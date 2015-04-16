@@ -1,0 +1,95 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+    $responsive=Mage::getStoreConfig('megatronconfig/options/responsive');
+    $site_width=Mage::getStoreConfig('megatronconfig/options/site_width');
+    $rtl=Mage::getStoreConfig('megatronconfig/options/rtl_mode');
+?>
+    <meta charset="utf-8">
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
+<title><?php echo $this->getTitle() ?></title>
+<?php if($responsive):?>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php endif;?>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+<?php echo $this->getCssJsHtml() ?>
+
+<?php if(Mage::getStoreConfig('megatronconfig/options/countdown')):?>
+    <script type="text/javascript">
+        jQuery.countdown.regionalOptions['lang'] = {
+            labels: ['<?php echo $this->__('Years') ?>', '<?php echo $this->__('Months') ?>', '<?php echo $this->__('Weeks') ?>', '<?php echo $this->__('Days') ?>', '<?php echo $this->__('Hours') ?>', '<?php echo $this->__('Minutes') ?>', '<?php echo $this->__('Seconds') ?>'],
+            labels1: ['<?php echo $this->__('Year') ?>', '<?php echo $this->__('Month') ?>', '<?php echo $this->__('Week') ?>', '<?php echo $this->__('Day') ?>', '<?php echo $this->__('Hour') ?>', '<?php echo $this->__('Minute') ?>', '<?php echo $this->__('Second') ?>'],
+            compactLabels: ['<?php echo $this->__('y') ?>', '<?php echo $this->__('m') ?>', '<?php echo $this->__('w') ?>', '<?php echo $this->__('d') ?>'],
+            whichLabels: null,
+            digits: ['<?php echo $this->__('0') ?>', '<?php echo $this->__('1') ?>', '<?php echo $this->__('2') ?>', '<?php echo $this->__('3') ?>', '<?php echo $this->__('4') ?>', '<?php echo $this->__('5') ?>', '<?php echo $this->__('6') ?>', '<?php echo $this->__('7') ?>', '<?php echo $this->__('8') ?>', '<?php echo $this->__('9') ?>'],
+            timeSeparator: ':', isRTL: false};
+        jQuery.countdown.setDefaults(jQuery.countdown.regionalOptions['lang']);
+    </script>
+<?php endif;?>
+
+
+
+<?php if($site_width=='width_1400'):?>
+    <link type="text/css" href="<?php echo Mage::getBaseUrl('skin')  . 'frontend/megatron/default/css/bootstrap-xl.css' ?>" rel="stylesheet" />
+<?php elseif($site_width=='width_1600'):?>
+    <link type="text/css" href="<?php echo Mage::getBaseUrl('skin')  . 'frontend/megatron/default/css/bootstrap-xxl.css' ?>" rel="stylesheet" />
+<?php endif;?>
+
+
+
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+<?php if($rtl):?>
+    <link type="text/css" href="<?php echo Mage::getBaseUrl('skin')  . 'frontend/megatron/default/css/megatron-template-rtl.css' ?>" rel="stylesheet" />
+<?php endif;?>
+
+<?php
+    $font=Mage::getStoreConfig('megatroncolors/captions/font');
+?>
+<?php if($font!='Arial' && $font!='Georgia' && $font!='Default' && !empty($font)):?>
+    <link href='//fonts.googleapis.com/css?family=<?php echo Mage::getStoreConfig('megatroncolors/captions/font')?>' rel='stylesheet'>
+<?php endif;?>
+
+<link type="text/css" href="<?php echo Mage::getBaseUrl('skin')  . 'frontend/megatron/default/css/colors/colors_'.Mage::app()->getStore()->getCode().'.css' ?>" rel="stylesheet" />

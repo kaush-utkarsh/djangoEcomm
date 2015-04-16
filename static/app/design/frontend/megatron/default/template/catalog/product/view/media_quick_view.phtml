@@ -1,0 +1,100 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $video=$_product->getVideobox();
+    $free=Mage::getStoreConfig('megatronconfig/options/cloudzoom_free');
+?>
+
+
+    <!--thumbnails left-->
+<?php $absent_left=1;?>
+
+
+
+<?php
+if($free)
+{
+    $_img = '<div class="large-image  hidden-xs '.(($absent_left)?'absent_left':'').'"> <a href="'.$this->helper('catalog/image')->init($_product, 'image').'" class="cloud-zoom" id="zoom'.$_product->getId().'" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="'.$this->helper('catalog/image')->init($_product, 'image').'"> </a> </div>';
+echo $_helper->productAttribute($_product, $_img, 'image');
+}
+
+?>
+<?php  if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+<?php if (count($this->getGalleryImages()) > 0): ?>
+        <?php $absent_left=0;?>
+    <div class="hidden-xs flexslider-thumb<?php if(!$free) echo '-vertical';?>-outer">
+        <div class="flexslider flexslider-thumb<?php if(!$free) echo '-vertical vertical';?> min">
+            <ul class="previews-list slides">
+
+                        <?php foreach ($this->getGalleryImages() as $_image): ?>
+                            <?php if($free) { ?>
+                                <li><a href='<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>' class='cloud-zoom-gallery' rel="useZoom: 'zoom<?php echo $_product->getId()?>', smallImage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>' "><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile())->resize(76,93); ?>" alt = "<?php echo $this->escapeHtml($_image->getLabel()) ?>"/></a></li>
+                            <?php }  else  {  ?>
+                                <li><img class = 'cloudzoom-gallery' alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>"  src = "<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile())->resize(76,93); ?>" data-cloudzoom = "useZoom: '#zoom<?php echo $_product->getId()?>', image: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>', zoomImage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>', autoInside : 991" ></li>
+                            <?php } ?>
+
+                        <?php endforeach; ?>
+
+
+                <?php if(!empty($video)):?>
+                    <li><a class="various fancybox.iframe" href="<?php echo $_helper->productAttribute($this->getProduct(), $video, 'videobox') ?>"><img alt="#"  class='fancybox-video' src = "<?php echo Mage::getDesign()->getSkinUrl('images/video.png')?>" ></a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+    <?php endif; ?>
+<?php endif; ?>
+
+
+<?php
+if(!$free)
+{
+    $_img = '<div class="large-image  vertical hidden-xs '.(($absent_left)?'absent_left':'').'"><img id="zoom'.$_product->getId().'" class = "cloudzoom" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->escapeHtml($this->getImageLabel()).'"   data-cloudzoom = "zoomImage: \''.$this->helper('catalog/image')->init($_product, 'image').'\', zoomSizeMode: \'image\', autoInside : 991'.(Mage::getStoreConfig('megatronconfig/options/rtl_mode')?', zoomPosition:13, zoomOffsetX:-35':'').'"/></div>';
+	echo $_helper->productAttribute($_product, $_img, 'image');
+}
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+

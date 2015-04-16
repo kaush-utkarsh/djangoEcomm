@@ -1,0 +1,701 @@
+<?xml version="1.0"?>
+<dresscode>
+    <resources>
+        <resource>
+            <title>Megatron Home page</title>
+            <identifier>megatron_home</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+
+                <!--Products List-->
+                <section class="container content slider-products">
+                    {{block type="catalog/product_list" category_id="8"  block_name="Featured Products" template="carousel/products_horizontal_attention.phtml"}}
+                </section>
+                <!--Brands-->
+                <section class="container content-row">
+                {{block type="cms/block" block_id="mtron_content_brands" template="cms/content.phtml"}}
+                </section>
+                <!--Blog widjets-->
+                 {{widget type="wordpress/sidebar_widget_posts" title="Recent Posts" number="5" template="wordpress/sidebar/widget/posts.phtml"}}
+
+                <section class="container content slider-products">
+                <!-- Filters -->
+                  <section class="filters-by-category header-filter clearfix">
+                    <ul class="option-set" data-option-key="filter">
+                      <li><a href="#filter" data-option-value=".category_id_10" class="selected">Men</a></li>
+                      <li>/</li>
+                      <li><a href="#filter" data-option-value=".category_id_15">Women</a></li>
+                      <li>/</li>
+                      <li><a href="#filter" data-option-value=".category_id_8">Unisex</a></li>
+                    </ul>
+                  </section>
+                <!-- //end Filters -->
+
+
+                <!-- Isotope Products -->
+                    <!-- Products list -->
+                    <div class="row">
+                        <div class="products-list-isotope">
+                            {{block type="catalog/product_list" category_id="10" block_name="Men" template="izotope/products_from_category.phtml"}}
+                            {{block type="catalog/product_list" category_id="15" block_name="Women" template="izotope/products_from_category.phtml"}}
+                            {{block type="catalog/product_list" category_id="8" block_name="Unisex" template="izotope/products_from_category.phtml"}}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Products widgets -->
+                <div class="grey-container-light">
+      <section class="container content nopad-bottom hidden-xs">
+                    <div class="row  add_after_quick_view_section">
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            {{block type="catalog/product_list" category_id="10"  block_name="Bestsellers" template="carousel/products_vertical.phtml"}}
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            {{block type="catalog/product_new" cache_lifetime="1" products_count="10"  template="carousel/products_new_vertical.phtml"  block_name="New Products"}}
+                        </div>
+                        <section class="col-sm-6 col-md-3 col-lg-3  slider-products module">
+                            {{block type="catalog/product_list" category_id="10"  block_name="On Sale" template="carousel/products_horizontal.phtml"}}
+                        </section>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            {{block type="catalog/product_list" category_id="15"  block_name="Top Rated" template="carousel/products_vertical.phtml"}}
+                        </div>
+                    </div>
+                </section>
+                </div>
+                <!-- //end Products widget -->
+
+
+
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+
+        <resource>
+            <title>Megatron Home Left+Right Sidebar</title>
+            <identifier>megatron_home_3_columns</identifier>
+            <root_template>three_columns</root_template>
+            <content><![CDATA[
+
+                               <section class="container">
+
+                    <!--Products List Grid-->
+                    <h3>Featured Products</h3>
+                    <div class="row products-list">
+                       {{block type="catalog/product_list" category_id="8"  block_name="Featured Products" template="izotope/products_from_category.phtml"}}
+                    </div>
+
+
+                </section>
+
+
+
+
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+
+        <resource>
+            <title>Megatron Home Right Sidebar</title>
+            <identifier>megatron_home_right_sidebar</identifier>
+            <root_template>two_columns_right</root_template>
+            <content><![CDATA[
+
+                                            <section class="container">
+
+                    <!--Products List Grid-->
+                    <h3>Featured Products</h3>
+                    <div class="row products-list">
+                       {{block type="catalog/product_list" category_id="8"  block_name="Featured Products" template="izotope/products_from_category.phtml"}}
+                    </div>
+                    <div class="line-divider divider-xxs"></div>
+                    <!--Brands-->
+                    <section class="content-row">
+                    {{block type="cms/block" block_id="mtron_content_brands" template="cms/content.phtml"}}
+                    </section>
+                    <div class="line-divider divider-xxs"></div>
+                    {{block type="catalog/product_list" category_id="10" block_name="On Sale" template="carousel/products_horizontal.phtml"}}
+                </section>
+
+
+
+
+
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+
+        <resource>
+            <title>Megatron Home Izotope</title>
+            <identifier>megatron_home_isotope</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+                 <!--Products Izotope-->
+
+<!-- Filters -->
+        <section class="filters-by-category clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="text-center">
+                        <ul class="option-set" data-option-key="filter">
+                            <li><a href="#filter" data-option-value="*" class="selected">all</a></li>
+                            <li><a href="#filter" data-option-value=".category_id_8">BEST SELLERS</a></li>
+                            <li><a href="#filter" data-option-value=".new">New Products</a></li>
+                            <li><a href="#filter" data-option-value=".category_id_10">On Sale</a></li>
+                            <li><a href="#filter" data-option-value=".category_id_15">Top Rated</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- //end Filters -->
+
+        <!-- Isotope Products -->
+        <section class="container content slider-products">
+        <!-- Products list -->
+            <div class="row">
+                <div class="products-list-isotope">
+                    {{block type="catalog/product_list" category_id="8"  block_name="Bestsellers" template="izotope/products_from_category.phtml"}}
+                    {{block type="catalog/product_new" cache_lifetime="1" products_count="10"  template="izotope/products_new.phtml"  block_name="New Products"}}
+                    {{block type="catalog/product_list" category_id="10"  block_name="On Sale" template="izotope/products_from_category.phtml"}}
+                    {{block type="catalog/product_list" category_id="15"  block_name="Top Rated" template="izotope/products_from_category.phtml"}}
+                </div>
+            </div>
+        </section>
+
+
+
+
+                <!--Blog widjets-->
+                {{block type="cms/block" block_id="mtron_blog_posts" template="cms/content.phtml"}}
+
+
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+
+        <resource>
+            <title>Megatron Home + Leftsidebar</title>
+            <identifier>megatron_home_left_sidebar</identifier>
+            <root_template>two_columns_left</root_template>
+            <content><![CDATA[
+                <section class="container">
+
+                    <!--Products List Grid-->
+                    <h3>Featured Products</h3>
+                    <div class="row products-list">
+                       {{block type="catalog/product_list" category_id="8"  block_name="Featured Products" template="izotope/products_from_category.phtml"}}
+                    </div>
+                    <div class="line-divider divider-xxs"></div>
+                    <!--Brands-->
+                    <section class="content-row">
+                    {{block type="cms/block" block_id="mtron_content_brands" template="cms/content.phtml"}}
+                    </section>
+                    <div class="line-divider divider-xxs"></div>
+                    {{block type="catalog/product_list" category_id="10" block_name="On Sale" template="carousel/products_horizontal.phtml"}}
+                </section>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+
+        <resource>
+            <title>Megatron 404</title>
+            <identifier>megatron_404</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+                <section class="container error-page">
+        <div class="error-number">
+            404
+            <div class="icon"><img src="{{media url=wysiwyg/large-icon-tea.png}}" alt=""></div>
+        </div>
+        <h2>Sorry!</h2>
+        <h5>The page you requested was not found, and we have a fine guess why.</h5>
+        <ul class="list">
+            <li>If you typed the URL directly, please make sure the spelling is correct.</li>
+            <li>If you clicked on a link to get here, the link is outdated.</li>
+        </ul>
+    </section>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+
+
+        <resource>
+            <title>Megatron About</title>
+            <identifier>megatron_about</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+    <!-- About us -->
+    <section class="container content-row page-content">
+        <h3>About us</h3>
+        <div class="row">
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <img class="img-responsive animate scale" src="{{media url=wysiwyg/about-us-image.jpg}}" alt="">
+            </div>
+            <div class="divider-md visible-xs"></div>
+<div class="col-sm-7 col-md-7 col-lg-7">
+<h5>Who We Are?</h5>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. </p>
+                <a href="#" class="btn btn-mega btn-lg">GET STARTED NOW!</a>
+            </div>
+        </div>
+    </section>
+    <!-- //end About us -->
+
+    <!-- Services block dark -->
+    <section class="services-block-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <a class="item animate scale" href="#">
+                        <span class="icon">
+                            <span class="icon-paperplane"></span>
+                        </span>
+                        <span class="title">Ut sit amet turpis</span>
+                        In est arcu vitae sollicitudin eu, vehicula venenatis est tempor diam
+                    </a>
+                </div> <div class="divider-md visible-xs"></div>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <a class="item animate scale" href="#">
+                        <span class="icon">
+                            <span class="icon-earth"></span>
+                        </span>
+                        <span class="title">Ut sit amet turpis</span>
+                        Maecenas tincidunt adipiscing tellus ivamus euismod nulla vel nunc.
+                    </a>
+                </div>
+                <div class="divider-md visible-sm visible-xs"></div>
+<div class="col-sm-6 col-md-3 col-lg-3">
+              <a class="item animate scale" href="#">
+                  <span class="icon">
+                      <span class="icon-basket"></span>
+                  </span>
+                  <span class="title">Ut sit amet turpis</span>
+                  Fusce tincidunt, justo congue egestas mo tortor tortor blandit erat
+              </a>
+          </div> <div class="divider-md visible-xs"></div>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <a class="item animate scale" href="#">
+                        <span class="icon">
+                            <span class="icon-bullhorn"></span>
+                        </span>
+                        <span class="title">Ut sit amet turpis</span>
+                        Гltrices enim sem ut pede. Aenean quam. Nulla neque purus, ullamcorpe
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //end Services block dark -->
+
+    <!-- Our team -->
+    <section class="content-row">
+    <div class="grey-container">
+    <div class="container">
+      <h3>ABOUT OUR TEAM</h3>
+      <div class="row">
+        <div class="member-info col-sm-6 col-md-3 col-lg-3">
+          <div class="photo"> <img class="img-responsive animate scale" src="{{media url=wysiwyg/temp/member-01-269x177.jpg}}" alt=""> </div>
+          <div class="name"><strong>Mike Williams</strong>, Manager</div>
+          <div class="about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. </div>
+          <a class="contact-icon" href="#"><span class="icon-facebook-3"></span></a> <a class="contact-icon" href="#"><span class="icon-twitter-3"></span></a> <a class="contact-icon" href="#"><span class="icon-envelop"></span></a> </div>
+        <div class="member-info col-sm-6 col-md-3 col-lg-3">
+          <div class="photo"> <img class="img-responsive animate scale" src="{{media url=wysiwyg/temp/member-02-269x177.jpg}}" alt=""> </div>
+          <div class="name"><strong>Andrea Smith</strong>, Sales Manager</div>
+          <div class="about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. </div>
+          <a class="contact-icon" href="#"><span class="icon-facebook-3"></span></a> <a class="contact-icon" href="#"><span class="icon-twitter-3"></span></a> <a class="contact-icon" href="#"><span class="icon-envelop"></span></a> </div>
+        <div class="member-info col-sm-6 col-md-3 col-lg-3">
+          <div class="photo"> <img class="img-responsive animate scale" src="{{media url=wysiwyg/temp/member-03-269x177.jpg}}" alt=""> </div>
+          <div class="name"><strong>Alex Fisherman</strong>, Sales Director</div>
+          <div class="about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. </div>
+          <a class="contact-icon" href="#"><span class="icon-facebook-3"></span></a> <a class="contact-icon" href="#"><span class="icon-twitter-3"></span></a> <a class="contact-icon" href="#"><span class="icon-envelop"></span></a> </div>
+        <div class="member-info col-sm-6 col-md-3 col-lg-3">
+          <div class="photo"> <img class="img-responsive animate scale" src="{{media url=wysiwyg/temp/member-04-269x177.jpg}}" alt=""> </div>
+          <div class="name"><strong>Samantha Elman</strong>, Manager</div>
+          <div class="about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. </div>
+          <a class="contact-icon" href="#"><span class="icon-facebook-3"></span></a> <a class="contact-icon" href="#"><span class="icon-twitter-3"></span></a> <a class="contact-icon" href="#"><span class="icon-envelop"></span></a> </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <!-- //end Our team -->
+
+    <!-- Testimonials -->
+    <section class="container content-row">
+        <h3>TESTIMONIALS</h3>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="quote-block">
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="{{media url=wysiwyg/temp/member-05-71x71.jpg}}" alt="...">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="#">Nam lectus nulla</a></h4>
+                            bibendum pretium, dictum a, mattis nec, dolor. Nullam id justo sed diam aliquam tincidunt...
+                        </div>
+                    </div>
+                </div>
+            </div><div class="divider-md visible-xs visible-sm"></div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="quote-block">
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="{{media url=wysiwyg/temp/member-06-71x71.jpg}}" alt="...">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="#">Morbi eget dolor</a></h4>
+                            bibendum pretium, dictum a, mattis nec, dolor. Nullam id justo sed diam aliquam tincidunt...
+                        </div>
+                    </div>
+                </div>
+            </div><div class="divider-md visible-xs visible-sm"></div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="quote-block">
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="{{media url=wysiwyg/temp/member-07-71x71.jpg}}" alt="...">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="#">Fusce vulputate nibh egestas orci</a></h4>
+                            bibendum pretium, dictum a, mattis nec, dolor. Nullam id justo sed diam aliquam tincidunt. Duis sollicitudin...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //end Testimonials -->
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+
+
+        <resource>
+            <title>Megatron Home Corporate</title>
+            <identifier>megatron_home_corporate</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+                <!-- Video -->
+    <section class="videoWrapperFull topVideo">
+      <div class="video-hover"></div>
+      <div class="video-hover-color"></div>
+      <div class="video-text top20">
+        <h2 class="title">COMPANY ARCHIEVMENTS</h2>
+        <div>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam. Pellentesque a leo. Donec <br>
+          consequat lectus sed felis. Quisque vestibulum massa. Nulla ornare.</div>
+        <div class="container hidden-sm hidden-xs"><br>
+          <br>
+          <br>
+          <br>
+          <div class="row">
+            <div class="col-sm-6 col-md-3 text-center">
+              <div class="title1"><span class="counter" data-from="0" data-to="11000" data-speed="2000">11000</span>+</div>
+              <div class="title2">HAPPY CLIENTS</div>
+              <div>Fusce eu dui. Integer vel nibh sit amet turpis lum massa. Nulla ornare. </div>
+            </div>
+            <div class="col-sm-6 col-md-3 text-center">
+              <div class="title1"><span class="counter" data-from="0" data-to="300" data-speed="2000">300</span>+</div>
+              <div class="title2">FOLLOWERS</div>
+              <div>Fusce eu dui. Integer vel nibh sit amet turpis lum massa. Nulla ornare. </div>
+            </div>
+            <div class="col-sm-6 col-md-3 text-center">
+              <div class="title1"><span class="counter" data-from="0" data-to="24" data-speed="2000">24</span>/<span class="counter" data-from="0" data-to="7" data-speed="2000">7</span></div>
+              <div class="title2">BEST SUPPORT</div>
+              <div>Fusce eu dui. Integer vel nibh sit amet turpis lum massa. Nulla ornare. </div>
+            </div>
+            <div class="col-sm-6 col-md-3 text-center">
+              <div class="title1"><span class="counter" data-from="0" data-to="5" data-speed="2000">5</span></div>
+              <div class="title2">THEMES</div>
+              <div>Fusce eu dui. Integer vel nibh sit amet turpis lum massa. Nulla ornare. </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hidden-touch">
+        <video  style="width: 100%; height: 100%;" preload="auto" loop="loop" autoplay="autoplay" >
+        	<source src="{{media url=wysiwyg/video/video-slider-corporate.mp4}}">
+        </video>
+      </div>
+    </section>
+    <!-- //end Video -->
+    <!-- Our team -->
+    <section>
+      <div class="grey-container">
+        <div class="container">
+          <h3>OUR TEAM</h3>
+          <div class="row">
+            <div class="member-info col-sm-6 col-md-3 col-lg-3">
+              <div class="photo"> <img class="img-responsive animate scale" src="{{media url=wysiwyg/temp/member-01-269x177.jpg}}" alt=""> </div>
+              <div class="name"><strong>Mike Williams</strong>, Manager</div>
+              <div class="about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. </div>
+              <a class="contact-icon" href="#"><span class="icon-facebook-3"></span></a> <a class="contact-icon" href="#"><span class="icon-twitter-3"></span></a> <a class="contact-icon" href="#"><span class="icon-envelop"></span></a> </div>
+            <div class="member-info col-sm-6 col-md-3 col-lg-3">
+              <div class="photo"> <img class="img-responsive animate scale" src="{{media url=wysiwyg/temp/member-02-269x177.jpg}}" alt=""> </div>
+              <div class="name"><strong>Andrea Smith</strong>, Sales Manager</div>
+              <div class="about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. </div>
+              <a class="contact-icon" href="#"><span class="icon-facebook-3"></span></a> <a class="contact-icon" href="#"><span class="icon-twitter-3"></span></a> <a class="contact-icon" href="#"><span class="icon-envelop"></span></a> </div>
+            <div class="member-info col-sm-6 col-md-3 col-lg-3">
+              <div class="photo"> <img class="img-responsive animate scale" src="{{media url=wysiwyg/temp/member-03-269x177.jpg}}" alt=""> </div>
+              <div class="name"><strong>Alex Fisherman</strong>, Sales Director</div>
+              <div class="about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. </div>
+              <a class="contact-icon" href="#"><span class="icon-facebook-3"></span></a> <a class="contact-icon" href="#"><span class="icon-twitter-3"></span></a> <a class="contact-icon" href="#"><span class="icon-envelop"></span></a> </div>
+            <div class="member-info col-sm-6 col-md-3 col-lg-3">
+              <div class="photo"> <img class="img-responsive animate scale" src="{{media url=wysiwyg/temp/member-04-269x177.jpg}}" alt=""> </div>
+              <div class="name"><strong>Samantha Elman</strong>, Manager</div>
+              <div class="about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. </div>
+              <a class="contact-icon" href="#"><span class="icon-facebook-3"></span></a> <a class="contact-icon" href="#"><span class="icon-twitter-3"></span></a> <a class="contact-icon" href="#"><span class="icon-envelop"></span></a> </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- //end Our team -->
+
+    <!-- Blog widget -->
+     <!-- Blog Widget Sidebar-->
+
+ {{widget type="wordpress/sidebar_widget_posts" title="Recent Posts" number="5" template="wordpress/sidebar/widget/posts.phtml"}}
+    <!-- //end Blog widget -->
+    <!-- Gallery -->
+    <section class="container content">
+      <h3>easy to customize</h3>
+      <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <div class="image-wrapper"><a class="fancybox-gallery" href="{{media url=wysiwyg/img-layout-big.jpg}}"  ><img class="animate scale" src="{{media url=wysiwyg/img-layout.jpg}}" alt="Image1">
+            <div class="image-hover"><i class="icon-zoom-in-2"></i></div>
+            <div class="image-title">Default</div>
+            </a> </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <div class="image-wrapper"><a class="fancybox-gallery" href="{{media url=wysiwyg/img-layout-kids-big.jpg}}"  ><img class="animate scale" src="{{media url=wysiwyg/img-layout-kids.jpg}}" alt="Image2">
+            <div class="image-hover"><i class="icon-zoom-in-2"></i></div>
+            <div class="image-title">Kids store</div>
+            </a> </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <div class="image-wrapper"><a class="fancybox-gallery" href="{{media url=wysiwyg/img-layout-electronics-big.jpg}}"  ><img class="animate scale" src="{{media url=wysiwyg/img-layout-electronics.jpg}}" alt="Image3">
+            <div class="image-hover"><i class="icon-zoom-in-2"></i></div>
+            <div class="image-title">Electronis</div>
+            </a> </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <div class="image-wrapper"><a class="fancybox-gallery" href="{{media url=wysiwyg/img-layout-food-big.jpg}}"  ><img class="animate scale" src="{{media url=wysiwyg/img-layout-food.jpg}}" alt="Image4">
+            <div class="image-hover"><i class="icon-zoom-in-2"></i></div>
+            <div class="image-title">Food store</div>
+            </a> </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <div class="image-wrapper"><a class="fancybox-gallery" href="{{media url=wysiwyg/img-layout-background-big.jpg}}"  ><img class="animate scale" src="{{media url=wysiwyg/img-layout-background.jpg}}" alt="Image5">
+            <div class="image-hover"><i class="icon-zoom-in-2"></i></div>
+            <div class="image-title">Background</div>
+            </a> </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <div class="image-wrapper"><a class="fancybox-gallery" href="{{media url=wysiwyg/img-layout-corporate-big.jpg}}"  ><img class="animate scale" src="{{media url=wysiwyg/img-layout-corporate.jpg}}" alt="Image6">
+            <div class="image-hover"><i class="icon-zoom-in-2"></i></div>
+            <div class="image-title">Corporate</div>
+            </a> </div>
+        </div>
+      </div>
+    </section>
+    <!-- // end gallery -->
+    <!-- Features -->
+    <section class="box-parallax-widget parallax">
+      <div class="container">
+        <div class="text-center">
+          <h2>AMAZING FEATURES</h2>
+        </div>
+        <div class="text-center"><strong>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam. <br>
+          Pellentesque a leo. Donec consequat lectus sed felis. Quisque vestibulum massa. Nulla ornare. </strong></div>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-xs-6 col-sm-3">
+            <ul class="styled-list checkmark">
+              <li>Responsive Layout </li>
+              <li>Visual Composer</li>
+              <li>WooCommerce Ready</li>
+              <li>Advanced Theme Options</li>
+              <li>DIfferent Headers and Footers</li>
+              <li>Different Menu Types</li>
+            </ul>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <ul class="styled-list checkmark">
+              <li>Unlimited Colors and Typography options</li>
+              <li>One-click installation</li>
+              <li>Revolution Slider</li>
+              <li>Unlimited sidebars</li>
+              <li>AJAX Filter</li>
+              <li>Different blog layouts (list, grid, timeline)</li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <div class="right-image"><img src="{{media url=wysiwyg/imac.png}}"  class="img-responsive" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- //end Features -->
+    <!-- Features List -->
+    <section class="container">
+      <div class="content">
+        <h3>Features</h3>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features.png}}" alt=""></span>
+              <div class="text">Retina ready optimized images, icon fonts</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-04.png}}" alt=""></span>
+              <div class="text">Bootstrap 3</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-07.png}}" alt=""></span>
+              <div class="text">Quick, optimized. Compare with our competitors</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-10.png}}" alt=""></span>
+              <div class="text">Magento certified developers</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-13.png}}" alt=""></span>
+              <div class="text">Google rich snippets support</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-16.png}}" alt=""></span>
+              <div class="text">Ready integrated modules</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-19.png}}" alt=""></span>
+              <div class="text">Skins available</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-22.png}}" alt=""></span>
+              <div class="text">Multilanguage support</div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-02.png}}" alt=""></span>
+              <div class="text">3 Headers variants</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-05.png}}" alt=""></span>
+              <div class="text">3 SLIders variants</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-08.png}}" alt=""></span>
+              <div class="text">Different layouts variants</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-11.png}}" alt=""></span>
+              <div class="text">3 Menu variants</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-14.png}}" alt=""></span>
+              <div class="text">2 Product hovers variants</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-17.png}}" alt=""></span>
+              <div class="text">Product listing isotope</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-20.png}}" alt=""></span>
+              <div class="text">Product preview variants</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-23.png}}" alt=""></span>
+              <div class="text">2 Quick view variants</div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-03.png}}" alt=""></span>
+              <div class="text">Blog ready </div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-06.png}}" alt=""></span>
+              <div class="text">Quick install 3</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-09.png}}" alt=""></span>
+              <div class="text">Color / Size watcher</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-12.png}}" alt=""></span>
+              <div class="text">1 page checkout</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-15.png}}" alt=""></span>
+              <div class="text">Ebay/Amazon magento integration</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-18.png}}" alt=""></span>
+              <div class="text">RTL</div>
+            </div>
+            <div class="feature-item"><span class="feature-icon"><img src="{{media url=wysiwyg/corporate/icon-features-21.png}}" alt=""></span>
+              <div class="text">Live chat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- //end Features List -->
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+
+        <resource>
+            <title>Megatron Home Creative</title>
+            <identifier>megatron_home_creative</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+               <!-- Start creative content -->
+
+    <section class="container content nopad-bottom">
+      <div class="row add_after_quick_view_section">
+        <!-- Featured Products -->
+        <section class="col-sm-12 col-md-6 col-lg-6  slider-products module">
+            {{block type="catalog/product_list" category_id="8"  block_name="Featured Products" template="carousel/products_horizontal.phtml"}}
+
+        </section>
+
+        <!-- //end Featured Products -->
+
+        <!-- On Sale -->
+        <section class="col-sm-6 col-md-3 col-lg-3  module">
+            {{block type="catalog/product_list" category_id="10"  block_name="On Sale" template="carousel/products_vertical.phtml"}}
+        </section>
+        <!-- //end On Sale -->
+        <!-- Blog Widget Small -->
+        <section class="col-sm-6 col-md-3 col-lg-3 blog-widget-small module">
+            {{widget type="wordpress/sidebar_widget_posts" title="Recent Posts" number="5" template="wordpress/sidebar/widget/posts_sidebar.phtml"}}
+        </section>
+      </div>
+      <div class="row add_after_quick_view_section">
+        <!-- Best Sellers -->
+        <section class="col-sm-6 col-md-3 col-lg-3 module">
+            {{block type="catalog/product_list" category_id="10"  block_name="Bestsellers" template="carousel/products_vertical.phtml"}}
+        </section>
+        <!-- //end Best Sellers -->
+        <!-- About Us -->
+        <section class="col-sm-6 col-md-3 col-lg-3 module">
+          <h3 class="upper">ABOUT US</h3>
+          <p class="upper"><strong>Lorem ipsum dolor sit amet, consec tetuer adipiscing elit</strong></p>
+          <p><em>Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. </em></p>
+          <p>Praesent vitae dui. Morbi id tellus. Cum sociis montes, nascetur ridicul us mus. Maecenas eu enim in lorem sceler isque auctor. Cras pellentesque. Fusce ullamcorper, pede eget pellentesque venenatis, felis magna nonummy eros, quis ultrices odio lorem quis urna. Mauris sem sapien, mollis vel, cursus vitae, ornare in, velit nunc eget justo. Aenean dapibus, pede ac dolor. Sed semper tortor. </p>
+          <p>Cras condimentum, odio magna, eu venenatis blandit tincidunt, ante nisi viverra. <br>
+          </p>
+        </section>
+        <!-- //end  About Us -->
+        <!-- New Products -->
+        <section class="col-sm-12 col-md-6 col-lg-6  slider-products  module">
+            {{block type="catalog/product_new" cache_lifetime="1" products_count="10"  template="carousel/products_new_horizontal.phtml"  block_name="New Products"}}
+          <!-- //end Products list -->
+        </section>
+        <!-- //end New Products -->
+
+      </div>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+    </resources>
+</dresscode>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<megatron>
+    <slides>
+
+        <!--
+        Images you need upload manually by ftp in folder media\etheme\megatron\megatronrevolution/
+        Recommended image size 1170x290 px
+
+        Revolution slider options you can edit here \app\design\frontend\megatron\default\template\megatron\slider\slider_revolution.phtml
+        Also You need read revolution slider documentation (attached to megatron package) how create your own amazing slides
+        -->
+        <slide1>
+
+            <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+                <!-- Main Image -->
+                <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/home_boxed_slider1.jpg" />
+                <!-- End Main Image -->
+                <!-- Captions -->
+                <div class="tp-caption sfr" data-easing="easeOutExpo" data-speed="700" data-start="600" data-x="830" data-y="80"><a href="{{LINK}}" class="title-slide-01"><span class="big">Sale</span></a></div>
+                <div class="tp-caption sfr" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="830" data-y="185"><a href="{{LINK}}" class="title-slide-01"><span class="middle">up to 40% OFF</span></a></div>
+                <!-- End Captions -->
+            </li>
+
+        </slide1>
+        <slide2>
+
+                  <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+                    <!-- Main Image -->
+                    <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/home_boxed_slider2.jpg" />
+                    <!-- End Main Image -->
+                    <!-- Captions -->
+                    <div class="tp-caption sfl" data-easing="easeOutExpo" data-speed="700" data-start="600" data-x="50" data-y="90"><a href="{{LINK}}" class="title-slide-02"><span class="big">New</span> </a> </div>
+                    <div class="tp-caption sfl" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="50" data-y="170"><a href="{{LINK}}" class="title-slide-02"><span class="small">collection</span> </a> </div>
+                    <div class="tp-caption sfl" data-easing="easeOutExpo" data-speed="700" data-start="1400" data-x="50" data-y="210"><a href="{{LINK}}" class="title-slide-02"> <span class="middle">AUTUMN 2014</span></a> </div>
+                    <!-- End Captions -->
+                </li>
+
+        </slide2>
+        <slide3>
+
+                <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+                    <!-- Main Image -->
+                    <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/home_boxed_slider3.jpg" />
+                    <!-- End Main Image -->
+                    <!-- Captions -->
+                    <div class="tp-caption sft" data-easing="easeOutExpo" data-speed="700" data-start="600" data-x="800" data-y="40"><a href="{{LINK}}" class="title-slide-03"><span class="big">Special<br>offer</span> </a> </div>
+                    <div class="tp-caption sfb" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="800" data-y="160"><a href="{{LINK}}" class="title-slide-03"><span class="middle">Save money with <br>Lingerie SALE</span></a> </div>
+                    <div class="tp-caption sfb" data-easing="easeOutExpo" data-speed="700" data-start="1200" data-x="800" data-y="265"><a href="{{LINK}}" class="title-slide-03"><span class="small">UP TO 50% OFF</span></a> </div>
+                    <!-- End Captions -->
+                </li>
+
+        </slide3>
+
+    </slides>
+</megatron>

@@ -1,0 +1,38 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php
+    $_product = $this->getProduct();
+    $widthSmall=62;
+    $heightSmall=62;
+    $widthMedium=460;
+    $heightMedium=440;
+
+
+
+
+?>
+<div class="product-view product-view-compact row hidden-xs">
+    <div class="col-sm-5 col-md-5 col-lg-5 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 ">
+        <?php echo $this->getChildHtml('media') ?>
+    </div>
+    <div class="info-cell col-sm-5 col-md-5 col-lg-5"> <a href="#" class="close-view"><span class="icon-cancel-3"></span></a>
+        <h2><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2>
+        <p><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></p>
+        <span class="rating">
+            <?php echo Mage::helper('megatronconfig')->getStars($_product)?>
+        </span>
+        <?php if (!Mage::getStoreConfig('megatronconfig/options/catalog_mode')): ?>
+        <span class="price">
+            <?php echo $this->getChildHtml('product_type_data') ?>
+            <?php echo $this->getTierPriceHtml() ?>
+        </span>
+        <?php endif;?>
+        <a href="<?php echo $_product->getProductUrl()  ?>" class="btn btn-mega"><?php echo $this->__('View full info') ?></a>
+        <div class="product-qr-code">
+            <?php if(Mage::getStoreConfig('megatronconfig/options/qr')):?>
+                <div class="clearfix hidden-xs hidden-sm hidden-md"  style="margin: 20px 0 0 0">
+                    <img src="//api.qrserver.com/v1/create-qr-code/?size=100x100&data=<?php echo $_product->getProductUrl()  ?>" alt=""/>
+                </div>
+            <?php endif;?>
+        </div>
+    </div>
+</div>

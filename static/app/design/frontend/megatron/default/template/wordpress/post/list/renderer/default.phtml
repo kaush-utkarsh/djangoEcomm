@@ -1,0 +1,58 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<!-- Blog post preview -->
+<div class="blog-post container-paper">
+    <?php echo $this->getBeforePostContentHtml() ?>
+
+    <div class="title">
+        <h2><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h2>
+    </div>
+
+    <div class="post-container <?php if ($post->getFeaturedImage): ?> post-entry-with-image<?php endif; ?>">
+        <?php if ($post->isViewableForVisitor()): ?>
+
+            <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+                   <img src="<?php echo $featuredImage->getFullSizeImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>" class="img-responsive animate scale"/>
+                <?php
+                    /*
+                     *  getThumbnailImage()
+                        getMediumImage()
+                        getLargeImage()
+                        getFullSizeImage()
+                        getPostThumbnailImage()
+                        getAvailableImage()
+                        getImageByType($type = 'thumbnail')
+                    */
+                ?>
+            <?php endif; ?>
+
+
+
+            <div class="row">
+                <div class="col-l col-md-6 col-lg-4">
+                    <?php echo $this->getAfterPostContentHtml() ?>
+                </div>
+                <div class="col-r col-md-6 col-lg-8">
+                    <?php if ($this->displayExcerptInFeed() || $post->hasMoreTag()): ?>
+                        <?php echo $post->getPostExcerpt() ?>
+                    <?php else: ?>
+                        <?php echo $post->getPostContent() ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+        <?php else: ?>
+            <?php echo $this->getPasswordProtectHtml($post) ?>
+        <?php endif; ?>
+    </div>
+
+
+</div>
+<!-- //end Blog post preview -->

@@ -1,0 +1,221 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+<?php
+    $header=Mage::getStoreConfig('megatronlayout/options/header');
+    switch($header)
+    {
+        case 'minimize':
+            $class='variant2';
+            break;
+        case 'central':
+            $class='variant3';
+            break;
+        case 'advanced':
+            $class='variant4';
+            break;
+        default:
+            $class='';
+    }
+
+    $fixed_class=!Mage::getStoreConfig('megatronlayout/options/header_fixed')?' not_fixed':'';
+    $hide_logo_in_fixed=Mage::getStoreConfig('megatronlayout/options/header_fixed_logo')?'compact-hidden':'';
+?>
+<div id="preloader">
+    <div class="loader" style="display: none"><img width="32" height="32" alt="" src="<?php echo $this->getSkinUrl('images/ajax/ajax-loader.gif')?>" /></div>
+    <div class="message"  style="display: none">
+        <div class="inside"></div>
+    </div>
+</div>
+<header class="<?php echo $class?>">
+      <?php if(Mage::getStoreConfig('megatronconfig/options/show_back_to_top')):?>
+      <!-- Back to top -->
+      <div class="back-to-top"><span class="icon-arrow-up-4"></span></div>
+      <!-- //end Back to top -->
+      <?php endif;?>
+
+
+      <section class="navbar<?php echo $fixed_class?>">
+
+
+
+
+        <div class="background">
+          <div class="container">
+
+              <?php if(Mage::getStoreConfig('megatronlayout/options/header')=='advanced'):?>
+              <div class="wrappertop">
+              <?php endif;?>
+
+
+                  <?php if($header=='central'):?>
+                      <div class="navbar-welcome pull-left compact-hidden hidden-xs"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></div>
+                  <?php endif;?>
+
+                    <!-- Logo -->
+                    <div class="navbar-logo pull-left <?php echo $hide_logo_in_fixed;?>">
+                        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+                            <?php if(Mage::getStoreConfig('megatronconfig/options/logo_header')):?>
+                            <img data-retina="true"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'megatron/'.Mage::getStoreConfig('megatronconfig/options/logo_header')?>" alt="<?php echo $this->getLogoAlt() ?>" />
+                            <?php else:?>
+                            <img data-retina="true"  src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+                            <?php endif;?>
+                        </a>
+                    </div>
+                    <!-- //end Logo -->
+
+                    <?php if($header=='minimize'):?>
+                    <?php echo $this->getChildHtml('topSearch') ?>
+                    <?php endif;?>
+
+                    <?php if($header=='default' || $header=='advanced'):?>
+                    <div class="navbar-welcome pull-left compact-hidden hidden-xs"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></div>
+                    <?php endif;?>
+
+                    <div class="clearfix visible-sm"></div>
+
+                    <div class="navbar-secondary-menu pull-right hidden-xs">
+                      <?php echo $this->getChildHtml('topLinks') ?>
+                      <?php echo $this->getChildHtml('store_language') ?>
+                      <?php echo $this->getChildHtml('currency') ?>
+                      <?php echo $this->getChildHtml('catalog.compare.sidebar') ?>
+                      <?php echo $this->getChildHtml('topcart') ?>
+                    </div>
+
+                    <!-- Secondary menu mobile -->
+                    <div class="navbar-secondary-menu pull-right compact-hidden visible-xs">
+                      <?php echo $this->getChildHtml('store_language_mobile') ?>
+                      <?php echo $this->getChildHtml('currency_mobile') ?>
+                    </div>
+                    <!-- //end Secondary menu -->
+
+                    <?php if($header=='default' || $header=='central' || $header=='advanced'):?>
+                      <?php echo $this->getChildHtml('topSearch') ?>
+                    <?php endif;?>
+
+                    <?php if(Mage::getStoreConfig('megatronlayout/options/header')!='advanced'):?>
+                        <?php if(Mage::getStoreConfig('megatronconfig/megamenu/megamenu')):?>
+                            <?php echo $this->getChildHtml('mtron_megamenu') ?>
+                        <?php else:?>
+                            <?php echo $this->getChildHtml('topMenu') ?>
+                        <?php endif;?>
+                    <?php endif;?>
+
+
+              <?php if(Mage::getStoreConfig('megatronlayout/options/header')=='advanced'):?>
+                </div>
+              <?php endif;?>
+
+
+          </div>
+
+            <?php if(Mage::getStoreConfig('megatronlayout/options/header')=='advanced'):?>
+                <?php if(Mage::getStoreConfig('megatronconfig/megamenu/megamenu')):?>
+                    <?php echo $this->getChildHtml('mtron_megamenu') ?>
+                <?php else:?>
+                    <?php echo $this->getChildHtml('topMenu') ?>
+                <?php endif;?>
+            <?php endif;?>
+        </div>
+
+
+
+
+
+        <!-- Mobile menu -->
+        <div class="container visible-xs">
+          <div class="mobile-nav row">
+            <div class="nav-item item-01"><a href="#" id="off-canvas-menu-toggle"><span class="icon icon-list-4"></span></a></div>
+
+            <?php if(!Mage::getStoreConfig('megatronconfig/options/catalog_mode')):?>
+            <div class="nav-item item-02"><a href="#"><span class="icon icon-vcard"></span></a>
+              <div class="tab-content">
+                <ul class="menu-list">
+
+
+                  <?php
+                    //check the user is loggedon or not
+                    if (! Mage::getSingleton('customer/session')->isLoggedIn()){
+                    //if user logged on show the logout link - add this code within anchor tag
+                    echo '<li><a href="'.Mage::helper('customer')->getLoginUrl().'">'.$this->__('Log In').'</a></li>';
+                    echo '<li><a href="'.Mage::helper("customer")->getRegisterUrl().'">'.$this->__('Sign Up').'</a></li>';
+                    }
+                    else{
+                    //if user is not logged on yet show the login link - add this code within anchor tag
+                    echo '<li><a href="'.Mage::helper('customer')->getLogoutUrl().'">'.$this->__('Log Out').'</a></li>';
+                    }
+                  ?>
+
+                  <li><a href=" <?php echo $this->helper('wishlist')->getListUrl()?>"><?php echo $this->__('Wishlist')?></a></li>
+                  <li><a href="<?php echo Mage::helper('checkout/url')->getCheckoutUrl()?>"><?php echo $this->__('Checkout')?></a></li>
+
+                </ul>
+              </div>
+            </div>
+            <?php endif;?>
+
+            <div class="nav-item <?php echo (Mage::getStoreConfig('megatronconfig/options/catalog_mode')?'item-02':'item-03')?>"><a href="#"><span class="icon icon-search-2"></span></a>
+              <div class="tab-content"> <!-- Search -->
+                <?php echo $this->getChildHtml('topSearch_mobile') ?>
+                <!-- //end Search -->
+              </div>
+            </div>
+
+            <div class="nav-item item-04">
+                <?php echo $this->getChildHtml('topcart_mobile') ?>
+            </div>
+          </div>
+        </div>
+        <!-- //end Mobile menu -->
+        <!-- Navbar switcher -->
+        <div class="navbar-switcher-container">
+          <div class="navbar-switcher"> <span class="i-inactive">
+                  <?php if(Mage::getStoreConfig('megatronlayout/options/header_fixed_switch')):?>
+                      <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'megatron/'.Mage::getStoreConfig('megatronlayout/options/header_fixed_switch')?>" width="35" height="35" alt="">
+                  <?php else:?>
+                      <img src="<?php echo $this->getSkinUrl('images/icon-megatron.png') ?>" width="35" height="35" alt="">
+                  <?php endif;?>
+              </span>
+              <span class="i-active icon-cancel-3"></span>
+          </div>
+       </div>
+        <!-- //end Navbar switcher -->
+      </section>
+
+      <!-- Navbar height -->
+      <div class="navbar-height"></div>
+      <?php if(Mage::getStoreConfig('megatronlayout/options/slider')!='megatron' || !Mage::helper('megatronconfig')->getIsHomePage() || (Mage::getStoreConfig('megatronlayout/options/slider_show'))):?>
+          <div class="navbar-height-inner"></div>
+      <?php endif;?>
+      <!-- Navbar height -->
+
+
+      <?php echo $this->getChildHtml('topContainer'); ?>
+    </header>

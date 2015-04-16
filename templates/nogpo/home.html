@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en"  >
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <![endif]-->
+    <title>Home page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Default Description" />
+    <meta name="keywords" content="Magento, Varien, E-commerce" />
+    <meta name="robots" content="INDEX,FOLLOW" />
+    <link rel="icon" href="{% static "skin/frontend/megatron/default/favicon.ico" %}" type="image/x-icon" />
+    <link rel="shortcut icon" href={% static "skin/frontend/megatron/default/favicon.ico" %} type="image/x-icon" />
+
+    <!--[if lt IE 7]>
+    <script type="text/javascript">
+    //<![CDATA[
+        var BLANK_URL = ' js/blank.html';
+        var BLANK_IMG = ' js/spacer.gif';
+    //]]>
+    </script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/styles.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/base/default/css/widgets.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/revolution.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/adv_slider/settings.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/adv_slider/extralayers.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/loader.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/bootstrap.min.css"  %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/megatron-template.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/icomoon.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/fontello.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/jquery.rw-slider.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/flexslider.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/jcarousel.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/owl.carousel.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/owl.theme.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/cloudzoom.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/sfmenu.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/isotope.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/smoothness/jquery-ui-1.10.3.custom.min.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/jquery.fancybox.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/hoverfold.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/smoothslides.theme.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/added.css" %} media="all" />
+    <link rel="stylesheet" type="text/css" href={% static "skin/frontend/megatron/default/css/print.css" %} media="print" />
+    <script type="text/javascript" src={% static "js/prototype/prototype.js" %}></script>
+    <script type="text/javascript" src={% static "js/lib/ccard.js" %}></script>
+    <script type="text/javascript" src={% static "js/prototype/validation.js" %}></script>
+    <script type="text/javascript" src={% static "js/scriptaculous/builder.js" %}></script>
+    <script type="text/javascript" src={% static "js/scriptaculous/effects.js" %}></script>
+    <script type="text/javascript" src={% static "js/scriptaculous/dragdrop.js" %}></script>
+    <script type="text/javascript" src={% static "js/scriptaculous/controls.js" %}></script>
+    <script type="text/javascript" src={% static "js/scriptaculous/slider.js" %}></script>
+    <script type="text/javascript" src={% static "js/varien/js.js" %}></script>
+    <script type="text/javascript" src={% static "js/varien/form.js" %}></script>
+    <script type="text/javascript" src={% static "js/varien/menu.js" %}></script>
+    <script type="text/javascript" src={% static "js/mage/translate.js" %}></script>
+    <script type="text/javascript" src={% static "js/mage/cookies.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/VS/ajaxwishlist.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/VS/addtocart.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery-1.10.2.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/noconflict.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery-ui-1.10.3.custom.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.ui.touch-punch.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.mousewheel.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/bootstrap.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.rw-preloader.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/hammer.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.flexslider.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/owl.carousel.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.jcarousel.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/cloudzoom.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.countTo.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.isotope.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.fancybox.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.inview.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/hoverIntent.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.hoverfold.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/superfish.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/supersubs.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.parallax.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.plugin.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.countdown.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/jquery.carouFredSel-6.2.1-packed.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/smoothslides.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/megatron.js" %}></script>
+    <script type="text/javascript" src={% static "js/etheme/megatron/retina-replace.js" %}></script>
+    <script type="text/javascript" src={% static "skin/frontend/megatron/default/js/lib/modernizr.custom.min.js" %}></script>
+    <script type="text/javascript" src={% static "skin/frontend/megatron/default/js/app.js" %}></script>
+    <script type="text/javascript" src={% static "skin/frontend/megatron/default/js/lib/imagesloaded.js" %}></script>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href=" skin/frontend/megatron/default/css/styles-ie.css" media="all" />
+    <![endif]-->
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src=" js/lib/ds-sleight.js"></script>
+    <script type="text/javascript" src=" skin/frontend/base/default/js/ie6.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src=" js/etheme/megatron/html5shiv.js"></script>
+    <script type="text/javascript" src=" js/etheme/megatron/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        jQuery.countdown.regionalOptions['lang'] = {
+            labels: ['Years', 'Months', 'Weeks', 'Days', 'Hours', 'Minutes', 'Seconds'],
+            labels1: ['Year', 'Month', 'Week', 'Day', 'Hour', 'Minute', 'Second'],
+            compactLabels: ['y', 'm', 'w', 'd'],
+            whichLabels: null,
+            digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+            timeSeparator: ':', isRTL: false};
+        jQuery.countdown.setDefaults(jQuery.countdown.regionalOptions['lang']);
+    </script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+Mage.Cookies.path     = '/magento';
+Mage.Cookies.domain   = '.localhost';
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+optionalZipCountries = ["HK","IE","MO","PA"];
+//]]>
+</script>
+<script type="text/javascript">//<![CDATA[
+        var Translator = new Translate([]);
+        //]]></script>
+
+
+<link type="text/css" href={% static "skin/frontend/megatron/default/css/colors/colors_default.css" %} rel="stylesheet" /></head>
+<body class="responsive    no-load-anime  cms-index-index cms-home">
+
+<div class="loader">
+    <div class="bubblingG"> <span id="bubblingG_1"> </span> <span id="bubblingG_2"> </span> <span id="bubblingG_3"> </span> </div>
+</div>
+
+<!-- Off Canvas Menu -->
+<nav id="off-canvas-menu" >
+  <div id="off-canvas-menu-title">MENU<span class="icon icon-cancel-3" id="off-canvas-menu-close"></span></div>
+
+  <ul class="expander-list">
+
+
+
+            <li>
+                <span class="name"><span class="expander">-</span><a href=" ">Home</a></span>
+                <ul>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+
+                </ul>
+            </li>
+
+            <li><span class="name"><span class="expander">-</span><a href="#">Left 1</a></span>
+                <ul>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                </ul>
+            </li>
+
+            <li><span class="name"><span class="expander">-</span><a href="#">Left 2</a></span>
+                <ul>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                </ul>
+            </li>
+
+
+
+
+
+
+
+
+
+            <li><span class="name"><span class="expander">-</span><a href="#">Right 1</a></span>
+                <ul>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                    <li><span class="name"><a href="#">Lorem Ipsum</a></span></li>
+                    <li><span class="name"><a href="#">Ipsum Dolor</a></span></li>
+                </ul>
+            </li>
+
+            <li><span class="name"><a href=" contacts" class="btn-main line">Contacts</a></span></li>
+
+                   </ul>
+</nav>
+<!-- //end Off Canvas Menu -->
+
+
+
+
+
+<div id="outer">
+    <div id="outer-canvas">
+            <noscript>
+        <div class="global-site-notice noscript">
+            <div class="notice-inner">
+                <p>
+                    <strong>JavaScript seems to be disabled in your browser.</strong><br />
+                    You must have JavaScript enabled in your browser to utilize the functionality of this website.                </p>
+            </div>
+        </div>
+    </noscript>
+
+<div id="preloader">
+    <div class="loader" style="display: none"><img width="32" height="32" alt="" src={% static "skin/frontend/megatron/default/images/ajax/ajax-loader.gif" %} /></div>
+    <div class="message"  style="display: none">
+        <div class="inside"></div>
+    </div>
+</div>
+<header class="variant4">
+            <!-- Back to top -->
+      <div class="back-to-top"><span class="icon-arrow-up-4"></span></div>
+      <!-- //end Back to top -->
+
+
+      <section class="navbar">
+
+
+
+
+        <div class="background">
+          <div class="container">
+
+                            <div class="wrappertop">
+
+
+
+                    <!-- Logo -->
+                    <div class="navbar-logo pull-left ">
+                        <a href=" " title="Magento Commerce" class="logo">
+                                                        <img data-retina="true"  src={% static "media/megatron/default/header-logo_1.png" %} alt="Magento Commerce" />
+                                                    </a>
+                    </div>
+                    <!-- //end Logo -->
+
+
+                                        <div class="navbar-welcome pull-left compact-hidden hidden-xs">Default welcome msg! </div>
+
+                    <div class="clearfix visible-sm"></div>
+
+                    <div class="navbar-secondary-menu pull-right hidden-xs">
+                      <div class="btn-group compact-hidden btn-hidden" id="toplinks"> <a href="#"  class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"> <span class="icon icon-vcard"></span>
+                Account
+    <span class="caret"></span> </a>
+    <ul class="dropdown-menu" role="menu">
+                                                  <li class="first" ><a href=" customer/account/" title="My Account" >My Account</a></li>
+                                                        <li ><a href=" wishlist/" title="My Wishlist" >My Wishlist</a></li>
+                                                        <li ><a href=" checkout/cart/" title="My Cart" class="top-link-cart">My Cart</a></li>
+                                    <li class="divider"></li>                    <li ><a href=" checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
+                                                        <li class=" last" ><a href=" customer/account/login/" title="Log In" >Log In</a></li>
+                        </ul>
+</div>
+
+
+
+
+<div class="btn-group compact-hidden block-compare btn-hidden"> <a href="#"  class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"> <span class="icon icon-justice"></span>
+                            Compare                            (0)&#x200E;
+
+
+
+
+        <span class="caret"></span>
+    </a>
+    <div class="dropdown-menu pull-right shoppingcart-box empty" role="menu">
+                    <p class="empty">You have no items to compare.</p>
+            </div>
+</div>
+
+
+
+    <div class="btn-group " id="shopping_cart">
+        <a href="#"  class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="compact-hidden text-shopping-cart">
+                    Cart -
+                    <strong><span class="price">₹0.00</span></strong>
+                </span>
+
+            <span class="icon-xcart-animate">
+                <span class="box">0</span>
+                <span class="handle"></span>
+            </span>
+        </a>
+        <div class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                        <span class="empty">You have no items in your shopping cart.</span>
+                    </div>
+    </div>
+
+
+
+
+
+
+
+                    </div>
+
+                    <!-- Secondary menu mobile -->
+                    <div class="navbar-secondary-menu pull-right compact-hidden visible-xs">
+
+
+                                          </div>
+                    <!-- //end Secondary menu -->
+
+                                          <!-- Search -->
+<form id="search_mini_form" action=" catalogsearch/result/" method="get" class="navbar-search form-inline hidden-xs pull-right " role="form">
+    <div class="form-group">
+        <button type="submit" class="button"><span class="icon-search-2"></span></button>
+        <input id="search" type="text" class="form-control" placeholder="Search" name="q"  maxlength="128">
+    </div>
+
+    <div  id="search_autocomplete"></div>
+
+    <!--<div id="search_autocomplete" class="search-autocomplete"></div>-->
+    <script type="text/javascript">
+        //<![CDATA[
+        var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Search');
+        searchForm.initAutocomplete(' catalogsearch/ajax/suggest/', 'search_autocomplete');
+        //]]>
+    </script>
+</form>
+<!-- //end Search -->
+
+
+
+                              </div>
+
+
+          </div>
+
+
+<!-- MEGAMENU -->
+<div class="navbar-main-menu-outer hidden-xs">
+    <div class="container">
+        <dl class="navbar-main-menu">
+
+
+
+
+<dt class="item">
+        <ul class="sf-menu">
+            <li><a href=" " class="btn-main"><span class="icon icon-home"></span></a>
+                <ul>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+
+                </ul>
+            </li>
+        </ul>
+    </dt>
+
+    <dd></dd>
+
+    <dt class="item">
+        <ul class="sf-menu">
+            <li><a href="#">Left 1</a>
+                <ul>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                </ul>
+            </li>
+        </ul>
+    </dt>
+
+    <dd></dd>
+
+    <dt class="item">
+        <ul class="sf-menu">
+            <li><a href="#">Left 2</a>
+                <ul>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="#">Ipsum Dolor</a></li>
+                </ul>
+            </li>
+        </ul>
+    </dt>
+
+    <dd></dd>
+
+
+
+
+
+
+
+
+ <dt class="item"> <a href=" contacts" class="btn-main line"><span class="icon icon-earth"></span></a> </dt>
+
+    <dd></dd>
+
+
+
+
+        </dl>
+    </div>
+</div>
+
+<!-- //end MEGAMENU -->
+
+
+
+
+                                    </div>
+
+
+
+
+
+        <!-- Mobile menu -->
+        <div class="container visible-xs">
+          <div class="mobile-nav row">
+            <div class="nav-item item-01"><a href="#" id="off-canvas-menu-toggle"><span class="icon icon-list-4"></span></a></div>
+
+                        <div class="nav-item item-02"><a href="#"><span class="icon icon-vcard"></span></a>
+              <div class="tab-content">
+                <ul class="menu-list">
+
+
+                  <li><a href=" customer/account/login/">Log In</a></li><li><a href=" customer/account/create/">Sign Up</a></li>
+                  <li><a href="  wishlist/">Wishlist</a></li>
+                  <li><a href=" checkout/onepage/">Checkout</a></li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="nav-item item-03"><a href="#"><span class="icon icon-search-2"></span></a>
+              <div class="tab-content"> <!-- Search -->
+                <!-- Search -->
+<form class="navbar-search form-inline" role="form" action=" catalogsearch/result/" method="get">
+  <div class="form-group">
+    <button type="submit" class="button"><span class="icon-search-2"></span></button>
+    <input type="text" class="form-control" placeholder="Search" name="q"  maxlength="128">
+  </div>
+</form>
+<!-- //end Search -->
+                <!-- //end Search -->
+              </div>
+            </div>
+
+            <div class="nav-item item-04">
+
+        <a href="#" class="cart_mob_count">
+            <span class="icon-xcart-white">0</span>
+        </a>
+
+<div class="tab-content">
+        <div class="shoppingcart-box">
+
+                                        <span class="empty">You have no items in your shopping cart.</span>
+
+
+        </div>
+</div>
+
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+        <!-- //end Mobile menu -->
+        <!-- Navbar switcher -->
+        <div class="navbar-switcher-container">
+          <div class="navbar-switcher"> <span class="i-inactive">
+                                        <img src={% static "skin/frontend/megatron/default/images/icon-megatron.png" %} width="35" height="35" alt="">
+                                </span>
+              <span class="i-active icon-cancel-3"></span>
+          </div>
+       </div>
+        <!-- //end Navbar switcher -->
+      </section>
+
+      <!-- Navbar height -->
+      <div class="navbar-height"></div>
+            <!-- Navbar height -->
+
+
+          </header>        gdfdhjf
+<script type="text/javascript" src={% static "js/etheme/megatron/jquery.rw-slider.js" %}></script>
+<script type="text/javascript" >
+    jQuery(function ($) {
+        "use strict";
+        $( ".rw-slider" ).rwSlider({
+            swipe: true
+        });
+
+        $( ".rw-slider .scroll-down" ).click(function() {
+            $( "html, body" ).animate({
+                scrollTop: $(".rw-slider").height()
+            }, 400);
+        });
+
+        $(window).scroll(function () {
+            if ( $(window).scrollTop() > 0) {$(".rw-slider .scroll-down").stop(true.false).fadeOut()}
+            else {$(".rw-slider .scroll-down").stop(true.false).fadeIn()}
+        })
+    });
+
+
+
+</script>
+<!-- Slider MEGATRON-->
+<section class="main-slider rw-slider hidden-xs hidden-sm hidden-md">
+    <ul>
+                        <li>
+                    <a href="#"><img src={% static "media/etheme/megatron/megatronrw/slider-main-back-01.jpg" %} data-rw-slider="main: true; move: true;" alt=""></a>
+                    <a href="#" style="position: absolute; left:10%;top:36%;width:100%;text-align: center">
+                        <span style='font:15.9em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.06em'>Sale</span><span style='font:5.5em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;letter-spacing:-.08em'>up to 40% OFF</span>                    </a>
+                </li>
+                                <li>
+                    <a href="#"><img src={% static "media/etheme/megatron/megatronrw/slider-main-back-02s.jpg" %} data-rw-slider="main: true; move: true;" alt=""></a>
+                    <a href="#" style="position: absolute; left:8%;top:44%;width:86%;">
+                        <span style='margin-left:-.06em;font:10.8em/0.7em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9; text-transform:uppercase;letter-spacing:-.06em'>New</span><span style='font:3.7em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff; opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>collection</span><span style='font:4.6em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>AUTUMN 2014</span>                    </a>
+                </li>
+                                <li>
+                    <a href="#"><img src={% static "media/etheme/megatron/megatronrw/slider-main-back-03.jpg" %} data-rw-slider="main: true; move: true;" alt=""></a>
+                    <a href="#" style="position: absolute; left:50%;top:21%;width:44%;">
+                        <span style='margin-left:-.06em;font:10.2em/0.75em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.06em'>Special offer</span><span style='padding:.3em 0 .5em;font:5.5em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;letter-spacing:-.08em'>Save money with Lingerie SALE</span><span style='font:2.3em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>Up to 50% OFF</span>                    </a>
+                </li>
+                    </ul>
+        <a href="#" class="control prev animate-scale"><span class="icon-arrow-left-5"></span></a>
+    <a href="#" class="control next animate-scale"><span class="icon-untitled"></span></a>
+            <a href="#" class="scroll-down animate-move-down"> <span class="icon icon-arrow-down"></span> scroll to view content </a>
+    </section>
+<!-- //end Slider -->
+
+
+
+               <section class="services-block hidden-xs">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-4 col-lg-4 divider-right"> <a href="#" class="item"> <span class="icon icon-airplane-2"></span> <span class="title">Free shipping</span> <span class="description">on orders over $200</span> </a> </div>
+                      <div class="col-xs-12 col-sm-4 col-lg-4 divider-right"> <a href="#" class="item"> <span class="icon icon-clock"></span> <span class="title">30-day returns</span> <span class="description">moneyback guarantee</span> </a> </div>
+                      <div class="col-xs-12 col-sm-4 col-lg-4"> <a href="#" class="item"> <span class="icon icon-umbrella "></span> <span class="title">24/7 Support </span> <span class="description">online consultations</span> </a> </div>
+                    </div>
+                  </div>
+                </section>
+
+
+        <section class="container">
+                                            </section>
+        <!-- Social widgets -->
+    <section class="social-widgets hidden-xs">
+      <ul class="items">
+
+        <!--FACEBOOK WIDJET-->
+                <li class="item facebook"> <a href="#" class="tab-icon"><span class="icon-facebook-3"></span></a>
+          <div class="tab-content">
+            <div class="title">FACEBOOK</div>
+            <div class="loading">
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/en_US//all.js#xfbml=1&appId=121855444668430";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+                <div class="fb-like-box" data-href="http://www.facebook.com/themeforest" data-width="282" data-height="320" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+            </div>
+          </div>
+        </li>
+
+        <!--TWITTER WIDJET-->
+                <li class="item twitter"> <a href="#" class="tab-icon"><span class="icon-twitter-3"></span></a>
+          <div class="tab-content">
+            <div class="title">TWITTER FEEDS</div>
+            <div class="loading">
+                <a data-chrome="nofooter noheader noborders" data-tweet-limit="2"  data-link-color="#cc0000"    class="twitter-timeline"  href="https://twitter.com/themeforest" data-screen-name="themeforest"  data-widget-id="395451121138802688">loading tweets...</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </div>
+        </li>
+
+        <!--YOUTUBE WIDJET-->
+                <li class="item youtube"> <a href="#" class="tab-icon"><span class="icon icon-youtube-3"></span></a>
+          <div class="tab-content">
+            <div class="title">Video</div>
+            <div class="loading">
+                <iframe width="430" height="244" src="//www.youtube.com/embed/L9szn1QQfas"  allowfullscreen></iframe>            </div>
+          </div>
+        </li>
+
+
+        <!--GOOGLE MAP WIDJET-->
+
+      </ul>
+    </section>
+    <!-- //end Social widgets -->
+    <script>
+        jQuery(function ($) {
+            "use strict";
+            var socialItems = $('.social-widgets .items .item');
+            var counter = 0;
+            socialItems.each(function () {
+                counter++;
+                var itemclass = "item-0"+counter;
+                $(this).addClass(itemclass)
+            });
+        });
+
+    </script>
+        <section class="container content">
+            <div class="row">
+                <!--Content -->
+                <section class="col-sm-8 col-md-9 col-lg-9 content-center">
+                    <div class="std"><div class="page-title"><h2>Home Page</h2></div></div>                </section>
+
+                <!-- Right column -->
+                <aside class="col-sm-4 col-md-3 col-lg-3 content-aside">
+
+
+
+
+
+<!-- Shop by categories -->
+<div class="block block-navigation">
+    <div class="block-title">
+        <strong><span>SHOP BY CATEGORIES</span></strong>
+    </div>
+    <div class="block-content">
+        <ul class="expander-list">
+                    </ul>
+    </div>
+</div>
+<!-- //end Shop by categories -->
+
+
+
+
+
+
+
+                      <!-- Products list -->
+<h3>Bestsellers</h3>
+    <div class="products-widget jcarousel-skin-previews vertical">
+        <ul class="slides">
+                    </ul>
+    </div>
+
+                      <div class="section-divider"></div>
+
+
+
+
+
+             <div class="paypal-logo">
+    <a href="#" title="Additional Options" onclick="javascript:window.open('https://www.paypal.com/us/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','paypal','width=600,height=350,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;"><img src="https://www.paypalobjects.com/en_US/i/bnr/bnr_nowAccepting_150x60.gif" alt="Additional Options" title="Additional Options" /></a>
+</div>
+                </aside>
+            </div>
+        </section>
+
+                    <!-- Social navbar -->
+    <section class="content content-border nopad-xs social-widget grey-container-dark">
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6  col-lg-6 newsletter collapsed-block">
+
+<div class="row">
+    <div class="col-lg-5  col-md-12 col-sm-12 ">
+        <h3>NEWSLETTER SIGNUP <a class="expander visible-xs" href="#TabBlock-1">+</a></h3>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6 tabBlock" id="TabBlock-1">
+        <p>Sign Up for Our Newsletter to receive latest news and events.</p>
+        <form class="form-inline" role="form" action=" newsletter/subscriber/new/" method="post" id="newsletter-validate-detail">
+            <div class="form-group input-control">
+                <button type="submit" class="button"><span class="icon-envelop"></span></button>
+                <input name="email" type="text" class="form-control required-entry validate-email" placeholder="Your E-mail..." >
+            </div>
+        </form>
+        <script type="text/javascript">
+            //<![CDATA[
+            var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+            //]]>
+        </script>
+    </div>
+</div>
+
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 collapsed-block">
+
+
+                    <h3>FIND US ON<a class="expander visible-xs" href="#TabBlock-2">+</a></h3>
+                    <div  class="tabBlock" id="TabBlock-2">
+                        <ul class="find-us">
+                            <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-facebook-3"></span></a></li>
+                            <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-twitter-3"></span></a></li>
+                            <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-linkedin-2"></span></a></li>
+                            <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-youtube-3"></span></a></li>
+                            <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-pinterest-2"></span></a></li>
+                            <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-googleplus-2"></span></a></li>
+                        </ul>
+                    </div>
+
+                         </div>
+        </div>
+    </div>
+</section>
+<!-- //end Social navbar -->
+
+<!-- Footer -->
+<footer>
+        <section class="footer-navbar dark">
+        <div class="container content nopad-xs">
+
+
+                    <div class="row">
+                <div class="col-sm-6 col-md-3 col-lg-3 collapsed-block">
+                    <h3>Information<a class="expander visible-xs" href="#TabBlock-3">+</a></h3>
+                    <div  class="tabBlock" id="TabBlock-3">
+                        <ul class="menu">
+                            <li><a href=" megatron_about">About Us</a></li>
+                            <li><a href="#">Shipping &amp; Returns</a></li>
+                            <li><a href="#">Privacy Notice</a></li>
+                            <li><a href="#">Conditions of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3 collapsed-block">
+                    <h3><span class="attention"><span class="attention_icon"></span></span>Customer service<a class="expander visible-xs" href="#TabBlock-4">+</a></h3>
+                    <div  class="tabBlock" id="TabBlock-4">
+                        <ul class="menu">
+                            <li><a href="#">Online support</a></li>
+                            <li><a href="#">Help & FAQs</a></li>
+                            <li><a href="#">Call Center</a></li>
+                            <li><a href=" contacts">Contact Us </a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix visible-sm"></div>
+                <div class="col-sm-6 col-md-3 col-lg-3 collapsed-block">
+                    <h3>My account<a class="expander visible-xs" href="#TabBlock-5">+</a></h3>
+                    <div  class="tabBlock" id="TabBlock-5">
+                        <ul class="menu">
+                            <li><a href=" customer/account">My Account </a> </li>
+                            <li><a href=" sales/guest/form">Order History</a> </li>
+                            <li><a href=" wishlist">Wish List</a> </li>
+                            <li><a href=" catalog/seo_sitemap/category">Site Map </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3 collapsed-block">
+                    <h3>CUSTOM HTML BLOCK<a class="expander visible-xs" href="#TabBlock-6">+</a></h3>
+                    <div  class="tabBlock" id="TabBlock-6">
+                        <ul class="menu">
+                            <li><span class="icon icon-house"></span> 7563 St. Vincent Place, Glasgow</li>
+                            <li><span class="icon icon-phone-4"></span> 321321321, 321321321</li>
+                            <li><span class="icon icon-envelop"></span> <a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
+                            <li><span class="icon icon-skype-2"></span> <a href="skype:shop.test">shop.test</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+                     </div>
+    </section>
+        <section class="footer-bottom-block container">
+        <div class="row">
+            <div class="col-sm-5 col-md-4 copyright-text"> &copy; 2014 Magento Demo Store. All Rights Reserved. </div>
+            <div class="col-sm-3 col-md-4">
+                            </div>
+            <div class="col-sm-4 col-md-4">
+
+
+                   <ul class="payment-list pull-right">
+
+                    <li><img src={% static "media/wysiwyg/icon-payment-01.png" %} width="36" height="22" alt=""></li>
+                    <li><img src={% static "media/wysiwyg/icon-payment-02.png" %} width="36" height="22" alt=""></li>
+                    <li><img src={% static "media/wysiwyg/icon-payment-03.png" %} width="36" height="22" alt=""></li>
+                    <li><img src={% static "media/wysiwyg/icon-payment-04.png" %} width="36" height="22" alt=""></li>
+                    <li><img src={% static "media/wysiwyg/icon-payment-05.png" %} width="36" height="22" alt=""></li>
+                </ul>
+
+
+            </div>
+        </div>
+    </section>
+</footer>
+        <section class="container">
+
+
+        </section>
+        <div id="outer-overlay"></div>
+    </div>
+</div>
+</body>
+</html>

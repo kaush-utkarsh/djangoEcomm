@@ -1,0 +1,113 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+
+?>
+<?php if(!$_productCollection->count()): ?>
+    <section class="no-product">
+        <div class="row">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('mtron_category_empty')->toHtml() ?>
+        </div>
+    </section>
+<?php else: ?>
+    <div class="category-products">
+        <?php echo $this->getToolbarHtml() ?>
+
+        <?php // List mode ?>
+        <?php if($this->getMode()!='grid'): ?>
+            <div class="products-list products-list-small row products-list-in-row">
+                <?php foreach ($_productCollection as $_product): ?>
+
+                    <?php
+                    $widthBig=212;
+                    $heightBig=257;
+                    $price=$this->getPriceHtml($_product, true);
+                    ?>
+                    <?php
+                    /*
+                     * Product Preview HTML  is using in many blocks (category listing, shortcodes).
+                     * That is why Product Preview HTML generation collected in one function drawProductPreview()
+                     * You can edit this function  in file \app\code\local\Etheme\Megatronconfig\Helper\Data.php
+                    */
+                    ?>
+                    <?php  echo Mage::helper('megatronconfig')->drawProductPreview($_product,$this,$widthBig,$heightBig,$price,true,'',true, false, 'new', 'list')?>
+
+                <?php endforeach; ?>
+            </div>
+
+        <?php else: ?>
+
+            <?php // Grid Mode ?>
+
+            <?php
+            $izotop_mode=Mage::getStoreConfig('megatronlayout/options/izotop_mode');
+            $small_prooducts=(Mage::getStoreConfig('megatronlayout/options/products_size')=='small');
+
+            ?>
+            <div class="products-list<?php if($izotop_mode):?>-isotope isotope<?php endif;?> <?php if($small_prooducts && !$izotop_mode):?>products-list-small<?php endif;?> <?php if(!$izotop_mode):?>row<?php endif;?>">
+
+                <?php foreach ($_productCollection as $_product): ?>
+                    <?php
+                    $widthBig=189;
+                    $heightBig=230;
+                    if(Mage::getStoreConfig('megatronlayout/options/products_size')=='big')
+                    {
+                        $widthBig=261;
+                        $heightBig=317;
+                    }
+                    $price=$this->getPriceHtml($_product, true);
+                    ?>
+
+                    <?php
+                    /*
+                     * Product Preview HTML  is using in many blocks (category listing, shortcodes).
+                     * That is why Product Preview HTML generation collected in one function drawProductPreview()
+                     * You can edit this function  in file \app\code\local\Etheme\Megatronconfig\Helper\Data.php
+                    */
+                    ?>
+                    <?php  echo Mage::helper('megatronconfig')->drawProductPreview($_product,$this,$widthBig,$heightBig,$price,true,'',true, false, 'new')?>
+                <?php endforeach ?>
+            </div>
+        <?php endif; ?>
+
+
+
+        <div class="clearfix"></div>
+
+        <?php echo $this->getToolbarHtml() ?>
+    </div>
+    </div>
+<?php endif; ?>

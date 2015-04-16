@@ -1,0 +1,554 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <!-- CSS preloader -->
+            <action method="addItem"><type>skin_css</type><name>css/loader.css</name><params/></action>
+            <!-- Bootstrap core CSS -->
+            <action method="addItem"><type>skin_css</type><name>css/bootstrap.min.css</name><params/></action>
+            <!-- Custom styles for this template -->
+            <action method="addItem"><type>skin_css</type><name>css/megatron-template.css</name><params/></action>
+            <!-- CSS modules -->
+            <action method="addItem"><type>skin_css</type><name>css/icomoon.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/fontello.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/jquery.rw-slider.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/flexslider.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/jcarousel.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/owl.carousel.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/owl.theme.css</name><params/></action>
+            <action method="addItem" ifconfig="megatronconfig/options/cloudzoom_paid"><type>skin_css</type><name>css/cloudzoom.css</name><params/></action>
+            <action method="addItem" ifconfig="megatronconfig/options/cloudzoom_free"><type>skin_css</type><name>css/cloud-zoom.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/sfmenu.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/isotope.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/smoothness/jquery-ui-1.10.3.custom.min.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/jquery.fancybox.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/hoverfold.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/smoothslides.theme.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/megatron-template-kids.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/added.css</name><params/></action>
+
+            <action method="addItem" ifconfig="megatroncolors/general/custom_css"><type>skin_css</type><name>css/custom_changes.css</name><params/></action>
+
+            <!-- CSS IE -->
+            <action method="addCssIe"><css>css/styles-ie.css</css></action>
+
+            <!--JS-->
+            <action method="addItem"><type>js</type><name>etheme/megatron/html5shiv.js</name><params/><if>lt IE 9</if></action>
+            <action method="addItem"><type>js</type><name>etheme/megatron/respond.min.js</name><params/><if>lt IE 9</if></action>
+
+            <action method="addJs"><script>etheme/megatron/jquery-1.10.2.min.js</script></action>
+            <action method="addJs"><script>etheme/megatron/noconflict.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery-ui-1.10.3.custom.min.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.ui.touch-punch.min.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.mousewheel.min.js</script></action>
+            <action method="addJs"><script>etheme/megatron/bootstrap.min.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.rw-preloader.js</script></action>
+            <action method="addJs"><script>etheme/megatron/hammer.min.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.flexslider.js</script></action>
+            <action method="addJs"><script>etheme/megatron/owl.carousel.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.jcarousel.min.js</script></action>
+            <action method="addJs" ifconfig="megatronconfig/options/cloudzoom_paid"><script>etheme/megatron/cloudzoom.js</script></action>
+            <action method="addJs" ifconfig="megatronconfig/options/cloudzoom_free"><script>etheme/megatron/cloud-zoom.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.countTo.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.isotope.min.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.fancybox.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.inview.js</script></action>
+            <action method="addJs"><script>etheme/megatron/hoverIntent.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.hoverfold.js</script></action>
+            <action method="addJs"><script>etheme/megatron/superfish.js</script></action>
+            <action method="addJs"><script>etheme/megatron/supersubs.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.parallax.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.plugin.min.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.countdown.js</script></action>
+            <action method="addJs"><script>etheme/megatron/jquery.carouFredSel-6.2.1-packed.js</script></action>
+            <action method="addJs"><script>etheme/megatron/smoothslides.js</script></action>
+            <!--<action method="addJs"><script>etheme/megatron/VS/ajaxwishlist.js</script></action>
+            <action method="addJs"><script>etheme/megatron/VS/addtocart.js</script></action>-->
+            <action method="addJs"><script>etheme/megatron/megatron.js</script></action>
+            <action method="addJs"><script>etheme/megatron/retina-replace.js</script></action>
+        </reference>
+
+        <reference name="root">
+            <block type="megatronconfig/navigationmob" name="canvas_menu_mobile" template="page/html/canvas_menu_mobile.phtml">
+                <block type="cms/block" name="mtron_topmenu_mobile_btm">
+                    <action method="setBlockId"><block_id>mtron_topmenu_mobile_btm</block_id></action>
+                </block>
+                <block type="cms/block" name="mtron_topmenu_mobile_top">
+                    <action method="setBlockId"><block_id>mtron_topmenu_mobile_top</block_id></action>
+                </block>
+                <action ifconfig="megatronconfig/megamenu/left_part" method="unsetChild"><name>mtron_topmenu_mobile_top</name></action>
+                <action ifconfig="megatronconfig/megamenu/right_part" method="unsetChild"><name>mtron_topmenu_mobile_btm</name></action>
+            </block>
+
+            <block type="core/template" name="social_contacts" as="social_contacts" template="megatron/social_contacts.phtml" />
+
+
+
+        </reference>
+
+        <reference name="right">
+            <action method="unsetChild"><name>right.poll</name></action>
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+            <action method="unsetChild"><name>right.reports.product.viewed</name></action>
+            <action method="unsetChild"><name>wishlist</name></action>
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="unsetChild"><name>right.permanent.callout</name></action>
+            <action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+
+            <block type="megatronconfig/navigationsidebar" name="mtron_leftmenu" template="page/html/leftmenu.phtml" before="-" />
+            <block type="cms/block" name="mtron_custom_block_left_sidebar">
+                <action method="setBlockId"><block_id>mtron_custom_block_left_sidebar</block_id></action>
+            </block>
+            <block type="cms/block" name="mtron_blog_left_sidebar">
+                <action method="setBlockId"><block_id>mtron_blog_left_sidebar</block_id></action>
+            </block>
+            <action ifconfig="megatronlayout/sidebar/blog" method="unsetChild"><name>mtron_blog_left_sidebar</name></action>
+
+        </reference>
+
+
+
+        <reference name="left">
+            <action method="unsetChild"><name>currency</name></action>
+            <action method="unsetChild"><name>footer_newsletter</name></action>
+            <action method="unsetChild"><name>left.permanent.callout</name></action>
+            <action method="unsetChild"><name>left.newsletter</name></action>
+
+            <action method="unsetChild"><name>catalog.leftnav</name></action>
+
+
+            <block type="reports/product_viewed"  name="right.reports.product.viewed" template="reports/product_viewed.phtml" />
+            <block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist"  template="wishlist/sidebar.phtml" />
+
+
+
+            <block type="poll/activePoll" name="pollleft">
+                <action method="setPollTemplate"><template>poll/active.phtml</template><type>poll</type></action>
+                <action method="setPollTemplate"><template>poll/result.phtml</template><type>results</type></action>
+            </block>
+
+
+            <block type="megatronconfig/navigationsidebar" name="mtron_leftmenu" template="page/html/leftmenu.phtml" before="-" />
+
+            <block type="cms/block" name="mtron_custom_block_left_sidebar">
+                <action method="setBlockId"><block_id>mtron_custom_block_left_sidebar</block_id></action>
+            </block>
+
+            <action ifconfig="megatronlayout/sidebar/custom_block" method="unsetChild"><name>mtron_custom_block_left_sidebar</name></action>
+
+            <block type="cms/block" name="mtron_blog_left_sidebar">
+                <action method="setBlockId"><block_id>mtron_blog_left_sidebar</block_id></action>
+            </block>
+            <action ifconfig="megatronlayout/sidebar/blog" method="unsetChild"><name>mtron_blog_left_sidebar</name></action>
+
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/navigation"><name>mtron_leftmenu</name></action>
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/navigation"><name>tags_popular</name></action>
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/community_poll"><name>pollleft</name></action>
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/viewed"><name>right.reports.product.viewed</name></action>
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/wishlist"><name>wishlist</name></action>
+
+
+
+
+            <reference name="catalog.leftnav">
+                <action method="setCacheLifetime"><s>null</s></action>
+            </reference>
+
+        </reference>
+
+
+
+
+        <!--HEADER-->
+        <reference name="header">
+            <!--CURRENCY-->
+            <block type="directory/currency" name="currency_mobile" template="page/switch/currency_mobile.phtml" />
+            <block type="directory/currency" name="currency" template="page/switch/currency.phtml" />
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/currency"><name>currency</name></action>
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/currency"><name>currency_mobile</name></action>
+            <action method="unsetChild" ifconfig="megatronconfig/options/catalog_mode"><name>currency</name></action>
+
+            <!--TOPCART-->
+            <block type="checkout/cart_sidebar" name="topcart" as="topcart" template="checkout/cart/topcart.phtml">
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                    <label>Shopping Cart Sidebar Extra Actions</label>
+                </block>
+            </block>
+            <block type="checkout/cart_sidebar" name="topcart_mobile" as="topcart_mobile" template="checkout/cart/topcart_mobile.phtml">
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                    <label>Shopping Cart Sidebar Extra Actions</label>
+                </block>
+            </block>
+            <action ifconfig="megatronlayout/sidebar/my_cart" method="unsetChild"><name>topcart</name></action>
+            <action ifconfig="megatronlayout/sidebar/my_cart" method="unsetChild"><name>topcart_mobile</name></action>
+            <action ifconfig="megatronconfig/options/catalog_mode" method="unsetChild" ><name>topcart</name></action>
+
+            <!--LANGUAGES-->
+            <block type="page/switch" name="store_language_mobile" as="store_language_mobile" template="page/switch/languages_mobile.phtml"/>
+            <action ifconfig="megatronlayout/sidebar/language" method="unsetChild"><name>store_language</name></action>
+            <action ifconfig="megatronlayout/sidebar/language" method="unsetChild"><name>store_language_mobile</name></action>
+
+            <!--COMPARE-->
+            <block type="catalog/product_compare_sidebar"  name="catalog.compare.sidebar"  template="catalog/product/compare/sidebar.phtml"/>
+            <action ifconfig="megatronconfig/options/catalog_mode" method="unsetChild"><name>catalog.compare.sidebar</name></action>
+            <action ifconfig="megatronlayout/sidebar/compare" method="unsetChild"><name>catalog.compare.sidebar</name></action>
+
+            <!--SEARCH-->
+            <block type="core/template" name="top.search_mobile" as="topSearch_mobile" template="catalogsearch/form.mini_mobile.phtml"/>
+            <action ifconfig="megatronlayout/sidebar/search" method="unsetChild"><name>topSearch</name></action>
+
+            <!--TOPLINKS-->
+            <action ifconfig="megatronlayout/sidebar/toplinks" method="unsetChild"><name>topLinks</name></action>
+            <action method="unsetChild" ifconfig="megatronconfig/options/catalog_mode"><name>topLinks</name></action>
+
+
+
+
+            <!--MEGAMENU-->
+            <block type="megatronconfig/megamenu" name="mtron_megamenu" template="page/html/megamenu.phtml">
+                <block type="cms/block" name="mtron_topmenu_megamenu_right">
+                    <action method="setBlockId"><block_id>mtron_topmenu_megamenu_right</block_id></action>
+                </block>
+                <block type="cms/block" name="mtron_topmenu_megamenu_left">
+                    <action method="setBlockId"><block_id>mtron_topmenu_megamenu_left</block_id></action>
+                </block>
+
+                <action ifconfig="megatronconfig/megamenu/left_part" method="unsetChild"><name>mtron_topmenu_megamenu_left</name></action>
+                <action ifconfig="megatronconfig/megamenu/right_part" method="unsetChild"><name>mtron_topmenu_megamenu_right</name></action>
+            </block>
+            <action ifconfig="megatronlayout/sidebar/topmenu" method="unsetChild"><name>mtron_megamenu</name></action>
+
+
+            <!--SIMPLE TREE MENU-->
+            <block type="megatronconfig/navigation" name="topMenu" template="page/html/topmenu.phtml">
+                <block type="cms/block" name="mtron_topmenu_simple_right">
+                    <action method="setBlockId"><block_id>mtron_topmenu_simple_right</block_id></action>
+                </block>
+                <block type="cms/block" name="mtron_topmenu_simple_left">
+                    <action method="setBlockId"><block_id>mtron_topmenu_simple_left</block_id></action>
+                </block>
+
+                <action ifconfig="megatronconfig/megamenu/left_part" method="unsetChild"><name>mtron_topmenu_simple_left</name></action>
+                <action ifconfig="megatronconfig/megamenu/right_part" method="unsetChild"><name>mtron_topmenu_simple_right</name></action>
+            </block>
+            <action ifconfig="megatronlayout/sidebar/topmenu" method="unsetChild"><name>mtron_megamenu</name></action>
+
+        </reference>
+        <!--HEADER END-->
+
+        <!--FOOTER-->
+        <reference name="footer">
+            <block type="page/switch" name="store_switcher" as="store_switcher" template="page/switch/stores.phtml"/>
+            <action ifconfig="megatronlayout/sidebar/store" method="unsetChild"><name>store_switcher</name></action>
+            <block type="newsletter/subscribe" name="footer.newsletter" as="footer_newsletter" template="newsletter/subscribe.phtml"/>
+
+            <block type="cms/block" name="mtron_find_us">
+                <action method="setBlockId"><block_id>mtron_find_us</block_id></action>
+            </block>
+
+            <block type="cms/block" name="mtron_footer_links">
+                <action method="setBlockId"><block_id>mtron_footer_links</block_id></action>
+            </block>
+
+            <block type="cms/block" name="mtron_footer_payments">
+                <action method="setBlockId"><block_id>mtron_footer_payments</block_id></action>
+            </block>
+
+
+            <action ifconfig="megatronlayout/sidebar/newsletter" method="unsetChild"><name>footer_newsletter</name></action>
+            <action ifconfig="megatronlayout/sidebar/find_us" method="unsetChild"><name>mtron_find_us</name></action>
+            <action ifconfig="megatronlayout/sidebar/footer_links" method="unsetChild"><name>mtron_footer_links</name></action>
+        </reference>
+        <!--FOOTER EOF-->
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <block type="core/template" name="mtron_left_navigation" template="megatron/left_navigation.phtml" />
+        </reference>
+
+
+    </default>
+
+
+
+    <cms_index_index>
+        <reference name="root">
+            <!--SLIDERS-->
+            <block type="core/template" name="slider" as="slider" template="megatron/slider/slider.phtml">
+                <block  type="megatronrw/megatronrw" name="slider_megatron" as="slider_megatron" template="megatron/slider/slider_megatron.phtml" />
+                <block  type="megatronsimple/megatronsimple" name="slider_simple" as="slider_simple" template="megatron/slider/slider_simple.phtml" />
+                <block  type="megatronrevolution/megatronrevolution" name="slider_revolution" as="slider_revolution" template="megatron/slider/slider_revolution.phtml" />
+            </block>
+            <action ifconfig="megatronlayout/options/slider_show" method="unsetChild"><name>slider</name></action>
+
+            <block type="cms/block" name="mtron_content_services">
+                <action method="setBlockId"><block_id>mtron_content_services</block_id></action>
+            </block>
+            <action method="unsetChild" ifconfig="megatronlayout/options/topservices"><name>mtron_content_services</name></action>
+
+        </reference>
+
+        <!--<reference name="left">
+            <remove name="right.reports.product.viewed"/>
+        </reference>-->
+    </cms_index_index>
+
+
+
+    <catalog_category_default translate="label">
+        <reference name="left">
+            <action method="unsetChild"><name>currency</name></action>
+            <action method="unsetChild"><name>catalog.shopby</name></action>
+
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/shop_by"><name>catalog.leftnav</name></action>
+
+            <block type="cms/block" name="mtron_sidebar_custom_html">
+                <action method="setBlockId"><block_id>mtron_sidebar_custom_html</block_id></action>
+            </block>
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/custom_html"><name>mtron_sidebar_custom_html</name></action>
+        </reference>
+
+
+    </catalog_category_default>
+
+    <catalog_category_layered translate="label">
+        <reference name="left">
+            <action method="unsetChild"><name>currency</name></action>
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/shop_by"><name>catalog.leftnav</name></action>
+            <block type="cms/block" name="mtron_sidebar_custom_html">
+                <action method="setBlockId"><block_id>mtron_sidebar_custom_html</block_id></action>
+            </block>
+            <action method="unsetChild" ifconfig="megatronlayout/sidebar/custom_html"><name>mtron_sidebar_custom_html</name></action>
+        </reference>
+    </catalog_category_layered>
+
+    <catalogsearch_advanced_index translate="label">
+        <reference name="left">
+            <action method="unsetChild"><name>right_currency</name></action>
+        </reference>
+    </catalogsearch_advanced_index>
+
+    <catalogsearch_result_index translate="label">
+        <reference name="left">
+            <action method="unsetChild"><name>currency</name></action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <catalog_product_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+        <reference name="content">
+
+            <block  name="product.info.upsell" >
+                <action method="setColumnCount"><columns>3</columns></action>
+                <action method="setItemLimit"><type>upsell</type><limit>24</limit></action>
+            </block>
+
+            <reference name="product.info">
+
+                <block type="review/product_view_list" name="reviews" as="reviews" template="review/product/view/list.phtml">
+                    <block type="review/form" name="product.review.form" as="review_form">
+                        <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+                            <label>Review Form Fields Before</label>
+                            <action method="setMayBeInvisible"><value>1</value></action>
+                        </block>
+                    </block>
+                </block>
+
+                <block type="catalog/product_list_related" name="catalog.product.related" as="related_products" template="catalog/product/list/related.phtml"/>
+
+
+                <block type="tag/popular" name="tags_popular" template="tag/popular.phtml"/>
+
+                <block type="megatronconfig/navigationsidebar" name="mtron_leftmenu" template="page/html/leftmenu.phtml" before="-" />
+
+                <block type="cms/block" name="mtron_product_custom_html_accordion">
+                    <action method="setBlockId"><block_id>mtron_product_custom_html_accordion</block_id></action>
+                </block>
+                <block type="cms/block" name="mtron_product_services_links_bottom">
+                    <action method="setBlockId"><block_id>mtron_product_services_links_bottom</block_id></action>
+                </block>
+                <block type="cms/block" name="mtron_product_services_links_right">
+                    <action method="setBlockId"><block_id>mtron_product_services_links_right</block_id></action>
+                </block>
+
+                <block type="inchoo_prevnext/links" name="inchoo.prevnext.links"  as="prev_next" template="inchoo/prevnext/links.phtml" />
+
+               
+
+                <action method="insert"><blockName>catalog.product.related</blockName></action>
+            </reference>
+        </reference>
+
+
+        <reference name="right">
+            <action method="unsetChild"><name>catalog.product.related</name></action>
+        </reference>
+
+    </catalog_product_view>
+
+    <customer_account>
+        <reference name="left">
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+        </reference>
+    </customer_account>
+
+    <contacts_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+        <reference name="contactForm">
+            <block type="cms/block" name="mtron_contact_information">
+                <action method="setBlockId"><block_id>mtron_contact_information</block_id></action>
+            </block>
+        </reference>
+
+    </contacts_index_index>
+
+
+
+    <customer_account_create>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </customer_account_create>
+
+    <customer_account_login>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </customer_account_login>
+    <customer_account_logoutsuccess>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </customer_account_logoutsuccess>
+    <customer_account_forgotpassword>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </customer_account_forgotpassword>
+
+    <catalog_seo_sitemap_category>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </catalog_seo_sitemap_category>
+
+    <catalog_seo_sitemap_product>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </catalog_seo_sitemap_product>
+
+
+    <checkout_onepage_success>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_onepage_success>
+
+    <checkout_multishipping_addresses>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_addresses>
+
+    <checkout_multishipping_shipping>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_shipping>
+
+    <sales_guest_form>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </sales_guest_form>
+
+
+    <checkout_multishipping_billing>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_billing>
+
+    <checkout_multishipping_address_selectbilling>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_address_selectbilling>
+
+    <checkout_multishipping_address_newbilling>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_address_newbilling>
+
+    <checkout_multishipping_overview>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_overview>
+
+    <checkout_multishipping_address_editshipping>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_address_editshipping>
+
+    <checkout_multishipping_address_editbilling>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_address_editbilling>
+
+    <checkout_multishipping_success>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_success>
+
+
+    <catalogsearch_result_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <catalogsearch_advanced_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+    </catalogsearch_advanced_index>
+
+    <customer_account>
+        <reference name="left">
+            <remove name="catalog.compare.sidebar" />
+            <remove name="mtron_custom_block_left_sidebar" />
+            <remove name="mtron_blog_left_sidebar" />
+        </reference>
+    </customer_account>
+
+    <wordpress_homepage>
+        <reference name="content">
+            <reference name="wordpress_homepage">
+                <block type="wordpress/post_list" name="wordpress_post_list" as="post_list" template="wordpress/post/list.phtml">
+                    <action method="setTemplate" ifconfig="megatronlayout/options/blog_style">
+                        <template>wordpress/post/grid.phtml</template>
+                    </action>
+                </block>
+            </reference>
+        </reference>
+    </wordpress_homepage>
+
+</layout>

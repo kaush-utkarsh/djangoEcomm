@@ -1,0 +1,85 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<?php
+    $responsive=Mage::getStoreConfig('megatronconfig/options/responsive');
+    $rtl=Mage::getStoreConfig('megatronconfig/options/rtl_mode');
+    $site_boxed=Mage::getStoreConfig('megatronconfig/options/site_boxed');
+    $fixed_bg=Mage::getStoreConfig('megatronconfig/options/fixed_bg');
+$show_load=Mage::getStoreConfig('megatronconfig/options/show_load');
+
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>"  <?php if($rtl):?>dir="rtl"<?php endif;?>>
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.($responsive?'responsive':'noresponsive').' '.($rtl?'rtl':'').' '.($cloudzoom_free?'cloudzoom_free':'').' '.($fixed_bg?'back-bg':'').' '.((!$show_load)?'no-load-anime':'').' '.$this->getBodyClass().'"':'' ?>>
+
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="loader">
+  <div class="bubblingG"> <span id="bubblingG_1"> </span> <span id="bubblingG_2"> </span> <span id="bubblingG_3"> </span> </div>
+</div>
+<?php echo $this->getChildHtml('canvas_menu_mobile') ?>
+<div id="outer">
+    <div id="outer-canvas">
+        <?php echo $this->getChildHtml('global_notices') ?>
+        <?php echo $this->getChildHtml('header') ?>
+        <?php echo $this->getChildHtml('slider') ?>
+        <?php if($site_boxed):?><div class="container"><?php endif;?>
+        <?php echo $this->getChildHtml('mtron_content_services') ?>
+        <?php if($site_boxed):?></div><?php endif;?>
+
+        <section class="container">
+            <?php if($fixed_bg):?><br /><?php endif;?>
+            <?php echo $this->getChildHtml('global_messages') ?>
+            <?php echo $this->getChildHtml('breadcrumbs') ?>
+        </section>
+        <?php echo $this->getChildHtml('social_contacts') ?>
+
+        <div class="container">
+        <?php echo $this->getChildHtml('content') ?>
+        </div>
+
+        <?php if($site_boxed):?><div class="container"><?php endif;?>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php if($site_boxed):?></div><?php endif;?>
+
+        <section class="container">
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+        </section>
+        <div id="outer-overlay"></div>
+    </div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

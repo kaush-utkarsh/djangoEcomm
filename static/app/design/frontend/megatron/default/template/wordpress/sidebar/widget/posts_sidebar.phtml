@@ -1,0 +1,52 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $posts = $this->getPosts() ?>
+<?php if (count($posts) > 0): ?>
+
+    <section class="blog-widget-small">
+        <?php if ($title = $this->getTitle()): ?>
+            <h3><?php echo $this->__($title) ?></h3>
+        <?php endif; ?>
+        <div class="posts flexslider">
+            <ul class="slides">
+                <?php foreach($posts as $post): ?>
+                    <li>
+                        <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+                            <div class="image-cell">
+                                <a href="<?php echo $post->getPermalink() ?>"><img src="<?php echo $featuredImage->getMediumImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>" class="img-responsive animate scale"  height="119" /></a>
+                            </div>
+
+                            <?php
+                            /*
+                             *  getThumbnailImage()
+                                getMediumImage()
+                                getLargeImage()
+                                getFullSizeImage()
+                                getPostThumbnailImage()
+                                getAvailableImage()
+                                getImageByType($type = 'thumbnail')
+                            */
+                            ?>
+                        <?php endif; ?>
+
+                        <div class="offset-image">
+                            <h4><a href="<?php echo $post->getPermalink() ?>"><?php echo $this->htmlEscape($post->getPostTitle()) ?></a></h4>
+                            <p>
+                                <a><?php echo $post->getCommentCountString($post) ?></a>
+                            </p>
+                            <?php echo $post->getPostExcerpt();?>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+
+            </ul>
+        </div>
+        <div class="section-divider"></div>
+    </section>
+<?php endif; ?>

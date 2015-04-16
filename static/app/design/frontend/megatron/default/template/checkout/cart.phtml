@@ -1,0 +1,187 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+<section class="container">
+
+   <div class="row">
+       <br /><br /><br />
+        <section class="col-md-8 col-lg-8">
+
+            <!-- Shopping cart -->
+            <section class="content-box">
+
+
+                <div class="shopping-cart">
+                    <div class="shopping-cart-header">
+                        <img src="<?php echo $this->getSkinUrl('images/shopping-cart-back-left.png')?>" alt="" class="pull-left">
+                        <img src="<?php echo $this->getSkinUrl('images/shopping-cart-back-right.png')?>" alt="" class="pull-right">
+                    </div>
+                    <div class="box">
+
+
+                        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+                        <?php echo $this->getChildHtml('form_before') ?>
+                        <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+                            <?php echo $this->getBlockHtml('formkey'); ?>
+
+                            <h3><?php echo $this->__('Shopping Cart') ?></h3>
+                            <table>
+                                <thead>
+                                <tr  class="hidden-xs">
+                                    <th></th>
+                                    <th></th>
+                                    <th><?php echo $this->__('Product Name') ?></th>
+                                    <th><?php echo $this->__('Unit Price') ?></th>
+                                    <th><?php echo $this->__('Qty') ?></th>
+                                    <th><?php echo $this->__('Subtotal') ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->getItems() as $_item): ?>
+                                    <?php echo $this->getItemHtml($_item) ?>
+                                <?php endforeach ?>
+                                </tbody>
+                            </table>
+
+                            <div class="row hidden-xs">
+
+                                <?php if($this->getContinueShoppingUrl()): ?>
+                                    <div class="col-md-4 col-lg-4 col-xs-4">
+                                            <button type="button " title="<?php echo $this->__('Continue Shopping') ?>" class="btn btn-sm btn-primary" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>');return false;"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                                    </div>
+                                <?php endif; ?>
+                                    <div class="col-md-4 col-lg-4 col-xs-4 text-center">
+                                        <button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Cart'); ?>" class="btn btn-sm btn-primary "><span><span><?php echo $this->__('Update Shopping Cart'); ?></span></span></button>
+                                    </div>
+                                    <div class="col-md-4 col-lg-4 col-xs-4 text-right">
+                                        <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear Shopping Cart'); ?>" class="btn btn-sm  btn-primary" id="empty_cart_button"><span><span><?php echo $this->__('Clear Shopping Cart'); ?></span></span></button>
+                                    </div>
+                            </div>
+
+                            <div class="row visible-xs">
+
+                                <?php if($this->getContinueShoppingUrl()): ?>
+
+                                        <button type="button " title="<?php echo $this->__('Continue Shopping') ?>" class="btn btn-sm btn-primary" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>');return false;"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+
+                                <?php endif; ?>
+
+                                    <button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Cart'); ?>" class="btn btn-sm btn-primary "><span><span><?php echo $this->__('Update Shopping Cart'); ?></span></span></button>
+
+                                    <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear Shopping Cart'); ?>" class="btn btn-sm  btn-primary" id="empty_cart_button"><span><span><?php echo $this->__('Clear Shopping Cart'); ?></span></span></button>
+
+                            </div>
+
+
+
+
+                            <!--[if lt IE 8]>
+                            <input type="hidden" id="update_cart_action_container" />
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                    Event.observe(window, 'load', function()
+                                    {
+                                        // Internet Explorer (lt 8) does not support value attribute in button elements
+                                        $emptyCartButton = $('empty_cart_button');
+                                        $cartActionContainer = $('update_cart_action_container');
+                                        if ($emptyCartButton && $cartActionContainer) {
+                                            Event.observe($emptyCartButton, 'click', function()
+                                            {
+                                                $emptyCartButton.setAttribute('name', 'update_cart_action_temp');
+                                                $cartActionContainer.setAttribute('name', 'update_cart_action');
+                                                $cartActionContainer.setValue('empty_cart');
+                                            });
+                                        }
+
+                                    });
+                                //]]>
+                                </script>
+                                <![endif]-->
+
+                        </form>
+
+
+
+                        <div class="pull-right">
+                            <div class="totals">
+                                <?php echo $this->getChildHtml('totals'); ?>
+                                <?php if(!$this->hasError()): ?>
+                                    <ul class="checkout-types">
+                                        <?php foreach ($this->getMethods('methods') as $method): ?>
+                                            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                                <li><?php echo $methodHtml; ?></li>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- //end Shopping cart -->
+
+        </section>
+        <aside class="col-md-4 col-lg-4 shopping-cart-aside">
+
+            <!-- Coupon -->
+            <section class="container-widget">
+                <?php echo $this->getChildHtml('coupon') ?>
+            </section>
+            <!-- //end Coupon -->
+
+            <!-- Estimate shipping -->
+            <section class="container-widget">
+                <?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+            </section>
+            <!-- //end Estimate shipping -->
+
+        </aside>
+    </div>
+
+
+
+    <?php echo $this->getChildHtml('crosssell') ?>
+
+    <?php echo $this->getChildHtml('checkout.cart.extra') ?>
+
+
+
+
+
+
+
+</section>

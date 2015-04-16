@@ -1,0 +1,40 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $posts = $this->getPosts() ?>
+<?php if (count($posts) > 0): ?>
+
+
+
+    <div class="row">
+
+        <!-- //end Filters -->
+        <div class="posts-isotope">
+            <?php foreach($posts as $post): ?>
+
+                <div class="col-sm-6 col-md-4 post category4">
+                    <div class="container-paper-table">
+                        <?php echo $this->getPostRenderer($post)->toHtml() ?>
+
+
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+
+
+
+
+        </div>
+    </div>
+
+	<div class="post-list">
+		<?php echo $this->getPagerHtml() ?>
+        <br /><br />
+	</div>
+<?php endif; ?>

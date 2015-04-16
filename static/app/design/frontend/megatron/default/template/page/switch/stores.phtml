@@ -1,0 +1,51 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Store switcher template
+ *
+ * @see Mage_Core_Block_Store_Switcher
+ */
+?>
+<?php if(count($this->getGroups())>1): ?>
+    <?php echo $this->__('Select Store:') ?>
+    <div class="btn-group btn-select dropup">
+        <a href="#" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+            <span class="value">
+                <?php foreach ($this->getGroups() as $_group): ?>
+                    <?php if($_selected = ($_group->getId()==$this->getCurrentGroupId())) echo $this->escapeHtml($_group->getName()) ?>
+                <?php endforeach; ?>
+            </span>
+            <span class="caret min"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <?php foreach ($this->getGroups() as $_group): ?>
+                <li> <a href="<?php echo $_group->getHomeUrl() ?>"><?php echo $this->escapeHtml($_group->getName()) ?></a> </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

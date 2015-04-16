@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<megatron>
+    <slides>
+
+        <!--
+        Images you need upload manually by ftp in folder media\etheme\megatron\megatronrevolution/kids/
+        Recommended image size 1280x700 px
+
+        Revolution slider options you can edit here \app\design\frontend\megatron\default\template\megatron\slider\slider_revolution.phtml
+        Also You need read revolution slider documentation (attached to megatron package) how create your own amazing slides
+        -->
+        <slide1>
+
+            <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+                <!-- Main Image -->
+                <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/kids/slider-main-back-01.jpg" />
+                <!-- End Main Image -->
+                <!-- Captions -->
+                <div class="tp-caption sfr" data-easing="easeOutExpo" data-speed="700" data-start="400" data-x="300" data-y="50"><a href="index.html" class="title-slide-01"> <span class="big">Pretty much all the honest truth telling <br />
+                    in the world is done by children</span></a> </div>
+                <div class="tp-caption sfr" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="950" data-y="250"><a href="index.html" class="title-slide-01"> <span class="small">Holmes</span> </a> </div>
+                <!-- End Captions -->
+            </li>
+
+
+        </slide1>
+        <slide2>
+
+            <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+                <!-- Main Image -->
+                <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/kids/slider-main-back-02.jpg" />
+                <!-- End Main Image -->
+                <!-- Captions -->
+                <div class="tp-caption sft" data-easing="easeOutExpo" data-speed="700" data-start="600" data-x="600" data-y="220"><a href="index.html" class="title-slide-02"><span class="big">The soul is healed by being with children</span> </a> </div>
+                <div class="tp-caption sfb" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="1350" data-y="370"><a href="index.html" class="title-slide-02"><span class="small">Fyodor Dostoyevsky</span> </a> </div>
+                <!-- End Captions -->
+            </li>
+
+        </slide2>
+        <slide3>
+
+            <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+                <!-- Main Image -->
+                <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/kids/slider-main-back-03.jpg" />
+                <!-- End Main Image -->
+                <!-- Captions -->
+                <div class="tp-caption sfl" data-easing="easeOutExpo" data-speed="700" data-start="600" data-x="0" data-y="250"><a href="index.html" class="title-slide-03"> <span class="big">Children must be taught how to think, <br />
+                    not what to think</span></a> </div>
+                <div class="tp-caption sfl" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="600" data-y="450"><a href="index.html" class="title-slide-03"> <span class="small">Margaret Mead</span> </a> </div>
+                <!-- End Captions -->
+            </li>
+
+        </slide3>
+
+        <slide4>
+            <li data-transition="fade" data-slotamount="7" data-masterspeed="300">
+                <img src="{{BASE}}media/etheme/megatron/megatronrevolution/kids/blank.gif" alt="" />
+                <div class="tp-caption fade hidden-notouch"  data-start="0" data-x="0" data-y="0">
+                    <img src="{{BASE}}media/etheme/megatron/megatronrevolution/kids/slider-main-back-04.jpg" alt="" />
+                </div>
+                <div class="tp-caption fade fullscreenvideo" data-autoplay="false" data-speed="500" data-start="10" data-easing="easeOutBack">
+                    <video class="hidden-touch"  style="width: 100%; height: auto" preload="auto" src="{{BASE}}media/etheme/megatron/megatronrevolution/kids/video-slider.mp4" loop="loop"  autoplay="autoplay" ></video>
+                </div>
+                <div class="tp-caption sft" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="560" data-y="300">
+                    <div class="title-01"> New Arrivals</div>
+                </div>
+                <div class="tp-caption sft" data-easing="easeOutExpo" data-speed="700" data-start="500" data-x="230" data-y="370">
+                    <div class="title-02"> Spring/Summer Kids Wear Collection </div>
+                </div>
+                <div class="tp-caption sfb" data-easing="easeOutExpo" data-speed="700" data-start="500" data-x="230" data-y="440">
+                    <div class="title-03"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget,<br />
+                        nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. </div>
+                </div>
+                <div class="tp-caption sfb" data-easing="easeOutExpo" data-speed="700" data-start="1500" data-x="490" data-y="520">
+                    <div><a class="btn btn-mega btn-xlg" href="#">GET STARTED NOW!</a></div>
+                </div>
+            </li>
+        </slide4>
+
+    </slides>
+</megatron>

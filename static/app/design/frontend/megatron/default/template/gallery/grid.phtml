@@ -1,0 +1,113 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php
+    $slides = $this->getDataSlides();
+    $cols=3;
+    switch(Mage::getStoreConfig('megatronlayout/options/gallery_grid')){
+        case 'columns_2':$cols=6;break;
+        case 'columns_3':$cols=4;break;
+        case 'columns_4':$cols=3;break;
+        case 'columns_4_no_space':$cols=3;break;
+        default:$cols=3;
+    }
+
+    $mode_3d=Mage::getStoreConfig('megatronlayout/options/gallery_3d');
+    $filters=Mage::getStoreConfig('megatronlayout/options/gallery_izotop');
+
+?>
+
+<h3><?php echo $this->getBlockName(); ?></h3>
+
+
+<?php if($filters && $mode_3d): ?>
+<?php
+    $categories=explode(',',Mage::getStoreConfig('megatronlayout/options/gallery_categories'));
+    if($categories):
+?>
+    <!-- Filters -->
+    <section class="filters-by-category clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <ul class="option-set" data-option-key="filter">
+                        <li><a href="#filter" data-option-value="*" class="selected"><?php echo $this->__('all') ?></a></li>
+                        <?php foreach($categories as $key=>$category): ?>
+                        <li><a href="#filter" data-option-value=".<?php echo str_replace(' ','_',$category)?>"><?php echo $category?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //end Filters -->
+    <?php endif; ?>
+<?php endif; ?>
+
+<?php if($mode_3d): ?><!--[if lt IE 10]> <br><br><div class="alert alert-danger"><?php echo $this->__('Your browser doesn\'t support 3D gallery. Please update to modern browser.') ?> </div><![endif]--><?php endif;?>
+
+
+
+
+<div <?php if($mode_3d): ?>id="hoverfold"<?php endif;?> class="row  <?php if(Mage::getStoreConfig('megatronlayout/options/gallery_grid')=='columns_4_no_space' && !$mode_3d):?>noGutter<?php endif;?>">
+    <?php
+    foreach($slides as $slide):
+    ?>
+
+
+    <?php if(!empty($slide['image'])):?>
+        <?php if($mode_3d):?>
+            <div class="hoverfold-item <?php echo str_replace(' ','_',$slide['category'])?>">
+                <div class="view">
+                    <div class="view-back">
+                        <span class="zoom-view">
+                            <a class="icon-zoom-in-2 fancybox-gallery" rel="group" href="<?php echo Mage::getBaseUrl('media') . $slide['image'];?>" ></a>
+                        </span>
+                        <span class="info"><span><?php echo $slide['caption']?></span></span>
+                    </div>
+                    <img src="<?php echo Mage::getBaseUrl('media') . $slide['image'];?>" alt="<?php echo $slide['caption']?>" />
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="col-sm-<?php echo $cols;?>">
+                <div class="image-wrapper">
+                    <a class="fancybox-gallery" rel="group" href="<?php echo Mage::getBaseUrl('media') . $slide['image'];?>">
+                        <img class="animate scale" src="<?php echo Mage::getBaseUrl('media') . $slide['image'];?>" alt="<?php echo $slide['caption']?>">
+                        <div class="image-hover"><i class="icon-zoom-in-2"></i></div>
+                        <?php if(!empty($slide['caption'])):?>
+                            <div class="image-title"><?php echo $slide['caption']?></div>
+                        <?php endif; ?>
+                    </a>
+                </div>
+            </div>
+        <?php endif; ?>
+
+
+    <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+

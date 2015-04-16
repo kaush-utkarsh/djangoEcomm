@@ -1,0 +1,51 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $posts = $this->getPosts() ?>
+<?php if (count($posts) > 0): ?>
+    <section class="blog-widget parallax">
+        <div class="container content">
+            <div class="posts flexslider">
+                <?php if ($title = $this->getTitle()): ?>
+                     <h3><?php echo $this->__($title) ?></h3>
+                <?php endif; ?>
+                <ul class="slides">
+                    <?php foreach($posts as $post): ?>
+                    <li>
+                        <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+                        <div class="image-cell">
+                            <a href="<?php echo $post->getPermalink() ?>"><img data-image2x="<?php echo $featuredImage->getFullSizeImage() ?>" src="<?php echo $featuredImage->getThumbnailImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>" class="img-responsive animate scale product-retina"  height="119" /></a>
+                        </div>
+
+                            <?php
+                            /*
+                             *  getThumbnailImage()
+                                getMediumImage()
+                                getLargeImage()
+                                getFullSizeImage()
+                                getPostThumbnailImage()
+                                getAvailableImage()
+                                getImageByType($type = 'thumbnail')
+                            */
+                            ?>
+                        <?php endif; ?>
+
+                        <div class="offset-image">
+                            <h4><a href="<?php echo $post->getPermalink() ?>"><?php echo $this->htmlEscape($post->getPostTitle()) ?></a></h4>
+                            <p>
+                                <a><?php echo $post->getCommentCountString($post) ?></a>
+                            </p>
+                            <?php echo $post->getPostExcerpt();?>
+                        </div>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>

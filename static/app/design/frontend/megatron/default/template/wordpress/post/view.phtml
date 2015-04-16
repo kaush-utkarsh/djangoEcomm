@@ -1,0 +1,50 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<?php if ($post): ?>
+	<?php $helper = $this->helper('wordpress') ?>
+	<?php $author = $post->getAuthor() ?>
+
+    <?php $template = Mage::getSingleton('core/layout')->getBlock('root')->getTemplate();
+    if($template=='page/1column.phtml'):?>
+        <section class="container">
+    <?php endif;?>
+
+    <!-- Blog post -->
+    <div class="blog-post container-paper">
+        <?php echo $this->getBeforePostContentHtml() ?>
+        <div class="title">
+            <h2><?php echo $this->escapeHtml($post->getPostTitle()) ?></h2>
+        </div>
+        <div class="post-container">
+            <?php if ($post->isViewableForVisitor()): ?>
+                <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+                    <img class="img-responsive animate scale" src="<?php echo $featuredImage->getFullSizeImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>">
+                <?php endif; ?>
+                <div class="text">
+                    <?php echo $post->getPostContent() ?>
+                </div>
+                <?php echo $this->getAfterPostContentHtml() ?>
+            <?php else: ?>
+                <?php echo $this->getPasswordProtectHtml() ?>
+            <?php endif; ?>
+            <br />
+        </div>
+    </div>
+    <!-- //end Blog post -->
+    <div class="clearfix"></div>
+
+    <?php echo $this->getCommentsHtml() ?>
+
+    <?php if($template=='page/1column.phtml'):?>
+        </section>
+    <?php endif;?>
+
+
+<?php endif; ?>

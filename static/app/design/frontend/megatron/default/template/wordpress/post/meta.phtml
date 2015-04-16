@@ -1,0 +1,35 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ */
+?>
+<?php $post = $this->getPost() ?>
+<?php if ($post): ?>
+
+    <ul class="list-info">
+        <li><span class="icon icon-clock-3"></span> Posted on <?php echo $post->getPostDate()?></li>
+        <li><span class="icon icon-user"></span> By <?php echo $post->getAuthor()->getDisplayName()?></li>
+        <li><span class="icon icon-eye"></span> <?php echo $this->getCategoryString($post) ?></li>
+        <?php if ($this->hasTags($post)): ?>
+            <li><span class="icon icon-tag"></span> <?php echo $this->getTagString($post) ?></li>
+        <?php endif; ?>
+
+    </ul>
+
+    <?php if ($this->canDisplayPreviousNextLinks()): ?>
+
+
+        <div class="post-navigation">
+                <?php if (($previous = $post->getPreviousPost()) !== false): ?>
+            <div class="pull-left"><a href="<?php echo $previous->getPermalink() ?>" class="btn btn-mega btn-inverse"
+                       title="<?php echo $this->escapeHtml($previous->getPostTitle()) ?>"><span class="icon icon-arrow-left-6"></span> &nbsp; <?php echo $this->__('Previous Post') ?></a></div>
+                <?php endif; ?>
+            <?php if (($next = $post->getNextPost()) !== false): ?>
+            <div class="pull-right"><a href="<?php echo $next->getPermalink() ?>" class="btn btn-mega btn-inverse" title="<?php echo $this->escapeHtml($next->getPostTitle()) ?>"><?php echo $this->__('Next Post') ?> &nbsp;<span class="icon icon-arrow-right-5"></span></a></div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+<?php endif; ?>
