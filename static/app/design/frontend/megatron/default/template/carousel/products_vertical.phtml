@@ -1,0 +1,23 @@
+<?php if ($_productCollection=$this->getLoadedProductCollection()): ?>
+<!-- Products list -->
+<h3><?php echo $this->getBlockName();?></h3>
+    <div class="products-widget jcarousel-skin-previews vertical">
+        <ul class="slides">
+            <?php foreach ($_productCollection as $_product): ?>
+            <?php  if(!$_product->isSaleable() && !Mage::getStoreConfig('cataloginventory/options/show_out_of_stock'))continue; ?>
+                <li>
+                    <div class="product">
+                        <a href="<?php echo $_product->getProductUrl()?>" class="preview-image">
+                            <img class="img-responsive product_activ" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(126, 153);?>" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" >
+                        </a>
+                        <p class="name"><a href="<?php echo $_product->getProductUrl()?>" class="preview-image"><?php echo $this->stripTags($_product->getName(), null, true) ?></a></p>
+                        <span class="rating"><?php  echo Mage::helper('megatronconfig')->getStars($_product)?></span>
+                        <?php if (!Mage::getStoreConfig('megatronconfig/options/catalog_mode')): ?>
+                        <?php echo $this->getPriceHtml($_product, true)?>
+                        <?php endif; ?>
+                    </div>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+<?php endif; ?>

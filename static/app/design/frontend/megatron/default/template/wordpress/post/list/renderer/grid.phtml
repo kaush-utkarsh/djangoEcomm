@@ -1,0 +1,36 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+
+<?php echo $this->getBeforePostContentHtml() ?>
+<div class="title">
+    <h2><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h2>
+</div>
+
+<?php if ($post->isViewableForVisitor()): ?>
+    <div class="post-container">
+        <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+            <a href="<?php echo $post->getPermalink() ?>"><img src="<?php echo $featuredImage->getFullSizeImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>" class="img-responsive animate scale"/></a>
+        <?php endif; ?>
+        <div class="text">
+            <div class="divider-sm clearfix"></div>
+            <?php if ($this->displayExcerptInFeed() || $post->hasMoreTag()): ?>
+                <?php echo $post->getPostExcerpt() ?>
+            <?php else: ?>
+                <?php echo $post->getPostContent() ?>
+            <?php endif; ?>
+            <div class="divider-sm"></div>
+            <?php echo $this->getAfterPostContentHtml() ?>
+            <div class="divider-xs clearfix"></div>
+        </div>
+    </div>
+<?php else: ?>
+    <?php echo $this->getPasswordProtectHtml($post) ?>
+<?php endif; ?>
+

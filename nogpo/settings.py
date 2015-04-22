@@ -80,6 +80,12 @@ EMAIL_HOST_USER = 'postmaster@nogpo.com'
 EMAIL_HOST_PASSWORD = 'f63f5059d3255612cfae4470ed9b34ed'
 EMAIL_PORT = 587
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'postmaster@nogpo.com'
+EMAIL_HOST_PASSWORD = 'f63f5059d3255612cfae4470ed9b34ed'
+EMAIL_PORT = 587
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -98,6 +104,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_PATH = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),

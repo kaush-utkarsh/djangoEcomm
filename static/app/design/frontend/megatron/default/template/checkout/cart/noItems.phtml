@@ -1,0 +1,51 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $template = Mage::getSingleton('core/layout')->getBlock('root')->getTemplate(); if ($template == 'page/1column.phtml'): ?>
+<section class="container">
+    <?php endif; ?>
+
+    <div class="row">
+        <section class="col-md-8 col-lg-8">
+            <section class="no-product">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                        <div class="icon-circle active animate scale text-center"><span class="icon icon-cart-2 small"></span></div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"><br>
+                        <h3><?php echo $this->__('Shopping Cart is Empty') ?></h3>
+                        <?php echo $this->__('You have no items in your shopping cart.') ?><br>
+                        <?php echo $this->__('Click <a href="%s">here</a> to continue shopping.', $this->getContinueShoppingUrl()) ?>
+                        <?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
+                    </div>
+                </div></section>
+            <!-- Shopping cart -->
+            <!-- //end Shopping cart -->
+        </section>
+    </div>
+<?php if ($template == 'page/1column.phtml'): ?>
+    </section>
+<?php endif; ?>

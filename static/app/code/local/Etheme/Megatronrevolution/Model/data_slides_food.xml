@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<megatron>
+    <slides>
+
+        <!--
+        Images you need upload manually by ftp in folder media\etheme\megatron\megatronrevolution/food/
+        Recommended image size 1170x500 px
+
+        Revolution slider options you can edit here \app\design\frontend\megatron\default\template\megatron\slider\slider_revolution.phtml
+        Also You need read revolution slider documentation (attached to megatron package) how create your own amazing slides
+        -->
+        <slide1>
+
+
+            <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+              <!-- Main Image -->
+              <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/food/slider-main-back-01.jpg" />
+              <!-- End Main Image -->
+              <!-- Captions -->
+              <div class="tp-caption sfr" data-easing="easeOutExpo" data-speed="700" data-start="600" data-x="830" data-y="150"><a href="{{LINK}}" class="title-slide-01"> <span class="big">The first<br />
+ wealth is<br />
+health</span></a> </div>
+              <div class="tp-caption sfr" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="830" data-y="340"><a href="{{LINK}}" class="title-slide-01"><span class="small">Emerson</span> </a> </div>
+              <!-- End Captions -->
+            </li>
+
+
+        </slide1>
+        <slide2>
+
+              <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+              <!-- Main Image -->
+              <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/food/slider-main-back-02.jpg" />
+              <!-- End Main Image -->
+              <!-- Captions -->
+              <div class="tp-caption sfl" data-easing="easeOutExpo" data-speed="700" data-start="600" data-x="70" data-y="130"><a href="{{LINK}}" class="title-slide-02"><span class="big">If slaughterhouses <br />
+          had glass walls, <br />
+          we would all be <br />
+          vegetarian</span> </a> </div>
+              <div class="tp-caption sfl" data-easing="easeOutExpo" data-speed="700" data-start="1000" data-x="70" data-y="350"><a href="{{LINK}}" class="title-slide-02"><span class="small">Paul McCartney</span> </a> </div>
+              <!-- End Captions -->
+            </li>
+
+        </slide2>
+        <slide3>
+
+                <li data-masterspeed="300" data-slotamount="2" data-transition="fade">
+              <!-- Main Image -->
+              <img alt="" src="{{BASE}}media/etheme/megatron/megatronrevolution/food/slider-main-back-03.jpg" />
+              <!-- End Main Image -->
+              <!-- Captions -->
+              <div class="tp-caption sft" data-easing="easeOutExpo" data-speed="700" data-start="600" data-x="600" data-y="350"><a href="{{LINK}}" class="title-slide-03"><span class="big">There is <br />
+          no love sincerer <br />
+          than the love of food</span> </a> </div>
+              <div class="tp-caption sfb" data-easing="easeOutExpo" data-speed="700" data-start="1200" data-x="600" data-y="385"><a href="{{LINK}}" class="title-slide-03"><span class="small">Bernard Shaw</span></a> </div>
+              <!-- End Captions -->
+            </li>
+
+        </slide3>
+
+    </slides>
+</megatron>

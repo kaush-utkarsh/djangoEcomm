@@ -1,0 +1,213 @@
+/*
+ATTENTION! changes in this css file will be overwritten. If you want to change this template change file  /app/design/frontend/base/default/template/etheme/megatron/cssrefresh/colors.phtml
+*/
+<?php
+$store=Mage::registry('store_for_css');
+?>
+/*text color*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/general/text_color',$store)): ?>
+    body{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+/*link color*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/general/link_color',$store)): ?>
+    a{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+/*link hover color*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/general/link_hover_color',$store)): ?>
+    a:hover{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+/*Background Color*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/general/background_color',$store)): ?>
+    body{background-color: <?php echo $temp?>;}
+<?php endif; ?>
+
+/*Background Image*/
+<?php
+$temp = Mage::getStoreConfig('megatroncolors/general/background_image',$store);
+if (!empty($temp)) {
+    ?>
+    body {
+    background-image: url("<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'megatron/' . $temp?>");
+    <?php
+    switch (Mage::getStoreConfig('megatroncolors/general/background_image_display_mode',$store)) {
+        case 'center':
+            ?> background-position: center top; background-repeat: no-repeat; <?php break;
+        case 'no-repeat':
+            ?> background-attachment: fixed; background-position: center top; background-repeat: no-repeat;<?php break;
+    }
+    ?>
+
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) and (orientation:portrait) {
+    body {
+    background-image: none !important;
+    }
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) and (orientation:landscape) {
+    body {
+    background-image: none !important;
+    }
+    }
+    <?php unset ($temp);
+} ?>
+
+
+/***************Captions***************/
+<?php $temp=Mage::getStoreConfig('megatroncolors/captions/font',$store);
+if($temp!='Arial' && $temp!='Georgia' && $temp!='Default' && $temp!=''):?>
+    h3,.block .block-title strong,h1, h2,.filters-by-category.header-filter li a,.services-block .title{font-family:'<?php echo  str_replace('+',' ',$temp) ?>'}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('megatroncolors/captions/text_color',$store)): ?>
+    h3,.block .block-title strong,h1, h2,.filters-by-category.header-filter li a,.services-block .title{color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+/***************Buttons***************/
+
+
+/*Bg color*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/buttons/background_color',$store)): ?>
+    .back-link a,a.back-link,.btn-mega,.btn-mega.btn-inverse:hover,
+    .content-aside button.button, .buttons-set button.button, .buttons-set a.back-link, p.back-link a, button.btn-cart, .my-account button, #multiship-addresses-table button, #review-button{background-color: <?php echo $temp ?>;}
+
+    a.back-link:hover,.btn-mega:hover,.btn-mega.btn-inverse{color: <?php echo $temp ?> !important;}
+
+
+    .btn-mega:hover,.btn-mega.btn-inverse,.btn-mega.btn-inverse:hover,
+    .content-aside button.button:hover,
+    .buttons-set button.button:hover,
+    .buttons-set a.back-link:hover,
+    p.back-link a:hover,
+    button.btn-cart:hover,
+    .my-account button:hover,
+    #multiship-addresses-table button:hover,
+    #review-button:hover{border-color:<?php echo $temp ?>;
+    color:<?php echo $temp ?> !important;
+    background:0 0}
+
+
+
+
+<?php endif; ?>
+
+
+/***************Products***************/
+/*discount lable*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/products/discount_lable',$store)): ?>
+    .product-controls-list .label{  background-color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+/*sale lable*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/products/sale_lable',$store)): ?>
+    .product-controls-list .label-sale{  background-color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+/*new lable*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/products/new_lable',$store)): ?>
+    .product-controls-list .label-new{  background-color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+/*button*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/products/button',$store)): ?>
+    .product-controls-list .circle{  background: <?php echo $temp ?>;}
+<?php endif; ?>
+
+/*button hover*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/products/button_hover',$store)): ?>
+    .product-controls-list .circle:hover{  background: <?php echo $temp ?>;}
+<?php endif; ?>
+
+/*price*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/products/regular_price',$store)): ?>
+    .price{  color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+/*special price*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/products/special_price',$store)): ?>
+    .special-price .price{  color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+
+
+/***************Footer***************/
+
+/*link color*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/footer/link_color',$store)): ?>
+    .footer-navbar.dark a{  color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('megatroncolors/footer/link_hover_color',$store)): ?>
+    .footer-navbar.dark a:hover{  color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('megatroncolors/footer/text_color',$store)): ?>
+    .footer-navbar.dark{  color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+/*theme color*/
+<?php if($temp=Mage::getStoreConfig('megatroncolors/general/theme_color',$store)): ?>
+    .sf-menu > li,.sf-menu > li:hover,
+    .navbar-main-menu .active .btn-main, .navbar-main-menu .with-sub .btn-main:hover, .navbar-main-menu .current .btn-main,
+    .filters-by-category li a.selected, .filters-by-category li a:hover,.navbar-main-menu .item .btn-main,.countdown_inner,.back-to-top:hover{ border-color:<?php echo $temp ?>}
+
+    .navbar-main-submenu .exclusive .icon,.product-controls-list .cart,.rating{color:<?php echo $temp ?>}
+    .navbar-switcher,.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{background-color:<?php echo $temp ?> !important}
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover,.responsive .tabs-left .tab-content-outer,.nav-tabs{ border-color:<?php echo $temp ?> !important}
+
+
+    .filters-by-category li a.selected,.member-info .contact-icon:hover{border-color:<?php echo $temp ?>;background-color: <?php echo $temp ?>;}
+
+    .services-block-dark a:hover .icon span,.navbar-main-submenu .button-up:hover{color:<?php echo $temp ?> !important;}
+
+    .fullwidthbanner-container .bullet.selected,.hbl_pal_offline_submit_bg,.hbl_pal_title_bg{background-color: <?php echo $temp ?> !important;}
+
+    .tp-leftarrow.default:hover:before, .tp-rightarrow.default:hover:before{color:<?php echo $temp ?>;}
+
+    .owl-slider-outer .owl-slider-next:hover, .owl-slider-outer .owl-slider-prev:hover, .owl-theme .owl-controls .owl-buttons div:hover,
+    .jcarousel-skin-previews .jcarousel-prev:hover, .jcarousel-skin-previews .jcarousel-next:hover,
+    .view-mode > a.active,.view-mode > a:hover{color:<?php echo $temp ?>;}
+
+    .main-slider .owl-slider-outer .owl-slider-next:hover, .main-slider .owl-slider-outer .owl-slider-prev:hover, .main-slider .owl-theme .owl-controls .owl-buttons div:hover{color:<?php echo $temp ?> !important;}
+
+    .infobox,.blockquote,.testimonials,.services-block-box .item,.price-table.active,.price-table.active .price-table-price, .price-table.active .price-table-title  {
+    border-color: <?php echo $temp ?>;
+    }
+    .color_mark,.back-to-top:hover, .ajax-loader.progress .progress-bar-danger{background-color: <?php echo $temp ?>;}
+    .styled-list li:before,.color,.dropcap.color{color:<?php echo $temp ?>}
+    .icon-circle-sm.active, .icon-circle-xs.active, .icon-circle.active,.services-block-box .full-text,.services-block-box .icon,.services-block-box .title,.price-table.active .price-table-price,.accordion-faq .panel-heading a{background-color: <?php echo $temp ?>;}
+
+<?php endif; ?>
+
+
+
+
+/*recent posts bg*/
+<?php
+$temp = Mage::getStoreConfig('megatronlayout/options/blog_home_bg',$store);
+if (!empty($temp)) {
+    ?>
+    .blog-widget{
+    background: url("<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'megatron/' . $temp?>");
+    }
+    <?php unset ($temp);
+} ?>
+
+/*boxed fixed bg*/
+<?php
+
+$temp0 = Mage::getStoreConfig('megatronconfig/options/site_boxed',$store);
+$temp1 = Mage::getStoreConfig('megatronconfig/options/fixed_bg',$store);
+$temp2 = Mage::getStoreConfig('megatronconfig/options/fixed_bg_image',$store);
+
+if ($temp0 && $temp1 && !empty($temp2)) {
+    ?>
+    body.back-bg{
+    background: url("<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'megatron/' . $temp2?>") no-repeat fixed center;
+    }
+    <?php unset ($temp);
+} ?>

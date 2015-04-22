@@ -1,0 +1,78 @@
+<?php
+$slides = $this->getDataSlides();
+if($slides && Mage::getStoreConfig('megatronlayout/options/revolution_slider_init')):
+?>
+
+<!-- Slider REVOLUTION-->
+
+
+
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>etheme/megatron/jquery.themepunch.plugins.min.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>etheme/megatron/jquery.themepunch.revolution.min.js"></script>
+    <section class="<?php if(!Mage::getStoreConfig('megatronlayout/options/revolution_slider_wide')):?>container<?php endif;?>  hidden-xs hidden-sm hidden-md main-slider">
+        <div class="fullwidthbanner-container">
+            <div class="fullwidthbanner">
+                <ul>
+                    <?php
+                    $slides = $this->getDataSlides();
+                    foreach($slides as $slide)
+                    {
+                        echo str_replace(array('{{BASE}}media/',"{{LINK}}"), array(Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA), $slide['link']),$slide['slide_html_code']);
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <script type="text/javascript" >
+        jQuery(document).ready(function($) {
+            if ($.fn.cssOriginal!=undefined)
+                $.fn.css = $.fn.cssOriginal;
+
+            /*-------------------------------------------------*/
+
+            $('.fullwidthbanner').each(function() {
+                $(this).revolution({
+                    delay					: 5000,
+                    startwidth				: 1170,
+                    startheight				: <?php echo Mage::getStoreConfig('megatronlayout/options/revolution_slider_height') ?>,
+                    onHoverStop				: "on",
+                    thumbWidth				: 100,
+                    thumbHeight				: 50,
+                    thumbAmount				: 3,
+                    hideThumbs				: 0,
+                    navigationType			: "bullet",
+                    navigationArrows		: "solo",
+                    navigationStyle			: "round",
+                    navigationHAlign		: "center",
+                    navigationVAlign		: "bottom",
+                    navigationHOffset		: 0,
+                    navigationVOffset		: 20,
+                    soloArrowLeftHalign		: "left",
+                    soloArrowLeftValign		: "center",
+                    soloArrowLeftHOffset	: 20,
+                    soloArrowLeftVOffset	: 0,
+                    soloArrowRightHalign	: "right",
+                    soloArrowRightValign	: "center",
+                    soloArrowRightHOffset	: 20,
+                    soloArrowRightVOffset	: 0,
+                    touchenabled			: "on",
+                    stopAtSlide				: -1,
+                    stopAfterLoops			: -1,
+                    hideCaptionAtLimit 		: 0,
+                    hideAllCaptionAtLilmit 	: 0,
+                    hideSliderAtLimit		: 0,
+                    fullWidth 				: "off",
+                    shadow 					:0
+                });
+            });
+        });
+    </script>
+
+
+
+    <!-- //end Slider REVOLUTION -->
+<?php endif;?>

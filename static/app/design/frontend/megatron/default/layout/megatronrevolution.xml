@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="megatronlayout/options/revolution_slider_init">
+                <type>skin_css</type>
+                <name>css/revolution.css</name>
+                <params/>
+            </action>
+            <action method="addItem" ifconfig="megatronlayout/options/revolution_slider_init">
+                <type>skin_css</type>
+                <name>css/adv_slider/settings.css</name>
+                <params/>
+            </action>
+            <action method="addItem" ifconfig="megatronlayout/options/revolution_slider_init">
+                <type>skin_css</type>
+                <name>css/adv_slider/extralayers.css</name>
+                <params/>
+            </action>
+        </reference>
+    </default>
+</layout>

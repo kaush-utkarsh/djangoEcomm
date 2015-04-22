@@ -1,0 +1,534 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php
+$_product = $this->getProduct();
+$template = Mage::getSingleton('core/layout')->getBlock('root')->getTemplate();
+
+$_customtab = $this->getProduct()->getCustomtab();
+$_customtabtitle = $this->getProduct()->getCustomtabtitle();
+
+$modules_enable = Mage::getStoreConfig('advanced/modules_disable_output');
+
+$third_column = false;
+$services_links = Mage::getStoreConfig('megatronlayout/options/services_links_block');
+$services_links_right = Mage::getStoreConfig('megatronlayout/options/services_links_block_right');
+$services_links_bottom = Mage::getStoreConfig('megatronlayout/options/services_links_block_bottom');
+$related_products = Mage::getStoreConfig('megatronlayout/options/related_products');
+$related_products_pos = Mage::getStoreConfig('megatronlayout/options/related_products_pos');
+$tags = Mage::getStoreConfig('megatronlayout/options/popular_tags');
+$categories = Mage::getStoreConfig('megatronlayout/options/categories');
+$show_right_col=Mage::getStoreConfig('megatronlayout/options/right_col');
+
+if (($services_links_right) || ($related_products && $related_products_pos == 'right') || $tags || $categories) {
+    $third_column = true;
+}
+if(!$show_right_col)$third_column = false;
+
+$column_left = 'col-sm-6 col-md-6 col-lg-6';
+$column_center = 'col-sm-6 col-md-6 col-lg-6';
+
+if ($third_column) {
+    $column_left = 'col-sm-6 col-md-5 col-lg-5';
+    $column_center = 'col-sm-6 col-md-4 col-lg-4';
+}
+
+?>
+
+
+
+<?php
+
+if(Mage::getStoreConfig('megatronlayout/options/prevnext') && gettype(Mage::registry('current_category'))!='NULL')
+{
+    echo $this->getChildHtml('prev_next');
+}
+?>
+
+
+
+
+<?php if ($template == 'page/1column.phtml'): ?>
+<section class="container">
+<?php endif; ?>
+
+
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+<!-- Product view -->
+<div class="product-view row" id="ProductBox">
+    <div class="<?php echo $column_left ?> mediaimages">
+        <?php echo $this->getChildHtml('media') ?>
+    </div>
+    <div class="<?php echo $column_center ?>">
+        <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+              id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+            <?php echo $this->getBlockHtml('formkey') ?>
+            <div class="no-display">
+                <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+                <input type="hidden" name="related_product" id="related-products-field" value=""/>
+            </div>
+            <!-- Product label -->
+
+            <?php if(Mage::getStoreConfig('megatronlayout/options/price_bg')):?>
+            <div class="product-label">
+                <div class="box-wrap">
+                    <div class="box-wrap-top"></div>
+                    <div class="box-wrap-bot"></div>
+                    <div class="box-wrap-center"></div>
+                    <div class="box">
+            <?php else:?>
+            <div class="product-description">
+            <?php endif; ?>
+
+                        <div class="box-content product_name">
+                            <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                            <?php if (!Mage::getStoreConfig('megatronconfig/options/catalog_mode')): ?>
+                                <?php echo $this->getChildHtml('product_type_data') ?>
+                                <?php echo $this->getTierPriceHtml() ?>
+                            <?php endif; ?>
+                        </div>
+
+            <?php if(Mage::getStoreConfig('megatronlayout/options/price_bg')):?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            </div>
+            <!-- //end Product label -->
+
+            <!-- Description -->
+            <div class="product-description">
+                <?php if (Mage::getStoreConfig('megatronlayout/options/stars')): ?>
+                    <span class="rating">
+                        <?php echo Mage::helper('megatronconfig')->getStars($_product) ?>
+                    </span>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('alert_urls') ?>
+                <?php echo $this->getChildHtml('extrahint') ?>
+
+
+                <?php if (!Mage::getStoreConfig('megatronconfig/options/catalog_mode')): ?>
+
+                    <?php if (Mage::getStoreConfig('megatronlayout/options/sku')): ?>
+                        <p><?php echo $this->__('SKU') ?>: <b><?php echo nl2br($_product->getSku()) ?></b></p>
+                    <?php endif; ?>
+
+
+                    <?php if ($this->canEmailToFriend()): ?>
+                        <p class="email-friend"><a
+                                href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a>
+                        </p>
+                    <?php endif; ?>
+                    <br/>
+
+                    <div>
+                        <?php if (!$this->hasOptions()): ?>
+
+                            <?php if ($_product->isSaleable()): ?>
+                                <?php echo $this->getChildHtml('addtocart') ?>
+                            <?php endif; ?>
+
+
+                            <?php echo $this->getChildHtml('extra_buttons') ?>
+                        <?php elseif (!$_product->isSaleable()): ?>
+                            <div class="add-to-box">
+                                <?php echo $this->getChildHtml('addto') ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="add-to-links wish_comp">
+                            <ul><?php echo Mage::helper('megatronconfig')->addWishCompLink($_product, $this, true); ?></ul>
+                        </div>
+
+                    </div>
+
+
+
+                    <?php echo $this->getChildHtml('other'); ?>
+
+                    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                        <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                    <?php endif; ?>
+
+                    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                    <?php endif; ?>
+
+                <?php endif; ?>
+
+
+                <div class="panel-group accordion-simple" id="product-accordion">
+                    <?php if ($_product->getShortDescription()): ?>
+                        <div class="panel">
+                            <div class="panel-heading"><a data-toggle="collapse" data-parent="#product-accordion"
+                                                          <?php if (Mage::getStoreConfig('megatronlayout/options/accordion_static_block')): ?>href="#product-description"<?php endif; ?>>
+                                    <?php if (Mage::getStoreConfig('megatronlayout/options/accordion_static_block')): ?>
+                                        <span class="arrow-down icon-arrow-down-4"></span>
+                                        <span class="arrow-up icon-arrow-up-4"></span>
+                                    <?php endif; ?>
+                                    <?php echo $this->__('Description') ?>
+                                </a>
+                            </div>
+                            <div id="product-description" class="panel-collapse collapse in">
+                                <div
+                                    class="panel-body"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (Mage::getStoreConfig('megatronlayout/options/accordion_static_block')): ?>
+                        <?php echo $this->getChildHtml('mtron_product_custom_html_accordion') ?>
+                    <?php endif; ?>
+
+
+                </div>
+                <?php if (Mage::getStoreConfig('megatronlayout/options/addthis') && $code = Mage::getStoreConfig('megatronlayout/options/addthis_code')): ?>
+                    <!-- AddThis Button BEGIN -->
+                    <?php echo $code ?>
+                    <!-- AddThis Button END -->
+                <?php endif; ?>
+            </div>
+            <!-- //end Description -->
+
+        </form>
+
+    </div>
+    <?php if ($third_column): ?>
+        <section class="col-sm-12 col-md-3 col-lg-3  module">
+            <?php if ($related_products && $related_products_pos == 'right'): ?>
+                <?php echo $this->getChildHtml('related_products') ?>
+            <?php endif; ?>
+
+            <?php if ($services_links_right): ?>
+                <!-- Services -->
+                <?php echo $this->getChildHtml('mtron_product_services_links_right') ?>
+                <!-- //end Services -->
+            <?php endif; ?>
+
+            <?php if ($tags): ?>
+                <?php echo $this->getChildHtml('tags_popular') ?>
+            <?php endif; ?>
+
+            <?php if ($categories): ?>
+                <?php echo $this->getChildHtml('mtron_leftmenu') ?>
+            <?php endif; ?>
+        </section>
+    <?php endif; ?>
+</div>
+<!-- //end Product view -->
+
+<?php if ($services_links_bottom): ?>
+    <!-- Services -->
+    <?php echo $this->getChildHtml('mtron_product_services_links_bottom') ?>
+    <!-- //end Services -->
+<?php endif; ?>
+
+
+<!-- Tabs -->
+
+<?php $vertical = (Mage::getStoreConfig('megatronlayout/options/tabs_style') == 'ver'); ?>
+<section class="producttab">
+
+    <div class="tabsslider <?php if ($vertical): ?>visible-xs<?php endif; ?>">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-1"><?php echo $this->__('Description') ?></a></li>
+            <?php if (!$modules_enable['Mage_Review']): ?>
+                <li><a data-toggle="tab" href="#tab-2"><?php echo $this->__('Reviews') ?></a></li><?php endif; ?>
+            <?php if (!$modules_enable['Mage_Tag']): ?>
+                <li><a data-toggle="tab" href="#tab-3"><?php echo $this->__('Tags') ?></a></li><?php endif; ?>
+            <?php if ($_customtab): ?>
+                <li><a data-toggle="tab" href="#tab-4">Custom block</a></li><?php endif; ?>
+        </ul>
+        <a href="#" class="carousel-prev"></a><a href="#" class="carousel-next"></a>
+    </div>
+
+
+    <?php if ($vertical): ?>
+    <div class="tabs-left">
+        <ul class="nav nav-tabs hidden-xs">
+            <li class="active"><a data-toggle="tab" href="#tab-1"><?php echo $this->__('Description') ?></a></li>
+            <?php if (!$modules_enable['Mage_Review']): ?>
+                <li><a data-toggle="tab" href="#tab-2"><?php echo $this->__('Reviews') ?></a></li><?php endif; ?>
+            <?php if (!$modules_enable['Mage_Tag']): ?>
+                <li><a data-toggle="tab" href="#tab-3"><?php echo $this->__('Tags') ?></a></li><?php endif; ?>
+            <?php if ($_customtab): ?>
+                <li><a data-toggle="tab"
+                       href="#tab-4"><?php if (!empty($_customtabtitle)) echo html_entity_decode($this->helper('catalog/output')->productAttribute($this->getProduct(), $_customtabtitle, 'customtabtitle')); else echo 'Custom tab title' ?></a>
+                </li><?php endif; ?>
+        </ul>
+        <div class="tab-content-outer">
+    <?php endif; ?>
+
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade active in">
+                    <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html): ?>
+                        <div class="box-collateral <?php echo "box-{$alias}" ?>">
+                            <?php if ($title = $this->getChildData($alias, 'title')): ?>
+                                <h2><?php echo $this->escapeHtml($title); ?></h2>
+                            <?php endif; ?>
+                            <?php echo $html; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php if (!$modules_enable['Mage_Review']): ?>
+                    <div id="tab-2" class="tab-pane fade">
+                        <?php echo $this->getChildHtml('reviews') ?>
+                    </div>
+                <?php endif; ?>
+                <?php if (!$modules_enable['Mage_Tag']): ?>
+                    <div id="tab-3" class="tab-pane fade">
+                        <?php echo $this->getChildHtml('product_additional_data') ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($_customtab): ?>
+                    <div id="tab-4" class="tab-pane fade" style="min-height: 130px">
+                        <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_customtab, 'customtab') ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+    <?php if ($vertical): ?>
+        </div>
+    </div>
+    <?php endif; ?>
+</section>
+<!-- //end Tabs -->
+
+<?php if($temp=$_product->getVideobox() && Mage::getStoreConfig('megatronlayout/options/video') && Mage::getStoreConfig('megatronlayout/options/video_pos')=='under_tabs'):?>
+<!--  Video Container -->
+<section id="video-container">
+    <iframe src="<?php echo $_product->getVideobox() ?>" style="border:0; margin:0; padding:0" allowfullscreen></iframe>
+</section>
+<?php endif; ?>
+
+
+<?php if ($related_products && $related_products_pos == 'bottom'): ?>
+    <?php echo $this->getChildHtml('related_products') ?>
+<?php endif; ?>
+
+
+<?php if (Mage::getStoreConfig('megatronlayout/options/upsell_products')): ?>
+    <?php echo $this->getChildHtml('upsell_products') ?>
+<?php endif; ?>
+
+
+<!--/******************************************************************/-->
+
+
+<script type="text/javascript">
+    //<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    <?php if(Mage::getStoreConfig('megatronconfig/options/ajax_add_to_cart')){?>
+    productAddToCartForm.submit = function (button, url) {
+
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+                form.action = url;
+            }
+            var e = null;
+            // Start of our new ajax code
+            if (!url) {
+                url = jQuery('#product_addtocart_form').attr('action');
+            }
+
+            if (url.indexOf("?")){
+                url = url.split("?")[0];
+            }
+            url = url.replace("checkout/cart", "ajax/index"); // New Code
+
+            if(window.location.href.match("https://") && !url.match("https://")){
+                url = url.replace("http://", "https://");
+            }
+
+            if(window.location.href.match("http://") && !url.match("http://")){
+                url = url.replace("https://", "http://");
+            }
+
+            var data = jQuery('#product_addtocart_form').serialize();
+            data += '&isAjax=1';
+            jQuery('#preloader .loader').fadeIn(300);
+            try {
+                jQuery.ajax({
+                    url: url,
+                    dataType: 'json',
+                    type: 'post',
+                    data: data,
+                    success: function (data) {
+                        jQuery('#ajax_loader').hide();
+                        if (data.status == 'ERROR') {
+                            jQuery('#preloader .loader').hide();
+                            jQuery('#preloader .inside').html(data.message);
+                            jQuery('#preloader .message').fadeIn(300);
+                            setTimeout(function () {
+                                jQuery('#preloader .message').fadeOut();
+                            }, 2300);
+                        } else {
+                            jQuery('#preloader .loader').hide();
+
+                            if (jQuery('#shopping_cart')) {
+                                jQuery('#shopping_cart').replaceWith(data.sidebar);
+                            }
+
+                            if (jQuery('.nav-item.item-04')) {
+                                jQuery('.nav-item.item-04').html(data.topcart_mobile_block);
+                            }
+
+                            var $mobileNavItems4 = jQuery(".mobile-nav .nav-item.item-04"),
+                                $mobileNavItemsLinkAll = jQuery(".mobile-nav .nav-item");
+                            $mobileNavItemsLink4 = jQuery(".nav-item.item-04 > a");
+                            $mobileNavItemsLink4.each(function () {
+                                var $this =
+                                        jQuery(this),
+                                    timer;
+                                $this.bind("click", function (e) {
+                                    e.preventDefault();
+                                    $mobileNavItemsLinkAll.removeClass("active");
+                                    if (!$this.parent().hasClass("active")) {
+                                        $mobileNavItems4.removeClass("active");
+                                        $this.parent().addClass("active")
+                                    } else $this.parent().removeClass("active")
+                                })
+                            })
+
+
+                            if (jQuery('#toplinks')) {
+                                jQuery('#toplinks').replaceWith(data.toplink);
+                            }
+
+
+                            if (jQuery('header').hasClass('variant4')) {
+                                jQuery(function ($) {
+                                    "use strict";
+                                    var hiddenBut = $('.navbar-secondary-menu .btn-group.btn-hidden'),
+                                        hiddenWidth = 50,
+                                        animDiration = 300;
+                                    //hiddenBut.each(function () {$(this).css({'width':'auto'}).attr( "data-width", $(this).width()).css({'width':hiddenWidth}) })
+                                    hiddenBut.hover(
+                                        function () {
+                                            $(this).stop(true, false).animate({'width': $(this).prop('scrollWidth') }, animDiration , function(){ $(this).css({'overflow':'visible'})});
+                                        },
+                                        function () {
+                                            $(this).stop(true, false).removeClass('open').animate({'width':hiddenWidth}, animDiration, function(){ $(this).css({'overflow':'hidden'})});
+                                        });
+                                });
+                            }
+
+
+
+                            jQuery('#preloader .inside').html(data.message);
+                            jQuery('#preloader .message').fadeIn(300);
+
+                            setTimeout(function () {
+                                jQuery('#preloader .message').fadeOut();
+
+                            }, 2300)
+                        }
+                    }
+                });
+            } catch (e) {
+            }
+            // End of our new ajax code
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+        }
+    }.bind(productAddToCartForm);
+    <?php }else { ?>
+
+    productAddToCartForm.submit = function (button, url) {
+
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+                form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    <?php } ?>
+
+    productAddToCartForm.submitLight = function (button, url) {
+
+        if (this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            // Remove custom datetime validators
+            for (var methodName in Validation.methods) {
+                if (methodName.match(/^validate-datetime-.*/i)) {
+                    delete Validation.methods[methodName];
+                }
+            }
+
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+
+    //]]>
+</script>
+<?php if ($template == 'page/1column.phtml'): ?>
+</section>
+<?php endif; ?>
+

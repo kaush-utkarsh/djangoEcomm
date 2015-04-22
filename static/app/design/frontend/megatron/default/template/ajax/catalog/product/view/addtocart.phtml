@@ -1,0 +1,15 @@
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php if($_product->isSaleable()): ?>
+<div class="add-to-cart">
+    <form id="form-add_to_cart">
+        <?php if(!$_product->isGrouped()): ?>
+        <div class="qty">
+            <?php echo $this->__('Qty:') ?>
+            <input id="qty"  type="text" title="Qty" value="<?php echo $this->getProductDefaultQty() * 1 ?>" maxlength="12" name="qty">
+        </div>
+        <?php endif; ?>
+        <button class="btn btn-default btn-xl" title="<?php echo $buttonTitle ?>" type="button" onClick="productAddToCartForm.submit(this)"><i class="typcn typcn-shopping-cart"></i><?php echo $buttonTitle ?></button>
+    </form>
+</div>
+<?php endif; ?>

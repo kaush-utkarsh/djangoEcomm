@@ -1,0 +1,82 @@
+/*
+ATTENTION! changes in this css file will be overwritten. If you want to change this template change file  /app/design/frontend/base/default/template/etheme/megatron/cssrefresh/colors.phtml
+*/
+/*text color*/
+
+/*link color*/
+
+/*link hover color*/
+
+/*Background Color*/
+
+/*Background Image*/
+
+
+/***************Captions***************/
+    h3,.block .block-title strong,h1, h2,.filters-by-category.header-filter li a,.services-block .title{font-family:'Exo 2'}
+
+
+/***************Buttons***************/
+
+
+/*Bg color*/
+
+
+/***************Products***************/
+/*discount lable*/
+
+/*sale lable*/
+
+/*new lable*/
+
+/*button*/
+
+/*button hover*/
+
+/*price*/
+
+/*special price*/
+
+
+
+/***************Footer***************/
+
+/*link color*/
+
+
+
+/*theme color*/
+    .sf-menu > li,.sf-menu > li:hover,
+    .navbar-main-menu .active .btn-main, .navbar-main-menu .with-sub .btn-main:hover, .navbar-main-menu .current .btn-main,
+    .filters-by-category li a.selected, .filters-by-category li a:hover,.navbar-main-menu .item .btn-main,.countdown_inner,.back-to-top:hover{ border-color:#ff22a6}
+
+    .navbar-main-submenu .exclusive .icon,.product-controls-list .cart,.rating{color:#ff22a6}
+    .navbar-switcher,.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{background-color:#ff22a6 !important}
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover,.responsive .tabs-left .tab-content-outer,.nav-tabs{ border-color:#ff22a6 !important}
+
+
+    .filters-by-category li a.selected,.member-info .contact-icon:hover{border-color:#ff22a6;background-color: #ff22a6;}
+
+    .services-block-dark a:hover .icon span,.navbar-main-submenu .button-up:hover{color:#ff22a6 !important;}
+
+    .fullwidthbanner-container .bullet.selected,.hbl_pal_offline_submit_bg,.hbl_pal_title_bg{background-color: #ff22a6 !important;}
+
+    .tp-leftarrow.default:hover:before, .tp-rightarrow.default:hover:before{color:#ff22a6;}
+
+    .owl-slider-outer .owl-slider-next:hover, .owl-slider-outer .owl-slider-prev:hover, .owl-theme .owl-controls .owl-buttons div:hover,
+    .jcarousel-skin-previews .jcarousel-prev:hover, .jcarousel-skin-previews .jcarousel-next:hover,
+    .view-mode > a.active,.view-mode > a:hover{color:#ff22a6;}
+
+    .main-slider .owl-slider-outer .owl-slider-next:hover, .main-slider .owl-slider-outer .owl-slider-prev:hover, .main-slider .owl-theme .owl-controls .owl-buttons div:hover{color:#ff22a6 !important;}
+
+    .infobox,.blockquote,.testimonials,.services-block-box .item,.price-table.active,.price-table.active .price-table-price, .price-table.active .price-table-title  {
+    border-color: #ff22a6;
+    }
+    .color_mark,.back-to-top:hover, .ajax-loader.progress .progress-bar-danger{background-color: #ff22a6;}
+    .styled-list li:before,.color,.dropcap.color{color:#ff22a6}
+    .icon-circle-sm.active, .icon-circle-xs.active, .icon-circle.active,.services-block-box .full-text,.services-block-box .icon,.services-block-box .title,.price-table.active .price-table-price,.accordion-faq .panel-heading a{background-color: #ff22a6;}
+
+
+/*recent posts bg*/
+
+/*boxed fixed bg*/

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<megatron>
+    <slides>
+
+        COPY PARAMS TO ADMIN PANEL IN SLIDE FIELDS
+
+        Yoy can upload image from next addresses
+
+        <slide1>
+            <link>#</link>
+            <image>media/etheme/megatron/megatronrw/slider-main-back-01.jpg</image>
+            <caption>
+                <span style=" font:15.9em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;
+                color:#fff;
+                opacity:.9;
+                text-transform:uppercase;
+                letter-spacing:-.06em">Sale</span>
+                            <span style="font:5.5em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;
+                color:#fff;
+                opacity:.9;
+                letter-spacing:-.08em">up to 40% OFF</span>
+            </caption>
+            <left>1</left>
+            <top>36</top>
+            <width>100</width>
+            <Caption_Extra_css>text-align: center</Caption_Extra_css>
+        </slide1>
+
+        <slide2>
+            <link>#</link>
+            <image>media/etheme/megatron/megatronrw/slider-main-back-02s</image>
+            <caption>
+                <span style="margin-left:-.06em;
+                font:10.8em/0.7em Mavenpro-black, Arial, Helvetica, sans-serif;
+                color:#fff;
+                opacity:.9;
+                text-transform:uppercase;
+                letter-spacing:-.06em">New</span>
+                            <span style="font:3.7em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;
+                color:#fff;
+                opacity:.9;
+                text-transform:uppercase;
+                letter-spacing:-.08em">collection</span>
+                            <span style="font:4.6em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;
+                color:#fff;
+                opacity:.9;
+                text-transform:uppercase;
+                letter-spacing:-.08em">AUTUMN 2014</span>
+            </caption>
+            <left>8</left>
+            <top>44</top>
+            <width>86</width>
+            <Caption_Extra_css></Caption_Extra_css>
+        </slide2>
+
+        <slide3>
+            <link>#</link>
+            <image>media/etheme/megatron/megatronrw/slider-main-back-03.jpg</image>
+            <caption>
+                <span style="margin-left:-.06em;
+                font:10.2em/0.75em Mavenpro-black, Arial, Helvetica, sans-serif;
+                color:#fff;
+                opacity:.9;
+                text-transform:uppercase;
+                letter-spacing:-.06em">Special offer</span>
+                            <span style="padding:.3em 0 .5em;
+                font:5.5em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;
+                color:#fff;
+                opacity:.9;
+                letter-spacing:-.08em">Save money with Lingerie SALE</span>
+                            <span style="font:2.3em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;
+                color:#fff;
+                opacity:.9;
+                text-transform:uppercase;
+                letter-spacing:-.08em">Up to 50% OFF</span>
+            </caption>
+            <left>50</left>
+            <top>21</top>
+            <width>44</width>
+            <Caption_Extra_css></Caption_Extra_css>
+        </slide3>
+
+    </slides>
+</megatron>
