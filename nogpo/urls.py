@@ -9,5 +9,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.urls')),
-    url(r'^$', views.home, name="home_page" )
+    url(r'^$', views.home, name="home_page"),
+    url(r'^products/$', views.products, name="products_page"),
+    url(r'^prdetail/$', views.product_details, name="product_details")
 )
