@@ -29,9 +29,20 @@ def get_search_url(string):
             return url
         elif 'query' in string.keys():
             url = baseurl + 'search?query=' + string['query']
+            url = price_in_search_query(string,url)
             return url
         else:
             return baseurl
+
+def price_in_search_query(string,url):
+    return_url = url
+    if 'price_l' in string.keys():
+        return_url = return_url + '&price_l=' + string['price_l']
+    if 'price_h' in string.keys():
+        return_url = return_url + '&price_h=' + string['price_h']
+    return return_url
+
+
 
 def home(request):
     return render(request, "nogpo/home.html")
@@ -56,13 +67,14 @@ def categories(request):
     if request.method == 'GET':
         categories = requests.get(baseurl+'categories')
         print type(categories.json())
-        # print categories.text
+        print categories.text
         return HttpResponse(JSONResponse(categories.json()))
 
 def product(request):
     ids = int(request.GET.get('id'))
     if request.method == 'GET':
         product = requests.get(baseurl+'product/'+ids)
+        print product.json()
         return JSONResponse(product.json())
 
 def search(request):
@@ -70,5 +82,5 @@ def search(request):
         string = request.GET
         hiturl = get_search_url(string)
         result = requests.get(hiturl)
-        # print result.text
+        print result.json()
         return JSONResponse(result.json())
