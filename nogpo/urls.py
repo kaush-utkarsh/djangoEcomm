@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from buyers import views
+from buyers import urls,views
 
 urlpatterns = patterns('',
     # Examples:
@@ -12,6 +12,6 @@ urlpatterns = patterns('',
     url(r'^dashboard/', views.userdashboard, name="user_dashboard"),
     url(r'^$', views.home, name="home_page"),
     url(r'^products/$', views.products, name="products_page"),
-    url(r'^prdetail/$', views.product_details, name="product_details")
-     url(r'^nogpo/', include('buyers.urls')),
+    url(r'^prdetail/$', views.product_details, name="product_details"),
+    url(r'^nogpo/', include('buyers.urls')),
 )
