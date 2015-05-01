@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+
 from buyers import urls, views
+
 
 urlpatterns = patterns('',
     # Examples:
