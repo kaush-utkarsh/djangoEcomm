@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from nogpo import views
+from buyers import views
 
 urlpatterns = [
     url(r'^categories/',views.categories),

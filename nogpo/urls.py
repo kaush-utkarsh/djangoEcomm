@@ -12,6 +12,6 @@ urlpatterns = patterns('',
     url(r'^dashboard/', views.userdashboard, name="user_dashboard"),
     url(r'^$', views.home, name="home_page"),
     url(r'^products/$', views.products, name="products_page"),
-    url(r'^prdetail/$', views.product_details, name="product_details")
+    url(r'^prdetail/$', views.product_details, name="product_details"),
      url(r'^nogpo/', include('buyers.urls')),
 )

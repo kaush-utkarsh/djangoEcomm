@@ -57,7 +57,7 @@ def categories(request):
         categories = requests.get(baseurl+'categories')
         print type(categories.json())
         # print categories.text
-        return JSONResponse(categories.json())
+        return HttpResponse(JSONResponse(categories.json()))
 
 def product(request):
     ids = int(request.GET.get('id'))
