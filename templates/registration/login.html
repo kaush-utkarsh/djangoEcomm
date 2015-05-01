@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container">
-                <form action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/customer/account/loginPost/" method="post" id="login-form">
+                <form action="." method="post" id="login-form">
+                    {% csrf_token %}
         <input name="form_key" type="hidden" value="r3wMpSOUPGOAMKE9" />
 
         <div class="row">
