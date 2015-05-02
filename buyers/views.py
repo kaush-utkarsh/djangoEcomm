@@ -1,5 +1,6 @@
 from django.shortcuts import render
-import requests
+import urllib2
+import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
@@ -65,22 +66,28 @@ def userdashboard(request):
 
 def categories(request):
     if request.method == 'GET':
-        categories = requests.get(baseurl+'categories')
-        print type(categories.json())
-        print categories.text
-        return HttpResponse(JSONResponse(categories.json()))
+        d ={"pcat":[]}
+        req = urllib2.urlopen(baseurl+'categories')
+        res = json.load(req)
+        l = len(res)
+        for i in range(l):
+            if res[i]["parent"] ==1:
+                d["pcat"].append(res[i]["name"])
+        print len(d["pcat"])
+        return HttpResponse(res[1]["name"])
 
 def product(request):
     ids = int(request.GET.get('id'))
     if request.method == 'GET':
-        product = requests.get(baseurl+'product/'+ids)
-        print product.json()
+        product = urllib2.urlopen(baseurl+'product/'+ids)
         return JSONResponse(product.json())
 
 def search(request):
     if request.method == 'GET':
         string = request.GET
         hiturl = get_search_url(string)
-        result = requests.get(hiturl)
-        print result.json()
+        result = urllib2.urlopen(hiturl)
         return JSONResponse(result.json())
+
+def test(request):
+    return render(request, "base.html")
