@@ -1,0 +1,4 @@
+requirement
+django
+pip install djangorestframework
+pip install django-registration-redux

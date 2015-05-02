@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'buyers',
+    'rest_framework',
     'registration',
 )
 
@@ -62,8 +63,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommerce',
         'USER' : 'root',
-        'PASSWORD' : "/\'",
-        'HOST' : 'localhost',
+        'PASSWORD' : '/\'',
+        'HOST' : '127.0.0.1',
         'PORT' : 3306,
     }
 }
@@ -72,13 +73,17 @@ DATABASES = {
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 3
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/dashboard/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
+<<<<<<< HEAD
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_HOST_USER = 'postmaster@nogpo.com'
 EMAIL_HOST_PASSWORD = 'f63f5059d3255612cfae4470ed9b34ed'
 EMAIL_PORT = 587
+=======
+LOGOUT_URL = "/"
+>>>>>>> 559010cc8c49337aec9221d25cab7ed4e0e65ba7
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mailgun.org'
