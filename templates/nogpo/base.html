@@ -1361,7 +1361,12 @@ Empty category #2
                                                         <li ><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/" title="My Wishlist" >My Wishlist</a></li>
                                                         <li ><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/" title="My Cart" class="top-link-cart">My Cart</a></li>
                                     <li class="divider"></li>                    <li ><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
-                                                        <li class=" last" ><a href="/accounts/login" title="Log In" >Log In</a></li>
+        {% if user.is_authenticated %}
+        <li class=" last" ><a href="{% url 'auth_logout' %}" title="Log Out" >Log Out</a></li>
+        <li class=" last" ><a href="{% url 'auth_password_change' %}" title="password change" >Password Change</a></li>
+        {% else %}
+        <li class=" last" ><a href="{% url 'auth_login' %}" title="Log Out" >Log In</a></li>
+        {% endif %}
                         </ul>
 </div>
 
