@@ -44,7 +44,6 @@ def price_in_search_query(string,url):
     return return_url
 
 
-
 def home(request):
     return render(request, "nogpo/home.html")
 
