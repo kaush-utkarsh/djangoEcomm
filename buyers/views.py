@@ -53,27 +53,19 @@ def products(request):
 def product_details(request):
     return  render(request, "nogpo/productdetails.html")
 
-def userdashboard(request):
-    user = request.user
-    data = {}
-    username = user.first_name + ' ' + user.last_name
-    data['username'] = username
-    data['email'] = user.email
+def categories():
+    re = urllib2.urlopen("http://162.209.8.12:8080/categories")
+    jsn = re.json()
 
-    return  render(request, "nogpo/dashboard.html")
-
-
-def categories(request):
-    if request.method == 'GET':
-        d ={"pcat":[]}
-        req = urllib2.urlopen(baseurl+'categories')
-        res = json.load(req)
-        l = len(res)
-        for i in range(l):
-            if res[i]["parent"] ==1:
-                d["pcat"].append(res[i]["name"])
-        print len(d["pcat"])
-        return HttpResponse(res[1]["name"])
+    final = list()
+    for each in jsn:
+	    if each["parent"] == 1:
+		    each["child"] = list()
+		    for second in jsn:
+			    if each["unspsc"] == second["parent"]:
+				    each["child"].append(second)
+		    final.append(each)
+    print json.dumps(final)
 
 def product(request):
     ids = int(request.GET.get('id'))
@@ -88,5 +80,3 @@ def search(request):
         result = urllib2.urlopen(hiturl)
         return JSONResponse(result.json())
 
-def test(request):
-    return render(request, "base.html")
