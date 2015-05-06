@@ -33,7 +33,12 @@
                             <label for="password">Password</label>
                             <input type="password" name="password" class="form-control required-entry validate-password" id="pass" title="Password" />
                         </div>
-                                                                        <div class="form-link"> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/customer/account/forgotpassword/">Forgot Your Password?</a> </div>
+                        {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <span>{{ form.errors }}</span>
+                        </div>
+                        {% endif %}
+                                                                        <div class="form-link"> <a href="{% url 'auth_password_reset' %}">Forgot Your Password?</a> </div>
                         <button type="submit" class="btn btn-mega" title="Login" name="send" id="send2"><span><span>Login</span></span></button>
                     </div>
                 </div>
