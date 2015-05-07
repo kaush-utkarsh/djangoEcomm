@@ -60,7 +60,7 @@ def price_in_search_query(string,url):
 def home(request):
     uid = get_userid(request)
     res = categories(request)
-    print res
+    print type(res)
     return render(request, "nogpo/home.html", {'res' : res})
 
 def products(request):
@@ -80,7 +80,7 @@ def categories(request):
 			    if each["unspsc"] == second["parent"]:
 				    each["child"].append(second)
 		    final.append(each)
-    return json.dumps(final)
+    return final
 
 def product(request):
     ids = int(request.GET.get('id'))
@@ -132,11 +132,10 @@ def edit_cart(request):
 def delete_from_cart(request):
     if request.method == 'POST':
         cartid = request.POST.get('cartid','')
-<<<<<<< HEAD
+
         cart = Cart.objects.get(id = cartid)
         cart.delete()
         return render(request,"nogpo/cart.html")
-=======
         productid = request.POST.get('productid','')
         products = Cart_products.objects.filter(cart_id_id = cartid).filter(product_id=productid)
         for product in products:
@@ -160,4 +159,4 @@ def get_cart(request):
             full_list.append(total)
         # response = {'items':product}
         return HttpResponse(json.dumps(full_list))
->>>>>>> daddd4b8404cf794716387da5fdf9318f0b2bbfa
+
