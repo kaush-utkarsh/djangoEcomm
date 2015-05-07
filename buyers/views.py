@@ -132,11 +132,6 @@ def edit_cart(request):
 def delete_from_cart(request):
     if request.method == 'POST':
         cartid = request.POST.get('cartid','')
-<<<<<<< HEAD
-        cart = Cart.objects.get(id = cartid)
-        cart.delete()
-        return render(request,"nogpo/cart.html")
-=======
         productid = request.POST.get('productid','')
         products = Cart_products.objects.filter(cart_id_id = cartid).filter(product_id=productid)
         for product in products:
@@ -160,4 +155,3 @@ def get_cart(request):
             full_list.append(total)
         # response = {'items':product}
         return HttpResponse(json.dumps(full_list))
->>>>>>> daddd4b8404cf794716387da5fdf9318f0b2bbfa
