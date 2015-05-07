@@ -1763,11 +1763,8 @@ Women
                 <div class="navbar-main-submenu"> <a href="#" class="button-up"><span class="icon-arrow-up-3"></span> </a>
 <ul class="exclusive toplevelcategory">
                     <li><span class="icon icon-coins"></span><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html">
-{% for category in categories %}
-    category['name']
-    {% for child in category['child'] %}
-        child['name']
-    {% endfor %}
+{% for item in res %}
+    item['name']
 {% endfor %}
                     </a></li>
                   </ul>

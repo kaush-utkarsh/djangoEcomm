@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 import urllib2
 import json
 from django.http import HttpResponse
@@ -7,13 +9,23 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 
+session_key = '8cae76c505f15432b48c8292a7dd0e54'
 baseurl = 'http://162.209.8.12:8080/'
+
 #An HttpResponse that renders its content into JSON.
 class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
+
+def get_userid(request):
+    session = Session.objects.get(session_key=request.session._session_key)
+    session_data = session.get_decoded()
+    print session_data
+    uid = session_data.get('_auth_user_id')
+    print uid
+    return uid
 
 def get_search_url(string):
     if 'query' not in string.keys():
@@ -45,8 +57,10 @@ def price_in_search_query(string,url):
 
 
 def home(request):
+    uid = get_userid(request)
     res = categories(request)
-    return render(request, "nogpo/home.html", {'categories' : res})
+    print res
+    return render(request, "nogpo/home.html", {'res' : res})
 
 def products(request):
     return render(request, "nogpo/products.html")
@@ -56,7 +70,7 @@ def product_details(request):
 
 def categories(request):
     re = urllib2.urlopen("http://162.209.8.12:8080/categories")
-    jsn = re.json()
+    jsn = json.load(re)
     final = list()
     for each in jsn:
 	    if each["parent"] == 1:
