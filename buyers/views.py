@@ -45,7 +45,8 @@ def price_in_search_query(string,url):
 
 
 def home(request):
-    return render(request, "nogpo/home.html")
+    res = categories(request)
+    return render(request, "nogpo/home.html", {'categories' : res})
 
 def products(request):
     return render(request, "nogpo/products.html")
@@ -53,10 +54,9 @@ def products(request):
 def product_details(request):
     return  render(request, "nogpo/productdetails.html")
 
-def categories():
+def categories(request):
     re = urllib2.urlopen("http://162.209.8.12:8080/categories")
     jsn = re.json()
-
     final = list()
     for each in jsn:
 	    if each["parent"] == 1:
@@ -65,7 +65,7 @@ def categories():
 			    if each["unspsc"] == second["parent"]:
 				    each["child"].append(second)
 		    final.append(each)
-    print json.dumps(final)
+    return json.dumps(final)
 
 def product(request):
     ids = int(request.GET.get('id'))
