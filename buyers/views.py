@@ -60,14 +60,18 @@ def price_in_search_query(string,url):
 def home(request):
     uid = get_userid(request)
     res = categories(request)
-    print type(res)
+    print type(res), len(res)
     return render(request, "nogpo/home.html", {'res' : res})
 
 def products(request):
-    return render(request, "nogpo/products.html")
+    res = categories(request)
+    print type(res), len(res)
+    return render(request, "nogpo/products.html", {'res' : res})
 
 def product_details(request):
-    return  render(request, "nogpo/productdetails.html")
+    res = categories(request)
+    print type(res), len(res)
+    return  render(request, "nogpo/productdetails.html", {'res': res})
 
 def categories(request):
     re = urllib2.urlopen("http://162.209.8.12:8080/categories")
@@ -132,7 +136,6 @@ def edit_cart(request):
 def delete_from_cart(request):
     if request.method == 'POST':
         cartid = request.POST.get('cartid','')
-
         cart = Cart.objects.get(id = cartid)
         cart.delete()
         return render(request,"nogpo/cart.html")
@@ -159,4 +162,3 @@ def get_cart(request):
             full_list.append(total)
         # response = {'items':product}
         return HttpResponse(json.dumps(full_list))
-
