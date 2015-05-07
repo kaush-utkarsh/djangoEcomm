@@ -30,38 +30,11 @@
                                                                     <p><strong>Category</strong></p>
                     <dd>
 <ul class="simple-list">
+    {% for item in res %}
     <li>– &nbsp;
-                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=138&amp;mode=grid">Dresses</a>
-                        (15)
+                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=138&amp;mode=grid">{{ item.name }}</a>
             </li>
-    <li>– &nbsp;
-                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=139&amp;mode=grid">Shirts</a>
-                        (6)
-            </li>
-    <li>– &nbsp;
-                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=140&amp;mode=grid">Coats</a>
-                        (6)
-            </li>
-    <li>– &nbsp;
-                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=141&amp;mode=grid">Jackets</a>
-                        (6)
-            </li>
-    <li>– &nbsp;
-                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=142&amp;mode=grid">Shorts</a>
-                        (6)
-            </li>
-    <li>– &nbsp;
-                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=143&amp;mode=grid">Jeans</a>
-                        (6)
-            </li>
-    <li>– &nbsp;
-                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=144&amp;mode=grid">Skirts</a>
-                        (6)
-            </li>
-    <li>– &nbsp;
-                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=145&amp;mode=grid">Lingerie</a>
-                        (6)
-            </li>
+    {% endfor %}
 </ul>
 </dd>
                                                                     <p><strong>Price</strong></p>

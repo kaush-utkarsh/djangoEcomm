@@ -1,0 +1,119 @@
+<html>
+<head>
+    <title>Cart</title>
+</head>
+
+<body>
+    <label>Add to cart</label>
+    <form id = "addcart" action="/nogpo/add_to_cart/" method = "POST">
+        {% csrf_token %}
+        customer id: <input type="text" name="customerid" value="Mickey"><br>
+        product id: <input type="text" name="productid" value="1010110yhi"><br>
+        no of products: <input type="text" name="no_of_items" value="3"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+    <label>Edit cart</label>
+    <form id = "editcart" action="/nogpo/edit_cart" method = "POST">
+        cartid: <input type="text" name="cartid" ><br>
+        product id: <input type="text" name="productid" value="1010110yhi"><br>
+        no of products: <input type="text" name="no_of_items" value="3"><br>
+        <input type="submit" value="edit">
+    </form>
+    <br>
+    <label>Delete from cart</label>
+        <form id= "deletecart" action="/nogpo/delete_from_cart" method="POST">
+        cartid: <input type="text" name="cartid" ><br>
+        productid: <input type="text" name="productid" ><br>
+        <input type="submit" value="Delete">
+    </form>
+    <br>
+    <label>get full cart</label>
+    <form id="getcart" action="/nogpo/get_cart" method="POST">
+        cartid: <input type="text" name="cartid" ><br>
+        <input type="submit" value="get cart">
+    </form>
+
+    <script type="text/javascript">
+    $("#addcart").on('submit',function(evt){
+        evt.preventDefault();
+            var range = 0;
+            var $inputs = $('#addcart :input');
+            var inputLength = ($inputs.length) - 1;
+            var values = {};
+            $.ajax({
+                    type: "POST",
+                    url: "add_to_cart",
+                    data: values
+                })
+            .done(function(msg){
+                console.log(msg)
+            })
+            .fail(function()
+            {
+                console.log("error")
+            })
+    })
+
+        $("#editcart").on('submit',function(evt){
+        evt.preventDefault();
+            var range = 0;
+            var $inputs = $('#editcart :input');
+            var inputLength = ($inputs.length) - 1;
+            var values = {};
+            $.ajax({
+                    type: "POST",
+                    url: "editcart",
+                    data: values
+                })
+            .done(function(msg){
+                console.log(msg)
+            })
+            .fail(function()
+            {
+                console.log("error")
+            })
+    })
+
+        $("#deletecart").on('submit',function(evt){
+        evt.preventDefault();
+            var range = 0;
+            var $inputs = $('#deletecart :input');
+            var inputLength = ($inputs.length) - 1;
+            var values = {};
+            $.ajax({
+                    type: "POST",
+                    url: "deletecart",
+                    data: values
+                })
+            .done(function(msg){
+                console.log(msg)
+            })
+            .fail(function()
+            {
+                console.log("error")
+            })
+    })
+
+    
+        $("#getcart").on('submit',function(evt){
+        evt.preventDefault();
+            var range = 0;
+            var $inputs = $('#getcart :input');
+            var inputLength = ($inputs.length) - 1;
+            var values = {};
+            $.ajax({
+                    type: "POST",
+                    url: "getcart",
+                    data: values
+                })
+            .done(function(msg){
+                console.log(msg)
+            })
+            .fail(function()
+            {
+                console.log("error")
+            })
+    })
+    </script>
+</body>
