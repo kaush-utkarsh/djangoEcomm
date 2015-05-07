@@ -58,7 +58,6 @@ def price_in_search_query(string,url):
 
 
 def home(request):
-    uid = get_userid(request)
     res = categories(request)
     print type(res), len(res)
     return render(request, "nogpo/home.html", {'res' : res})
