@@ -80,3 +80,41 @@ def search(request):
         result = urllib2.urlopen(hiturl)
         return JSONResponse(result.json())
 
+@csrf_exempt
+def add_to_cart(request):
+    if request.method == 'POST':
+        userid = request.POST.get('customerid', '')
+        productid = request.POST.get('productid', '')
+        no_of_items = request.POST.get('no_of_items', '')
+
+        cart= Cart(userid=userid, productid=productid, no_of_items = no_of_items)
+        cart.save()
+        print cart.id
+        response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items}
+        return  HttpResponse(json.dumps(response))
+    else:
+        c = {}
+        c.update(csrf(request))
+        return render_to_response("nogpo/cart.html", c)
+
+@csrf_exempt
+def edit_cart(request):
+    if request.method == 'POST':
+        cartid = request.POST.get('cartid','')
+        productid = request.POST.get('productid', '')
+        no_of_items = request.POST.get('no_of_items', '')
+
+        cart = Cart.objects.get(id=cartid)
+        cart.productid = productid
+        cart.no_of_items = no_of_items
+        cart.save()
+        response = {'id':cart.id,'productid':productid,'no_of_items':no_of_items}
+        return HttpResponse(json.dumps(response))
+
+@csrf_exempt
+def delete_from_cart(request):
+    if request.method == 'POST':
+        cartid = request.POST.get('cartid','')
+        cart = Cart.objects.get(id = cartid)
+        cart.delete()
+        return render(request,"nogpo/cart.html")
