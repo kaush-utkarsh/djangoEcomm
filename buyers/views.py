@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import urllib2
+import datetime
 import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -87,8 +88,10 @@ def add_to_cart(request):
         productid = request.POST.get('productid', '')
         no_of_items = request.POST.get('no_of_items', '')
 
-        cart= Cart(userid=userid, productid=productid, no_of_items = no_of_items)
+        cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
         cart.save()
+        product = Cart_products(product_id=productid,no_of_items=no_of_items,status=0,date=datetime.datetime.today(),cart_id_id=cart.id)
+        product.save()
         print cart.id
         response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items}
         return  HttpResponse(json.dumps(response))
@@ -104,17 +107,37 @@ def edit_cart(request):
         productid = request.POST.get('productid', '')
         no_of_items = request.POST.get('no_of_items', '')
 
-        cart = Cart.objects.get(id=cartid)
-        cart.productid = productid
-        cart.no_of_items = no_of_items
-        cart.save()
-        response = {'id':cart.id,'productid':productid,'no_of_items':no_of_items}
+        product = Cart_products.objects.get(cart_id_id=cartid)
+        product.productid = productid
+        product.no_of_items = no_of_items
+        product.save()
+        response = {'id':cartid,'productid':productid,'no_of_items':no_of_items}
         return HttpResponse(json.dumps(response))
 
 @csrf_exempt
 def delete_from_cart(request):
     if request.method == 'POST':
         cartid = request.POST.get('cartid','')
-        cart = Cart.objects.get(id = cartid)
-        cart.delete()
+        productid = request.POST.get('productid','')
+        products = Cart_products.objects.filter(cart_id_id = cartid).filter(product_id=productid)
+        for product in products:
+            # print p.product_id
+            product.status = 1
+            product.save()
         return render(request,"nogpo/cart.html")
+
+@csrf_exempt
+def get_cart(request):
+    if request.method == 'POST':
+        number = 1
+        item = {}
+        full_list = list()
+        cartid = request.POST.get('cartid','')
+        products = Cart_products.objects.filter(cart_id_id=cartid)
+        for product in products:
+            item = {'id':product.id,'productid':product.product_id,'no_of_items':product.no_of_items,'date':product.date.strftime('%Y/%m/%d')}
+            total = {'number':number,'item':item}
+            number = number + 1
+            full_list.append(total)
+        # response = {'items':product}
+        return HttpResponse(json.dumps(full_list))
