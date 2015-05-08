@@ -10,7 +10,6 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 
-session_key = '8cae76c505f15432b48c8292a7dd0e54'
 baseurl = 'http://162.209.8.12:8080/'
 
 #An HttpResponse that renders its content into JSON.
@@ -43,18 +42,23 @@ def get_search_url(string):
             url = url + '&price_h=' + string['price_h']
         return url
 
-
 def home(request):
-    uid = get_userid(request)
     res = categories(request)
-    print res
-    return render(request, "nogpo/home.html", {'res' : res})
+    print type(res), len(res)
+    if request.user.is_authenticated():
+        return render(request, "nogpo/home.html", {'res' : res})
+    else:
+        return render(request, "registration/login.html")
 
 def products(request):
-    return render(request, "nogpo/products.html")
+    res = categories(request)
+    print type(res), len(res)
+    return render(request, "nogpo/products.html", {'res' : res})
 
 def product_details(request):
-    return  render(request, "nogpo/productdetails.html")
+    res = categories(request)
+    print type(res), len(res)
+    return  render(request, "nogpo/productdetails.html", {'res': res})
 
 def categories(request):
     re = urllib2.urlopen("http://162.209.8.12:8080/categories")
@@ -67,7 +71,7 @@ def categories(request):
 			    if each["unspsc"] == second["parent"]:
 				    each["child"].append(second)
 		    final.append(each)
-    return json.dumps(final)
+    return final
 
 def product(request):
     ids = int(request.GET.get('id'))
@@ -119,6 +123,9 @@ def edit_cart(request):
 def delete_from_cart(request):
     if request.method == 'POST':
         cartid = request.POST.get('cartid','')
+        cart = Cart.objects.get(id = cartid)
+        cart.delete()
+        return render(request,"nogpo/cart.html")
         productid = request.POST.get('productid','')
         products = Cart_products.objects.filter(cart_id_id = cartid).filter(product_id=productid)
         for product in products:

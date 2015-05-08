@@ -1757,15 +1757,13 @@ Empty category #2
                  
     <dt class="item with-sub level0 nav-1 first parent">
 <a href="#" class="btn-main line">
-Women
+    Categories
 </a>
 <dd class="item-content">
                 <div class="navbar-main-submenu"> <a href="#" class="button-up"><span class="icon-arrow-up-3"></span> </a>
 <ul class="exclusive toplevelcategory">
                     <li><span class="icon icon-coins"></span><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html">
-{% for item in res %}
-    item['name']
-{% endfor %}
+    Medical Specifications
                     </a></li>
                   </ul>
 <ul class="exclusive">
@@ -1778,172 +1776,18 @@ Women
             <!-- caregories -->
             <div class="col-xs-9">
                         <div class="row">
-                  
-<div class="col-xs-6 col-md-4 col-lg-3">
-                                    <div
-                               class="level1 nav-1-1 first parent submenu-block">
-<span class="icon m-icon-dress"></span>
+{% for item in res %}
+<div class="col-lg-6 col-md-6 col-lg-6">
+                                    <div class="level1 nav-1-{{ item.id }} parent submenu-block">
+<ul><span class="glyphicon glyphicon-asterisk"></span>
 <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/dresses.html" class="name">
-Dresses
-</a>
-<ul class="level1">
-<li class="level2 nav-1-1-1 first">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/dresses/empty-category-1.html">
-Club Dresses
-</a><li class="level2 nav-1-1-2">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/dresses/empty-category-2.html">
-Evening Dresses
-</a><li class="level2 nav-1-1-3 last">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/dresses/empty-category-3.html">
-Prom Dresses
-</a>
-</ul>
+    {{ item.name }}
+</a></ul>
  </div>
-                          </div><div class="col-xs-6 col-md-4 col-lg-3">
-                                    <div
-                               class="level1 nav-1-2 parent submenu-block">
-<span class="icon m-icon-shirts"></span>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/shirts.html" class="name">
-Shirts
-</a>
-<ul class="level1">
-<li class="level2 nav-1-2-4 first">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/shirts/empty-category-1.html">
-Empty category #1
-</a><li class="level2 nav-1-2-5">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/shirts/empty-category-2.html">
-Empty category #2
-</a><li class="level2 nav-1-2-6 last">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/shirts/empty-category-3.html">
-Empty category #3
-</a>
-</ul>
  </div>
-                          </div><div class="col-xs-6 col-md-4 col-lg-3">
-                                    <div
-                               class="level1 nav-1-3 parent submenu-block">
-<span class="icon m-icon-coats"></span>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/coats.html" class="name">
-Coats
-</a>
-<ul class="level1">
-<li class="level2 nav-1-3-7 first">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/coats/empty-category-1.html">
-Empty category #1
-</a><li class="level2 nav-1-3-8">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/coats/empty-category-2.html">
-Empty category #2
-</a><li class="level2 nav-1-3-9 last">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/coats/empty-category-3.html">
-Empty category #3
-</a>
-</ul>
+ {% endfor %}
  </div>
-                          </div><div class="col-xs-6 col-md-4 col-lg-3">
-                                    <div
-                               class="level1 nav-1-4 parent submenu-block">
-<span class="icon m-icon-jackets"></span>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/jackets.html" class="name">
-Jackets
-</a>
-<ul class="level1">
-<li class="level2 nav-1-4-10 first">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/jackets/empty-category-1.html">
-Empty category #1
-</a><li class="level2 nav-1-4-11">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/jackets/empty-category-2.html">
-Empty category #2
-</a><li class="level2 nav-1-4-12 last">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/jackets/empty-category-3.html">
-Empty category #3
-</a>
-</ul>
  </div>
-                          </div><div class="col-xs-6 col-md-4 col-lg-3">
-                                    <div
-                               class="level1 nav-1-5 parent submenu-block">
-<span class="icon m-icon-shorts"></span>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/shorts.html" class="name">
-Shorts
-</a>
-<span class="label label-mega">-15%</span>
-<ul class="level1">
-<li class="level2 nav-1-5-13 first">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/shorts/empty-category-1.html">
-Empty category #1
-</a><li class="level2 nav-1-5-14">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/shorts/empty-category-2.html">
-Empty category #2
-</a><li class="level2 nav-1-5-15 last">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/shorts/empty-category-3.html">
-Empty category #3
-</a>
-</ul>
- </div>
-                          </div><div class="col-xs-6 col-md-4 col-lg-3">
-                                    <div
-                               class="level1 nav-1-6 parent submenu-block">
-<span class="icon m-icon-jeans"></span>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/jeans.html" class="name">
-Jeans
-</a>
-<ul class="level1">
-<li class="level2 nav-1-6-16 first">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/jeans/empty-category-1.html">
-Empty category #1
-</a><li class="level2 nav-1-6-17">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/jeans/empty-category-30.html">
-Empty category #2
-</a><li class="level2 nav-1-6-18 last">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/jeans/empty-category-3.html">
-Empty category #3
-</a>
-</ul>
- </div>
-                          </div><div class="col-xs-6 col-md-4 col-lg-3">
-                                    <div
-                               class="level1 nav-1-7 parent submenu-block">
-<span class="icon m-icon-skirts"></span>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/skirts.html" class="name">
-Skirts
-</a>
-<ul class="level1">
-<li class="level2 nav-1-7-19 first">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/skirts/empty-category-1.html">
-Empty category #1
-</a><li class="level2 nav-1-7-20">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/skirts/empty-category-2.html">
-Empty category #2
-</a><li class="level2 nav-1-7-21 last">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/skirts/empty-category-3.html">
-Empty category #3
-</a>
-</ul>
- </div>
-                          </div><div class="col-xs-6 col-md-4 col-lg-3">
-                                    <div
-                               class="level1 nav-1-8 last parent submenu-block">
-<span class="icon m-icon-lingerie"></span>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/lingerie.html" class="name">
-Lingerie
-</a>
-<ul class="level1">
-<li class="level2 nav-1-8-22 first">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/lingerie/empty-category-1.html">
-Empty category #1
-</a><li class="level2 nav-1-8-23">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/lingerie/empty-category-2.html">
-Empty category #2
-</a><li class="level2 nav-1-8-24 last">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/lingerie/empty-category-3.html">
-Empty category #3
-</a>
-</ul>
- </div>
-                          </div>
-
-                        </div>
-                      </div>
                       <!-- //end caregories -->
 
                       <!-- html block -->
