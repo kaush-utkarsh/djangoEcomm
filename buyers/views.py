@@ -149,3 +149,51 @@ def get_cart(request):
             full_list.append(total)
         # response = {'items':product}
         return HttpResponse(json.dumps(full_list))
+
+@csrf_exempt
+def apply_for_credit(request):
+    if request.method == 'POST':
+        userid = request.POST.get('userid','')
+        merchantid = request.POST.get('merchantid','')
+        credit_asked = request.POST.get('credit_asked',0)
+        credit_status = request.POST.get('credit_status',0)
+        applied_date = datetime.datetime.date()
+        request_msg = request.POST.get('request_msg','Please Grant me the requested credit')
+        status = request.POST.get('status',1)
+
+        credit = Credit_balance(userid=userid,merchantid=merchantid,credit_asked=credit_asked,credit_status=0,applied_date=applied_date,request_msg=request_msg)
+        credit.save()
+
+@csrf_exempt
+def credit_request_clearnace(request):
+    if request.method == 'GET':
+        number = 1
+        merchantid = request.GET.get('merchantid','')
+        credits = Credit_balance.objects.filter(merchantid=merchantid)
+        for credit in credits:
+            item = {'userid':credit.userid,'credit':credit.credit,'applied_date':credit.applied_date,'request_msg':credit.request_msg}
+            total = {'number':number,'item':item}
+            number = number +1
+            full_list.append(total)
+        return HttpResponse(json.dumps(full_list))
+    if request.method == 'POST':
+        userid = request.POST.get('userid','')
+        merchantid = request.POST.get('merchantid','')
+        response_msg = request.POST.get('response_msg','')
+        credit_approved = request.POST.get('credit_approved','')
+        credit_status = request.POST.get('credit_status',0)
+        applied_date = request.POST.get('applied_date','')
+        credit_expiry_date = request.POST.get('credit_expiry_date','')
+        cleared_date = datetime.datetime.date()
+        rejection_date = request.POST.get('rejection_date','')
+        credit = Credit_balance.objects.get(merchantid=merchantid).filter(userid=userid).filter(applied_date=applied_date)
+        credit.response_msg = response_msg
+        credit.credit_status = credit_status
+        credit.credit_expiry_date = credit_expiry_date
+        credit.cleared_date = datetime.datetime.date()
+        credit.rejection_date = rejection_date
+        credit.credit_approved = credit_approved
+        credit.save()
+        response = {'credit_approved':credit_approved,'merchantid':merchantid,'response_msg':response_msg}
+        return HttpResponse(json.dumps(response))
+
