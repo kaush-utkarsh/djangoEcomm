@@ -10,7 +10,6 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 
-session_key = '8cae76c505f15432b48c8292a7dd0e54'
 baseurl = 'http://162.209.8.12:8080/'
 
 #An HttpResponse that renders its content into JSON.
@@ -56,11 +55,13 @@ def price_in_search_query(string,url):
         return_url = return_url + '&price_h=' + string['price_h']
     return return_url
 
-
 def home(request):
     res = categories(request)
     print type(res), len(res)
-    return render(request, "nogpo/home.html", {'res' : res})
+    if request.user.is_authenticated():
+        return render(request, "nogpo/home.html", {'res' : res})
+    else:
+        return render(request, "registration/login.html")
 
 def products(request):
     res = categories(request)
