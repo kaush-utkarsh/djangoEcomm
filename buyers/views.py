@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 import urllib2
@@ -32,29 +32,16 @@ def get_search_url(string):
     if 'query' not in string.keys():
         return baseurl
     else:
-        if 'page' in string.keys() and 'category' in string.keys():
-            url = baseurl + 'search?query=' + string['query'] + '&page=' + string['page'] + '&category=' + string['category']
-            return url
-        elif 'page' in string.keys():
-            url = baseurl + 'search?query=' + string['query'] + '&page=' + string['page']
-            return url
-        elif 'category' in string.keys():
-            url = baseurl + 'search?query=' + string['query'] + '&category=' + string['category']
-            return url
-        elif 'query' in string.keys():
-            url = baseurl + 'search?query=' + string['query']
-            url = price_in_search_query(string,url)
-            return url
-        else:
-            return baseurl
-
-def price_in_search_query(string,url):
-    return_url = url
-    if 'price_l' in string.keys():
-        return_url = return_url + '&price_l=' + string['price_l']
-    if 'price_h' in string.keys():
-        return_url = return_url + '&price_h=' + string['price_h']
-    return return_url
+        url = baseurl + 'search?query=' + string['query']
+        if 'page' in string.keys():
+            url = url + '&page=' + string['page']
+        if 'category' in string.keys():
+            url = url + '&category=' + string['category']
+        if 'price_l' in string.keys():
+             url = url + '&price_l=' + string['price_l']
+        if 'price_h' in string.keys():
+            url = url + '&price_h=' + string['price_h']
+        return url
 
 
 def home(request):
@@ -86,14 +73,15 @@ def product(request):
     ids = int(request.GET.get('id'))
     if request.method == 'GET':
         product = urllib2.urlopen(baseurl+'product/'+ids)
-        return JSONResponse(product.json())
+        return JSONResponse(json.load(product))
 
 def search(request):
     if request.method == 'GET':
         string = request.GET
         hiturl = get_search_url(string)
         result = urllib2.urlopen(hiturl)
-        return JSONResponse(result.json())
+        print result
+        return JSONResponse(json.load(result))
 
 @csrf_exempt
 def add_to_cart(request):
@@ -101,7 +89,8 @@ def add_to_cart(request):
         userid = request.POST.get('customerid', '')
         productid = request.POST.get('productid', '')
         no_of_items = request.POST.get('no_of_items', '')
-
+        userid = get_userid()
+        # total_price = baseurl + send request to get product price
         cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
         cart.save()
         product = Cart_products(product_id=productid,no_of_items=no_of_items,status=0,date=datetime.datetime.today(),cart_id_id=cart.id)
@@ -110,9 +99,7 @@ def add_to_cart(request):
         response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items}
         return  HttpResponse(json.dumps(response))
     else:
-        c = {}
-        c.update(csrf(request))
-        return render_to_response("nogpo/cart.html", c)
+        return render_to_response("nogpo/cart.html")
 
 @csrf_exempt
 def edit_cart(request):

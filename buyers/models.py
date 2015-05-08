@@ -7,9 +7,6 @@ class Cart(models.Model):
     checkout_date = models.DateField()
     total_price = models.DecimalField(max_digits=10,decimal_places=2)
 
-    def __unicode__():
-        return self.id
-
 class Cart_products(models.Model):
     cart_id = models.ForeignKey(Cart)
     product_id = models.CharField(max_length=70)
