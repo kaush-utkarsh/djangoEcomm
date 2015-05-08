@@ -69,6 +69,9 @@ DATABASES = {
     }
 }
 
+SOUTH_DATABASE_ADAPTERS = {
+'default':'south.db.mysql'
+}
 # registration app settings
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 3
