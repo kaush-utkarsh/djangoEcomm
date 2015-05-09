@@ -1,6 +1,7 @@
 from django.shortcuts import render,render_to_response
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 import urllib2
 import datetime
 import json
@@ -50,11 +51,13 @@ def home(request):
     else:
         return render(request, "registration/login.html")
 
+@login_required
 def products(request):
     res = categories(request)
     print type(res), len(res)
     return render(request, "nogpo/products.html", {'res' : res})
 
+@login_required
 def product_details(request):
     res = categories(request)
     print type(res), len(res)
