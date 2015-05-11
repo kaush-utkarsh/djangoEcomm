@@ -165,7 +165,7 @@ def apply_for_credit(request):
         credit.save()
 
 @csrf_exempt
-def credit_request_clearnace(request):
+def credit_request_clearance(request):
     if request.method == 'GET':
         number = 1
         merchantid = request.GET.get('merchantid','')
