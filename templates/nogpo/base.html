@@ -22,7 +22,7 @@
 //]]>
 </script>
 <![endif]-->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/css/styles.css" media="all" />
 <link rel="stylesheet" type="text/css" href="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/base/default/css/widgets.css" media="all" />
 <link rel="stylesheet" type="text/css" href="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/base/default/css/amasty/amajaxlogin/amajaxlogin.css" media="all" />
@@ -50,7 +50,7 @@
 <link rel="stylesheet" type="text/css" href="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/css/custom_changes.css" media="all" />
 <link rel="stylesheet" type="text/css" href="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/css/print.css" media="print" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://demo.ethemeuk.com/megatron/magento/demo/js/prototype/prototype.js"></script>
 <script type="text/javascript" src="http://demo.ethemeuk.com/megatron/magento/demo/js/lib/ccard.js"></script>
 <script type="text/javascript" src="http://demo.ethemeuk.com/megatron/magento/demo/js/prototype/validation.js"></script>
@@ -527,67 +527,7 @@ var AmAjaxLoginObj = new AmAjaxLogin({"send_url":"http:\/\/demo.ethemeuk.com\/me
                      
         <section class="container">
                                             </section>
-        <!-- Social widgets -->
-    <section class="social-widgets hidden-xs">
-      <ul class="items">
 
-        <!--FACEBOOK WIDJET-->
-                <li class="item facebook"> <a href="#" class="tab-icon"><span class="icon-facebook-3"></span></a>
-          <div class="tab-content">
-            <div class="title">FACEBOOK</div>
-            <div class="loading">
-                <div id="fb-root"></div>
-                <script>(function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s); js.id = id;
-                        js.src = "//connect.facebook.net/en_US//all.js#xfbml=1&appId=121855444668430";
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));</script>
-                <div class="fb-like-box" data-href="http://www.facebook.com/themeforest" data-width="282" data-height="320" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
-            </div>
-          </div>
-        </li>
-        
-        <!--TWITTER WIDJET-->
-                <li class="item twitter"> <a href="#" class="tab-icon"><span class="icon-twitter-3"></span></a>
-          <div class="tab-content">
-            <div class="title">TWITTER FEEDS</div>
-            <div class="loading">
-                <a data-chrome="nofooter noheader noborders" data-tweet-limit="2"  data-link-color="#cc0000"    class="twitter-timeline"  href="https://twitter.com/themeforest" data-screen-name="themeforest"  data-widget-id="395451121138802688">loading tweets...</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>
-          </div>
-        </li>
-        
-        <!--YOUTUBE WIDJET-->
-                <li class="item youtube"> <a href="#" class="tab-icon"><span class="icon icon-youtube-3"></span></a>
-          <div class="tab-content">
-            <div class="title">Video</div>
-            <div class="loading">
-                <iframe width="430" height="244" src="//www.youtube.com/embed/L9szn1QQfas"  allowfullscreen></iframe>            </div>
-          </div>
-        </li>
-        
-
-        <!--GOOGLE MAP WIDJET-->
-        
-      </ul>
-    </section>
-    <!-- //end Social widgets -->
-    <script>
-        jQuery(function ($) {
-            "use strict";
-            var socialItems = $('.social-widgets .items .item');
-            var counter = 0;
-            socialItems.each(function () {
-                counter++;
-                var itemclass = "item-0"+counter;
-                $(this).addClass(itemclass)
-            });
-        });
-
-    </script>
 <div id="content">
     {% block content %}{% endblock %}
 </div>

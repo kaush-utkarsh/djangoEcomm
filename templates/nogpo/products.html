@@ -11,30 +11,7 @@ jQuery(function($) {
     });
 });
 </script>
-<script type="text/javascript">
-    jQuery.ajax({
-        url: "/nogpo/search/",
-        data: {
-            query: "tough"
-        }
-    }).done(function(response){
 
-        var productLists = jQuery("#products_list")
-        var productTemplate = '';
-
-        for (var i = 0; i < response.length; i += 2) {
-            if(response[i]) {
-                var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="[[product_url]]" class="preview-image"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i].name+'"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="product-retina img-responsive" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+response[i].price+'</span></span></div></div>'
-                productLists.append(templateTwoImages)
-            }
-
-            if(response[i+1]) {
-                var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="[[product_url]]" class="preview-image"><img src="http://3.imimg.com/data3/UN/KI/MY-4527123/orthopedic-implants-250x250.jpg" class="product-retina img-responsive" data-image2x="http://3.imimg.com/data3/UN/KI/MY-4527123/orthopedic-implants-250x250.jpg" alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+response[i+1].price+'</span></span></div></div>'
-                productLists.append(templateOneImage)
-            }
-        }
-    })
-</script>
 <section class="container content">
     <div class="row">
         <!-- Left column -->
@@ -108,16 +85,50 @@ jQuery(function($) {
         </aside>
         <!--Content -->
         <section class="col-sm-8 col-md-9 col-lg-9 content-center">
-            <form class="form-inline">
-                <input type="text" class="input-medium search-query">
+            <form id="submit_query" class="form-inline">
+                <input id="submit_input" type="text" class="input-medium search-query">
                 <button type="submit" class="btn btn-lg btn-success">Search</button>
             </form>
+            <script type="text/javascript">
+                var url = window.location.href;
+                var query = url.split('?')[1].split('=')[1];
+
+                jQuery.ajax({
+                    url: "/nogpo/search/",
+                    data: {
+                        query: query
+                    }
+                }).done(function(response){
+                    jQuery('#products_list').empty()
+                    var productLists = jQuery("#products_list")
+                    var productTemplate = '';
+
+                    for (var i = 0; i < response.length; i += 2) {
+                        if(response[i]) {
+                            var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="[[product_url]]" class="preview-image"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i].name+'"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="product-retina img-responsive" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+response[i].price+'</span></span></div></div>'
+                            productLists.append(templateTwoImages)
+                        }
+
+                        if(response[i+1]) {
+                            var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="[[product_url]]" class="preview-image"><img src="http://3.imimg.com/data3/UN/KI/MY-4527123/orthopedic-implants-250x250.jpg" class="product-retina img-responsive" data-image2x="http://3.imimg.com/data3/UN/KI/MY-4527123/orthopedic-implants-250x250.jpg" alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+response[i+1].price+'</span></span></div></div>'
+                            productLists.append(templateOneImage)
+                        }
+                    }
+                })
+
+                jQuery("#submit_query").submit(function(evt) {
+                    evt.preventDefault()
+                    var query = jQuery("#submit_input").val();
+                    var urlString = window.location.href;
+                    urlString = urlString.replace(/search=\w+/, "search="+query);
+                    window.location = urlString
+                })
+            </script>
             <br>
             <br>
             <br>
             <br>
             <div class="products-list products-list-small row" id="products_list">
-
             </div>
             <div class="clearfix"></div>
     </div>
