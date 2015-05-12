@@ -58,10 +58,10 @@ def products(request):
     return render(request, "nogpo/products.html", {'res' : res})
 
 @login_required
-def product_details(request):
+def products_details(request):
     res = categories(request)
     print type(res), len(res)
-    return  render(request, "nogpo/productdetails.html", {'res': res})
+    return  render(request, "nogpo/product.html", {'res': res})
 
 def categories(request):
     re = urllib2.urlopen("http://162.209.8.12:8080/categories")
@@ -76,11 +76,16 @@ def categories(request):
 		    final.append(each)
     return final
 
-def product(request):
-    ids = int(request.GET.get('id'))
+def product(request, product_id):
+    # ids = int(request.GET.get('id'))
+    print product_id
     if request.method == 'GET':
-        product = urllib2.urlopen(baseurl+'product/'+ids)
-        return JSONResponse(json.load(product))
+        product = urllib2.urlopen(baseurl+'product/'+product_id)
+        # print json.load(product)
+        data = {
+            "data": json.load(product)
+        }
+        return  render(request, "nogpo/product.html", data)
 
 def search(request):
     if request.method == 'GET':
