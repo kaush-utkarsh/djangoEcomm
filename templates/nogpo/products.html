@@ -92,7 +92,8 @@ jQuery(function($) {
             <script type="text/javascript">
                 var url = window.location.href;
                 var query = url.split('?')[1].split('=')[1];
-
+                console.log(url)
+                console.log(query)
                 jQuery.ajax({
                     url: "/nogpo/search/",
                     data: {
@@ -119,8 +120,10 @@ jQuery(function($) {
                 jQuery("#submit_query").submit(function(evt) {
                     evt.preventDefault()
                     var query = jQuery("#submit_input").val();
+                    console.log(query)
                     var urlString = window.location.href;
-                    urlString = urlString.replace(/search=\w+/, "search="+query);
+                    urlString = urlString.replace('/products/?', "/products/?search="+query);
+                    console.log(urlString)
                     window.location = urlString
                 })
             </script>
