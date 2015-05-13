@@ -29,5 +29,5 @@ class Credit_balance(models.Model):
     request_msg = models.TextField()
     response_msg = models.TextField()
     credit_expiry_date = models.DateField()
-    rejection_date = models.DateField()
-    status = models.IntegerField()
+    # rejection_date = models.DateField()
+    # status = models.IntegerField()

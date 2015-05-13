@@ -23,9 +23,7 @@ class JSONResponse(HttpResponse):
 def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
     session_data = session.get_decoded()
-    print session_data
     uid = session_data.get('_auth_user_id')
-    print uid
     return uid
 
 def get_search_url(string):
@@ -45,7 +43,6 @@ def get_search_url(string):
 
 def home(request):
     res = categories(request)
-    print type(res), len(res)
     if request.user.is_authenticated():
         return render(request, "nogpo/home.html", {'res' : res})
     else:
@@ -54,13 +51,11 @@ def home(request):
 @login_required
 def products(request):
     res = categories(request)
-    print type(res), len(res)
     return render(request, "nogpo/products.html", {'res' : res})
 
 @login_required
 def products_details(request):
     res = categories(request)
-    print type(res), len(res)
     return  render(request, "nogpo/product.html", {'res': res})
 
 def categories(request):
@@ -77,13 +72,12 @@ def categories(request):
     return final
 
 def product(request, product_id):
-    # ids = int(request.GET.get('id'))
-    print product_id
+    res = categories(request)
     if request.method == 'GET':
         product = urllib2.urlopen(baseurl+'product/'+product_id)
-        # print json.load(product)
         data = {
-            "data": json.load(product)
+            "data": json.load(product),
+            "res": res
         }
         return  render(request, "nogpo/product.html", data)
 
@@ -92,7 +86,6 @@ def search(request):
         string = request.GET
         hiturl = get_search_url(string)
         result = urllib2.urlopen(hiturl)
-        print result
         return JSONResponse(json.load(result))
 
 @csrf_exempt
@@ -107,7 +100,6 @@ def add_to_cart(request):
         cart.save()
         product = Cart_products(product_id=productid,no_of_items=no_of_items,status=0,date=datetime.datetime.today(),cart_id_id=cart.id)
         product.save()
-        print cart.id
         response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items}
         return  HttpResponse(json.dumps(response))
     else:
@@ -137,7 +129,6 @@ def delete_from_cart(request):
         productid = request.POST.get('productid','')
         products = Cart_products.objects.filter(cart_id_id = cartid).filter(product_id=productid)
         for product in products:
-            # print p.product_id
             product.status = 1
             product.save()
         return render(request,"nogpo/cart.html")
