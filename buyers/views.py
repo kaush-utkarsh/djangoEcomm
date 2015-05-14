@@ -53,7 +53,7 @@ def home(request):
 
 @login_required
 def products(request):
-    res = search(request)
+    res = categories(request)
     print res
     return render(request, "nogpo/products.html", {'res' : res})
 
