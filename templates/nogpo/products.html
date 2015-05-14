@@ -91,16 +91,25 @@ jQuery(function($) {
             </form>
             <script type="text/javascript">
                 var url = window.location.href;
-                console.log('url', url)
-                if(url.indexOf('search=') != -1) {
-                    console.log('if women')
-                    var query = url.split('?')[1].split('=')[1];
-                    jQuery("#submit_input").val(query)
+                if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('category=') != -1) {
+                    function getUrlParms(url) {
+                        var parms = {},
+                            hash
+                        var hashes = url.slice(url.indexOf('?') + 1).split('&')
+
+                        for (var i = 0; i < hashes.length; i++) {
+                            hash = hashes[i].split('=')
+                            parms[hash[0]] = hash[1]
+                        }
+                        return parms
+                    }
+
+
+                    data = getUrlParms(url)
+
                     jQuery.ajax({
                         url: "/nogpo/search/",
-                        data: {
-                            query: query
-                        }
+                        data: data
                     }).done(function(response){
                         jQuery('#products_list').empty()
                         var productLists = jQuery("#products_list")
@@ -124,13 +133,10 @@ jQuery(function($) {
                     evt.preventDefault()
                     var query = jQuery("#submit_input").val();
                     var urlString = window.location.href;
-                    console.log(urlString)
-                    if(urlString.indexOf('search=') == -1) {
-                        console.log('if working')
-                        urlString = urlString + '?search=' + query
+                    if(urlString.indexOf('query=') == -1) {
+                        urlString = urlString + '&query=' + query
                     } else {
-                        console.log('else working')
-                        urlString = urlString.replace(/search=\w+/, "search="+query);
+                        urlString = urlString.replace(/query=\w+/, "query="+query);
                     }
                     window.location = urlString
                 })

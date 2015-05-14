@@ -28,16 +28,20 @@ def get_userid(request):
     return uid
 
 def get_search_url(string):
-    if 'query' in string.keys():
+    if 'query' not in string.keys():
+        url = baseurl
+        if 'category' in string.keys():
+            url = url + 'search?category=' + string['category']
+    else:
         url = baseurl + 'search?query=' + string['query']
-    if 'page' in string.keys():
-        url = url + '&page=' + string['page']
-    if 'category' in string.keys():
-        url = url + '&category=' + string['category']
-    if 'price_l' in string.keys():
-         url = url + '&price_l=' + string['price_l']
-    if 'price_h' in string.keys():
-        url = url + '&price_h=' + string['price_h']
+        if 'page' in string.keys():
+            url = url + '&page=' + string['page']
+        if 'category' in string.keys():
+            url = url + '&category=' + string['category']
+        if 'price_l' in string.keys():
+             url = url + '&price_l=' + string['price_l']
+        if 'price_h' in string.keys():
+            url = url + '&price_h=' + string['price_h']
     return url
 
 def home(request):
@@ -50,6 +54,7 @@ def home(request):
 @login_required
 def products(request):
     res = search(request)
+    print res
     return render(request, "nogpo/products.html", {'res' : res})
 
 @login_required
@@ -83,6 +88,7 @@ def product(request, product_id):
 def search(request):
     if request.method == 'GET':
         string = request.GET
+        print string
         hiturl = get_search_url(string)
         result = urllib2.urlopen(hiturl)
         return JSONResponse(json.load(result))
@@ -134,7 +140,7 @@ def add_to_cartproduct(data):
     product.save()
     return product.id
 
-@csrf_exemptd
+@csrf_exempt
 def edit_cart(request):
     if request.method == 'POST':
         subcartid = request.POST.get('subcartid','')
@@ -169,8 +175,8 @@ def get_cart(request):
         full_list = list()
         cartid = request.POST.get('cartid','')
         subcart_ids = Subcart.objects.filter(cart_id_id=cartid)
-        for id in subcart_ids
-            products = Cart_products.objects.filter(subcart_id_id=id)
+        for ids in subcart_ids:
+            products = Cart_products.objects.filter(subcart_id_id=ids)
             for product in products:
                 item = {'id':product.id,'productid':product.product_id,'no_of_items':product.no_of_items,'date':product.date.strftime('%Y/%m/%d')}
                 total = {'number':number,'item':item}
