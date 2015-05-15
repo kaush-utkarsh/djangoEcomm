@@ -267,6 +267,9 @@ h1{padding-bottom: 20px}
 .products-list-small .preview.hover-slide .preview-image {
     height: 243px;
 }
+.products-list-small .preview.hover-slide .preview-image {
+    height: 230px;
+}
 .btn .meta-nav{display:none !important;}
 .blog-post .post-container .blockquote {
     margin: 10px 30px 10px 20px;
