@@ -1,17 +1,4 @@
 {% extends "nogpo/base.html" %} {% block content %}
-<script>
-jQuery(function($) {
-    "use strict";
-    var socialItems = $('.social-widgets .items .item');
-    var counter = 0;
-    socialItems.each(function() {
-        counter++;
-        var itemclass = "item-0" + counter;
-        $(this).addClass(itemclass)
-    });
-});
-</script>
-
 <div class="hide-rich-snippets">
     <div itemscope itemtype="http://schema.org/Product">
         <meta itemprop="name" content="Swarovski crystal-embellished jersey dress" />
@@ -87,7 +74,7 @@ jQuery(function($) {
             <div class="large-image  hidden-xs"><img id="zoom192" class="cloudzoom" src="http://www.mendell.com/images/Orthopedics.jpg" alt="Swarovski crystal-embellished jersey dress" data-cloudzoom="zoomImage: 'http://www.mendell.com/images/Orthopedics.jpg',zoomSizeMode: 'image', autoInside : 991" /></div>
             <div class="hidden-xs flexslider flexslider-thumb">
                 <ul class="previews-list slides thumbs">
-                <!-- small image in down -->
+                    <!-- small image in down -->
                     <li><img class='cloudzoom-gallery' alt="" src="http://www.mendell.com/images/Orthopedics.jpg" data-cloudzoom="useZoom: '#zoom192', image: 'http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_2.jpg', zoomImage: 'http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_2.jpg', autoInside : 991"></li>
                     <li>
                         <a class="various fancybox.iframe" href="http://www.youtube.com/embed/L9szn1QQfas"><img alt="#" class='fancybox-video' src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/images/video.png"></a>
@@ -101,15 +88,12 @@ jQuery(function($) {
             </div>
             <script>
             jQuery(function($) {
-
                 slider = jQuery('.mediaimages .flexslider-thumb');
                 sliderVer = jQuery('.mediaimages  .flexslider-thumb-vertical');
                 sliderItemsNumber = slider.find(".slides.thumbs li").size();
                 sliderVerItemsNumber = sliderVer.find(".slides.thumbs li").size();
                 isInitiated = slider.find(".flex-direction-nav").size();
                 isInitiatedVer = sliderVer.find(".flex-direction-nav").size();
-
-
 
                 if (slider.length) {
                     if (sliderItemsNumber > 3) {
@@ -127,8 +111,6 @@ jQuery(function($) {
                     }
                 }
 
-
-
                 if (sliderVer.length) {
                     if (sliderVerItemsNumber > 3) {
                         sliderVer.flexVSlider({
@@ -144,8 +126,6 @@ jQuery(function($) {
                         })
                     }
                 }
-
-
 
                 CloudZoom.quickStart();
             })
@@ -656,7 +636,7 @@ jQuery(function($) {
         <section class="col-sm-12 col-md-3 col-lg-3  module">
             <h3>Related Products</h3>
             <!-- Related Products '3 visible item' style -->
-<!--             <div class="products-widget jcarousel-skin-previews vertical">
+            <!--             <div class="products-widget jcarousel-skin-previews vertical">
                 <ul class="slides">
                     <li>
                         <div class="product">
@@ -749,7 +729,7 @@ jQuery(function($) {
             <!-- Services -->
             <h3>PRODUCT CUSTOM BLOCK </h3> You can add your content here, like promotions or some additional info
             <!-- Services -->
-<!--             <section class="services-block single small vertical">
+            <!--             <section class="services-block single small vertical">
                 <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
                     <a class="item" href="#"> <span class="icon icon-tags-2"></span>
                         <div class="text"><span class="title">Special Offer 1+1=3</span> <span class="description">Get a gift!</span> </div>
@@ -778,7 +758,7 @@ jQuery(function($) {
     <!-- //end Product view -->
     <!-- Services -->
     <section class="services-block single small row">
-<!--         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 divider-right"> <a class="item" href="#"><span class="icon icon-tags-2"></span>
+        <!--         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 divider-right"> <a class="item" href="#"><span class="icon icon-tags-2"></span>
                       <div class="text"> <span class="title">Special Offer 1+1=3</span> <span class="description">Get a gift!</span></div>
                       </a> </div>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 divider-right">
@@ -829,7 +809,7 @@ jQuery(function($) {
                                         <th>Manufacturer model number</th>
                                         <td class="data"> {{ data.attributes.Manufacturer_model_number }}</td>
                                     </tr>
-                                      <tr>
+                                    <tr>
                                         <th>Category</th>
                                         <td class="data"> {{ data.attributes.Category }}</td>
                                     </tr>
@@ -933,8 +913,8 @@ jQuery(function($) {
                                     <label for="productTagName">Add Your Tags:</label>
                                     <input type="text" class="form-control required-entry" name="productTagName" id="productTagName">
                                     <span class="input-group-btn">
-                    <button class="btn btn-default" style="display: none" type="button" onclick="submitTagForm()">Add Tags</button>
-                  </span>
+                                        <button class="btn btn-default" style="display: none" type="button" onclick="submitTagForm()">Add Tags</button>
+                                        </span>
                                 </div>
                             </form>
                             <p class="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
@@ -943,11 +923,11 @@ jQuery(function($) {
                             var addTagFormJs = new VarienForm('addTagForm');
 
                             function submitTagForm() {
-                                    if (addTagFormJs.validator.validate()) {
-                                        addTagFormJs.form.submit();
-                                    }
+                                if (addTagFormJs.validator.validate()) {
+                                    addTagFormJs.form.submit();
                                 }
-                                //]]>
+                            }
+                            //]]>
                             </script>
                         </div>
                     </div>
@@ -959,7 +939,7 @@ jQuery(function($) {
     <h3>You may also be interested in the following product(s)</h3>
     <div class="products-list-small add_after_quick_view_section">
         <ul class="slides">
-<!--             <li>
+            <!--             <li>
                 <div class="product-preview">
                     <div class="preview animate scale">
                         <a href="#" title="Jacket In Quilted Fabric" class="product-image">

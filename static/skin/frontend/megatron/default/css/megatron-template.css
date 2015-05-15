@@ -6260,8 +6260,8 @@ transform:rotate(0deg)
 	animation-name:swing
 }
 .animate, .animate-delay {
-	opacity:0;/*	-webkit-perspective:1000
-*/
+	/*opacity:0;	-webkit-perspective:1000*/
+
 }
 .touch .animate, .touch .animate-delay {
 	opacity:1!important

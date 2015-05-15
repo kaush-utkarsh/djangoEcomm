@@ -60,8 +60,8 @@ jQuery(function($) {
                         {% for item in res %}
                         <li class="level{{ item.id }} nav-{{ item.id }} parent">
                             <span class="name">
-            <span class="expander">-</span>
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html">{{ item.name }}</a>
+                                <span class="expander">-</span>
+                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html">{{ item.name }}</a>
                             </span>
                             <ul class="level{{ item.id }}">
                                 {% for item_child in item.child %}
@@ -90,44 +90,46 @@ jQuery(function($) {
                 <button type="submit" class="btn btn-lg btn-success">Search</button>
             </form>
             <script type="text/javascript">
-                var url = window.location.href;
-                if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('category=') != -1) {
-                    function getUrlParms(url) {
-                        var parms = {},
-                            hash
-                        var hashes = url.slice(url.indexOf('?') + 1).split('&')
+                function getProducts(url) {
+                    if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('category=') != -1) {
+                        function getUrlParms(url) {
+                            var parms = {},
+                                hash
+                            var hashes = url.slice(url.indexOf('?') + 1).split('&')
 
-                        for (var i = 0; i < hashes.length; i++) {
-                            hash = hashes[i].split('=')
-                            parms[hash[0]] = hash[1]
+                            for (var i = 0; i < hashes.length; i++) {
+                                hash = hashes[i].split('=')
+                                parms[hash[0]] = hash[1]
+                            }
+                            return parms
                         }
-                        return parms
+
+                        data = getUrlParms(url)
+
+                        jQuery.ajax({
+                            url: "/nogpo/search/",
+                            data: data
+                        }).done(function(response){
+                            jQuery('#products_list').empty()
+                            var productLists = jQuery("#products_list")
+                            var productTemplate = '';
+
+                            for (var i = 0; i < response.length; i += 2) {
+                                if(response[i]) {
+                                    var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="/product/'+response[i].id+'" class="preview-image"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i].name+'"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="product-retina img-responsive" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+response[i].price+'</span></span></div></div>'
+                                    productLists.append(templateTwoImages)
+                                }
+
+                                if(response[i+1]) {
+                                    var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="/product/'+response[i+1].id+'" class="preview-image"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="product-retina img-responsive" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+response[i+1].price+'</span></span></div></div>'
+                                    productLists.append(templateOneImage)
+                                }
+                            }
+                        })
                     }
-
-
-                    data = getUrlParms(url)
-
-                    jQuery.ajax({
-                        url: "/nogpo/search/",
-                        data: data
-                    }).done(function(response){
-                        jQuery('#products_list').empty()
-                        var productLists = jQuery("#products_list")
-                        var productTemplate = '';
-
-                        for (var i = 0; i < response.length; i += 2) {
-                            if(response[i]) {
-                                var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="/product/'+response[i].id+'" class="preview-image"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i].name+'"><img src="http://www.mendell.com/images/Orthopedics.jpg" class="product-retina img-responsive" data-image2x="http://www.mendell.com/images/Orthopedics.jpg" alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+response[i].price+'</span></span></div></div>'
-                                productLists.append(templateTwoImages)
-                            }
-
-                            if(response[i+1]) {
-                                var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="/product/'+response[i+1].id+'" class="preview-image"><img src="http://3.imimg.com/data3/UN/KI/MY-4527123/orthopedic-implants-250x250.jpg" class="product-retina img-responsive" data-image2x="http://3.imimg.com/data3/UN/KI/MY-4527123/orthopedic-implants-250x250.jpg" alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+response[i+1].price+'</span></span></div></div>'
-                                productLists.append(templateOneImage)
-                            }
-                        }
-                    })
                 }
+                var url = window.location.href;
+                getProducts(url)
 
                 jQuery("#submit_query").submit(function(evt) {
                     evt.preventDefault()
@@ -138,7 +140,8 @@ jQuery(function($) {
                     } else {
                         urlString = urlString.replace(/query=\w+/, "query="+query);
                     }
-                    window.location = urlString
+                    window.history.pushState('', '', urlString)
+                    getProducts(urlString)
                 })
             </script>
             <br>
