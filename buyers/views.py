@@ -49,7 +49,7 @@ def home(request):
     if request.user.is_authenticated():
         return render(request, "nogpo/home.html", {'res' : res})
     else:
-        return render(request, "registration/login.html")
+        return render(request, "nogpo/login.html")
 
 @login_required
 def products(request):
@@ -113,6 +113,7 @@ def add_to_cart(request):
         return  HttpResponse(json.dumps(response))
     else:
         return render_to_response("nogpo/cart.html")
+
 def add_to_existing_subcart(request):
     if request.method == 'POST':
         cart_id = request.POST.get('cart_id','')
@@ -128,7 +129,6 @@ def add_to_existing_subcart(request):
         return  HttpResponse(json.dumps(response))
     else:
         return render_to_response("nogpo/cart.html")
-
 
 def add_to_subcart(data):
     subcart = Subcart(supplierid=data['supplierid'],cart_id=data['cart_id'],total_price=data['total_price'],status=0)
