@@ -1,10 +1,10 @@
+import urllib2
+import datetime
+import json
 from django.shortcuts import render,render_to_response
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-import urllib2
-import datetime
-import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
@@ -105,6 +105,7 @@ def add_to_cart(request):
         no_of_items = request.POST.get('quantity', '')
         cartproduct_data = {'product_id':productid,'no_of_items':no_of_items,'price':price}
         response = current_cart(userid,supplierid,float(price)*int(no_of_items),cartproduct_data)
+        print response
         return HttpResponse('working')
     #     cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
     #     cart.save()
