@@ -1171,6 +1171,7 @@
             data: data,
             success: function(data) {
                 jQuery('#ajax_loader').hide();
+                jQuery('#preloader .loader').hide();
                 // if (data.status == 'ERROR') {
                 //     jQuery('#preloader .loader').hide();
                 //     jQuery('#preloader .inside').html(data.message);
