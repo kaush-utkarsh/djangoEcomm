@@ -34,8 +34,8 @@
 <!-- //end Small Previews -->
 <section class="container">
     <script type="text/javascript">
-    var optionsPrice = new Product.OptionsPrice({
-        "productId": "192",
+    window.optionsPrice = new Product.OptionsPrice({
+        "productId": {{ data.id }},
         "priceFormat": {
             "pattern": "$%s",
             "precision": 2,
@@ -48,10 +48,10 @@
         "includeTax": "false",
         "showIncludeTax": false,
         "showBothPrices": false,
-        "productPrice": 166,
-        "productOldPrice": 166,
-        "priceInclTax": 166,
-        "priceExclTax": 166,
+        "productPrice": {{ data.price }},
+        "productOldPrice": {{ data.price }},
+        "priceInclTax": {{ data.price }},
+        "priceExclTax": {{ data.price }},
         "skipCalculate": 1,
         "defaultTax": 0,
         "currentTax": 0,
@@ -83,8 +83,27 @@
             </div>
             <div class="flexslider flexslider-large visible-xs">
                 <ul class="slides thumbs">
-                    <li><img class="img-responsive animate scale" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/593x772/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_2.jpg" alt=""></li>
+                    <li>
+                        <img class="img-responsive animate scale" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/593x772/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_2.jpg" alt="">
+                    </li>
                 </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {% for merchant in data.merchants %}
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="radio" name="merchantId" value="{{ merchant.supplierId }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label>{{ merchant.name }}</label>
+                            </div>
+                            <div class="col-md-5">
+                                <label>{{ merchant.price }}</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
             <script>
             jQuery(function($) {
@@ -133,6 +152,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-4">
             <form action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvd29tZW4vc3dhcm92c2tpLWNyeXN0YWwtZW1iZWxsaXNoZWQtamVyc2V5LWRyZXNzLmh0bWw_X19fU0lEPVU,/product/192/form_key/IZgMB6Mic63XIbmd/" method="post" id="product_addtocart_form" enctype="multipart/form-data">
+                {% csrf_token %}
                 <input name="form_key" type="hidden" value="IZgMB6Mic63XIbmd" />
                 <div class="no-display">
                     <input type="hidden" name="product" value="192" />
@@ -573,7 +593,7 @@
                             </div>
                         </div>
                         <div class="clearfix visible-xs"></div>
-                        <a class="btn btn-mega btn-lg" title="Add to Cart" onclick="productAddToCartForm.submit(this)">BUY NOW</a>
+                        <a class="btn btn-mega btn-lg" title="Add to Cart" onclick="productAddToCartForm.submit(this)" data-id="{{ data.id }}">BUY NOW</a>
                     </div>
                     <div class="panel-group accordion-simple" id="product-accordion">
                         <div class="panel">
@@ -1136,123 +1156,103 @@
     <script type="text/javascript">
     //<![CDATA[
     var productAddToCartForm = new VarienForm('product_addtocart_form');
-    productAddToCartForm.submit = function(button, url) {
-        
-        if (this.validator.validate()) {
-            var form = this.form;
-            var oldUrl = form.action;
-
-            if (url) {
-                form.action = url;
-            }
-            var e = null;
-            // Start of our new ajax code
-            if (!url) {
-                url = jQuery('#product_addtocart_form').attr('action');
-            }
-
-
-            url = url.replace("checkout/cart", "ajax/index"); // New Code
-            var data = jQuery('#product_addtocart_form').serialize();
-            data += '&isAjax=1';
-            jQuery('#preloader .loader').fadeIn(300);
-            try {
-                jQuery.ajax({
-                    url: url,
-                    dataType: 'json',
-                    type: 'post',
-                    data: data,
-                    success: function(data) {
-                        jQuery('#ajax_loader').hide();
-                        if (data.status == 'ERROR') {
-                            jQuery('#preloader .loader').hide();
-                            jQuery('#preloader .inside').html(data.message);
-                            jQuery('#preloader .message').fadeIn(300);
-                            setTimeout(function() {
-                                jQuery('#preloader .message').fadeOut();
-                            }, 2300);
-                        } else {
-                            jQuery('#preloader .loader').hide();
-
-                            if (jQuery('#shopping_cart')) {
-                                jQuery('#shopping_cart').replaceWith(data.sidebar);
-                            }
-
-                            if (jQuery('.nav-item.item-04')) {
-                                jQuery('.nav-item.item-04').html(data.topcart_mobile_block);
-                            }
-
-                            var $mobileNavItems4 = jQuery(".mobile-nav .nav-item.item-04"),
-                                $mobileNavItemsLinkAll = jQuery(".mobile-nav .nav-item");
-                            $mobileNavItemsLink4 = jQuery(".nav-item.item-04 > a");
-                            $mobileNavItemsLink4.each(function() {
-                                var $this =
-                                    jQuery(this),
-                                    timer;
-                                $this.bind("click", function(e) {
-                                    e.preventDefault();
-                                    $mobileNavItemsLinkAll.removeClass("active");
-                                    if (!$this.parent().hasClass("active")) {
-                                        $mobileNavItems4.removeClass("active");
-                                        $this.parent().addClass("active")
-                                    } else $this.parent().removeClass("active")
-                                })
-                            })
-
-
-                            if (jQuery('#toplinks')) {
-                                jQuery('#toplinks').replaceWith(data.toplink);
-                            }
-
-
-                            if (jQuery('header').hasClass('variant4')) {
-                                jQuery(function($) {
-                                    "use strict";
-                                    var hiddenBut = $('.navbar-secondary-menu .btn-group.btn-hidden'),
-                                        hiddenWidth = 50,
-                                        animDiration = 300;
-                                    //hiddenBut.each(function () {$(this).css({'width':'auto'}).attr( "data-width", $(this).width()).css({'width':hiddenWidth}) })
-                                    hiddenBut.hover(
-                                        function() {
-                                            $(this).stop(true, false).animate({
-                                                'width': $(this).prop('scrollWidth')
-                                            }, animDiration, function() {
-                                                $(this).css({
-                                                    'overflow': 'visible'
-                                                })
-                                            });
-                                        },
-                                        function() {
-                                            $(this).stop(true, false).removeClass('open').animate({
-                                                'width': hiddenWidth
-                                            }, animDiration, function() {
-                                                $(this).css({
-                                                    'overflow': 'hidden'
-                                                })
-                                            });
-                                        });
-                                });
-                            }
-
-
-
-                            jQuery('#preloader .inside').html(data.message);
-                            jQuery('#preloader .message').fadeIn(300);
-
-                            setTimeout(function() {
-                                jQuery('#preloader .message').fadeOut();
-
-                            }, 2300)
-                        }
-                    }
-                });
-            } catch (e) {}
-            // End of our new ajax code
-            this.form.action = oldUrl;
-            if (e) {
-                throw e;
-            }
+    productAddToCartForm.submit = function(button) {
+        jQuery('#preloader .loader').fadeIn(300);
+        var url = window.location.protocol+'//'+window.location.hostname+':'+window.location.port+'/add_to_cart/'
+        var data = {
+            "product_id": jQuery(button).attr("data-id"),
+            "supplier_id": jQuery("input:radio[name='merchantId']:checked").val(),
+            "quantity": jQuery("#qty").val()
         }
+        jQuery.ajax({
+            url: url,
+            type: 'post',
+            headers: { "X-CSRFToken": 'o5SOQ0wipRZfW0E0Kd4x3kQZf05VnOoq' },
+            data: data,
+            success: function(data) {
+                jQuery('#ajax_loader').hide();
+                // if (data.status == 'ERROR') {
+                //     jQuery('#preloader .loader').hide();
+                //     jQuery('#preloader .inside').html(data.message);
+                //     jQuery('#preloader .message').fadeIn(300);
+                //     setTimeout(function() {
+                //         jQuery('#preloader .message').fadeOut();
+                //     }, 2300);
+                // } else {
+                //     jQuery('#preloader .loader').hide();
+
+                //     if (jQuery('#shopping_cart')) {
+                //         jQuery('#shopping_cart').replaceWith(data.sidebar);
+                //     }
+
+                //     if (jQuery('.nav-item.item-04')) {
+                //         jQuery('.nav-item.item-04').html(data.topcart_mobile_block);
+                //     }
+
+                //     var $mobileNavItems4 = jQuery(".mobile-nav .nav-item.item-04"),
+                //         $mobileNavItemsLinkAll = jQuery(".mobile-nav .nav-item");
+                //     $mobileNavItemsLink4 = jQuery(".nav-item.item-04 > a");
+                //     $mobileNavItemsLink4.each(function() {
+                //         var $this =
+                //             jQuery(this),
+                //             timer;
+                //         $this.bind("click", function(e) {
+                //             e.preventDefault();
+                //             $mobileNavItemsLinkAll.removeClass("active");
+                //             if (!$this.parent().hasClass("active")) {
+                //                 $mobileNavItems4.removeClass("active");
+                //                 $this.parent().addClass("active")
+                //             } else $this.parent().removeClass("active")
+                //         })
+                //     })
+
+
+                //     if (jQuery('#toplinks')) {
+                //         jQuery('#toplinks').replaceWith(data.toplink);
+                //     }
+
+
+                //     if (jQuery('header').hasClass('variant4')) {
+                //         jQuery(function($) {
+                //             "use strict";
+                //             var hiddenBut = $('.navbar-secondary-menu .btn-group.btn-hidden'),
+                //                 hiddenWidth = 50,
+                //                 animDiration = 300;
+                //             //hiddenBut.each(function () {$(this).css({'width':'auto'}).attr( "data-width", $(this).width()).css({'width':hiddenWidth}) })
+                //             hiddenBut.hover(
+                //                 function() {
+                //                     $(this).stop(true, false).animate({
+                //                         'width': $(this).prop('scrollWidth')
+                //                     }, animDiration, function() {
+                //                         $(this).css({
+                //                             'overflow': 'visible'
+                //                         })
+                //                     });
+                //                 },
+                //                 function() {
+                //                     $(this).stop(true, false).removeClass('open').animate({
+                //                         'width': hiddenWidth
+                //                     }, animDiration, function() {
+                //                         $(this).css({
+                //                             'overflow': 'hidden'
+                //                         })
+                //                     });
+                //                 });
+                //         });
+                //     }
+
+
+
+                //     jQuery('#preloader .inside').html(data.message);
+                //     jQuery('#preloader .message').fadeIn(300);
+
+                //     setTimeout(function() {
+                //         jQuery('#preloader .message').fadeOut();
+
+                //     }, 2300)
+                // }
+            }
+        });
     }.bind(productAddToCartForm);
 
     productAddToCartForm.submitLight = function(button, url) {

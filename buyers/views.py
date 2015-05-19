@@ -11,6 +11,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment
+import methods
 
 baseurl = 'http://162.209.8.12:8080/'
 
@@ -96,21 +97,20 @@ def search(request):
 @csrf_exempt
 def add_to_cart(request):
     if request.method == 'POST':
-        userid = request.POST.get('customerid', '')
-        productid = request.POST.get('productid', '')
-        supplierid = request.POST.get('supplierid','')
-        price = request.POST.get('price','')
-        no_of_items = request.POST.get('no_of_items', '')
-        userid = get_userid()
-        # total_price = baseurl + send request to get product price
+        userid = get_userid(request)
+        productid = request.POST.get('product_id', '')
+        supplierid = request.POST.get('supplier_id','')
+        product = urllib2.urlopen(baseurl+'product/'+productid)
+        price = json.load(product)['price']
+        no_of_items = request.POST.get('quantity', '')
         cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
         cart.save()
         subcart_data = {'supplierid':supplierid,'cart_id':cart.id,'total_price':float(price)*int(no_of_items)}
-        subcart_id = add_to_subcart(subcart_data)
-        cartproduct_data = {'subcart_id':subcart_id,'product_id':productid,'no_of_items':no_of_items}
-        product_cart = add_to_cartproduct(cartproduct_data)
-        response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items,'subcart':subcart_id}
-        return  HttpResponse(json.dumps(response))
+        subcart = add_to_subcart(subcart_data,cart)
+        cartproduct_data = {'product_id':productid,'no_of_items':no_of_items,'price':price}
+        product_cart = add_to_cartproduct(cartproduct_data,subcart)
+        response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items,'subcart':subcart}
+        return  HttpResponse(json.dumps(price))
     else:
         return render_to_response("nogpo/cart.html")
 
@@ -118,10 +118,10 @@ def add_to_existing_subcart(request):
     if request.method == 'POST':
         cart_id = request.POST.get('cart_id','')
         productid = request.POST.get('productid','')
-        supplierid = request.POST.get('supplierid','')
+        supplierid = request.POST.get('supplier_id','')
         price = request.POST.get('price','')
         no_of_items = request.POST.get('no_of_items','')
-        subcart_data = {'supplierid':supplierid,'cart_id':cart.id,'total_price':float(price)*int(no_of_items)}
+        subcart_data = {'supplierid':supplierid,'total_price':float(price)*int(no_of_items)}
         subcart_id = add_to_subcart(subcart_data)
         cartproduct_data = {'subcart_id':subcart_id,'product_id':productid,'no_of_items':no_of_items}
         product_cart = add_to_cartproduct(cartproduct_data)
@@ -130,15 +130,17 @@ def add_to_existing_subcart(request):
     else:
         return render_to_response("nogpo/cart.html")
 
-def add_to_subcart(data):
-    subcart = Subcart(supplierid=data['supplierid'],cart_id=data['cart_id'],total_price=data['total_price'],status=0)
+def add_to_subcart(data,cart):
+    print data
+    subcart = Subcart(supplierid=data['supplierid'],cart_id=cart,total_price=data['total_price'],status=0)
     subcart.save()
-    return subcart.id
+    print "working"
+    return subcart
 
-def add_to_cartproduct(data):
-    product = Cart_products(subcart_id=data['subcart_id'],product_id=productid,no_of_items=no_of_items,status=0,date=datetime.datetime.today())
+def add_to_cartproduct(data,subcart):
+    product = Cart_products(subcart_id=subcart,product_id=data['product_id'],no_of_items=data['no_of_items'],status=0,date=datetime.datetime.today(),price=data['price'])
     product.save()
-    return product.id
+    return product
 
 @csrf_exempt
 def edit_cart(request):
