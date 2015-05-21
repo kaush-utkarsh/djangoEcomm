@@ -63,15 +63,16 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommerce',
         'USER' : 'root',
-        'PASSWORD' : '/\'',
+        'PASSWORD' : 'password',
         'HOST' : '127.0.0.1',
         'PORT' : 3306,
     }
 }
 
 SOUTH_DATABASE_ADAPTERS = {
-'default':'south.db.mysql'
+    'default':'south.db.mysql'
 }
+
 # registration app settings
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 3

@@ -1,0 +1,22 @@
+/*
+You can write here you own custom changes. Write changes only in this file if you want update your theme without problems.
+*/
+
+/*
+for ex.
+.any_class{color:#000000}
+.any_class{color:#000000 !important}
+#any_id{color:#000000}
+#any_id{color:#000000 !important}
+*/
+.flexslider .slides .item, .flexslider .slides > li{overflow:hidden}
+.product-view .flexslider-thumb li img{ margin-top:-1px}
+.cms-mtron-electronics.cms-index-index .preview.hover-slide .preview-image {
+    margin-left: -1px;
+}
+.cms-index-index.cms-mtron-kids .navbar-height-inner {
+    height: 122px;
+}
+.cms-index-index .blog-widget {
+    margin-bottom: 0;
+}

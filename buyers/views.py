@@ -1,15 +1,17 @@
+import urllib2
+import datetime
+import json
 from django.shortcuts import render,render_to_response
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-import urllib2
-import datetime
-import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
+from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment
+from methods import current_cart,add_to_subcart,add_to_cartproduct
 
 baseurl = 'http://162.209.8.12:8080/'
 
@@ -23,14 +25,14 @@ class JSONResponse(HttpResponse):
 def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
     session_data = session.get_decoded()
-    print session_data
     uid = session_data.get('_auth_user_id')
-    print uid
     return uid
 
 def get_search_url(string):
     if 'query' not in string.keys():
-        return baseurl
+        url = baseurl
+        if 'category' in string.keys():
+            url = url + 'search?category=' + string['category']
     else:
         url = baseurl + 'search?query=' + string['query']
         if 'page' in string.keys():
@@ -41,27 +43,25 @@ def get_search_url(string):
              url = url + '&price_l=' + string['price_l']
         if 'price_h' in string.keys():
             url = url + '&price_h=' + string['price_h']
-        return url
+    return url
 
 def home(request):
     res = categories(request)
-    print type(res), len(res)
     if request.user.is_authenticated():
         return render(request, "nogpo/home.html", {'res' : res})
     else:
-        return render(request, "registration/login.html")
+        return render(request, "nogpo/login.html")
 
 @login_required
 def products(request):
     res = categories(request)
-    print type(res), len(res)
+    # print res
     return render(request, "nogpo/products.html", {'res' : res})
 
 @login_required
-def product_details(request):
+def products_details(request):
     res = categories(request)
-    print type(res), len(res)
-    return  render(request, "nogpo/productdetails.html", {'res': res})
+    return  render(request, "nogpo/product.html", {'res': res})
 
 def categories(request):
     re = urllib2.urlopen("http://162.209.8.12:8080/categories")
@@ -76,63 +76,89 @@ def categories(request):
 		    final.append(each)
     return final
 
-def product(request):
-    ids = int(request.GET.get('id'))
+def product(request, product_id):
+    res = categories(request)
     if request.method == 'GET':
-        product = urllib2.urlopen(baseurl+'product/'+ids)
-        return JSONResponse(json.load(product))
+        product = urllib2.urlopen(baseurl+'product/'+product_id)
+        data = {
+            "data": json.load(product),
+            "res": res
+        }
+        return  render(request, "nogpo/product.html", data)
 
 def search(request):
     if request.method == 'GET':
         string = request.GET
+        # print string
         hiturl = get_search_url(string)
         result = urllib2.urlopen(hiturl)
-        print result
         return JSONResponse(json.load(result))
 
 @csrf_exempt
 def add_to_cart(request):
     if request.method == 'POST':
-        userid = request.POST.get('customerid', '')
-        productid = request.POST.get('productid', '')
-        no_of_items = request.POST.get('no_of_items', '')
-        userid = get_userid()
-        # total_price = baseurl + send request to get product price
-        cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
-        cart.save()
-        product = Cart_products(product_id=productid,no_of_items=no_of_items,status=0,date=datetime.datetime.today(),cart_id_id=cart.id)
-        product.save()
-        print cart.id
-        response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items}
+        userid = get_userid(request)
+        productid = request.POST.get('product_id', '')
+        supplierid = request.POST.get('supplier_id','')
+        product = urllib2.urlopen(baseurl+'product/'+productid)
+        price = json.load(product)['price']
+        no_of_items = request.POST.get('quantity', '')
+        cartproduct_data = {'product_id':productid,'no_of_items':no_of_items,'price':price}
+        response = current_cart(userid,supplierid,float(price)*int(no_of_items),cartproduct_data)
+        print response
+        return HttpResponse('working')
+    #     cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
+    #     cart.save()
+    #     subcart_data = {'supplierid':supplierid,'cart_id':cart.id,'total_price':float(price)*int(no_of_items)}
+    #     subcart = add_to_subcart(subcart_data,cart)
+    #     product_cart = add_to_cartproduct(cartproduct_data,subcart)
+    #     response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items,'subcart':subcart}
+    #     return  HttpResponse(json.dumps(price))
+    # else:
+    #     return render_to_response("nogpo/cart.html")
+
+def add_to_existing_subcart(request):
+    if request.method == 'POST':
+        cart_id = request.POST.get('cart_id','')
+        productid = request.POST.get('productid','')
+        supplierid = request.POST.get('supplier_id','')
+        price = request.POST.get('price','')
+        no_of_items = request.POST.get('no_of_items','')
+        subcart_data = {'supplierid':supplierid,'total_price':float(price)*int(no_of_items)}
+        subcart_id = add_to_subcart(subcart_data)
+        cartproduct_data = {'subcart_id':subcart_id,'product_id':productid,'no_of_items':no_of_items}
+        product_cart = add_to_cartproduct(cartproduct_data)
+        response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items,'subcart':subcart_id}
         return  HttpResponse(json.dumps(response))
     else:
         return render_to_response("nogpo/cart.html")
 
+
+
 @csrf_exempt
 def edit_cart(request):
     if request.method == 'POST':
-        cartid = request.POST.get('cartid','')
+        subcartid = request.POST.get('subcartid','')
         productid = request.POST.get('productid', '')
         no_of_items = request.POST.get('no_of_items', '')
-
-        product = Cart_products.objects.get(cart_id_id=cartid)
+        product = Cart_products.objects.get(subcart_id_id=subcartid)
+        print product
         product.productid = productid
         product.no_of_items = no_of_items
         product.save()
-        response = {'id':cartid,'productid':productid,'no_of_items':no_of_items}
+        response = {'id':subcartid,'productid':productid,'no_of_items':no_of_items}
         return HttpResponse(json.dumps(response))
 
 @csrf_exempt
 def delete_from_cart(request):
     if request.method == 'POST':
-        cartid = request.POST.get('cartid','')
+        subcartid = request.POST.get('cartid','')
         cart = Cart.objects.get(id = cartid)
         cart.delete()
         return render(request,"nogpo/cart.html")
         productid = request.POST.get('productid','')
-        products = Cart_products.objects.filter(cart_id_id = cartid).filter(product_id=productid)
+        products = Cart_products.objects.filter(subcart_id_id = cartid).filter(product_id=productid)
         for product in products:
-            # print p.product_id
             product.status = 1
             product.save()
         return render(request,"nogpo/cart.html")
@@ -144,12 +170,14 @@ def get_cart(request):
         item = {}
         full_list = list()
         cartid = request.POST.get('cartid','')
-        products = Cart_products.objects.filter(cart_id_id=cartid)
-        for product in products:
-            item = {'id':product.id,'productid':product.product_id,'no_of_items':product.no_of_items,'date':product.date.strftime('%Y/%m/%d')}
-            total = {'number':number,'item':item}
-            number = number + 1
-            full_list.append(total)
+        subcart_ids = Subcart.objects.filter(cart_id_id=cartid)
+        for ids in subcart_ids:
+            products = Cart_products.objects.filter(subcart_id_id=ids)
+            for product in products:
+                item = {'id':product.id,'productid':product.product_id,'no_of_items':product.no_of_items,'date':product.date.strftime('%Y/%m/%d')}
+                total = {'number':number,'item':item}
+                number = number + 1
+                full_list.append(total)
         # response = {'items':product}
         return HttpResponse(json.dumps(full_list))
 
@@ -168,7 +196,7 @@ def apply_for_credit(request):
         credit.save()
 
 @csrf_exempt
-def credit_request_clearnace(request):
+def credit_request_clearance(request):
     if request.method == 'GET':
         number = 1
         merchantid = request.GET.get('merchantid','')

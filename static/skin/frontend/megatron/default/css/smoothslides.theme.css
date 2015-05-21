@@ -1,0 +1,118 @@
+/* Captions */
+.ss-capwrap {
+    text-align:center;
+    position:absolute;
+    bottom:5px;
+    width:100%;
+    text-align: center;
+}
+.ss-caption {
+    border-radius: 4px;
+    color: #FFF;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px rgba(41, 41, 41, 0.89);
+    font-weight: bold;
+    padding: 15px 10px;
+    font-family: sans-serif;
+    font-size: 16px;
+    display: inline-block;
+}
+
+/* Pagination */
+.ss-pag-wrap {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    padding-top:15px;
+}
+.ss-paginate {
+    display: inline-block;
+    font-size: 20px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: #fff;  
+}
+.ss-paginate a:link,
+.ss-paginate a:visited {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    margin: 3px 6px;
+    background: #F0353A;
+    -webkit-transition:all .2s ease-out;
+}
+.ss-paginate a:hover {
+    box-shadow: 0 0px 0 2px #F0353A;
+}
+.ss-current {
+    background: #FFF!important;
+    box-shadow: 0 0px 0 2px #F0353A;
+}
+
+/* Previous & Next Buttons */
+#ss-prev, #ss-next {
+    position: absolute;
+    top: 50%;
+	margin-top:-10px
+	color:#2b2b2b
+}
+#ss-prev:before, #ss-next:before{	font-family:icomoon;
+	font-size:50px!important;
+	display:inline-block;
+	content:'\e07b'
+}
+#ss-prev:before {
+	content:'\e078'
+}
+
+#ss-prev:hover, #ss-next:hover {
+    color:#ee3b27;
+}
+#ss-prev {
+    left:20px;
+}
+#ss-next {
+    right:20px;
+}
+
+/* Probably don't need to edit below here */
+.ss-slides-wrap {
+    position: relative;
+    display: block;
+    line-height: 0px;
+}
+.ss-slides {
+    position:relative;
+    overflow:hidden;
+    display:block;
+    transform-origin:50% 50%;
+    -ms-transform-origin:50% 50%;
+    -webkit-transform-origin:50% 50%;
+}
+.ss-slide {
+    top:0;
+    left:0;
+    position: absolute;
+    width:100%;
+    zoom: 1;
+    line-height:0;
+    -webkit-backface-visibility: hidden;
+}
+.ss-slide:after {
+    content: "";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+.ss-slide img {
+    max-width:100%;    
+}
+.notrans {
+    -webkit-transition: none!important;
+    -moz-transition:none!important;
+    transition: none!important;
+}
