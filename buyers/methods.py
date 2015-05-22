@@ -11,8 +11,7 @@ def current_cart(userid,supplierid,new_price,cartproduct_data):
     try:
         cart = Cart.objects.get(userid = userid,status=0)
     except Cart.DoesNotExist:
-        cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
-        
+        cart= None
     subcart_data = {'supplierid':supplierid,'cart_id':cart.id,'total_price':new_price}
     if cart is not None:
         print "in current_cart"
@@ -25,7 +24,7 @@ def current_cart(userid,supplierid,new_price,cartproduct_data):
         cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=float(price)*int(no_of_items))
         cart.save()
         subcart = add_to_subcart(subcart_data,cart)
-        product_cart = add_to_cartproduct(cartproduct_data,subcart)
+        price,product_cart = add_to_cartproduct(cartproduct_data,subcart)
         response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items,'subcart':subcart}
         res = create_cart_response(cart)
         return res
