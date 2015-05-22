@@ -12,6 +12,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment
 from methods import current_cart,add_to_subcart,add_to_cartproduct
+from django.template import Context, Template, loader
 
 baseurl = 'http://162.209.8.12:8080/'
 
@@ -101,12 +102,18 @@ def add_to_cart(request):
         productid = request.POST.get('product_id', '')
         supplierid = request.POST.get('supplier_id','')
         product = urllib2.urlopen(baseurl+'product/'+productid)
-        price = json.load(product)['price']
+        productinfo = json.load(product)
+        price = productinfo['price']
+        name = productinfo['name']
         no_of_items = request.POST.get('quantity', '')
-        cartproduct_data = {'product_id':productid,'no_of_items':no_of_items,'price':price}
+        cartproduct_data = {
+            'product_id': productid,
+            'no_of_items': no_of_items,
+            'price': price,
+            'name': name
+        }
         response = current_cart(userid,supplierid,float(price)*int(no_of_items),cartproduct_data)
-        print response
-        return HttpResponse('working')
+        return HttpResponse(json.dumps(response))
     #     cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
     #     cart.save()
     #     subcart_data = {'supplierid':supplierid,'cart_id':cart.id,'total_price':float(price)*int(no_of_items)}

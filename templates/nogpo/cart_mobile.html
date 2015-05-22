@@ -1,0 +1,36 @@
+<a href="#" class="cart_mob_count">
+    <span class="icon-xcart-white">{{ total_no_items }}</span>
+</a>
+<div class="tab-content">
+    <div class="shoppingcart-box">
+        <div class="title">Recently added item(s)</div>
+        <ul class="list">
+            {% for product in products %}
+            <li class="item">
+                <div class="icon-product-edit">
+                    <a class="icon icon-edit" href="{{ product.product_url }}"></a>
+                </div>
+                <div class="icon-product-delete">
+                    <a class="icon icon-trash-2" href="{{ product.product_delete_url }}"></a>
+                </div>
+                <a href="{{ product.product_url }}" class="preview-image">
+                    <img class="preview" src="{{ product.product_image }}"  alt="{{ product.product_name }}" />
+                </a>
+                <div class="description">
+                    <a href="{{ product.product_url }}" class="product-name">{{ product.product_name }} </a>
+                    <div class="product-price">
+                        {{ product.product_quantity }} x <span class="price">{{ product.product_price }}</span>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="total">
+            Total: {{ total_no_items }} items - <span class="price">{{ total_price }}</span>
+        </div>
+        <a href="{{ checkout_url }}" class="btn btn-mega">Proceed to Checkout</a>
+        <div class="view-link">
+            <a href="{{ cart_url }}">View shopping cart </a>
+        </div>
+    </div>
+</div>
