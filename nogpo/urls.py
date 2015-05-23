@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^products/$', views.products, name="products_page"),
     url(r'^prdetail/$', views.products_details, name="products_details"),
     url(r'^add_to_cart/',views.add_to_cart),
+    url(r'^cart/',views.cart),
     url(r'^nogpo/', include('buyers.urls')),
 )

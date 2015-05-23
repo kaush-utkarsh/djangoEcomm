@@ -34,7 +34,7 @@
 <!-- //end Small Previews -->
 <section class="container">
     <script type="text/javascript">
-    window.optionsPrice = new Product.OptionsPrice({
+    var optionsPrice = new Product.OptionsPrice({
         "productId": {{ data.id }},
         "priceFormat": {
             "pattern": "$%s",
@@ -90,15 +90,24 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <div class="row" style="margin-bottom: 20px; margin-top: 50px;">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-5">
+                            Merchant Name
+                        </div>
+                        <div class="col-xs-5">
+                            Price
+                        </div>
+                    </div>
                     {% for merchant in data.merchants %}
                         <div class="row">
-                            <div class="col-md-2">
-                                <input type="radio" name="merchantId" value="{{ merchant.supplierId }}">
+                            <div class="col-xs-2">
+                                <input style="width: 25% !important;" type="radio" name="merchantId" value="{{ merchant.supplierId }}">
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-xs-5">
                                 <label>{{ merchant.name }}</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-xs-5">
                                 <label>{{ merchant.price }}</label>
                             </div>
                         </div>
@@ -1155,10 +1164,16 @@
     <!--/******************************************************************/-->
     <script type="text/javascript">
 
-    jQuery('#shopping_cart').click(function() {
-        console.log('working')
-        jQuery(this).toggleClass('open')
-    })
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
 
     //<![CDATA[
     var productAddToCartForm = new VarienForm('product_addtocart_form');
@@ -1173,7 +1188,9 @@
         jQuery.ajax({
             url: url,
             type: 'post',
-            headers: { "X-CSRFToken": 'o5SOQ0wipRZfW0E0Kd4x3kQZf05VnOoq' },
+            headers: { 
+                "X-CSRFToken":  getCookie('csrftoken')
+            },
             data: data,
             success: function(data) {
                 data = JSON.parse(data)
