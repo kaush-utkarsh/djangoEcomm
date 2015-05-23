@@ -34,7 +34,7 @@
 <!-- //end Small Previews -->
 <section class="container">
     <script type="text/javascript">
-    window.optionsPrice = new Product.OptionsPrice({
+    var optionsPrice = new Product.OptionsPrice({
         "productId": {{ data.id }},
         "priceFormat": {
             "pattern": "$%s",
@@ -1174,11 +1174,6 @@
         }
         return "";
     }
-
-    jQuery('#shopping_cart').click(function() {
-        console.log('working')
-        jQuery(this).toggleClass('open')
-    })
 
     //<![CDATA[
     var productAddToCartForm = new VarienForm('product_addtocart_form');
