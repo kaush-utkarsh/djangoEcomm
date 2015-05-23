@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'buyers',
     'rest_framework',
     'registration',
+    'mathfilters',
 )
 
 MIDDLEWARE_CLASSES = (

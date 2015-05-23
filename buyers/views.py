@@ -11,10 +11,16 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment
-from methods import current_cart,add_to_subcart,add_to_cartproduct
+from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart
 from django.template import Context, Template, loader
 
 baseurl = 'http://162.209.8.12:8080/'
+
+def get_userid(request):
+    session = Session.objects.get(session_key=request.session._session_key)
+    session_data = session.get_decoded()
+    uid = session_data.get('_auth_user_id')
+    return uid
 
 #An HttpResponse that renders its content into JSON.
 class JSONResponse(HttpResponse):
@@ -22,12 +28,6 @@ class JSONResponse(HttpResponse):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
-
-def get_userid(request):
-    session = Session.objects.get(session_key=request.session._session_key)
-    session_data = session.get_decoded()
-    uid = session_data.get('_auth_user_id')
-    return uid
 
 def get_search_url(string):
     if 'query' not in string.keys():
@@ -141,20 +141,17 @@ def add_to_existing_subcart(request):
         return render_to_response("nogpo/cart.html")
 
 
-
 @csrf_exempt
-def edit_cart(request):
-    if request.method == 'POST':
-        subcartid = request.POST.get('subcartid','')
-        productid = request.POST.get('productid', '')
-        no_of_items = request.POST.get('no_of_items', '')
-        product = Cart_products.objects.get(subcart_id_id=subcartid)
-        print product
-        product.productid = productid
-        product.no_of_items = no_of_items
-        product.save()
-        response = {'id':subcartid,'productid':productid,'no_of_items':no_of_items}
-        return HttpResponse(json.dumps(response))
+def cart(request):
+    res = categories(request)
+    user_id = get_userid(request)
+    cart = Cart.objects.get(userid=user_id)
+    cart_data = get_cart(cart)
+    data = {
+        "res": res,
+        "cart": cart_data
+    }
+    return render(request,"nogpo/cart.html", data)
 
 @csrf_exempt
 def delete_from_cart(request):
@@ -169,24 +166,6 @@ def delete_from_cart(request):
             product.status = 1
             product.save()
         return render(request,"nogpo/cart.html")
-
-@csrf_exempt
-def get_cart(request):
-    if request.method == 'POST':
-        number = 1
-        item = {}
-        full_list = list()
-        cartid = request.POST.get('cartid','')
-        subcart_ids = Subcart.objects.filter(cart_id_id=cartid)
-        for ids in subcart_ids:
-            products = Cart_products.objects.filter(subcart_id_id=ids)
-            for product in products:
-                item = {'id':product.id,'productid':product.product_id,'no_of_items':product.no_of_items,'date':product.date.strftime('%Y/%m/%d')}
-                total = {'number':number,'item':item}
-                number = number + 1
-                full_list.append(total)
-        # response = {'items':product}
-        return HttpResponse(json.dumps(full_list))
 
 @csrf_exempt
 def apply_for_credit(request):
