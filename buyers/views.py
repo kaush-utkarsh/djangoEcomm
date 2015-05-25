@@ -95,6 +95,12 @@ def search(request):
         result = urllib2.urlopen(hiturl)
         return JSONResponse(json.load(result))
 
+def get_supplier(request):
+    if request.method == 'GET':
+        url = baseurl + 'supplier'
+        response = urllib2.urlopen(url)
+        return JSONResponse(json.load(response))
+
 @csrf_exempt
 def add_to_cart(request):
     if request.method == 'POST':
