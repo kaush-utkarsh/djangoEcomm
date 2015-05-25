@@ -44,6 +44,8 @@ def get_search_url(string):
              url = url + '&price_l=' + string['price_l']
         if 'price_h' in string.keys():
             url = url + '&price_h=' + string['price_h']
+        if 'items' in string.keys():
+            url = url + '&items=' + string['items']
     return url
 
 def home(request):
@@ -93,7 +95,8 @@ def search(request):
         # print string
         hiturl = get_search_url(string)
         result = urllib2.urlopen(hiturl)
-        return JSONResponse(json.load(result))
+        result_json = json.load(result)
+        return JSONResponse(result_json['products'])
 
 @csrf_exempt
 def add_to_cart(request):
@@ -152,6 +155,22 @@ def cart(request):
         "cart": cart_data
     }
     return render(request,"nogpo/cart.html", data)
+
+@csrf_exempt
+def checkout(request):
+    res = categories(request)
+    data = {
+        "res": res,
+    }
+    return render(request,"nogpo/checkout.html", data)
+
+@csrf_exempt
+def credits(request):
+    res = categories(request)
+    data = {
+        "res": res,
+    }
+    return render(request,"nogpo/credits.html", data)
 
 @csrf_exempt
 def delete_from_cart(request):
