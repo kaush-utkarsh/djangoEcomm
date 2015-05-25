@@ -18,4 +18,6 @@ urlpatterns = patterns('',
     url(r'^add_to_cart/',views.add_to_cart),
     url(r'^cart/',views.cart),
     url(r'^nogpo/', include('buyers.urls')),
+    url(r'^userproduct/delete/',views.delete_from_cart),
+    url(r'^emptycart/'views.empty_cart)
 )
