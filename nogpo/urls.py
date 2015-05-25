@@ -21,5 +21,6 @@ urlpatterns = patterns('',
     url(r'^credits/',views.credits),
     url(r'^nogpo/', include('buyers.urls')),
     url(r'^userproduct/delete/',views.delete_from_cart),
-    url(r'^emptycart/'views.empty_cart)
+    url(r'^emptycart/', views.empty_cart),
+    url(r'^suppliers/get/',views.get_supplier)
 )

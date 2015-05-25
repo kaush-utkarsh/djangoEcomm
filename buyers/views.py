@@ -98,6 +98,12 @@ def search(request):
         result_json = json.load(result)
         return JSONResponse(result_json['products'])
 
+def get_supplier(request):
+    if request.method == 'GET':
+        url = baseurl + 'supplier'
+        response = urllib2.urlopen(url)
+        return JSONResponse(json.load(response))
+
 @csrf_exempt
 def add_to_cart(request):
     if request.method == 'POST':
@@ -182,8 +188,8 @@ def credits(request):
 @csrf_exempt
 def delete_from_cart(request):
     if request.method == 'POST':
-        productid = request.POST.get('productid','')
-        supplierid = request.POST.get('supplierid','')
+        ids = request.POST.get('id')
+        productid,supplierid = ids.split('-')
         userid = get_userid(request)
         cart = Cart.objects.get(userid=userid,status=0)
         subcart = subcart.objects.get(cart_id_id=cart.id,supplierid=supplierid,status=0)
