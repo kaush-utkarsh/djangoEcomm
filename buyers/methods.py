@@ -124,6 +124,7 @@ def get_cart(cart):
             quant = str(product.no_of_items)
             total_quantity = long(total_quantity) + long(quant)
             product_return_data['product_url'] = 'product/' + str(product.id)
+            product_return_data['supplierid'] = subcart.supplierid
             product_return_data['product_id'] = str(product.id)
             product_return_data['delete_url'] = 'Yet to do'
             product_return_data['product_image'] = 'http://www.mendell.com/images/Orthopedics.jpg'
