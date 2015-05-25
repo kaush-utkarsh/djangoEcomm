@@ -20,4 +20,6 @@ urlpatterns = patterns('',
     url(r'^checkout/',views.checkout),
     url(r'^credits/',views.credits),
     url(r'^nogpo/', include('buyers.urls')),
+    url(r'^userproduct/delete/',views.delete_from_cart),
+    url(r'^emptycart/'views.empty_cart)
 )
