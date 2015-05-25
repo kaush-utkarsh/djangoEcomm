@@ -254,7 +254,9 @@
                                         <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
                                             <span class="compact-hidden text-shopping-cart">
                                                 Cart -
-                                                <strong><span class="price">$0.00</span></strong>
+                                                <strong>
+                                                    <span class="price">$0.00</span>
+                                                </strong>
                                             </span>
                                             <span class="icon-xcart-animate">
                                                 <span class="box">0</span>
@@ -575,9 +577,38 @@
         </div>
     </div>
     <script type="text/javascript">
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
         jQuery('#shopping_cart').click(function() {
             jQuery(this).toggleClass('open')
         })
+
+        function userProductDelete(deleteId) {
+            var url = window.location.protocol+'//'+window.location.hostname+':'+window.location.port+'/userproduct/delete/'
+            var data = {
+                id: deleteId
+            }
+            jQuery.ajax({
+                url: url,
+                type: 'post',
+                headers: { 
+                    "X-CSRFToken":  getCookie('csrftoken')
+                },
+                data: data,
+                success: function(data) {
+                    console.log('working')
+                }
+            })
+        }
     </script>
 </body>
 

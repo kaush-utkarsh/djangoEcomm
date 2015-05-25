@@ -74,31 +74,6 @@ def create_cart_response(cart):
     topsidebar = loader.get_template('nogpo/cart_topsidebar.html')
     mobile = loader.get_template('nogpo/cart_mobile.html')
     cart_data = get_cart(cart)
-    # cart_data = {}
-    # product_array = list()
-    # subcarts = Subcart.objects.filter(cart_id_id=cart.id)
-    # for subcart in subcarts:
-    #     products = Cart_products.objects.filter(subcart_id_id=subcart.id)
-    #     product_return_data = {}
-    #     for product in products:
-    #         url = baseurl+'product/'+str(product.product_id)
-    #         p = urllib2.urlopen(url)
-    #         productinfo = json.load(p)
-    #         quant = str(product.no_of_items)
-    #         total_quantity = long(total_quantity) + long(quant)
-    #         product_return_data['product_url'] = 'product/' + str(product.id)
-    #         product_return_data['delete_url'] = 'Yet to do'
-    #         product_return_data['product_image'] = 'http://www.mendell.com/images/Orthopedics.jpg'
-    #         product_return_data['product_name'] = productinfo['name']
-    #         product_return_data['quantity'] = str(product.no_of_items)
-    #         product_return_data['price'] = float(product.price)
-    #         product_array.append(product_return_data)
-
-    # cart_data['total_no_items'] = total_quantity
-    # cart_data['products'] = product_array
-    # cart_data['total_price'] = float(cart.total_price)
-    # cart_data['checkout_url'] = 'yet to do'
-    # cart_data['cart_url'] = 'yet to do'
 
     response = {
         'status':'SUCCESS',

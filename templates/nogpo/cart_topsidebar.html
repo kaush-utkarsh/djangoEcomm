@@ -14,7 +14,7 @@
                     <a class="icon icon-edit" href="{{ product.product_url }}"></a>
                 </div>
                 <div class="icon-product-delete">
-                    <a class="icon icon-trash-2" href="{{ product.product_delete_url }}"></a>
+                    <a href="#" class="icon icon-trash-2" userproduct-delete="{{ product.product_id }}_{{ product.supplierid }}"></a>
                 </div>
                 <a href="{{ product_url }}" class="preview-image">
                     <img class="preview" src="{{ product.product_image }}"  alt="{{ product.product_name }}" />

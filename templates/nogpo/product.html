@@ -1164,17 +1164,6 @@
     <!--/******************************************************************/-->
     <script type="text/javascript">
 
-    function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1);
-            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-        }
-        return "";
-    }
-
     //<![CDATA[
     var productAddToCartForm = new VarienForm('product_addtocart_form');
     productAddToCartForm.submit = function(button) {
@@ -1210,64 +1199,18 @@
                     if (jQuery('#shopping_cart')) {
                         jQuery('#shopping_cart').replaceWith(data.sidebar);
                         jQuery('#shopping_cart').click(function() {
-                            console.log('working')
                             jQuery(this).toggleClass('open')
+                        })
+
+                        jQuery("[userproduct-delete]").on('click', function(){
+                            var deleteId = jQuery(this).attr("userproduct-delete")
+                            userProductDelete(deleteId)
                         })
                     }
 
                     if (jQuery('.nav-item.item-04')) {
                         jQuery('.nav-item.item-04').html(data.topcart_mobile_block);
                     }
-
-                    // var $mobileNavItems4 = jQuery(".mobile-nav .nav-item.item-04"),
-                    //     $mobileNavItemsLinkAll = jQuery(".mobile-nav .nav-item");
-                    // $mobileNavItemsLink4 = jQuery(".nav-item.item-04 > a");
-                    // $mobileNavItemsLink4.each(function() {
-                    //     var $this =
-                    //         jQuery(this),
-                    //         timer;
-                    //     $this.bind("click", function(e) {
-                    //         e.preventDefault();
-                    //         $mobileNavItemsLinkAll.removeClass("active");
-                    //         if (!$this.parent().hasClass("active")) {
-                    //             $mobileNavItems4.removeClass("active");
-                    //             $this.parent().addClass("active")
-                    //         } else $this.parent().removeClass("active")
-                    //     })
-                    // })
-
-
-                    // if (jQuery('#toplinks')) {
-                    //     jQuery('#toplinks').replaceWith(data.toplink);
-                    // }
-
-
-                    // if (jQuery('header').hasClass('variant4')) {
-                    //     jQuery(function($) {
-                    //         "use strict";
-                    //         var hiddenBut = $('.navbar-secondary-menu .btn-group.btn-hidden'),
-                    //             hiddenWidth = 50,
-                    //             animDiration = 300;
-                    //         hiddenBut.each(function () {$(this).css({'width':'auto'}).attr( "data-width", $(this).width()).css({'width':hiddenWidth}) })
-                    //         hiddenBut.hover(function() {
-                    //             $(this).stop(true, false).animate({
-                    //                 'width': $(this).prop('scrollWidth')
-                    //             }, animDiration, function() {
-                    //                 $(this).css({
-                    //                     'overflow': 'visible'
-                    //                 })
-                    //             });
-                    //         },function() {
-                    //             $(this).stop(true, false).removeClass('open').animate({
-                    //                 'width': hiddenWidth
-                    //             }, animDiration, function() {
-                    //                 $(this).css({
-                    //                     'overflow': 'hidden'
-                    //                 })
-                    //             });
-                    //         });
-                    //     });
-                    // }
 
                     jQuery('#preloader .inside').html(data.message);
                     jQuery('#preloader .message').fadeIn(300);
