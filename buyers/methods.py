@@ -46,7 +46,7 @@ def current_sub_cart(supplierid,cart,new_price,cartproduct_data,subcart_data):
 
 def check_cart_products(subcart,cartproduct_data):
     try:
-        product = Cart_products.objects.get(subcart_id_id=subcart.id,product_id=cartproduct_data['product_id'])
+        product = Cart_products.objects.get(subcart_id_id=subcart.id,product_id=cartproduct_data['product_id'],status=0)
     except Cart_products.DoesNotExist:
         product = None
     if product is not None:
