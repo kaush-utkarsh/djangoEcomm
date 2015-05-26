@@ -34,7 +34,7 @@
 <!-- //end Small Previews -->
 <section class="container">
     <script type="text/javascript">
-    window.optionsPrice = new Product.OptionsPrice({
+    var optionsPrice = new Product.OptionsPrice({
         "productId": {{ data.id }},
         "priceFormat": {
             "pattern": "$%s",
@@ -90,15 +90,24 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <div class="row" style="margin-bottom: 20px; margin-top: 50px;">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-5">
+                            Merchant Name
+                        </div>
+                        <div class="col-xs-5">
+                            Price
+                        </div>
+                    </div>
                     {% for merchant in data.merchants %}
                         <div class="row">
-                            <div class="col-md-2">
-                                <input type="radio" name="merchantId" value="{{ merchant.supplierId }}">
+                            <div class="col-xs-2">
+                                <input style="width: 25% !important;" type="radio" name="merchantId" value="{{ merchant.supplierId }}">
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-xs-5">
                                 <label>{{ merchant.name }}</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-xs-5">
                                 <label>{{ merchant.price }}</label>
                             </div>
                         </div>
@@ -1154,6 +1163,7 @@
     </div>
     <!--/******************************************************************/-->
     <script type="text/javascript">
+
     //<![CDATA[
     var productAddToCartForm = new VarienForm('product_addtocart_form');
     productAddToCartForm.submit = function(button) {
@@ -1167,91 +1177,49 @@
         jQuery.ajax({
             url: url,
             type: 'post',
-            headers: { "X-CSRFToken": 'o5SOQ0wipRZfW0E0Kd4x3kQZf05VnOoq' },
+            headers: { 
+                "X-CSRFToken":  getCookie('csrftoken')
+            },
             data: data,
             success: function(data) {
+                data = JSON.parse(data)
+                console.log(data)
                 jQuery('#ajax_loader').hide();
-                jQuery('#preloader .loader').hide();
-                // if (data.status == 'ERROR') {
-                //     jQuery('#preloader .loader').hide();
-                //     jQuery('#preloader .inside').html(data.message);
-                //     jQuery('#preloader .message').fadeIn(300);
-                //     setTimeout(function() {
-                //         jQuery('#preloader .message').fadeOut();
-                //     }, 2300);
-                // } else {
-                //     jQuery('#preloader .loader').hide();
 
-                //     if (jQuery('#shopping_cart')) {
-                //         jQuery('#shopping_cart').replaceWith(data.sidebar);
-                //     }
+                if (data.status == 'ERROR') {
+                    // jQuery('#preloader .loader').hide();
+                    // jQuery('#preloader .inside').html(data.message);
+                    // jQuery('#preloader .message').fadeIn(300);
+                    // setTimeout(function() {
+                    //     jQuery('#preloader .message').fadeOut();
+                    // }, 2300);
+                } else {
+                    jQuery('#preloader .loader').hide();
 
-                //     if (jQuery('.nav-item.item-04')) {
-                //         jQuery('.nav-item.item-04').html(data.topcart_mobile_block);
-                //     }
+                    if (jQuery('#shopping_cart')) {
+                        jQuery('#shopping_cart').replaceWith(data.sidebar);
+                        jQuery('#shopping_cart').click(function() {
+                            jQuery(this).toggleClass('open')
+                        })
 
-                //     var $mobileNavItems4 = jQuery(".mobile-nav .nav-item.item-04"),
-                //         $mobileNavItemsLinkAll = jQuery(".mobile-nav .nav-item");
-                //     $mobileNavItemsLink4 = jQuery(".nav-item.item-04 > a");
-                //     $mobileNavItemsLink4.each(function() {
-                //         var $this =
-                //             jQuery(this),
-                //             timer;
-                //         $this.bind("click", function(e) {
-                //             e.preventDefault();
-                //             $mobileNavItemsLinkAll.removeClass("active");
-                //             if (!$this.parent().hasClass("active")) {
-                //                 $mobileNavItems4.removeClass("active");
-                //                 $this.parent().addClass("active")
-                //             } else $this.parent().removeClass("active")
-                //         })
-                //     })
+                        jQuery("[userproduct-delete]").on('click', function(){
+                            var deleteId = jQuery(this).attr("userproduct-delete")
+                            userProductDelete(deleteId)
+                        })
+                    }
 
+                    if (jQuery('.nav-item.item-04')) {
+                        jQuery('.nav-item.item-04').html(data.topcart_mobile_block);
+                    }
 
-                //     if (jQuery('#toplinks')) {
-                //         jQuery('#toplinks').replaceWith(data.toplink);
-                //     }
+                    jQuery('#preloader .inside').html(data.message);
+                    jQuery('#preloader .message').fadeIn(300);
 
+                    setTimeout(function() {
+                        jQuery('#preloader .message').fadeOut();
 
-                //     if (jQuery('header').hasClass('variant4')) {
-                //         jQuery(function($) {
-                //             "use strict";
-                //             var hiddenBut = $('.navbar-secondary-menu .btn-group.btn-hidden'),
-                //                 hiddenWidth = 50,
-                //                 animDiration = 300;
-                //             //hiddenBut.each(function () {$(this).css({'width':'auto'}).attr( "data-width", $(this).width()).css({'width':hiddenWidth}) })
-                //             hiddenBut.hover(
-                //                 function() {
-                //                     $(this).stop(true, false).animate({
-                //                         'width': $(this).prop('scrollWidth')
-                //                     }, animDiration, function() {
-                //                         $(this).css({
-                //                             'overflow': 'visible'
-                //                         })
-                //                     });
-                //                 },
-                //                 function() {
-                //                     $(this).stop(true, false).removeClass('open').animate({
-                //                         'width': hiddenWidth
-                //                     }, animDiration, function() {
-                //                         $(this).css({
-                //                             'overflow': 'hidden'
-                //                         })
-                //                     });
-                //                 });
-                //         });
-                //     }
-
-
-
-                //     jQuery('#preloader .inside').html(data.message);
-                //     jQuery('#preloader .message').fadeIn(300);
-
-                //     setTimeout(function() {
-                //         jQuery('#preloader .message').fadeOut();
-
-                //     }, 2300)
-                // }
+                    }, 2300)
+                }
             }
         });
     }.bind(productAddToCartForm);

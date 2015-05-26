@@ -1,119 +1,181 @@
-<html>
-<head>
-    <title>Cart</title>
-</head>
+{% extends "nogpo/base.html" %} {% block content %} {% load mathfilters %}
 
-<body>
-    <label>Add to cart</label>
-    <form id = "addcart" action="/nogpo/add_to_cart/" method = "POST">
-        {% csrf_token %}
-        customer id: <input type="text" name="customerid" value="Mickey"><br>
-        product id: <input type="text" name="productid" value="1010110yhi"><br>
-        no of products: <input type="text" name="no_of_items" value="3"><br>
-        <input type="submit" value="Submit">
-    </form>
-    <br>
-    <label>Edit cart</label>
-    <form id = "editcart" action="/nogpo/edit_cart" method = "POST">
-        cartid: <input type="text" name="cartid" ><br>
-        product id: <input type="text" name="productid" value="1010110yhi"><br>
-        no of products: <input type="text" name="no_of_items" value="3"><br>
-        <input type="submit" value="edit">
-    </form>
-    <br>
-    <label>Delete from cart</label>
-        <form id= "deletecart" action="/nogpo/delete_from_cart" method="POST">
-        cartid: <input type="text" name="cartid" ><br>
-        productid: <input type="text" name="productid" ><br>
-        <input type="submit" value="Delete">
-    </form>
-    <br>
-    <label>get full cart</label>
-    <form id="getcart" action="/nogpo/get_cart" method="POST">
-        cartid: <input type="text" name="cartid" ><br>
-        <input type="submit" value="get cart">
-    </form>
-
-    <script type="text/javascript">
-    $("#addcart").on('submit',function(evt){
-        evt.preventDefault();
-            var range = 0;
-            var $inputs = $('#addcart :input');
-            var inputLength = ($inputs.length) - 1;
-            var values = {};
-            $.ajax({
-                    type: "POST",
-                    url: "add_to_cart",
-                    data: values
-                })
-            .done(function(msg){
-                console.log(msg)
-            })
-            .fail(function()
-            {
-                console.log("error")
-            })
-    })
-
-        $("#editcart").on('submit',function(evt){
-        evt.preventDefault();
-            var range = 0;
-            var $inputs = $('#editcart :input');
-            var inputLength = ($inputs.length) - 1;
-            var values = {};
-            $.ajax({
-                    type: "POST",
-                    url: "editcart",
-                    data: values
-                })
-            .done(function(msg){
-                console.log(msg)
-            })
-            .fail(function()
-            {
-                console.log("error")
-            })
-    })
-
-        $("#deletecart").on('submit',function(evt){
-        evt.preventDefault();
-            var range = 0;
-            var $inputs = $('#deletecart :input');
-            var inputLength = ($inputs.length) - 1;
-            var values = {};
-            $.ajax({
-                    type: "POST",
-                    url: "deletecart",
-                    data: values
-                })
-            .done(function(msg){
-                console.log(msg)
-            })
-            .fail(function()
-            {
-                console.log("error")
-            })
-    })
-
-    
-        $("#getcart").on('submit',function(evt){
-        evt.preventDefault();
-            var range = 0;
-            var $inputs = $('#getcart :input');
-            var inputLength = ($inputs.length) - 1;
-            var values = {};
-            $.ajax({
-                    type: "POST",
-                    url: "getcart",
-                    data: values
-                })
-            .done(function(msg){
-                console.log(msg)
-            })
-            .fail(function()
-            {
-                console.log("error")
-            })
-    })
-    </script>
-</body>
+{% if cart.products %}
+    <section class="container">
+        <div class="row">
+            <br>
+            <br>
+            <br>
+            <section class="col-md-8 col-lg-8">
+                <!-- Shopping cart -->
+                <section class="content-box">
+                    <div class="shopping-cart">
+                        <div class="shopping-cart-header">
+                            <img src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/images/shopping-cart-back-left.png" alt="" class="pull-left">
+                            <img src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/images/shopping-cart-back-right.png" alt="" class="pull-right">
+                        </div>
+                        <div class="box">
+                            <form action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/updatePost/" method="post">
+                                <input name="form_key" type="hidden" value="dpiWLWbTaRzrtxhh">
+                                <h3>Shopping Cart</h3>
+                                <table>
+                                    <thead>
+                                        <tr class="hidden-xs">
+                                            <th></th>
+                                            <th></th>
+                                            <th>Product Name</th>
+                                            <th>Unit Price</th>
+                                            <th>Qty</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for product in cart.products %}
+                                            <tr>
+                                                <td>
+                                                    <a href="#" title="Remove item" class="remove-button hidden-xs">
+                                                        <span class="icon-cancel-2 "></span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="remove-button visible-xs">
+                                                        <span class="icon-cancel-2 "></span>
+                                                    </a>
+                                                    <a href="{{ product.product_url }}" title="Azrouel Dress"><img class="preview" src="{{ product.product_image }}" alt="{{ product.product_name }}"></a>
+                                                </td>
+                                                <td>
+                                                    <span class="td-name visible-xs">Product</span>
+                                                    <a href="{{ product.product_url }}">{{ product.product_name }}</a>
+                                                </td>
+                                                <td>
+                                                    <span class="td-name visible-xs">Price</span>
+                                                    <span>
+                                                        <span class="price">${{ product.price }}</span>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="td-name visible-xs">Quantity</span>
+                                                    <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
+                                                        <span class="input-group-addon">−</span>
+                                                        <input name="cart[{{ product.product_id }}][qty]" value="{{ product.quantity }}" size="4" title="Qty" class="form-control" maxlength="2">
+                                                        <span class="input-group-addon">+</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="td-name visible-xs">Total</span>
+                                                    <span>
+                                                        <span class="price">${{ product.quantity|mul:product.price }}</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="row hidden-xs">
+                                    <div class="col-md-4 col-lg-4 col-xs-4">
+                                        <button type="button " title="Continue Shopping" class="btn btn-sm btn-primary" onclick="setLocation('http://demo.ethemeuk.com/megatron/magento/demo/index.php/');return false;"><span><span>Continue Shopping</span></span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4 col-lg-4 col-xs-4 text-center">
+                                        <button type="submit" name="update_cart_action" value="update_qty" title="Update Shopping Cart" class="btn btn-sm btn-primary "><span><span>Update Shopping Cart</span></span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4 col-lg-4 col-xs-4 text-right">
+                                        <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary" id="empty_cart_button"><span><span>Clear Shopping Cart</span></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row visible-xs">
+                                    <button type="button " title="Continue Shopping" class="btn btn-sm btn-primary" onclick="setLocation('http://demo.ethemeuk.com/megatron/magento/demo/index.php/');return false;"><span><span>Continue Shopping</span></span>
+                                    </button>
+                                    <button type="submit" name="update_cart_action" value="update_qty" title="Update Shopping Cart" class="btn btn-sm btn-primary "><span><span>Update Shopping Cart</span></span>
+                                    </button>
+                                    <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary" id="empty_cart_button"><span><span>Clear Shopping Cart</span></span>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="pull-right">
+                                <div class="totals">
+                                    <table id="shopping-cart-totals-table">
+                                        <colgroup>
+                                            <col>
+                                            <col width="1">
+                                        </colgroup>
+                                        <tfoot>
+                                            <tr>
+                                                <td style="" class="a-right" colspan="1">
+                                                    <strong>Grand Total</strong>
+                                                </td>
+                                                <td style="" class="a-right">
+                                                    <strong><span class="price">${{ cart.total_price }}</span></strong>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr>
+                                                <td style="" class="a-right" colspan="1">
+                                                    Subtotal
+                                                </td>
+                                                <td style="" class="a-right">
+                                                    <span class="price">${{ cart.total_price }}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <ul class="checkout-types">
+                                        <li>
+                                            <button type="button" title="Proceed to Checkout" class="btn btn-mega btn-inverse btn-xl btn-proceed-checkout btn-checkout" onclick="window.location='http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/onepage/';"><i class="typcn typcn-tick"></i><span><span>Proceed to Checkout</span></span>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/multishipping/" title="Checkout with Multiple Addresses">Checkout with Multiple Addresses</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <aside class="col-md-4 col-lg-4 shopping-cart-aside">
+                <section class="container-widget">
+                    <form id="discount-coupon-form" action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/couponPost/" method="post">
+                        <div class="discount">
+                            <h2>Discount Codes</h2>
+                            <div class="discount-form">
+                                <label for="coupon_code">Enter your coupon code if you have one.</label>
+                                <input type="hidden" name="remove" id="remove-coupone" value="0">
+                                <div class="input-box">
+                                    <input class="input-text" id="coupon_code" name="coupon_code" value="">
+                                </div>
+                                <div class="buttons-set">
+                                    <button type="button" title="Apply Coupon" class="btn btn-mega" onclick="discountForm.submit(false)" value="Apply Coupon">Apply Coupon</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </aside>
+        </div>
+    </section>
+{% else %}
+    <section class="container">
+        <div class="row">
+            <section class="col-md-8 col-lg-8">
+                <section class="no-product">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                            <div class="icon-circle active animate scale text-center"><span class="icon icon-cart-2 small"></span></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <br>
+                            <h3>Shopping Cart is Empty</h3> You have no items in your shopping cart.
+                            <br> Click <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/">here</a> to continue shopping. </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+{% endif %}
+{% endblock %}

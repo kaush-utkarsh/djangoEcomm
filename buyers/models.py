@@ -47,3 +47,8 @@ class Payment(models.Model):
     msg = models.TextField()
     method_id = models.CharField(max_length=200)
     subcart_id = models.ForeignKey(Subcart)
+
+class User_meta(models.Model):
+    userid = models.CharField(max_length=200)
+    metakey = models.TextField()
+    metavalue = models.TextField()

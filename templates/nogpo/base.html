@@ -207,6 +207,7 @@
                                             <li class="first"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/customer/account/" title="My Account">My Account</a></li>
                                             <li><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/" title="My Wishlist">My Wishlist</a></li>
                                             <li><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/" title="My Cart" class="top-link-cart">My Cart</a></li>
+                                            <li><a href="/credits/" title="My Credits">My Credits</a></li>
                                             <li class="divider"></li>
                                             <li><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
                                             {% if user.is_authenticated %}
@@ -250,19 +251,56 @@
                                         </div>
                                     </div>
                                     <div class="btn-group " id="shopping_cart">
-                                        <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-                                            <span class="compact-hidden text-shopping-cart">
-                                                Cart -
-                                                <strong><span class="price">$0.00</span></strong>
-                                            </span>
-                                            <span class="icon-xcart-animate">
-                                                <span class="box">0</span>
-                                                <span class="handle"></span>
-                                            </span>
-                                        </a>
-                                        <div class="dropdown-menu pull-right shoppingcart-box" role="menu">
-                                            <span class="empty">You have no items in your shopping cart.</span>
-                                        </div>
+                                        {% if cart.products %}
+                                            <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span class="icon-xcart-animate">
+                                                    <span class="box">{{ cart.total_no_items }}</span>
+                                                    <span class="handle"></span>
+                                                </span>
+                                            </a>
+
+                                            <div class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                                Recently added item(s)
+                                                <ul class="list">
+                                                    {% for product in cart.products %}
+                                                    <li class="item">
+                                                        <div class="icon-product-edit">
+                                                            <a class="icon icon-edit" href="{{ product.product_url }}"></a>
+                                                        </div>
+                                                        <div class="icon-product-delete">
+                                                            <a href="#" class="icon icon-trash-2" userproduct-delete="{{ product.product_id }}_{{ product.supplierid }}"></a>
+                                                        </div>
+                                                        <a href="{{ product_url }}" class="preview-image">
+                                                            <img class="preview" src="{{ product.product_image }}"  alt="{{ product.product_name }}" />
+                                                        </a>
+                                                        <div class="description">
+                                                            <a href="{{ product.product_url }}" class="product-name">{{ product.product_name }}</a>
+                                                            <div class="product-price">
+                                                                {{ product.quantity }} x <span class="price">${{ product.price }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                                <div class="total">
+                                                    Total: {{ cart.total_no_items }} items - <span class="price">${{ cart.total_price }}</span>
+                                                </div>
+                                                <a href="/checkout/" class="btn btn-mega">Proceed to Checkout</a>
+                                                <div class="view-link">
+                                                    <a href="/cart_url/">View shopping cart </a>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span class="icon-xcart-animate">
+                                                    <span class="box">0</span>
+                                                    <span class="handle"></span>
+                                                </span>
+                                            </a>
+                                            <div class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                                <span class="empty">You have no items in your shopping cart.</span>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <!-- Secondary menu mobile -->
@@ -421,14 +459,53 @@
                                 </div>
                             </div>
                             <div class="nav-item item-04">
-                                <a href="#" class="cart_mob_count">
-                                    <span class="icon-xcart-white">0</span>
-                                </a>
-                                <div class="tab-content">
-                                    <div class="shoppingcart-box">
-                                        <span class="empty">You have no items in your shopping cart.</span>
+                                {% if cart.products %}
+                                    <a href="#" class="cart_mob_count">
+                                        <span class="icon-xcart-white">{{ cart.total_no_items }}</span>
+                                    </a>
+                                    <div class="tab-content">
+                                        <div class="shoppingcart-box">
+                                            <div class="title">Recently added item(s)</div>
+                                            <ul class="list">
+                                                {% for product in cart.products %}
+                                                <li class="item">
+                                                    <div class="icon-product-edit">
+                                                        <a class="icon icon-edit" href="{{ product.product_url }}"></a>
+                                                    </div>
+                                                    <div class="icon-product-delete">
+                                                        <a class="icon icon-trash-2" href="{{ product.product_delete_url }}"></a>
+                                                    </div>
+                                                    <a href="{{ product.product_url }}" class="preview-image">
+                                                        <img class="preview" src="{{ product.product_image }}"  alt="{{ product.product_name }}" />
+                                                    </a>
+                                                    <div class="description">
+                                                        <a href="{{ product.product_url }}" class="product-name">{{ product.product_name }} </a>
+                                                        <div class="product-price">
+                                                            {{ product.quantity }} x <span class="price">${{ product.price }}</span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <div class="total">
+                                                Total: {{ cart.total_no_items }} items - <span class="price">${{ cart.total_price }}</span>
+                                            </div>
+                                            <a href="/checkout/" class="btn btn-mega">Proceed to Checkout</a>
+                                            <div class="view-link">
+                                                <a href="/cart/">View shopping cart </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                {% else %}
+                                    <a href="#" class="cart_mob_count">
+                                        <span class="icon-xcart-white">0</span>
+                                    </a>
+                                    <div class="tab-content">
+                                        <div class="shoppingcart-box">
+                                            <span class="empty">You have no items in your shopping cart.</span>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -468,50 +545,6 @@
             <div id="content">
                 {% block content %}{% endblock %}
             </div>
-            <!-- footer -->
-            <!-- Social navbar -->
-            <section class="content content-border nopad-xs social-widget grey-container-dark">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6  col-lg-6 newsletter collapsed-block">
-                            <div class="row">
-                                <div class="col-lg-5  col-md-12 col-sm-12 ">
-                                    <h3>NEWSLETTER SIGNUP <a class="expander visible-xs" href="#TabBlock-1">+</a></h3>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-6 tabBlock" id="TabBlock-1">
-                                    <p>Sign Up for Our Newsletter to receive latest news and events.</p>
-                                    <form class="form-inline" role="form" action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/newsletter/subscriber/new/" method="post" id="newsletter-validate-detail">
-                                        <div class="form-group input-control">
-                                            <button type="submit" class="button"><span class="icon-envelop"></span></button>
-                                            <input name="email" type="text" class="form-control required-entry validate-email" placeholder="Your E-mail...">
-                                        </div>
-                                    </form>
-                                    <script type="text/javascript">
-                                    //<![CDATA[
-                                    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
-                                    //]]>
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6 collapsed-block">
-                            <h3>FIND US ON<a class="expander visible-xs" href="#TabBlock-2">+</a></h3>
-                            <div class="tabBlock" id="TabBlock-2">
-                                <ul class="find-us">
-                                    <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-facebook-3"></span></a></li>
-                                    <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-twitter-3"></span></a></li>
-                                    <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-linkedin-2"></span></a></li>
-                                    <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-youtube-3"></span></a></li>
-                                    <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-pinterest-2"></span></a></li>
-                                    <li class="divider"><a href="#" class="animate-scale"><span class="icon icon-googleplus-2"></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- //end Social navbar -->
-            <!-- Footer -->
             <footer>
                 <section class="footer-navbar dark">
                     <div class="container content nopad-xs">
@@ -617,12 +650,40 @@
             </footer>
         </div>
     </div>
+    <script type="text/javascript">
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
+        jQuery('#shopping_cart').click(function() {
+            jQuery(this).toggleClass('open')
+        })
+
+        function userProductDelete(deleteId) {
+            var url = window.location.protocol+'//'+window.location.hostname+':'+window.location.port+'/userproduct/delete/'
+            var data = {
+                id: deleteId
+            }
+            jQuery.ajax({
+                url: url,
+                type: 'post',
+                headers: { 
+                    "X-CSRFToken":  getCookie('csrftoken')
+                },
+                data: data,
+                success: function(data) {
+                    console.log('working')
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>
-<<<<<<< HEAD
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Main Store                                                                                                                                                                                          span>
-            
-=======
-Main Store span>
->>>>>>> c41abc295de5e39c8f5eaef923c8d93df20c2176

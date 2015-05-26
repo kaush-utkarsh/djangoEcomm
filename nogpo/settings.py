@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'buyers',
     'rest_framework',
     'registration',
+    'mathfilters',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,7 +64,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommerce',
         'USER' : 'root',
-        'PASSWORD' : 'password',
+        'PASSWORD' : 'root',
         'HOST' : '127.0.0.1',
         'PORT' : 3306,
     }

@@ -20,3 +20,7 @@ for ex.
 .cms-index-index .blog-widget {
     margin-bottom: 0;
 }
+
+#shopping_cart {
+	display: inline-block !important;
+}
