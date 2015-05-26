@@ -20,6 +20,7 @@ def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
     session_data = session.get_decoded()
     uid = session_data.get('_auth_user_id')
+    print uid
     return uid
 
 #An HttpResponse that renders its content into JSON.
@@ -52,12 +53,17 @@ def home(request):
     if request.user.is_authenticated():
         res = categories(request)
         user_id = get_userid(request)
-        cart = Cart.objects.get(userid=user_id)
-        cart_data = get_cart(cart)
-        data = {
-            "res": res,
-            "cart": cart_data
-        }
+        cart = Cart.objects.filter(userid=user_id)
+        if len(cart)>0:
+            cart_data = get_cart(cart[0])
+            data = {
+                "res": res,
+                "cart": cart_data
+            }
+        else:
+            data = {
+                "res":res
+            }
         return render(request, "nogpo/home.html", data)
     else:
         return render(request, "nogpo/login.html")
@@ -65,13 +71,26 @@ def home(request):
 @login_required
 def products(request):
     res = categories(request)
-    # print res
-    return render(request, "nogpo/products.html", {'res' : res})
+    user_id = get_userid(request)
+    cart = Cart.objects.get(userid=user_id)
+    cart_data = get_cart(cart[0])
+    data = {
+        "res": res,
+        "cart": cart_data
+    }
+    return render(request, "nogpo/products.html", data)
 
 @login_required
 def products_details(request):
     res = categories(request)
-    return  render(request, "nogpo/product.html", {'res': res})
+    user_id = get_userid(request)
+    cart = Cart.objects.get(userid=user_id)
+    cart_data = get_cart(cart[0])
+    data = {
+        "res": res,
+        "cart": cart_data
+    }
+    return  render(request, "nogpo/product.html",data)
 
 def categories(request):
     re = urllib2.urlopen("http://162.209.8.12:8080/categories")
@@ -89,11 +108,24 @@ def categories(request):
 def product(request, product_id):
     res = categories(request)
     if request.method == 'GET':
+        print "working"
         product = urllib2.urlopen(baseurl+'product/'+product_id)
-        data = {
-            "data": json.load(product),
-            "res": res
-        }
+        user_id = get_userid(request)
+        print user_id
+        cart = Cart.objects.filter(userid=user_id)
+        print cart
+        if len(cart) > 0:
+            cart_data = get_cart(cart[0])
+            data = {
+                "data": json.load(product),
+                "res": res,
+                "cart": cart_data
+            }
+        else:
+            data = {
+                "data": json.load(product),
+                "res": res
+            }
         return  render(request, "nogpo/product.html", data)
 
 def search(request):
@@ -168,28 +200,53 @@ def empty_cart(request):
 def cart(request):
     res = categories(request)
     user_id = get_userid(request)
-    cart = Cart.objects.get(userid=user_id)
-    cart_data = get_cart(cart)
-    data = {
-        "res": res,
-        "cart": cart_data
-    }
+    cart = Cart.objects.filter(userid=user_id)
+    if len(cart) > 0 :
+
+        cart_data = get_cart(cart[0])
+        data = {
+            "res": res,
+            "cart": cart_data
+        }
+    else:
+        data = {
+            "res": res
+        }
     return render(request,"nogpo/cart.html", data)
 
 @csrf_exempt
 def checkout(request):
     res = categories(request)
-    data = {
-        "res": res,
-    }
+    user_id = get_userid(request)
+    cart = Cart.objects.filter(userid=user_id)
+    if len(cart) > 0:
+
+        cart_data = get_cart(cart[0])
+        data = {
+            "res": res,
+            "cart":cart_data
+        }
+    else:
+        data = {
+            "res":res
+        }
     return render(request,"nogpo/checkout.html", data)
 
 @csrf_exempt
 def credits(request):
     res = categories(request)
-    data = {
-        "res": res,
-    }
+    user_id = get_userid(request)
+    cart = Cart.objects.filter(userid=user_id)
+    if len(cart)>0:
+        cart_data = get_cart(cart[0])
+        data = {
+            "res": res,
+            "cart":cart_data
+        }
+    else:
+        data = {
+         "res":res
+        }
     return render(request,"nogpo/credits.html", data)
 
 @csrf_exempt
