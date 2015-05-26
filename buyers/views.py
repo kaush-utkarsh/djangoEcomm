@@ -49,9 +49,16 @@ def get_search_url(string):
     return url
 
 def home(request):
-    res = categories(request)
     if request.user.is_authenticated():
-        return render(request, "nogpo/home.html", {'res' : res})
+        res = categories(request)
+        user_id = get_userid(request)
+        cart = Cart.objects.get(userid=user_id)
+        cart_data = get_cart(cart)
+        data = {
+            "res": res,
+            "cart": cart_data
+        }
+        return render(request, "nogpo/home.html", data)
     else:
         return render(request, "nogpo/login.html")
 
