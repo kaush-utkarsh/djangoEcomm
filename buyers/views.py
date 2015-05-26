@@ -10,8 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment
-from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart,User_meta
+from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta
+from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart
 from django.template import Context, Template, loader
 
 baseurl = 'http://162.209.8.12:8080/'
