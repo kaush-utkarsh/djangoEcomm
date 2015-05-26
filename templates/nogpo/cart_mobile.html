@@ -19,18 +19,18 @@
                 <div class="description">
                     <a href="{{ product.product_url }}" class="product-name">{{ product.product_name }} </a>
                     <div class="product-price">
-                        {{ product.product_quantity }} x <span class="price">{{ product.product_price }}</span>
+                        {{ product.quantity }} x <span class="price">${{ product.price }}</span>
                     </div>
                 </div>
             </li>
             {% endfor %}
         </ul>
         <div class="total">
-            Total: {{ total_no_items }} items - <span class="price">{{ total_price }}</span>
+            Total: {{ total_no_items }} items - <span class="price">${{ total_price }}</span>
         </div>
-        <a href="{{ checkout_url }}" class="btn btn-mega">Proceed to Checkout</a>
+        <a href="/checkout/" class="btn btn-mega">Proceed to Checkout</a>
         <div class="view-link">
-            <a href="{{ cart_url }}">View shopping cart </a>
+            <a href="/cart_url/">View shopping cart </a>
         </div>
     </div>
 </div>

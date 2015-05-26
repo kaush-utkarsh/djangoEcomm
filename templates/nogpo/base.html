@@ -251,15 +251,56 @@
                                         </div>
                                     </div>
                                     <div class="btn-group " id="shopping_cart">
-                                        <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-                                            <span class="icon-xcart-animate">
-                                                <span class="box">0</span>
-                                                <span class="handle"></span>
-                                            </span>
-                                        </a>
-                                        <div class="dropdown-menu pull-right shoppingcart-box" role="menu">
-                                            <span class="empty">You have no items in your shopping cart.</span>
-                                        </div>
+                                        {% if cart.products %}
+                                            <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span class="icon-xcart-animate">
+                                                    <span class="box">{{ cart.total_no_items }}</span>
+                                                    <span class="handle"></span>
+                                                </span>
+                                            </a>
+
+                                            <div class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                                Recently added item(s)
+                                                <ul class="list">
+                                                    {% for product in cart.products %}
+                                                    <li class="item">
+                                                        <div class="icon-product-edit">
+                                                            <a class="icon icon-edit" href="{{ product.product_url }}"></a>
+                                                        </div>
+                                                        <div class="icon-product-delete">
+                                                            <a href="#" class="icon icon-trash-2" userproduct-delete="{{ product.product_id }}_{{ product.supplierid }}"></a>
+                                                        </div>
+                                                        <a href="{{ product_url }}" class="preview-image">
+                                                            <img class="preview" src="{{ product.product_image }}"  alt="{{ product.product_name }}" />
+                                                        </a>
+                                                        <div class="description">
+                                                            <a href="{{ product.product_url }}" class="product-name">{{ product.product_name }}</a>
+                                                            <div class="product-price">
+                                                                {{ product.quantity }} x <span class="price">${{ product.price }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                                <div class="total">
+                                                    Total: {{ cart.total_no_items }} items - <span class="price">${{ cart.total_price }}</span>
+                                                </div>
+                                                <a href="/checkout/" class="btn btn-mega">Proceed to Checkout</a>
+                                                <div class="view-link">
+                                                    <a href="/cart_url/">View shopping cart </a>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span class="icon-xcart-animate">
+                                                    <span class="box">0</span>
+                                                    <span class="handle"></span>
+                                                </span>
+                                            </a>
+                                            <div class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                                <span class="empty">You have no items in your shopping cart.</span>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <!-- Secondary menu mobile -->
@@ -418,14 +459,53 @@
                                 </div>
                             </div>
                             <div class="nav-item item-04">
-                                <a href="#" class="cart_mob_count">
-                                    <span class="icon-xcart-white">0</span>
-                                </a>
-                                <div class="tab-content">
-                                    <div class="shoppingcart-box">
-                                        <span class="empty">You have no items in your shopping cart.</span>
+                                {% if cart.products %}
+                                    <a href="#" class="cart_mob_count">
+                                        <span class="icon-xcart-white">{{ cart.total_no_items }}</span>
+                                    </a>
+                                    <div class="tab-content">
+                                        <div class="shoppingcart-box">
+                                            <div class="title">Recently added item(s)</div>
+                                            <ul class="list">
+                                                {% for product in cart.products %}
+                                                <li class="item">
+                                                    <div class="icon-product-edit">
+                                                        <a class="icon icon-edit" href="{{ product.product_url }}"></a>
+                                                    </div>
+                                                    <div class="icon-product-delete">
+                                                        <a class="icon icon-trash-2" href="{{ product.product_delete_url }}"></a>
+                                                    </div>
+                                                    <a href="{{ product.product_url }}" class="preview-image">
+                                                        <img class="preview" src="{{ product.product_image }}"  alt="{{ product.product_name }}" />
+                                                    </a>
+                                                    <div class="description">
+                                                        <a href="{{ product.product_url }}" class="product-name">{{ product.product_name }} </a>
+                                                        <div class="product-price">
+                                                            {{ product.quantity }} x <span class="price">${{ product.price }}</span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <div class="total">
+                                                Total: {{ cart.total_no_items }} items - <span class="price">${{ cart.total_price }}</span>
+                                            </div>
+                                            <a href="/checkout/" class="btn btn-mega">Proceed to Checkout</a>
+                                            <div class="view-link">
+                                                <a href="/cart/">View shopping cart </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                {% else %}
+                                    <a href="#" class="cart_mob_count">
+                                        <span class="icon-xcart-white">0</span>
+                                    </a>
+                                    <div class="tab-content">
+                                        <div class="shoppingcart-box">
+                                            <span class="empty">You have no items in your shopping cart.</span>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
