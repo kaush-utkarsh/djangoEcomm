@@ -77,8 +77,8 @@ def create_cart_response(cart):
     response = {
         'status':'SUCCESS',
         'message':'was added to your shopping cart.',
-        'sidebar': topsidebar.render(cart_data),
-        'topcart_mobile_block': mobile.render(cart_data)
+        'sidebar': topsidebar.render(Context(cart_data)),
+        'topcart_mobile_block': mobile.render(Context(cart_data))
     }
 
     return response
