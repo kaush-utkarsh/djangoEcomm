@@ -271,13 +271,13 @@ def delete_from_cart(request):
 @csrf_exempt
 def apply_for_credit(request):
     if request.method == 'POST':
-        userid = request.POST.get('userid','')
+        userid = get_userid(request)
         merchantid = request.POST.get('merchantid','')
         credit_asked = request.POST.get('credit_asked',0)
         credit_status = request.POST.get('credit_status',0)
-        applied_date = datetime.datetime.date()
+        applied_date = datetime.datetime.now().strftime('%Y-%m-%d')
         request_msg = request.POST.get('request_msg','Please Grant me the requested credit')
-        status = request.POST.get('status',1)
+        status = request.POST.get('status',0)
 
         credit = Credit_balance(userid=userid,merchantid=merchantid,credit_asked=credit_asked,credit_status=0,applied_date=applied_date,request_msg=request_msg)
         credit.save()

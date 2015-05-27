@@ -10,7 +10,7 @@ def current_cart(userid,supplierid,new_price,cartproduct_data):
     try:
         cart = Cart.objects.get(userid = userid,status=0)
     except Cart.DoesNotExist:
-        cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=float(cartproduct_data['price'])*int(cartproduct_data['no_of_items']))
+        cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.now().strftime('%Y-%m-%d'),total_price=float(cartproduct_data['price'])*int(cartproduct_data['no_of_items']))
         cart.save()
     subcart_data = {'supplierid':supplierid,'cart_id':cart.id,'total_price':new_price}
     if cart is not None:
@@ -63,7 +63,7 @@ def add_to_subcart(data,cart):
     return subcart
 
 def add_to_cartproduct(data,subcart):
-    product = Cart_products(subcart_id=subcart,product_id=data['product_id'],no_of_items=data['no_of_items'],status=0,date=datetime.datetime.today(),price=data['price'])
+    product = Cart_products(subcart_id=subcart,product_id=data['product_id'],no_of_items=data['no_of_items'],status=0,date=datetime.datetime.now().strftime('%Y-%m-%d'),price=data['price'])
     product.save()
     new_price = int(data['no_of_items']) * float(data['price'])
     return new_price,product
