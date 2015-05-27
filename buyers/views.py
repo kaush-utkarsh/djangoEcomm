@@ -33,13 +33,13 @@ def get_search_url(string):
     if 'query' not in string.keys():
         url = baseurl
         if 'category' in string.keys():
-            url = url + 'search?category=' + string['category']
+            url = url + 'search?categories=' + string['category']
     else:
         url = baseurl + 'search?query=' + string['query']
         if 'page' in string.keys():
             url = url + '&page=' + string['page']
         if 'category' in string.keys():
-            url = url + '&category=' + string['category']
+            url = url + '&categories=' + string['category']
         if 'price_l' in string.keys():
              url = url + '&price_l=' + string['price_l']
         if 'price_h' in string.keys():
@@ -70,17 +70,21 @@ def home(request):
 @login_required
 def products(request):
     res = categories(request)
+    filter_data = search_backend(request)
+    # print filter_data
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
     if len(cart)>0:
         cart_data = get_cart(cart[0])
         data = {
             "res": res,
-            "cart": cart_data
+            "cart": cart_data,
+            "filters":filter_data['filters']
         }
     else:
         data = {
-        "res":res
+        "res":res,
+        "filters":filters_data['filters']
         }
     return render(request, "nogpo/products.html", data)
 
@@ -134,13 +138,16 @@ def product(request, product_id):
             }
         return  render(request, "nogpo/product.html", data)
 
+def search_backend(request):
+    string = request.GET
+    hiturl = get_search_url(string)
+    result = urllib2.urlopen(hiturl)
+    result_json = json.load(result)
+    return result_json
+
 def search(request):
     if request.method == 'GET':
-        string = request.GET
-        hiturl = get_search_url(string)
-        result = urllib2.urlopen(hiturl)
-        result_json = json.load(result)
-        return JSONResponse(result_json['products'])
+        return JSONResponse(search_backend(request))
 
 def get_supplier(request):
     if request.method == 'GET':
@@ -271,13 +278,13 @@ def delete_from_cart(request):
 @csrf_exempt
 def apply_for_credit(request):
     if request.method == 'POST':
-        userid = request.POST.get('userid','')
+        userid = get_userid(request)
         merchantid = request.POST.get('merchantid','')
         credit_asked = request.POST.get('credit_asked',0)
         credit_status = request.POST.get('credit_status',0)
-        applied_date = datetime.datetime.date()
+        applied_date = datetime.datetime.now().strftime('%Y-%m-%d')
         request_msg = request.POST.get('request_msg','Please Grant me the requested credit')
-        status = request.POST.get('status',1)
+        status = request.POST.get('status',0)
 
         credit = Credit_balance(userid=userid,merchantid=merchantid,credit_asked=credit_asked,credit_status=0,applied_date=applied_date,request_msg=request_msg)
         credit.save()
