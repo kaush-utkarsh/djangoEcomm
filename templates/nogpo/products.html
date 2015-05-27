@@ -12,75 +12,30 @@ jQuery(function($) {
 });
 </script>
 
-<section class="container content">
+<section class="container content" style="margin-top: 130px;">
     <div class="row">
         <!-- Left column -->
         <aside class="col-sm-4 col-md-3 col-lg-3 content-aside">
             <div class="block block-layered-nav">
                 <div class="block-title">
-                    <strong><span>Shop By</span></strong>
+                    <strong><span>Filter By Price</span></strong>
                 </div>
                 <div class="block-content">
-                    <p class="block-subtitle">Shopping Options</p>
-                    <!-- <p><strong>Category</strong></p> -->
-                   <!--  <dd>
-                        <ul class="simple-list">
-                            {% for item in res %}
-                            <li>– &nbsp;
-                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=138&amp;mode=grid">{{ item.name }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </dd> -->
-                    <p><strong>Price</strong></p>
                     <dd>
-                        <ul class="simple-list">
-                            <li>– &nbsp;
-                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;mode=grid&amp;price=-1000"><span class="price">$0.00</span> - <span class="price">$999.99</span></a> (23)
-                            </li>
-                            <li>– &nbsp;
-                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;mode=grid&amp;price=1000-"><span class="price">$1,000.00</span> and above</a> (3)
-                            </li>
-                        </ul>
+                        <b>$ 10</b> 
+                        <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
+                        <b>$ 1000</b>
                     </dd>
-                    <!-- <p><strong>Color</strong></p> -->
-                    <dd></dd>
-                    <script type="text/javascript">
-                    decorateDataList('narrow-by-list')
-                    </script>
                 </div>
             </div>
-            <!-- Shop by categories -->
             <div class="block block-navigation">
                 <div class="block-title">
-                    <strong><span>SHOP BY CATEGORIES</span></strong>
+                    <strong><span>Filter By Color</span></strong>
                 </div>
                 <div class="block-content">
-                    <ul class="expander-list">
-                        {% for item in res %}
-                        <li class="level{{ item.id }} nav-{{ item.id }} parent">
-                            <span class="name">
-                                <span class="expander">-</span>
-                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html">{{ item.name }}</a>
-                            </span>
-                            <ul class="level{{ item.id }}">
-                                {% for item_child in item.child %}
-                                <li class="level1 nav-{{ item_child.id }} parent">
-                                    <span class="name">
-                <span class="expander">-</span>
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/dresses.html">
-                                        <span class="glyphicon glyphicon-asterisk"></span>{{ item_child.name }}
-                                    </a>
-                                    </span>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            {% endfor %}
-                    </ul>
+
                 </div>
             </div>
-            <!-- //end Shop by categories -->
-            <!-- Products list -->
             <div class="section-divider"></div>
         </aside>
         <!--Content -->
@@ -90,6 +45,7 @@ jQuery(function($) {
                 <button type="submit" class="btn btn-lg btn-success">Search</button>
             </form>
             <script type="text/javascript">
+                var slider = new Slider('#ex2', {});
                 function getProducts(url) {
                     if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('category=') != -1) {
                         function getUrlParms(url) {
