@@ -87,9 +87,9 @@ def get_cart(cart):
     total_quantity = 0
     cart_data = {}
     product_array = list()
-    subcarts = Subcart.objects.filter(cart_id_id=cart.id)
+    subcarts = Subcart.objects.filter(cart_id_id=cart.id,status=0)
     for subcart in subcarts:
-        products = Cart_products.objects.filter(subcart_id_id=subcart.id)
+        products = Cart_products.objects.filter(subcart_id_id=subcart.id,status=0)
         product_return_data = {}
         for product in products:
             url = baseurl+'product/'+str(product.product_id)
@@ -97,9 +97,9 @@ def get_cart(cart):
             productinfo = json.load(p)
             quant = str(product.no_of_items)
             total_quantity = long(total_quantity) + long(quant)
-            product_return_data['product_url'] = 'product/' + str(product.id)
+            product_return_data['product_url'] = 'product/' + str(product.product_id)
             product_return_data['supplierid'] = subcart.supplierid
-            product_return_data['product_id'] = str(product.id)
+            product_return_data['product_id'] = str(product.product_id)
             product_return_data['delete_url'] = 'Yet to do'
             product_return_data['product_image'] = 'http://www.mendell.com/images/Orthopedics.jpg'
             product_return_data['product_name'] = productinfo['name']

@@ -1183,7 +1183,6 @@
             data: data,
             success: function(data) {
                 data = JSON.parse(data)
-                console.log(data)
                 jQuery('#ajax_loader').hide();
 
                 if (data.status == 'ERROR') {
@@ -1202,7 +1201,7 @@
                             jQuery(this).toggleClass('open')
                         })
 
-                        jQuery("[userproduct-delete]").on('click', function(){
+                        jQuery("[userproduct-delete]").on('click', function() {
                             var deleteId = jQuery(this).attr("userproduct-delete")
                             userProductDelete(deleteId)
                         })
