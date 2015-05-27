@@ -110,6 +110,7 @@ jQuery(function($) {
                             url: "/nogpo/search/",
                             data: data
                         }).done(function(response){
+                            response = response.products
                             jQuery('#products_list').empty()
                             var productLists = jQuery("#products_list")
                             var productTemplate = '';
