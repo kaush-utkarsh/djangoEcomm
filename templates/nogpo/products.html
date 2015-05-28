@@ -41,7 +41,7 @@ jQuery(function($) {
                             <ul>
                                 {% for key,value in filter.list.items %}
                                     <li>
-                                        <input type="radio" class="radio" value="{{ key }}">
+                                        <input filter-type="{{ filter.type }}_{{ filter.name }}_{{ key }}" type="radio" class="radio" value="{{ key }}">
                                         <span class="label"><label>{{ key }} ({{ value }})</label></span>
                                     </li>
                                 {% endfor %}
@@ -59,7 +59,7 @@ jQuery(function($) {
                             <ul>
                                 {% for key,value in filter.list.items %}
                                     <li>
-                                        <input type="checkbox" class="checkbox" value="{{ key }}">
+                                        <input filter-type="{{ filter.type }}_{{ filter.name }}_{{ key }}" type="checkbox" class="checkbox" value="{{ key }}">
                                         <span class="label"><label>{{ key }} ({{ value }})</label></span>
                                     </li>
                                 {% endfor %}
@@ -70,7 +70,7 @@ jQuery(function($) {
             {% endfor %}
             <div class="block block-navigation">
                 <div class="block-content">
-                    <button type="submit" title="Filter" class="button"><span><span>Filter</span></span></button>
+                    <button type="submit" title="Filter" class="button" id="filter"><span><span>Filter</span></span></button>
                 </div>
             </div>
         </aside>
@@ -82,26 +82,26 @@ jQuery(function($) {
             </form>
             <script type="text/javascript">
                 var slider = new Slider('#ex2', {});
+                function getUrlParms(url) {
+                    var parms = {},
+                        hash
+                    var hashes = url.slice(url.indexOf('?') + 1).split('&')
+
+                    for (var i = 0; i < hashes.length; i++) {
+                        hash = hashes[i].split('=')
+                        parms[hash[0]] = hash[1]
+                    }
+                    return parms
+                }
+
                 function getProducts(url) {
                     if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('category=') != -1) {
-                        function getUrlParms(url) {
-                            var parms = {},
-                                hash
-                            var hashes = url.slice(url.indexOf('?') + 1).split('&')
-
-                            for (var i = 0; i < hashes.length; i++) {
-                                hash = hashes[i].split('=')
-                                parms[hash[0]] = hash[1]
-                            }
-                            return parms
-                        }
-
                         data = getUrlParms(url)
 
                         jQuery.ajax({
                             url: "/nogpo/search/",
                             data: data
-                        }).done(function(response){
+                        }).done(function(response) {
                             response = response.products
                             jQuery('#products_list').empty()
                             var productLists = jQuery("#products_list")
@@ -135,6 +135,30 @@ jQuery(function($) {
                     }
                     window.history.pushState('', '', urlString)
                     getProducts(urlString)
+                })
+
+                jQuery("#filter").on("click", function() {
+                    var request = {}
+                    var url = ""
+                    jQuery("[filter-type]").each(function() {
+                        if (jQuery(this).is(":checked")) {
+                            var filterType =  jQuery(this).attr("filter-type")
+                            filterType = filterType.split("_")
+                            url += '&'+filterType[1]+'%5B%5D='+jQuery(this).val()
+                        }
+                    })
+
+                    sliderValue = slider.getValue()
+                    url += '&slider_min='+sliderValue[0]+'&slider_max='+sliderValue[1]
+                    var currentUrl = window.location.href
+                    var category = getUrlParms(currentUrl)["category"]
+                    url += "&category="+category
+                                        
+                    jQuery.ajax({
+                        url: "http://localhost:8000/nogpo/search/"+url
+                    }).done(function(response) {
+                        console.log(response)
+                    })
                 })
             </script>
             <br>
