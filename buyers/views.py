@@ -1,7 +1,7 @@
 import urllib2
 import datetime
 import json
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render,render_to_response,HttpResponseRedirect
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -268,17 +268,15 @@ def credits(request):
         print "in post"
         userid = get_userid(request)
         merchantid = request.POST.get('merchantid','')
-        credit_asked = request.POST.get('credit_asked',0)
+        credit_requested = int(request.POST.get('credit_requested','0'))
         credit_status = request.POST.get('credit_status',0)
         applied_date = datetime.datetime.now().strftime('%Y-%m-%d')
         request_msg = request.POST.get('request_msg','Please Grant me the requested credit')
         status = request.POST.get('status',0)
-        print merchantid
-        print credit_asked
-        print request_msg
-        credit = Credit_balance(userid=userid,merchantid=merchantid,credit_asked=credit_asked,credit_status=0,applied_date=applied_date,request_msg=request_msg)
-        credit.save()        
-        return HttpResponse("success")
+        credit = Credit_balance(userid=userid,merchantid=merchantid,credit_requested=credit_requested,credit_status=0,applied_date=applied_date,request_msg=request_msg,credit_approved=0)
+        credit.save()
+        print credit       
+        return HttpResponseRedirect("/")
 
 @csrf_exempt
 def delete_from_cart(request):
@@ -294,21 +292,6 @@ def delete_from_cart(request):
         response = create_cart_response(cart)
         return HttpResponse(json.dumps(response))
 
-@csrf_exempt
-def apply_for_credit(request):
-    print "here"
-    if request.method == 'POST':
-        userid = get_userid(request)
-        merchantid = request.POST.get('merchantid','')
-        credit_asked = request.POST.get('credit_asked',0)
-        credit_status = request.POST.get('credit_status',0)
-        applied_date = datetime.datetime.now().strftime('%Y-%m-%d')
-        request_msg = request.POST.get('request_msg','Please Grant me the requested credit')
-        status = request.POST.get('status',0)
-        print merchantid
-    return "success"
-        # credit = Credit_balance(userid=userid,merchantid=merchantid,credit_asked=credit_asked,credit_status=0,applied_date=applied_date,request_msg=request_msg)
-        # credit.save()
 
 @csrf_exempt
 def credit_request_clearance(request):

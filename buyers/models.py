@@ -30,10 +30,11 @@ class Credit_balance(models.Model):
     credit_approved = models.DecimalField(max_digits=10,decimal_places=2)
     credit_status = models.IntegerField()
     applied_date = models.DateField()
-    Cleared_date = models.DateField()
+    Cleared_date = models.DateField(null=True, blank=True)
     request_msg = models.TextField()
     response_msg = models.TextField()
-    credit_expiry_date = models.DateField()
+    credit_expiry_date = models.DateField(null=True, blank=True)
+
 
 class Transaction(models.Model):
     cart_id = models.ForeignKey(Cart)
