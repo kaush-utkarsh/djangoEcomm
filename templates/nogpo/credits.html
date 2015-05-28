@@ -6,20 +6,25 @@
         <br>
         <section class="col-md-12 col-lg-12">
             <section class="content-box">
-            <form>
+            <form action="/credits/" method="POST">
+            {% csrf_token %}
             <div>
-                <select>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
+                <select name="merchantid">
+                    {% for supplier in suppliers %}
+                    <option value="{{supplier.id}}">{{supplier.name}}</option>
+                    {% endfor %}
+
+                    <!-- <option value=1>Volvo</option>
+                    <option value=2>Saab</option>
+                    <option value=3>Opel</option>
+                    <option value=4>Audi</option> -->
                 </select>
             </div>
             <div>
-                Credit Required: <input type="text" name="credit"><br>
+                Credit Required: <input type="number" name="credit_asked"><br>
             </div>
             <div>
-                Message: <input type="text" name="msg"><br>
+                Message: <input type="text" name="request_msg"><br>
             </div>
             <input type="submit" value="Submit">
             </form>
