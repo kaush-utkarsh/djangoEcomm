@@ -71,7 +71,7 @@ def home(request):
 def products(request):
     res = categories(request)
     filter_data = search_backend(request)
-    # print filter_data
+    print filter_data['filters']
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
     if len(cart)>0:
@@ -84,7 +84,7 @@ def products(request):
     else:
         data = {
         "res":res,
-        "filters":filters_data['filters']
+        "filters":filter_data['filters']
         }
     return render(request, "nogpo/products.html", data)
 
