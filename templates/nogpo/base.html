@@ -281,22 +281,6 @@
                                         {% endif %}
                                     </div>
                                 </div>
-
-                                <!-- Search -->
-                                <form id="search_mini_form" action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalogsearch/result/" method="get" class="navbar-search form-inline hidden-xs pull-right " role="form">
-                                    <div class="form-group">
-                                        <button type="submit" class="button"><span class="icon-search-2"></span></button>
-                                        <input id="search" type="text" class="form-control" placeholder="Search" name="q" maxlength="128">
-                                    </div>
-                                    <div id="search_autocomplete"></div>
-                                    <!--<div id="search_autocomplete" class="search-autocomplete"></div>-->
-                                    <script type="text/javascript">
-                                    //<![CDATA[
-                                    var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Search');
-                                    searchForm.initAutocomplete('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalogsearch/ajax/suggest/', 'search_autocomplete');
-                                    //]]>
-                                    </script>
-                                </form>
                                 {% endif %}
                                 <!-- //end Search -->
                             </div>

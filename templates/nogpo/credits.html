@@ -8,28 +8,43 @@
             <section class="content-box">
                 <form action="/credits/" method="POST">
                     {% csrf_token %}
-                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6"></div>
-                        <select name="merchantid" class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
-                            {% for supplier in suppliers %}
-                            <option value="{{supplier.id}}">{{supplier.name}}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="row">
+                        <div class="col-md-2">
+                            Supplier
+                        </div>
+                        <div class="col-md-10">
+                            <select name="merchantid" class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                                {% for supplier in suppliers %}
+                                    <option value="{{supplier.id}}">{{supplier.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6"></div>
-                        Credit Required:
-                        <input type="number" name="credit_requested" class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
-                        <br>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-2">
+                            Credit Required:
+                        </div>
+                        <div class="col-md-10">
+                            <input type="number" name="credit_requested" class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                        </div>
                     </div>
-                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                        Message:
-                        <input type="text" name="request_msg" class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
-                        <br>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-2">
+                            Message:
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" name="request_msg" class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                        </div>
                     </div>
-                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6"></div>
-                        <input type="submit" value="Submit" class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" value="Submit" class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                        </div>
                     </div>
                 </form>
             </section>
