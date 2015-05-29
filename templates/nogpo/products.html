@@ -153,9 +153,9 @@ jQuery(function($) {
                     var currentUrl = window.location.href
                     var category = getUrlParms(currentUrl)["category"]
                     url += "&category="+category
-                                        
+                    window.history.pushState('', '', '/products/?'+url)
                     jQuery.ajax({
-                        url: "http://localhost:8000/nogpo/search/"+url
+                        url: "http://localhost:8000/nogpo/search/?"+url
                     }).done(function(response) {
                         console.log(response)
                     })
