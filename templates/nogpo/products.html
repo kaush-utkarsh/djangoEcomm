@@ -155,7 +155,7 @@ jQuery(function($) {
                     url += "&category="+category
                                         
                     jQuery.ajax({
-                        url: "http://localhost:8000/nogpo/search/"+url
+                        url: "http://localhost:8000/nogpo/search?"+url
                     }).done(function(response) {
                         console.log(response)
                     })
