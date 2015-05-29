@@ -12,76 +12,67 @@ jQuery(function($) {
 });
 </script>
 
-<section class="container content">
+<section class="container content" style="margin-top: 130px;">
     <div class="row">
         <!-- Left column -->
         <aside class="col-sm-4 col-md-3 col-lg-3 content-aside">
-            <div class="block block-layered-nav">
-                <div class="block-title">
-                    <strong><span>Shop By</span></strong>
-                </div>
-                <div class="block-content">
-                    <p class="block-subtitle">Shopping Options</p>
-                    <!-- <p><strong>Category</strong></p> -->
-                   <!--  <dd>
-                        <ul class="simple-list">
-                            {% for item in res %}
-                            <li>– &nbsp;
-                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;cat=138&amp;mode=grid">{{ item.name }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </dd> -->
-                    <p><strong>Price</strong></p>
-                    <dd>
-                        <ul class="simple-list">
-                            <li>– &nbsp;
-                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;mode=grid&amp;price=-1000"><span class="price">$0.00</span> - <span class="price">$999.99</span></a> (23)
-                            </li>
-                            <li>– &nbsp;
-                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html?___store=fluidchat&amp;mode=grid&amp;price=1000-"><span class="price">$1,000.00</span> and above</a> (3)
-                            </li>
-                        </ul>
-                    </dd>
-                    <!-- <p><strong>Color</strong></p> -->
-                    <dd></dd>
-                    <script type="text/javascript">
-                    decorateDataList('narrow-by-list')
-                    </script>
-                </div>
-            </div>
-            <!-- Shop by categories -->
-            <div class="block block-navigation">
-                <div class="block-title">
-                    <strong><span>SHOP BY CATEGORIES</span></strong>
-                </div>
-                <div class="block-content">
-                    <ul class="expander-list">
-                        {% for item in res %}
-                        <li class="level{{ item.id }} nav-{{ item.id }} parent">
-                            <span class="name">
-                                <span class="expander">-</span>
-                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women.html">{{ item.name }}</a>
-                            </span>
-                            <ul class="level{{ item.id }}">
-                                {% for item_child in item.child %}
-                                <li class="level1 nav-{{ item_child.id }} parent">
-                                    <span class="name">
-                <span class="expander">-</span>
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/women/dresses.html">
-                                        <span class="glyphicon glyphicon-asterisk"></span>{{ item_child.name }}
-                                    </a>
-                                    </span>
-                                </li>
+            {% for filter in filters %}
+                {% if filter.type == 'range' %}
+                    <div class="block block-layered-nav">
+                        <div class="block-title">
+                            <strong><span>Filter By {{ filter.name }}</span></strong>
+                        </div>
+                        <div class="block-content">
+                            <dd>
+                                <b>$ {{ filter.lower }}</b>
+                                <input id="ex2" type="text" class="span2" value="" data-slider-min="{{ filter.lower }}" data-slider-max="{{ filter.upper }}" data-slider-step="5" data-slider-value="[{{ filter.lower }}, {{ filter.upper }}]"/>
+                                <b style="float: right; position: absolute; right: 0; top: 36px;">$ {{ filter.upper }}</b>
+                            </dd>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if filter.type == 'radio' %}
+                    <div class="block block-navigation">
+                        <div class="block-title">
+                            <strong><span>Filter By {{ filter.name }}</span></strong>
+                        </div>
+                        <div class="block-content">
+                            <ul>
+                                {% for key,value in filter.list.items %}
+                                    <li>
+                                        <input filter-type="{{ filter.type }}_{{ filter.name }}_{{ key }}" type="radio" class="radio" value="{{ key }}">
+                                        <span class="label"><label>{{ key }} ({{ value }})</label></span>
+                                    </li>
                                 {% endfor %}
                             </ul>
-                            {% endfor %}
-                    </ul>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if filter.type == 'term' %}
+                    <div class="block block-navigation">
+                        <div class="block-title">
+                            <strong><span>Filter By {{ filter.name }}</span></strong>
+                        </div>
+                        <div class="block-content">
+                            <ul>
+                                {% for key,value in filter.list.items %}
+                                    <li>
+                                        <input filter-type="{{ filter.type }}_{{ filter.name }}_{{ key }}" type="checkbox" class="checkbox" value="{{ key }}">
+                                        <span class="label"><label>{{ key }} ({{ value }})</label></span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="block block-navigation">
+                <div class="block-content">
+                    <button type="submit" title="Filter" class="button" id="filter"><span><span>Filter</span></span></button>
                 </div>
             </div>
-            <!-- //end Shop by categories -->
-            <!-- Products list -->
-            <div class="section-divider"></div>
         </aside>
         <!--Content -->
         <section class="col-sm-8 col-md-9 col-lg-9 content-center">
@@ -90,26 +81,28 @@ jQuery(function($) {
                 <button type="submit" class="btn btn-lg btn-success">Search</button>
             </form>
             <script type="text/javascript">
+                var slider = new Slider('#ex2', {});
+                function getUrlParms(url) {
+                    var parms = {},
+                        hash
+                    var hashes = url.slice(url.indexOf('?') + 1).split('&')
+
+                    for (var i = 0; i < hashes.length; i++) {
+                        hash = hashes[i].split('=')
+                        parms[hash[0]] = hash[1]
+                    }
+                    return parms
+                }
+
                 function getProducts(url) {
-                    if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('category=') != -1) {
-                        function getUrlParms(url) {
-                            var parms = {},
-                                hash
-                            var hashes = url.slice(url.indexOf('?') + 1).split('&')
-
-                            for (var i = 0; i < hashes.length; i++) {
-                                hash = hashes[i].split('=')
-                                parms[hash[0]] = hash[1]
-                            }
-                            return parms
-                        }
-
+                    if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('categories=') != -1) {
                         data = getUrlParms(url)
 
                         jQuery.ajax({
                             url: "/nogpo/search/",
                             data: data
-                        }).done(function(response){
+                        }).done(function(response) {
+                            response = response.products
                             jQuery('#products_list').empty()
                             var productLists = jQuery("#products_list")
                             var productTemplate = '';
@@ -142,6 +135,58 @@ jQuery(function($) {
                     }
                     window.history.pushState('', '', urlString)
                     getProducts(urlString)
+                })
+
+                jQuery("#filter").on("click", function() {
+                    var request = {}
+                    var url = ""
+                    var requestObject = {};
+                    jQuery("[filter-type]").each(function() {
+                        if (jQuery(this).is(":checked")) {
+                            var filterType =  jQuery(this).attr("filter-type")
+                            filterType = filterType.split("_")
+                            if(filterType[1] in requestObject) {
+                                requestObject[filterType[1]].push(jQuery(this).val())
+                            } else {
+                                requestObject[filterType[1]] = []
+                                requestObject[filterType[1]].push(jQuery(this).val())
+                            }
+                        }
+                    })
+
+                    console.log(requestObject)
+
+                    for(var each in requestObject) {
+                        url += '&'+each +'='+requestObject[each].join('|')
+                    }
+
+                    sliderValue = slider.getValue()
+                    url += '&price_l='+sliderValue[0]+'&price_h='+sliderValue[1]
+                    var currentUrl = window.location.href
+                    var categories = getUrlParms(currentUrl)["categories"]
+                    url += "&categories="+categories
+                    window.history.pushState('', '', '/products/?'+url)
+
+                    jQuery.ajax({
+                        url: "http://localhost:8000/nogpo/search/?"+url
+                    }).done(function(response) {
+                        response = response.products
+                        jQuery('#products_list').empty()
+                        var productLists = jQuery("#products_list")
+                        var productTemplate = '';
+
+                        for (var i = 0; i < response.length; i += 2) {
+                            if(response[i]) {
+                                var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="/product/'+response[i].id+'" class="preview-image"><img src="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" alt="'+response[i].name+'"><img src="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" class="product-retina img-responsive" data-image2x="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+response[i].price+'</span></span></div></div>'
+                                productLists.append(templateTwoImages)
+                            }
+
+                            if(response[i+1]) {
+                                var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="/product/'+response[i+1].id+'" class="preview-image"><img src="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" class="product-retina img-responsive" data-image2x="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+response[i+1].price+'</span></span></div></div>'
+                                productLists.append(templateOneImage)
+                            }
+                        }
+                    })
                 })
             </script>
             <br>
