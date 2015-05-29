@@ -168,7 +168,7 @@ jQuery(function($) {
                     window.history.pushState('', '', '/products/?'+url)
 
                     jQuery.ajax({
-                        url: "http://localhost:8000/nogpo/search/?"+url
+                        url: window.location.protocol+'//'+window.location.hostname+':'+window.location.port+"/nogpo/search/?"+url
                     }).done(function(response) {
                         response = response.products
                         jQuery('#products_list').empty()
