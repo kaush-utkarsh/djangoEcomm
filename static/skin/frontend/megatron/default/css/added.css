@@ -264,8 +264,8 @@ h1{padding-bottom: 20px}
 .product-view-ajax .ajax-loader {
     top: -40px;
 }
-.products-list-small .preview.hover-slide .preview-image {
-    height: 243px;
+.products-list-small .preview .preview-image {
+    height: 230px;
 }
 .products-list-small .preview.hover-slide .preview-image {
     height: 230px;

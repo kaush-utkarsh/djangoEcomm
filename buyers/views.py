@@ -32,14 +32,14 @@ class JSONResponse(HttpResponse):
 def get_search_url(string):
     if 'query' not in string.keys():
         url = baseurl
-        if 'category' in string.keys():
-            url = url + 'search?categories=' + string['category']
+        if 'categories' in string.keys():
+            url = url + 'search?categories=' + string['categories']
     else:
         url = baseurl + 'search?query=' + string['query']
         if 'page' in string.keys():
             url = url + '&page=' + string['page']
-        if 'category' in string.keys():
-            url = url + '&categories=' + string['category']
+        if 'categories' in string.keys():
+            url = url + '&categories=' + string['categories']
         if 'price_l' in string.keys():
              url = url + '&price_l=' + string['price_l']
         if 'price_h' in string.keys():
@@ -147,7 +147,26 @@ def search_backend(request):
 
 def search(request):
     if request.method == 'GET':
-        return JSONResponse(search_backend(request))
+        print "work"
+        url = baseurl + 'search?'
+        string = request.GET
+        print string
+        for a in string:
+            values = request.GET.getlist(a)
+            val = ''
+            for v in values:
+                if val == '':
+                    val = v
+                else:
+                    val = val + "|" + v
+            print val
+            url = url + a + '=' + val + '&'
+        print url
+        result = urllib2.urlopen(url)
+        result_json = json.load(result)
+        print result_json
+        return JSONResponse(result_json)
+        # return HttpResponse('work')
 
 def get_supplier(request):
     if request.method == 'GET':
