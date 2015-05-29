@@ -149,15 +149,31 @@ jQuery(function($) {
                     })
 
                     sliderValue = slider.getValue()
-                    url += '&slider_min='+sliderValue[0]+'&slider_max='+sliderValue[1]
+                    url += '&price_l='+sliderValue[0]+'&price_h='+sliderValue[1]
                     var currentUrl = window.location.href
                     var category = getUrlParms(currentUrl)["category"]
                     url += "&category="+category
                     window.history.pushState('', '', '/products/?'+url)
+
                     jQuery.ajax({
                         url: "http://localhost:8000/nogpo/search/?"+url
                     }).done(function(response) {
-                        console.log(response)
+                        response = response.products
+                        jQuery('#products_list').empty()
+                        var productLists = jQuery("#products_list")
+                        var productTemplate = '';
+
+                        for (var i = 0; i < response.length; i += 2) {
+                            if(response[i]) {
+                                var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="/product/'+response[i].id+'" class="preview-image"><img src="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" alt="'+response[i].name+'"><img src="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" class="product-retina img-responsive" data-image2x="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+response[i].price+'</span></span></div></div>'
+                                productLists.append(templateTwoImages)
+                            }
+
+                            if(response[i+1]) {
+                                var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="/product/'+response[i+1].id+'" class="preview-image"><img src="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" class="product-retina img-responsive" data-image2x="http://i01.i.aliimg.com/photo/v0/50001323285/Orthopedic_Medical_Devices.jpg" alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+response[i+1].price+'</span></span></div></div>'
+                                productLists.append(templateOneImage)
+                            }
+                        }
                     })
                 })
             </script>
