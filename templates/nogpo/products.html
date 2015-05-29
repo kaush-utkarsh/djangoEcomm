@@ -95,7 +95,7 @@ jQuery(function($) {
                 }
 
                 function getProducts(url) {
-                    if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('category=') != -1) {
+                    if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('categories=') != -1) {
                         data = getUrlParms(url)
 
                         jQuery.ajax({
@@ -140,19 +140,31 @@ jQuery(function($) {
                 jQuery("#filter").on("click", function() {
                     var request = {}
                     var url = ""
+                    var requestObject = {};
                     jQuery("[filter-type]").each(function() {
                         if (jQuery(this).is(":checked")) {
                             var filterType =  jQuery(this).attr("filter-type")
                             filterType = filterType.split("_")
-                            url += '&'+filterType[1]+'%5B%5D='+jQuery(this).val()
+                            if(filterType[1] in requestObject) {
+                                requestObject[filterType[1]].push(jQuery(this).val())
+                            } else {
+                                requestObject[filterType[1]] = []
+                                requestObject[filterType[1]].push(jQuery(this).val())
+                            }
                         }
                     })
+
+                    console.log(requestObject)
+
+                    for(var each in requestObject) {
+                        url += '&'+each +'='+requestObject[each].join('|')
+                    }
 
                     sliderValue = slider.getValue()
                     url += '&price_l='+sliderValue[0]+'&price_h='+sliderValue[1]
                     var currentUrl = window.location.href
-                    var category = getUrlParms(currentUrl)["category"]
-                    url += "&category="+category
+                    var categories = getUrlParms(currentUrl)["categories"]
+                    url += "&categories="+categories
                     window.history.pushState('', '', '/products/?'+url)
 
                     jQuery.ajax({
