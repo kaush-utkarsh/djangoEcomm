@@ -11,7 +11,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta
-from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart, create_cart_response
+from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart, create_cart_response,update_cart_price
 from django.template import Context, Template, loader
 
 baseurl = 'http://162.209.8.12:8080/'
@@ -308,6 +308,7 @@ def delete_from_cart(request):
         product = Cart_products.objects.get(subcart_id_id = subcart.id,product_id=productid,status=0)
         product.status = 1
         product.save()
+        update_cart_price(cart)
         response = create_cart_response(cart)
         return HttpResponse(json.dumps(response))
 
