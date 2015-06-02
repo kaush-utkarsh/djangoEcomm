@@ -103,7 +103,7 @@ def get_cart(cart):
             product_return_data['supplierid'] = subcart.supplierid
             product_return_data['product_id'] = str(product.product_id)
             product_return_data['delete_url'] = 'Yet to do'
-            product_return_data['product_image'] = 'http://www.mendell.com/images/Orthopedics.jpg'
+            product_return_data['product_image'] =  'http://162.209.8.12/nogpo-portal/portal/system/Catalog/' + str(productinfo['unspsc']) +'/' + productinfo['pictures'][0]['url']
             product_return_data['product_name'] = productinfo['name']
             product_return_data['quantity'] = str(product.no_of_items)
             product_return_data['price'] = float(product.price)

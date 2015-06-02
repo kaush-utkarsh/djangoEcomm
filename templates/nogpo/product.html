@@ -83,11 +83,12 @@
         <div class="col-sm-6 col-md-5 col-lg-5 mediaimages">
             <!--thumbnails bottom-->
             <!-- change product image here -->
-            <div class="large-image  hidden-xs"><img id="zoom192" class="cloudzoom" src="http://www.mendell.com/images/Orthopedics.jpg" alt="Swarovski crystal-embellished jersey dress" data-cloudzoom="zoomImage: 'http://www.mendell.com/images/Orthopedics.jpg',zoomSizeMode: 'image', autoInside : 991" /></div>
+            {% for pictures in data.pictures %} 
+            <div class="large-image  hidden-xs"><img id="zoom192" class="cloudzoom" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}" alt="Swarovski crystal-embellished jersey dress" data-cloudzoom="zoomImage: 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}',zoomSizeMode: 'image', autoInside : 991" /></div>
             <div class="hidden-xs flexslider flexslider-thumb">
                 <ul class="previews-list slides thumbs">
                     <!-- small image in down -->
-                    <li><img class='cloudzoom-gallery' alt="" src="http://www.mendell.com/images/Orthopedics.jpg" data-cloudzoom="useZoom: '#zoom192', image: 'http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_2.jpg', zoomImage: 'http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_2.jpg', autoInside : 991"></li>
+                    <li><img class='cloudzoom-gallery' alt="" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}" data-cloudzoom="useZoom: '#zoom192', image: 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}', zoomImage: 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}', autoInside : 991"></li>
                     <li>
                         <a class="various fancybox.iframe" href="http://www.youtube.com/embed/L9szn1QQfas"><img alt="#" class='fancybox-video' src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/images/video.png"></a>
                     </li>
@@ -100,6 +101,7 @@
                     </li>
                 </ul>
             </div>
+            {% endfor %}
             <div class="row">
                 <div class="col-md-12">
                     <div class="row" style="margin-bottom: 20px; margin-top: 50px;">
@@ -111,7 +113,7 @@
                             Price
                         </div>
                     </div>
-                    {% for merchant in data.merchants %}
+                    {% for merchant in data.merchants %} 
                         <div class="row">
                             <div class="col-xs-2">
                                 <input style="width: 25% !important;" type="radio" name="merchantId" onChange="makeRadioButtons()" value="{{ merchant.supplierId }},{{ merchant.price }}">
