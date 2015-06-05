@@ -151,7 +151,6 @@ def search(request):
         print "work"
         url = baseurl + 'search?'
         string = request.GET
-        print string
         for a in string:
             values = request.GET.getlist(a)
             val = ''
