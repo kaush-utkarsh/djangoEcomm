@@ -11,10 +11,11 @@
             <div class="page-title">
                 <h1>Checkout</h1>
             </div>
-            <script type="text/javascript" src="http://demo.ethemeuk.com/megatron/magento/demo/js/varien/accordion.js"></script>
-            <script type="text/javascript" src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/base/default/js/opcheckout.js"></script>
+            <script type="text/javascript" src="/static/skin/frontend/base/default/js/accordion.js"></script>
+            <script type="text/javascript" src="/static/skin/frontend/base/default/js/opcheckout.js"></script>
             <ol class="opc" id="checkoutSteps">
-                <li id="opc-login" class="section allow">
+            
+                <li id="opc-login" class="section {% if not user.is_authenticated %}allow{% endif %}">
                     <div class="step-title">
                         <span class="number">1</span>
                         <h2>Checkout Method</h2>
@@ -99,13 +100,14 @@
                         </script>
                     </div>
                 </li>
-                <li id="opc-billing" class="section allow">
+            
+                <li id="opc-billing" class="section {% if user.is_authenticated %}allow{% endif %}">
                     <div class="step-title">
                         <span class="number">2</span>
                         <h2>Billing Information</h2>
                         <a href="#">Edit</a>
                     </div>
-                    <div id="checkout-step-billing" class="step a-item" style="display:none;">
+                    <div id="checkout-step-billing" class="step a-item" {% if not user.is_authenticated %}style="display:none;"{% endif %}>
                         <form id="co-billing-form" action="">
                             <fieldset>
                                 <ul class="form-list">
@@ -452,20 +454,6 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="fields" id="register-customer-password">
-                                                    <div class="field">
-                                                        <label for="billing:customer_password" class="required"><em>*</em>Password</label>
-                                                        <div class="input-box">
-                                                            <input type="password" name="billing[customer_password]" id="billing:customer_password" title="Password" class="input-text required-entry validate-password" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="field">
-                                                        <label for="billing:confirm_password" class="required"><em>*</em>Confirm Password</label>
-                                                        <div class="input-box">
-                                                            <input type="password" name="billing[confirm_password]" title="Confirm Password" id="billing:confirm_password" class="input-text required-entry validate-cpassword" />
-                                                        </div>
-                                                    </div>
-                                                </li>
                                                 <li class="no-display">
                                                     <input type="hidden" name="billing[save_in_address_book]" value="1" />
                                                 </li>
@@ -534,7 +522,7 @@
                         </form>
                         <script type="text/javascript">
                         //<![CDATA[
-                        var billing = new Billing('co-billing-form', 'http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/onepage/getAddress/address/', 'http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/onepage/saveBilling/');
+                        var billing = new Billing('co-billing-form', '/user_meta_data', '/user_meta_data');
                         var billingForm = new VarienForm('co-billing-form');
 
                         //billingForm.setElementsRelation('billing:country_id', 'billing:region', 'http://demo.ethemeuk.com/megatron/magento/demo/index.php/directory/json/childRegion/', 'Select State/Province...');
