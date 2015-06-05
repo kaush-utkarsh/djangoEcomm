@@ -13,6 +13,7 @@ from rest_framework.decorators import api_view
 from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta
 from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart, create_cart_response,update_cart_price
 from django.template import Context, Template, loader
+from credit import current_credit
 
 baseurl = 'http://162.209.8.12:8080/'
 
@@ -271,16 +272,19 @@ def credits(request):
         user_id = get_userid(request)
         cart = Cart.objects.filter(userid=user_id)
         if len(cart)>0:
+            credit = current_credit(user_id)
             cart_data = get_cart(cart[0])
             data = {
                 "res": res,
                 "cart":cart_data,
-                "suppliers":suppliers
+                "suppliers":suppliers,
+                "credit": credit
             }
         else:
             data = {
              "res":res,
-             "suppliers":suppliers
+             "suppliers":suppliers,
+             "credit":"No credit from any supplier"
             }
         return render(request,"nogpo/credits.html", data)
     if request.method == "POST":
@@ -308,6 +312,8 @@ def delete_from_cart(request):
         product = Cart_products.objects.get(subcart_id_id = subcart.id,product_id=productid,status=0)
         product.status = 1
         product.save()
+        subcart.status = 1
+        subcart.save()
         update_cart_price(cart)
         response = create_cart_response(cart)
         return HttpResponse(json.dumps(response))
@@ -335,7 +341,7 @@ def credit_request_clearance(request):
         credit_expiry_date = request.POST.get('credit_expiry_date','')
         cleared_date = datetime.datetime.date()
         rejection_date = request.POST.get('rejection_date','')
-        credit = Credit_balance.objects.get(merchantid=merchantid).filter(userid=userid).filter(applied_date=applied_date)
+        credit = Credit_balance.objects.get(merchantid=merchantid).filter(userid=userid)
         credit.response_msg = response_msg
         credit.credit_status = credit_status
         credit.credit_expiry_date = credit_expiry_date
