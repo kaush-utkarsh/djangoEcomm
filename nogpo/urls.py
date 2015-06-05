@@ -23,5 +23,6 @@ urlpatterns = patterns('',
     url(r'^userproduct/delete/',views.delete_from_cart),
     url(r'^emptycart/', views.empty_cart),
     url(r'^suppliers/get/',views.get_supplier),
+    url(r'^usermeta/',views.meta),
 
 )

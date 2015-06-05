@@ -14,6 +14,7 @@ from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Paymen
 from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart, create_cart_response,update_cart_price
 from django.template import Context, Template, loader
 from credit import current_credit
+from usermeta import user_meta_data
 
 baseurl = 'http://162.209.8.12:8080/'
 
@@ -351,3 +352,7 @@ def credit_request_clearance(request):
         response = {'credit_approved':credit_approved,'merchantid':merchantid,'response_msg':response_msg}
         return HttpResponse(json.dumps(response))
 
+def address(request):
+    response = user_meta_data(request)
+
+    return HttpResponse(json.dumps(response))
