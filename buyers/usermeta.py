@@ -18,11 +18,18 @@ def user_meta_data(request):
         }
         return meta
     if request.method == "POST":
-        # data = request.POST
         metakey = request.POST.get('metakey','')
         metavalue = request.POST.get('metavalue','')
-        # print data
+        metavalue = create_dict(metavalue)
         userid = get_userid(request)
         user_meta = User_meta(userid=userid,metakey=metakey,metavalue=metavalue)
         user_meta.save()
         return "success"
+
+def create_dict(metavalue):
+    metadict = {}
+    for meta in metavalue:
+        for key,value in meta.iteritems():
+            metadict[key] = value
+
+    return metadict
