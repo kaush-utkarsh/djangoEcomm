@@ -13,6 +13,7 @@
             </div>
             <script type="text/javascript" src="/static/skin/frontend/base/default/js/accordion.js"></script>
             <script type="text/javascript" src="/static/skin/frontend/base/default/js/opcheckout.js"></script>
+            <script type="text/javascript" src="/static/js/customScripts.js"></script>
             <ol class="opc" id="checkoutSteps">
             
                 <li id="opc-login" class="section {% if not user.is_authenticated %}allow{% endif %}">
@@ -109,6 +110,7 @@
                     </div>
                     <div id="checkout-step-billing" class="step a-item" {% if not user.is_authenticated %}style="display:none;"{% endif %}>
                         <form id="co-billing-form" action="">
+                        {% csrf_token %}
                             <fieldset>
                                 <ul class="form-list">
                                     <li id="billing-new-address-form">
@@ -522,7 +524,7 @@
                         </form>
                         <script type="text/javascript">
                         //<![CDATA[
-                        var billing = new Billing('co-billing-form', '/user_meta_data', '/user_meta_data');
+                        var billing = new Billing('co-billing-form', '/usermeta/', '/usermeta/');
                         var billingForm = new VarienForm('co-billing-form');
 
                         //billingForm.setElementsRelation('billing:country_id', 'billing:region', 'http://demo.ethemeuk.com/megatron/magento/demo/index.php/directory/json/childRegion/', 'Select State/Province...');

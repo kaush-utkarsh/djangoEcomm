@@ -364,10 +364,10 @@ Billing.prototype = {
         var validator = new Validation(this.form);
         if (validator.validate()) {
             checkout.setLoadWaiting('billing');
-
-//            if ($('billing:use_for_shipping') && $('billing:use_for_shipping').checked) {
-//                $('billing:use_for_shipping').value=1;
-//            }
+            var rslt=[]
+            jQuery.each(jQuery('#co-billing-form').serializeArray(),function(i,item){
+            rslt[item.name]=item.value
+            })
 
             var request = new Ajax.Request(
                 this.saveUrl,
@@ -375,8 +375,7 @@ Billing.prototype = {
                     method: 'post',
                     onComplete: this.onComplete,
                     onSuccess: this.onSave,
-                    onFailure: checkout.ajaxFailure.bind(checkout),
-                    parameters: Form.serialize(this.form)
+                    parameters: {metakey:"billing", metavalue:JSON.stringify(rslt)}
                 }
             );
         }
