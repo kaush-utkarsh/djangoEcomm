@@ -2523,20 +2523,20 @@
                             <ul class="form-list">
                                 <li id="shipping-new-address-form">
                                     <fieldset>
-                                        <input type="hidden" name="shipping[address_id]" value="" id="shipping:address_id" />
+                                        <input type="hidden" name="address_id" value="" id="shipping:address_id" />
                                         <ul>
                                             <li class="fields">
                                                 <div class="customer-name">
                                                     <div class="field name-firstname">
                                                         <label for="shipping:firstname" class="required"><em>*</em>First Name</label>
                                                         <div class="input-box">
-                                                            <input type="text" id="shipping:firstname" name="shipping[firstname]" value="" title="First Name" maxlength="255" class="input-text required-entry" onchange="shipping.setSameAsBilling(false)" />
+                                                            <input type="text" id="shipping:firstname" name="firstname" value="" title="First Name" maxlength="255" class="input-text required-entry" onchange="shipping.setSameAsBilling(false)" />
                                                         </div>
                                                     </div>
                                                     <div class="field name-lastname">
                                                         <label for="shipping:lastname" class="required"><em>*</em>Last Name</label>
                                                         <div class="input-box">
-                                                            <input type="text" id="shipping:lastname" name="shipping[lastname]" value="" title="Last Name" maxlength="255" class="input-text required-entry" onchange="shipping.setSameAsBilling(false)" />
+                                                            <input type="text" id="shipping:lastname" name="lastname" value="" title="Last Name" maxlength="255" class="input-text required-entry" onchange="shipping.setSameAsBilling(false)" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2545,32 +2545,32 @@
                                                 <div class="fields">
                                                     <label for="shipping:company">Company</label>
                                                     <div class="input-box">
-                                                        <input type="text" id="shipping:company" name="shipping[company]" value="" title="Company" class="input-text " onchange="shipping.setSameAsBilling(false);" />
+                                                        <input type="text" id="shipping:company" name="company" value="" title="Company" class="input-text " onchange="shipping.setSameAsBilling(false);" />
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="wide">
                                                 <label for="shipping:street1" class="required"><em>*</em>Address</label>
                                                 <div class="input-box">
-                                                    <input type="text" title="Street Address" name="shipping[street][]" id="shipping:street1" value="" class="input-text  required-entry" onchange="shipping.setSameAsBilling(false);" />
+                                                    <input type="text" title="Street Address" name="street[]" id="shipping:street1" value="" class="input-text  required-entry" onchange="shipping.setSameAsBilling(false);" />
                                                 </div>
                                             </li>
                                             <li class="wide">
                                                 <div class="input-box">
-                                                    <input type="text" title="Street Address 2" name="shipping[street][]" id="shipping:street2" value="" class="input-text " onchange="shipping.setSameAsBilling(false);" />
+                                                    <input type="text" title="Street Address 2" name="street[]" id="shipping:street2" value="" class="input-text " onchange="shipping.setSameAsBilling(false);" />
                                                 </div>
                                             </li>
                                             <li class="fields">
                                                 <div class="field">
                                                     <label for="shipping:city" class="required"><em>*</em>City</label>
                                                     <div class="input-box">
-                                                        <input type="text" title="City" name="shipping[city]" value="" class="input-text  required-entry" id="shipping:city" onchange="shipping.setSameAsBilling(false);" />
+                                                        <input type="text" title="City" name="city" value="" class="input-text  required-entry" id="shipping:city" onchange="shipping.setSameAsBilling(false);" />
                                                     </div>
                                                 </div>
                                                 <div class="field">
                                                     <label for="shipping:region" class="required"><em>*</em>State/Province</label>
                                                     <div class="input-box">
-                                                        <select id="shipping:region_id" name="shipping[region_id]" title="State/Province" class="validate-select" style="display:none;">
+                                                        <select id="shipping:region_id" name="region_id" title="State/Province" class="validate-select" style="display:none;">
                                                             <option value="">Please select region, state or province</option>
                                                         </select>
                                                         <script type="text/javascript">
@@ -2578,7 +2578,7 @@
                                                         $('shipping:region_id').setAttribute('defaultValue', "");
                                                         //]]>
                                                         </script>
-                                                        <input type="text" id="shipping:region" name="shipping[region]" value="" title="State/Province" class="input-text regions" style="display:none;" />
+                                                        <input type="text" id="shipping:region" name="region" value="" title="State/Province" class="input-text regions" style="display:none;" />
                                                     </div>
                                                 </div>
                                             </li>
@@ -2586,13 +2586,13 @@
                                                 <div class="field">
                                                     <label for="shipping:postcode" class="required"><em>*</em>Zip/Postal Code</label>
                                                     <div class="input-box">
-                                                        <input type="text" title="Zip/Postal Code" name="shipping[postcode]" id="shipping:postcode" value="" class="input-text validate-zip-international  required-entry" onchange="shipping.setSameAsBilling(false);" />
+                                                        <input type="text" title="Zip/Postal Code" name="postcode" id="shipping:postcode" value="" class="input-text validate-zip-international  required-entry" onchange="shipping.setSameAsBilling(false);" />
                                                     </div>
                                                 </div>
                                                 <div class="field">
                                                     <label for="shipping:country_id" class="required"><em>*</em>Country</label>
                                                     <div class="input-box">
-                                                        <select name="shipping[country_id]" id="shipping:country_id" class="validate-select" title="Country" onchange="if(window.shipping)shipping.setSameAsBilling(false);">
+                                                        <select name="country_id" id="shipping:country_id" class="validate-select" title="Country" onchange="if(window.shipping)shipping.setSameAsBilling(false);">
                                                             <option value=""> </option>
                                                             <option value="AF">Afghanistan</option>
                                                             <option value="AX">Åland Islands</option>
@@ -2848,24 +2848,24 @@
                                                 <div class="field">
                                                     <label for="shipping:telephone" class="required"><em>*</em>Telephone</label>
                                                     <div class="input-box">
-                                                        <input type="text" name="shipping[telephone]" value="" title="Telephone" class="input-text  required-entry" id="shipping:telephone" onchange="shipping.setSameAsBilling(false);" />
+                                                        <input type="text" name="telephone" value="" title="Telephone" class="input-text  required-entry" id="shipping:telephone" onchange="shipping.setSameAsBilling(false);" />
                                                     </div>
                                                 </div>
                                                 <div class="field">
                                                     <label for="shipping:fax">Fax</label>
                                                     <div class="input-box">
-                                                        <input type="text" name="shipping[fax]" value="" title="Fax" class="input-text " id="shipping:fax" onchange="shipping.setSameAsBilling(false);" />
+                                                        <input type="text" name="fax" value="" title="Fax" class="input-text " id="shipping:fax" onchange="shipping.setSameAsBilling(false);" />
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="no-display">
-                                                <input type="hidden" name="shipping[save_in_address_book]" value="1" />
+                                                <input type="hidden" name="save_in_address_book" value="1" />
                                             </li>
                                         </ul>
                                     </fieldset>
                                 </li>
                                 <li class="control">
-                                    <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1" title="Use Billing Address" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" />
+                                    <input type="checkbox" name="same_as_billing" id="shipping:same_as_billing" value="1" title="Use Billing Address" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" />
                                     <label for="shipping:same_as_billing">Use Billing Address</label>
                                 </li>
                             </ul>
@@ -2881,8 +2881,7 @@
                         </form>
                         <script type="text/javascript">
                         //<![CDATA[
-                        var shipping = new Shipping('co-shipping-form', 'http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/onepage/getAddress/address/', 'http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/onepage/saveShipping/',
-                            'http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/onepage/shippingMethod/');
+                        var shipping = new Shipping('co-shipping-form', '/usermeta/', '/usermeta/');
                         var shippingForm = new VarienForm('co-shipping-form');
                         shippingForm.extraChildParams = ' onchange="shipping.setSameAsBilling(false);"';
                         //shippingForm.setElementsRelation('shipping:country_id', 'shipping:region', 'http://demo.ethemeuk.com/megatron/magento/demo/index.php/directory/json/childRegion/', 'Select State/Province...');

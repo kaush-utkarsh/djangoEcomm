@@ -286,6 +286,18 @@ Checkout.prototype = {
     }
 }
 
+
+function nextFunction(item)
+{
+    jQuery('#'+item).parents('li').find('div[class="step a-item"]').attr('style','display:none;')
+    jQuery('#'+item).parents('li').next().addClass('allow')
+    jQuery('#'+item).parents('li').next().find('div[class="step a-item"]').attr('style','display:block;')
+
+}
+
+
+
+
 // billing
 var Billing = Class.create();
 Billing.prototype = {
@@ -364,17 +376,13 @@ Billing.prototype = {
         var validator = new Validation(this.form);
         if (validator.validate()) {
             checkout.setLoadWaiting('billing');
-            // var rslt=[]
-            // jQuery.each(jQuery('#co-billing-form').serializeArray(),function(i,item){
-            // rslt[item.name]=item.value
-            // })
-
+            
             var request = new Ajax.Request(
                 this.saveUrl,
                 {
                     method: 'post',
                     onComplete: this.onComplete,
-                    onSuccess: this.onSave,
+                    onSuccess: nextFunction(this.form),
                     parameters: {metakey:"billing", metavalue:JSON.stringify(jQuery('#co-billing-form').serializeArray())}
                 }
             );
@@ -537,11 +545,10 @@ Shipping.prototype = {
             var request = new Ajax.Request(
                 this.saveUrl,
                 {
-                    method:'post',
+                    method: 'post',
                     onComplete: this.onComplete,
-                    onSuccess: this.onSave,
-                    onFailure: checkout.ajaxFailure.bind(checkout),
-                    parameters: Form.serialize(this.form)
+                    onSuccess: nextFunction(this.form),
+                    parameters: {metakey:"shipping", metavalue:JSON.stringify(jQuery('#co-shipping-form').serializeArray())}
                 }
             );
         }
