@@ -352,7 +352,7 @@ def credit_request_clearance(request):
         response = {'credit_approved':credit_approved,'merchantid':merchantid,'response_msg':response_msg}
         return HttpResponse(json.dumps(response))
 
-def address(request):
+def meta(request):
     response = user_meta_data(request)
 
     return HttpResponse(json.dumps(response))
