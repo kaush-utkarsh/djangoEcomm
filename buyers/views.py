@@ -352,7 +352,7 @@ def credit_request_clearance(request):
         response = {'credit_approved':credit_approved,'merchantid':merchantid,'response_msg':response_msg}
         return HttpResponse(json.dumps(response))
 
-
+@csrf_exempt
 def meta(request):
     # data = request
     # print data

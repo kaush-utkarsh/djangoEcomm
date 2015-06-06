@@ -1,6 +1,6 @@
 from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta
 from django.contrib.sessions.models import Session
-
+import json
 def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
     session_data = session.get_decoded()
@@ -20,7 +20,9 @@ def user_meta_data(request):
     if request.method == "POST":
         metakey = request.POST.get('metakey','')
         metavalue = request.POST.get('metavalue','')
-        metavalue = create_dict(metavalue)
+        metavalue = json.loads(str(metavalue))
+        metavalue=create_dict(metavalue)
+        
         userid = get_userid(request)
         user_meta = User_meta(userid=userid,metakey=metakey,metavalue=metavalue)
         user_meta.save()
@@ -29,7 +31,6 @@ def user_meta_data(request):
 def create_dict(metavalue):
     metadict = {}
     for meta in metavalue:
-        for key,value in meta.iteritems():
-            metadict[key] = value
+        metadict[meta['name']] = meta['value']
 
     return metadict
