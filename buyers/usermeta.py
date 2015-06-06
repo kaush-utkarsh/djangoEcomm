@@ -1,4 +1,5 @@
 from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta
+from django.contrib.sessions.models import Session
 
 def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
@@ -17,8 +18,10 @@ def user_meta_data(request):
         }
         return meta
     if request.method == "POST":
+        # data = request.POST
         metakey = request.POST.get('metakey','')
         metavalue = request.POST.get('metavalue','')
+        # print data
         userid = get_userid(request)
         user_meta = User_meta(userid=userid,metakey=metakey,metavalue=metavalue)
         user_meta.save()
