@@ -22,9 +22,12 @@ def user_meta_data(request):
         metavalue = request.POST.get('metavalue','')
         metavalue = json.loads(str(metavalue))
         metavalue=create_dict(metavalue)
-        
         userid = get_userid(request)
-        user_meta = User_meta(userid=userid,metakey=metakey,metavalue=metavalue)
+        try:
+            user_meta = User_meta.objects.get(userid=userid,metakey=metakey)
+            user_meta.metavalue = metavalue
+        except User_meta.DoesNotExist:
+            user_meta = User_meta(userid=userid,metakey=metakey,metavalue=metavalue)
         user_meta.save()
         return "success"
 
