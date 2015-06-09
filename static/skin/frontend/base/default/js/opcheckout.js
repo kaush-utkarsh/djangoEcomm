@@ -203,43 +203,43 @@ Checkout.prototype = {
         }
 
         // this refreshes the checkout progress column
-
-//        if ($('billing:use_for_shipping') && $('billing:use_for_shipping').checked){
-//            shipping.syncWithBilling();
-//            //this.setShipping();
-//            //shipping.save();
-//            $('opc-shipping').addClassName('allow');
-//            this.gotoSection('shipping_method');
-//        } else {
-//            $('shipping:same_as_billing').checked = false;
-//            this.gotoSection('shipping');
-//        }
-//        this.reloadProgressBlock();
-//        //this.accordion.openNextSection(true);
+/*
+       if ($('billing:use_for_shipping') && $('billing:use_for_shipping').checked){
+           shipping.syncWithBilling();
+           this.setShipping();
+           shipping.save();
+           $('opc-shipping').addClassName('allow');
+           this.gotoSection('shipping_method');
+       } else {
+           $('shipping:same_as_billing').checked = false;
+           this.gotoSection('shipping');
+       }
+       this.reloadProgressBlock();
+       this.accordion.openNextSection(true);*/
     },
 
     setShipping: function() {
-        //this.nextStep();
+        this.nextStep();
         this.gotoSection('shipping_method', true);
-        //this.accordion.openNextSection(true);
+        this.accordion.openNextSection(true);
     },
 
     setShippingMethod: function() {
-        //this.nextStep();
+        this.nextStep();
         this.gotoSection('payment', true);
-        //this.accordion.openNextSection(true);
+        this.accordion.openNextSection(true);
     },
 
     setPayment: function() {
-        //this.nextStep();
+        this.nextStep();
         this.gotoSection('review', true);
-        //this.accordion.openNextSection(true);
+        this.accordion.openNextSection(true);
     },
 
     setReview: function() {
         this.reloadProgressBlock();
-        //this.nextStep();
-        //this.accordion.openNextSection(true);
+        this.nextStep();
+        this.accordion.openNextSection(true);
     },
 
     back: function(){
@@ -427,7 +427,7 @@ Billing.prototype = {
         // DELETE
         //alert('error: ' + response.error + ' / redirect: ' + response.redirect + ' / shipping_methods_html: ' + response.shipping_methods_html);
         // This moves the accordion panels of one page checkout and updates the checkout progress
-        //checkout.setBilling();
+        checkout.setBilling();
     }
 }
 
@@ -504,7 +504,7 @@ Shipping.prototype = {
     setSameAsBilling: function(flag) {
         $('shipping:same_as_billing').checked = flag;
 // #5599. Also it hangs up, if the flag is not false
-//        $('billing:use_for_shipping_yes').checked = flag;
+       $('billing:use_for_shipping_yes').checked = flag;
         if (flag) {
             this.syncWithBilling();
         }
