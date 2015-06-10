@@ -15,96 +15,9 @@
             <script type="text/javascript" src="/static/skin/frontend/base/default/js/opcheckout.js"></script>
             <script type="text/javascript" src="/static/js/customScripts.js"></script>
             <ol class="opc" id="checkoutSteps">
-            
-                <li id="opc-login" class="section {% if not user.is_authenticated %}allow{% endif %}">
-                    <div class="step-title">
-                        <span class="number">1</span>
-                        <h2>Checkout Method</h2>
-                        <a href="#">Edit</a>
-                    </div>
-                    <div id="checkout-step-login" class="step a-item" style="display:none;">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <h3>Checkout as a Guest or Register</h3>
-                                <p>Register with us for future convenience:</p>
-                                <ul class="form-list">
-                                    <li class="control">
-                                        <input type="radio" name="checkout_method" id="login:guest" value="guest" class="radio" />
-                                        <label for="login:guest">Checkout as Guest</label>
-                                    </li>
-                                    <li class="control">
-                                        <input type="radio" name="checkout_method" id="login:register" value="register" class="radio" />
-                                        <label for="login:register">Register</label>
-                                    </li>
-                                </ul>
-                                <h4>Register and save time!</h4>
-                                <p>Register with us for future convenience:</p>
-                                <ul class="ul">
-                                    <li>Fast and easy check out</li>
-                                    <li>Easy access to your order history and status</li>
-                                </ul>
-                                <p class="required">&nbsp;</p>
-                                <button id="onepage-guest-register-button" type="button" class="btn btn-mega btn-xl" onclick="checkout.setMethod();"><i class="typcn typcn-arrow-right-thick"></i><span><span>Continue</span></span>
-                                </button>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <h3>Login</h3>
-                                <form id="login-form" action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/customer/account/loginPost/" method="post">
-                                    <input name="form_key" type="hidden" value="8PaXjZnRBHYFW4cx" />
-                                    <fieldset>
-                                        <h4>Already registered?</h4>
-                                        <p>Please log in below:</p>
-                                        <ul class="form-list">
-                                            <li>
-                                                <label for="login-email" class="required"><em>*</em>Email Address</label>
-                                                <div class="input-box">
-                                                    <input type="text" class="input-text required-entry validate-email" id="login-email" name="login[username]" value="" />
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <label for="login-password" class="required"><em>*</em>Password</label>
-                                                <div class="input-box">
-                                                    <input type="password" class="input-text required-entry" id="login-password" name="login[password]" />
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <input name="context" type="hidden" value="checkout" />
-                                    </fieldset>
-                                </form>
-                                <div class="buttons-set">
-                                    <p class="required">* Required Fields</p>
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/customer/account/forgotpassword/" class="f-left">Forgot your password?</a>
-                                    <button type="submit" class="btn btn-mega btn-xl" onclick="onepageLogin(this)"><i class="typcn typcn-lock-closed"></i><span><span>Login</span></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                        //<![CDATA[
-                        var loginForm = new VarienForm('login-form', true);
-                        $('login-email').observe('keypress', bindLoginPost);
-                        $('login-password').observe('keypress', bindLoginPost);
-
-                        function bindLoginPost(evt) {
-                            if (evt.keyCode == Event.KEY_RETURN) {
-                                loginForm.submit();
-                            }
-                        }
-
-                        function onepageLogin(button) {
-                            if (loginForm.validator && loginForm.validator.validate()) {
-                                button.disabled = true;
-                                loginForm.submit();
-                            }
-                        }
-                        //]]>
-                        </script>
-                    </div>
-                </li>
-            
                 <li id="opc-billing" class="section {% if user.is_authenticated %}allow{% endif %}">
                     <div class="step-title">
-                        <span class="number">2</span>
+                        <span class="number">1</span>
                         <h2>Billing Information</h2>
                         <a href="#">Edit</a>
                     </div>
@@ -2515,7 +2428,7 @@
                 </li>
                 <li id="opc-shipping" class="section">
                     <div class="step-title">
-                        <span class="number">3</span>
+                        <span class="number">2</span>
                         <h2>Shipping Information</h2>
                         <a href="#">Edit</a>
                     </div>
@@ -4860,7 +4773,7 @@
                 </li>
                 <li id="opc-shipping_method" class="section">
                     <div class="step-title">
-                        <span class="number">4</span>
+                        <span class="number">3</span>
                         <h2>Shipping Method</h2>
                         <a href="#">Edit</a>
                     </div>
@@ -4965,7 +4878,7 @@
                 </li>
                 <li id="opc-payment" class="section">
                     <div class="step-title">
-                        <span class="number">5</span>
+                        <span class="number">4</span>
                         <h2>Payment Information</h2>
                         <a href="#">Edit</a>
                     </div>
@@ -5024,7 +4937,7 @@
                 </li>
                 <li id="opc-review" class="section">
                     <div class="step-title">
-                        <span class="number">6</span>
+                        <span class="number">5</span>
                         <h2>Order Review</h2>
                         <a href="#">Edit</a>
                     </div>
