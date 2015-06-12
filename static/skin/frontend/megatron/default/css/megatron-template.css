@@ -4022,6 +4022,7 @@ _:valid\0, .contacts-form input.form-control, .contacts-form textarea.form-contr
 	text-transform:uppercase;
 	border-radius:0;
 	border:0;
+	font-size:19px;
 }
 .filters-by-category.header-filter li a.selected {
 	background: none;

@@ -10,17 +10,28 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta
-from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart, create_cart_response
+from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta,Hospitals,Ecommerce_user_hospital_link
+from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart, create_cart_response,update_cart_price
 from django.template import Context, Template, loader
+from credit import current_credit
+from usermeta import user_meta_data
 
 baseurl = 'http://162.209.8.12:8080/'
-
 def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
     session_data = session.get_decoded()
     uid = session_data.get('_auth_user_id')
     return uid
+def get_hospital(request):
+    hospitals = Hospitals.objects.all()
+    hospital_list = list()
+    response = {}
+    for hospital in hospitals:
+        response['id'] = hospital.id
+        response['name'] = hospital.name
+        hospital_list.append(response)
+        response = {}
+    return hospital_list
 
 #An HttpResponse that renders its content into JSON.
 class JSONResponse(HttpResponse):
@@ -71,11 +82,12 @@ def home(request):
 def products(request):
     res = categories(request)
     filter_data = search_backend(request)
-    print filter_data['filters']
+    # print filter_data['filters']
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
     if len(cart)>0:
         cart_data = get_cart(cart[0])
+        print cart_data
         data = {
             "res": res,
             "cart": cart_data,
@@ -150,7 +162,6 @@ def search(request):
         print "work"
         url = baseurl + 'search?'
         string = request.GET
-        print string
         for a in string:
             values = request.GET.getlist(a)
             val = ''
@@ -193,15 +204,7 @@ def add_to_cart(request):
         }
         response = current_cart(userid,supplierid,float(price)*int(no_of_items),cartproduct_data)
         return HttpResponse(json.dumps(response))
-    #     cart= Cart(userid=userid, status=0, checkout_date = datetime.datetime.today(),total_price=0)
-    #     cart.save()
-    #     subcart_data = {'supplierid':supplierid,'cart_id':cart.id,'total_price':float(price)*int(no_of_items)}
-    #     subcart = add_to_subcart(subcart_data,cart)
-    #     product_cart = add_to_cartproduct(cartproduct_data,subcart)
-    #     response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items,'subcart':subcart}
-    #     return  HttpResponse(json.dumps(price))
-    # else:
-    #     return render_to_response("nogpo/cart.html")
+
 def empty_cart(request):
     if request.method == 'POST':
         userid = get_userid(request)
@@ -209,22 +212,6 @@ def empty_cart(request):
         cart.status = 1
         cart.save()
         return HttpResponse('Success')
-
-# def add_to_existing_subcart(request):
-#     if request.method == 'POST':
-#         cart_id = request.POST.get('cart_id','')
-#         productid = request.POST.get('productid','')
-#         supplierid = request.POST.get('supplier_id','')
-#         price = request.POST.get('price','')
-#         no_of_items = request.POST.get('no_of_items','')
-#         subcart_data = {'supplierid':supplierid,'total_price':float(price)*int(no_of_items)}
-#         subcart_id = add_to_subcart(subcart_data)
-#         cartproduct_data = {'subcart_id':subcart_id,'product_id':productid,'no_of_items':no_of_items}
-#         product_cart = add_to_cartproduct(cartproduct_data)
-#         response = {'id':cart.id,'userid':userid,'productid':productid,'no_of_items':no_of_items,'subcart':subcart_id}
-#         return  HttpResponse(json.dumps(response))
-#     else:
-#         return render_to_response("nogpo/cart.html")
 
 
 @csrf_exempt
@@ -269,18 +256,22 @@ def credits(request):
         res = categories(request)
         suppliers = get_supplier(request)
         user_id = get_userid(request)
-        cart = Cart.objects.filter(userid=user_id)
+        cart = Cart.objects.filter(userid=user_id,status=0)
         if len(cart)>0:
+            credit = current_credit(user_id)
             cart_data = get_cart(cart[0])
+            print cart_data
             data = {
                 "res": res,
                 "cart":cart_data,
-                "suppliers":suppliers
+                "suppliers":suppliers,
+                "credit": credit
             }
         else:
             data = {
              "res":res,
-             "suppliers":suppliers
+             "suppliers":suppliers,
+             "credit":"No credit from any supplier"
             }
         return render(request,"nogpo/credits.html", data)
     if request.method == "POST":
@@ -297,6 +288,34 @@ def credits(request):
         print credit       
         return HttpResponseRedirect("/")
 
+def hospital(request):
+    if request.method == "GET":
+        res = categories(request)
+        hospitals = get_hospital(request)
+        user_id = get_userid(request)
+        cart = Cart.objects.filter(userid=user_id,status=0)
+        if len(cart) > 0:
+            cart_data = get_cart(cart[0])
+            data = {
+                "res": res,
+                "cart":cart_data,
+                "hospitals":hospitals
+            }
+        else:
+            data = {
+                "res": res,
+                "hospitals":hospitals
+            }
+        return render(request,"nogpo/hospital.html",data)
+    if request.method == "POST":
+        userid = get_userid(request)
+        hospital_id = request.POST.get('hospital_id','')
+        print hospital_id
+        print userid
+        relation = Ecommerce_user_hospital_link(user_id=userid,hospital_id=hospital_id)
+        relation.save()
+        return HttpResponseRedirect('/')
+
 @csrf_exempt
 def delete_from_cart(request):
     if request.method == 'POST':
@@ -308,6 +327,9 @@ def delete_from_cart(request):
         product = Cart_products.objects.get(subcart_id_id = subcart.id,product_id=productid,status=0)
         product.status = 1
         product.save()
+        subcart.status = 1
+        subcart.save()
+        update_cart_price(cart)
         response = create_cart_response(cart)
         return HttpResponse(json.dumps(response))
 
@@ -334,7 +356,7 @@ def credit_request_clearance(request):
         credit_expiry_date = request.POST.get('credit_expiry_date','')
         cleared_date = datetime.datetime.date()
         rejection_date = request.POST.get('rejection_date','')
-        credit = Credit_balance.objects.get(merchantid=merchantid).filter(userid=userid).filter(applied_date=applied_date)
+        credit = Credit_balance.objects.get(merchantid=merchantid).filter(userid=userid)
         credit.response_msg = response_msg
         credit.credit_status = credit_status
         credit.credit_expiry_date = credit_expiry_date
@@ -345,3 +367,10 @@ def credit_request_clearance(request):
         response = {'credit_approved':credit_approved,'merchantid':merchantid,'response_msg':response_msg}
         return HttpResponse(json.dumps(response))
 
+@csrf_exempt
+def meta(request):
+    # data = request
+    # print data
+    response = user_meta_data(request)
+    print response
+    return HttpResponse(json.dumps(response))

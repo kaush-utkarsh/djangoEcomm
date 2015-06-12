@@ -214,6 +214,7 @@
                                             <li><a href="#" title="My Wishlist">My Wishlist</a></li>
                                             <li><a href="/cart/" title="My Cart" class="top-link-cart">My Cart</a></li>
                                             <li><a href="/credits/" title="My Credits">My Credits</a></li>
+                                            <li><a href="/hospitals/" title="My Hospital">My Hospital</a></li>
                                             <li><a href="/checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
                                             <li class="divider"></li>
                                             <li class=" last"><a href="{% url 'auth_logout' %}?next=/" title="Log Out">Log Out</a></li>
@@ -281,22 +282,6 @@
                                         {% endif %}
                                     </div>
                                 </div>
-
-                                <!-- Search -->
-                                <form id="search_mini_form" action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalogsearch/result/" method="get" class="navbar-search form-inline hidden-xs pull-right " role="form">
-                                    <div class="form-group">
-                                        <button type="submit" class="button"><span class="icon-search-2"></span></button>
-                                        <input id="search" type="text" class="form-control" placeholder="Search" name="q" maxlength="128">
-                                    </div>
-                                    <div id="search_autocomplete"></div>
-                                    <!--<div id="search_autocomplete" class="search-autocomplete"></div>-->
-                                    <script type="text/javascript">
-                                    //<![CDATA[
-                                    var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Search');
-                                    searchForm.initAutocomplete('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalogsearch/ajax/suggest/', 'search_autocomplete');
-                                    //]]>
-                                    </script>
-                                </form>
                                 {% endif %}
                                 <!-- //end Search -->
                             </div>
@@ -318,10 +303,10 @@
                                                             <div class="wrapper-border">
                                                                 <div class="row">
                                                                     <!-- sub-caregories -->
-                                                                    <div class="col-xs-9">
+                                                                    <div class="col-xs-12">
                                                                         <div class="row">
                                                                             {% for item_child in item.child %}
-                                                                            <div class="col-xs-6 col-md-4 col-lg-6">
+                                                                            <div class="col-xs-4 col-md-4 col-lg-4">
                                                                                 <div class="level1 nav-1-{{ item_child.id }} parent submenu-block">
                                                                                     <ul>
                                                                                         <span class="glyphicon glyphicon-asterisk"></span>
@@ -334,11 +319,11 @@
                                                                             {% endfor %}
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-xs-3">
+                                                                    <!-- <div class="col-xs-1">
                                                                         <div class='img-fullheight'>
                                                                             <img class='img-responsiv' src='http://www.mendell.com/images/Orthopedics.jpg' alt=''>
                                                                         </div>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -353,11 +338,11 @@
                                                     <div class="wrapper-border">
                                                         <div class="row">
                                                             <!-- caregories -->
-                                                            <div class="col-xs-9">
+                                                            <div class="col-xs-12">
                                                                 <div class="row">
                                                                     {% for item in res %}
                                                                         {% if item.id >= 6 %}
-                                                                            <div class="col-xs-6 col-md-4 col-lg-4">
+                                                                            <div class="col-xs-6 col-md-4 col-lg-3">
                                                                                 <div class="level1 nav-1-{{ item.id }} parent submenu-block">
                                                                                     <ul>
                                                                                         <span class="glyphicon glyphicon-asterisk">&nbsp;</span>

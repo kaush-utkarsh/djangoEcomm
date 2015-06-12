@@ -1,4 +1,15 @@
 {% extends "nogpo/base.html" %} {% block content %}
+ <script type="text/javascript">
+                            function makeRadioButtons()
+                            {    
+                                var x = jQuery("input:radio[name=merchantId]:checked").val().split(',')[1];
+                                var y = document.getElementsByClassName("price");
+                                for (i = 0; i < y.length; i++) { 
+                                y[i].innerHTML = '$ '+x;
+                                }
+                            } 
+
+                        </script>
 <div class="hide-rich-snippets">
     <div itemscope itemtype="http://schema.org/Product">
         <meta itemprop="name" content="Swarovski crystal-embellished jersey dress" />
@@ -22,6 +33,7 @@
     display: none;
 }
 </style>
+
 <!-- Small Previews -->
 <section class="container hidden-xs">
     <div class="small-previews">
@@ -34,7 +46,7 @@
 <!-- //end Small Previews -->
 <section class="container" style = "margin-top: 130px;">
     <script type="text/javascript">
-    var optionsPrice = new Product.OptionsPrice({
+    window.optionsPrice = new Product.OptionsPrice({
         "productId": {{ data.id }},
         "priceFormat": {
             "pattern": "$%s",
@@ -71,11 +83,12 @@
         <div class="col-sm-6 col-md-5 col-lg-5 mediaimages">
             <!--thumbnails bottom-->
             <!-- change product image here -->
-            <div class="large-image  hidden-xs"><img id="zoom192" class="cloudzoom" src="http://www.mendell.com/images/Orthopedics.jpg" alt="Swarovski crystal-embellished jersey dress" data-cloudzoom="zoomImage: 'http://www.mendell.com/images/Orthopedics.jpg',zoomSizeMode: 'image', autoInside : 991" /></div>
+            {% for pictures in data.pictures %} 
+            <div class="large-image  hidden-xs"><img id="zoom192" class="cloudzoom" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}" alt="Swarovski crystal-embellished jersey dress" data-cloudzoom="zoomImage: 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}',zoomSizeMode: 'image', autoInside : 991" /></div>
             <div class="hidden-xs flexslider flexslider-thumb">
                 <ul class="previews-list slides thumbs">
                     <!-- small image in down -->
-                    <li><img class='cloudzoom-gallery' alt="" src="http://www.mendell.com/images/Orthopedics.jpg" data-cloudzoom="useZoom: '#zoom192', image: 'http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_2.jpg', zoomImage: 'http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_2.jpg', autoInside : 991"></li>
+                    <li><img class='cloudzoom-gallery' alt="" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}" data-cloudzoom="useZoom: '#zoom192', image: 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}', zoomImage: 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}', autoInside : 991"></li>
                     <li>
                         <a class="various fancybox.iframe" href="http://www.youtube.com/embed/L9szn1QQfas"><img alt="#" class='fancybox-video' src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/images/video.png"></a>
                     </li>
@@ -88,6 +101,7 @@
                     </li>
                 </ul>
             </div>
+            {% endfor %}
             <div class="row">
                 <div class="col-md-12">
                     <div class="row" style="margin-bottom: 20px; margin-top: 50px;">
@@ -99,10 +113,10 @@
                             Price
                         </div>
                     </div>
-                    {% for merchant in data.merchants %}
+                    {% for merchant in data.merchants %} 
                         <div class="row">
                             <div class="col-xs-2">
-                                <input style="width: 25% !important;" type="radio" name="merchantId" value="{{ merchant.supplierId }}">
+                                <input style="width: 25% !important;" type="radio" name="merchantId" onChange="makeRadioButtons()" value="{{ merchant.supplierId }},{{ merchant.price }}">
                             </div>
                             <div class="col-xs-5">
                                 <label>{{ merchant.supplierName }}</label>
@@ -111,7 +125,9 @@
                                 <label>{{ merchant.price }}</label>
                             </div>
                         </div>
+                        
                     {% endfor %}
+                   
                 </div>
                 <script type="text/javascript">
                     jQuery("input:radio[name=merchantId]:first").attr('checked', true);
@@ -182,7 +198,8 @@
                                 <p class="availability in-stock">Availability: <span>In stock</span></p>
                                 <div class="price-box">
                                     <span class="regular-price" id="product-price-192">
-                                            <span class="price">$ {{ data.price }}</span> </span>
+                                        <span class="price" id="data-price">$ {{ data.price }}</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -1174,7 +1191,7 @@
         var url = window.location.protocol+'//'+window.location.hostname+':'+window.location.port+'/add_to_cart/'
         var data = {
             "product_id": jQuery(button).attr("data-id"),
-            "supplier_id": jQuery("input:radio[name='merchantId']:checked").val(),
+            "supplier_id": jQuery("input:radio[name='merchantId']:checked").val().split(',')[0],
             "quantity": jQuery("#qty").val()
         }
         jQuery.ajax({
@@ -1253,4 +1270,6 @@
     //]]>
     </script>
 </section>
+
+
 {% endblock %}

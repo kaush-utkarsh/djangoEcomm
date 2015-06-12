@@ -1,1123 +1,858 @@
-{% extends "nogpo/base.html" %}
-
-{% block content %}
+{% extends "nogpo/base.html" %} {% block content %}
 <script type="text/javascript" src="http://demo.ethemeuk.com/megatron/magento/demo/js/etheme/megatron/jquery.rw-slider.js"></script>
-<script type="text/javascript" >
-    jQuery(function ($) {
-        "use strict";
-        $( ".rw-slider" ).rwSlider({
-            swipe: true
-        });
-
-        $( ".rw-slider .scroll-down" ).click(function() {
-            $( "html, body" ).animate({
-                scrollTop: $(".rw-slider").height()
-            }, 400);
-        });
-
-        $(window).scroll(function () {
-            if ( $(window).scrollTop() > 0) {$(".rw-slider .scroll-down").stop(true.false).fadeOut()}
-            else {$(".rw-slider .scroll-down").stop(true.false).fadeIn()}
-        })
+<script type="text/javascript">
+jQuery(function($) {
+    "use strict";
+    $(".rw-slider").rwSlider({
+        swipe: true
     });
 
+    $(".rw-slider .scroll-down").click(function() {
+        $("html, body").animate({
+            scrollTop: $(".rw-slider").height()
+        }, 400);
+    });
 
-
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 0) {
+            $(".rw-slider .scroll-down").stop(true.false).fadeOut()
+        } else {
+            $(".rw-slider .scroll-down").stop(true.false).fadeIn()
+        }
+    })
+});
 </script>
 <!-- Slider MEGATRON-->
 <section class="main-slider rw-slider hidden-xs hidden-sm hidden-md">
     <ul>
-                        <li>
-                    <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/etheme/megatron/megatronrw/slider-main-back-01.jpg" data-rw-slider="main: true; move: true;" alt=""></a>
-                    <a href="#" style="position: absolute; left:0.1%;top:36%;width:100%;text-align: center">
-                        <span style='font:15.9em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.06em'>Sale</span><span style='font:5.5em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;letter-spacing:-.08em'>up to 40% OFF</span>                    </a>
-                </li>
-                                <li>
-                    <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/etheme/megatron/megatronrw/slider-main-back-02s.jpg" data-rw-slider="main: true; move: true;" alt=""></a>
-                    <a href="#" style="position: absolute; left:8%;top:44%;width:86%;">
-                        <span style='margin-left:-.06em;font:10.8em/0.7em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9; text-transform:uppercase;letter-spacing:-.06em'>New</span><span style='font:3.7em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff; opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>collection</span><span style='font:4.6em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>AUTUMN 2014</span>                    </a>
-                </li>
-                                <li>
-                    <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/etheme/megatron/megatronrw/slider-main-back-03.jpg" data-rw-slider="main: true; move: true;" alt=""></a>
-                    <a href="#" style="position: absolute; left:50%;top:21%;width:44%;">
-                        <span style='margin-left:-.06em;font:10.2em/0.75em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.06em'>Special offer</span><span style='padding:.3em 0 .5em;font:5.5em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;letter-spacing:-.08em'>Save money with Lingerie SALE</span><span style='font:2.3em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>Up to 50% OFF</span>                    </a>
-                </li>
-                    </ul>
-        <a href="#" class="control prev animate-scale"><span class="icon-arrow-left-5"></span></a>
+        <li>
+            <a href="#"><img src="/static/images/dvices-image.jpg" data-rw-slider="main: true; move: true;" alt=""></a>
+            <a href="#" style="position: absolute; left:0.1%;top:36%;width:100%;text-align: center">
+                <span style='font:15.9em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.06em'>Sale</span><span style='font:5.5em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;letter-spacing:-.08em'>up to 40% OFF</span> </a>
+        </li>
+        <li>
+            <a href="#"><img src="/static/images/sony-surgical.jpg" data-rw-slider="main: true; move: true;" alt=""></a>
+            <a href="#" style="position: absolute; left:8%;top:44%;width:86%;">
+                <span style='margin-left:-.06em;font:10.8em/0.7em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9; text-transform:uppercase;letter-spacing:-.06em'>New</span><span style='font:3.7em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff; opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>collection</span><span style='font:4.6em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>AUTUMN 2014</span> </a>
+        </li> 
+        <li>
+            <a href="#"><img src="/static/images/medical-devices.jpeg" data-rw-slider="main: true; move: true;" alt=""></a>
+            <a href="#" style="position: absolute; left:50%;top:21%;width:44%;">
+                <span style='margin-left:-.06em;font:10.2em/0.75em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.06em'>Special offer</span><span style='padding:.3em 0 .5em;font:5.5em/0.9em Mavenpro-medium, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;letter-spacing:-.08em'>Save money with Medico SALE</span><span style='font:2.3em/0.9em Mavenpro-black, Arial, Helvetica, sans-serif;color:#fff;opacity:.9;text-transform:uppercase;letter-spacing:-.08em'>Up to 50% OFF</span> </a>
+        </li>
+    </ul>
+    <a href="#" class="control prev animate-scale"><span class="icon-arrow-left-5"></span></a>
     <a href="#" class="control next animate-scale"><span class="icon-untitled"></span></a>
-            <a href="#" class="scroll-down animate-move-down"> <span class="icon icon-arrow-down"></span> scroll to view content </a>
-    </section>
+    <a href="#" class="scroll-down animate-move-down"> <span class="icon icon-arrow-down"></span> scroll to view content </a>
+</section>
 <!-- //end Slider -->
-                <div class="std"><section class="container content slider-products">
-                <!-- Filters -->
-                  <section class="filters-by-category header-filter clearfix">
-                    <ul class="option-set" data-option-key="filter">
- <li><a href="#filter" data-option-value=".category_id_226">Women</a></li>
-                      <li>/</li>
-                      <li><a href="#filter" data-option-value=".category_id_227" class="selected">Men</a></li>
-                      <li>/</li>
-                     
-                      <li><a href="#filter" data-option-value=".category_id_228">Unisex</a></li>
-                    </ul>
-                  </section>
-                <!-- //end Filters -->
+<div class="std">
+    <section class="container content slider-products">
+        <!-- Filters -->
+        <section class="filters-by-category header-filter clearfix">
+            <ul class="option-set" data-option-key="filter">
+                <li><a href="#filter" data-option-value=".category_id_226">Cardiology</a></li>
+                <li>/</li>
+                <li><a href="#filter" data-option-value=".category_id_227" class="selected">Orthopedic Rehabiliation</a></li>
+                <li>/</li>
+                <li><a href="#filter" data-option-value=".category_id_228">Orthopedic Trauma Care</a></li>
+            </ul>
 
+<!-- http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/paisley-print-stretch.html -->
+        </section>
+        <!-- //end Filters -->
+        <!-- Isotope Products -->
+        <!-- Products list -->
+        <div class="row">
+            <div class="products-list-isotope">
+                <div class="product-preview category_id_226 ">
+                    <div class="preview animate scale hover-slide">
+                        <a href="/product/2564" class="preview-image">
+                            <img src="/static/images/machine.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/2/_/2_3.jpg" alt="Paisley-print stretch">
+                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/3/_/3_2_2.jpg" alt="Paisley-print stretch">
+                        </a>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/230/form_key/IZgMB6Mic63XIbmd/',230);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/230/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',230);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" href="#"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('230')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/2564" title="Paisley-print stretch">Ekg leadwire</a></h3>
+                    <div class="price-box">
+                        <span class="regular-price" id="product-price-230">
+                                            <span class="price">$10.00</span> </span>
+                    </div>
+                </div>
 
-                <!-- Isotope Products -->
-                    <!-- Products list -->
-                    <div class="row">
-                    <div class="products-list-isotope">
-                     <div class="product-preview category_id_226 ">
-<div class="preview animate scale hover-slide">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/paisley-print-stretch.html" class="preview-image" >
-<img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/2/_/2_3.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/2/_/2_3.jpg"    alt="Paisley-print stretch">
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/3/_/3_2_2.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/3/_/3_2_2.jpg"  alt="Paisley-print stretch">
-</a>
+                <div class="product-preview category_id_226 ">
+                    <div class="preview animate scale ">
+                        <a href="/product/3" class="preview-image">
+                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/2/0/20140121140839_000823040_1.jpg" alt="Rose-print bandage dress">
+                        </a>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/187/form_key/IZgMB6Mic63XIbmd/',187);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/187/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',187);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/187/form_key/IZgMB6Mic63XIbmd/','187')"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('187')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/3" title="Rose-print bandage dress">Andra xxl</a></h3>
+                    <div class="price-box">
+                        <span class="regular-price" id="product-price-187">
+                                            <span class="price">$240.00</span> </span>
+                    </div>
+                </div>
 
+                <div class="product-preview category_id_226 ">
+                    <div class="preview animate scale hover-slide">
+                        <a href="/product/1649" class="preview-image">
+                            <img src="/static/images/machine.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31027-d99d-11e2-b1f8-525400a54919_6.jpg" alt="Azrouel Dress">
+                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31027-d99d-11e2-b1f8-525400a54919_1.jpg" alt="Azrouel Dress">
+                        </a>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/175/form_key/IZgMB6Mic63XIbmd/',175);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/175/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',175);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/175/form_key/IZgMB6Mic63XIbmd/','175')"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('175')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/1649" title="Azrouel Dress">Miller</a></h3>
+                    <div class="price-box">
+                        <span class="regular-price" id="product-price-175">
+                                            <span class="price">$240.00</span> </span>
+                    </div>
+                </div>
 
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/230/form_key/IZgMB6Mic63XIbmd/',230);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/230/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',230);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/paisley-print-stretch.html"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/230/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('230')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/paisley-print-stretch.html" title="Paisley-print stretch">Paisley-print stretch</a></h3>
-
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-230">
-                                            <span class="price">$125.00</span>                                    </span>
-                        
-        </div>
-
-
-</div>                    <div class="product-preview category_id_226 ">
-<div class="preview animate scale ">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/rose-print-bandage-dress.html" class="preview-image" >
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/2/0/20140121140839_000823040_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/2/0/20140121140839_000823040_1.jpg"  alt="Rose-print bandage dress">
-</a>
-
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/187/form_key/IZgMB6Mic63XIbmd/',187);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/187/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',187);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/187/form_key/IZgMB6Mic63XIbmd/','187')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/187/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-<span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('187')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/rose-print-bandage-dress.html" title="Rose-print bandage dress">Rose-print bandage dress</a></h3>
-
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-187">
-                                            <span class="price">$240.00</span>                                    </span>
-                        
-        </div>
-
-
-</div>                    <div class="product-preview category_id_226 ">
-<div class="preview animate scale hover-slide">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/azrouel-dress.html" class="preview-image" >
-<img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31027-d99d-11e2-b1f8-525400a54919_6.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31027-d99d-11e2-b1f8-525400a54919_6.jpg"    alt="Azrouel Dress">
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31027-d99d-11e2-b1f8-525400a54919_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31027-d99d-11e2-b1f8-525400a54919_1.jpg"  alt="Azrouel Dress">
-</a>
-
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/175/form_key/IZgMB6Mic63XIbmd/',175);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/175/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',175);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/175/form_key/IZgMB6Mic63XIbmd/','175')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/175/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-<span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('175')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/azrouel-dress.html" title="Azrouel Dress">Azrouel Dress</a></h3>
-
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-175">
-                                            <span class="price">$240.00</span>                                    </span>
-                        
-        </div>
-
-
-</div>                    <div class="product-preview category_id_226 ">
-<div class="preview animate scale hover-slide">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/twill-crop-jacket.html" class="preview-image" >
-<img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/c/7/c7c01656-d4ad-11e1-9cab-eec9795b5349_4.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/c/7/c7c01656-d4ad-11e1-9cab-eec9795b5349_4.jpg"    alt="Twill Crop Jacket">
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/c/7/c7c01656-d4ad-11e1-9cab-eec9795b5349_3.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/c/7/c7c01656-d4ad-11e1-9cab-eec9795b5349_3.jpg"  alt="Twill Crop Jacket">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-18%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/190/form_key/IZgMB6Mic63XIbmd/',190);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/190/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',190);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/twill-crop-jacket.html"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/190/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-<span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('190')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-women/twill-crop-jacket.html" title="Twill Crop Jacket">Twill Crop Jacket</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-190">
+                <div class="product-preview category_id_226 ">
+                    <div class="preview animate scale hover-slide">
+                        <a href="/product/2566" class="preview-image">
+                            <img src="/static/images/machine.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/c/7/c7c01656-d4ad-11e1-9cab-eec9795b5349_4.jpg" alt="Twill Crop Jacket">
+                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/c/7/c7c01656-d4ad-11e1-9cab-eec9795b5349_3.jpg" alt="Twill Crop Jacket">
+                        </a>
+                        <ul class="product-controls-list right">
+                            <li><span class="label label-sale">Sale</span></li>
+                            <li><span class="label">-18%</span></li>
+                        </ul>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/190/form_key/IZgMB6Mic63XIbmd/',190);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/190/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',190);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" href="#"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('190')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/2566" title="Twill Crop Jacket">Ekg Cable</a></h3>
+                    <div class="price-box">
+                        <p class="old-price">
+                            <span class="price-label">Regular Price:</span>
+                            <span class="price" id="old-price-190">
                     $490.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-190">
+                        </p>
+                        <p class="special-price">
+                            <span class="price-label">Special Price</span>
+                            <span class="price" id="product-price-190">
                     $400.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>                       
-                     <div class="product-preview category_id_227 ">
-<div class="preview animate scale hover-slide">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/vintage-varsity-jacket-with-floral-tapestry-panel.html" class="preview-image" >
-<img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/1/6/16_3.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/6/16_3.jpg"    alt="Vintage Varsity Jacket with Floral Panel">
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/1/6/16_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/6/16_1.jpg"  alt="Vintage Varsity Jacket with Floral Panel">
-</a>
-
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/203/form_key/IZgMB6Mic63XIbmd/',203);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/203/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',203);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/203/form_key/IZgMB6Mic63XIbmd/','203')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/203/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('203')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/vintage-varsity-jacket-with-floral-tapestry-panel.html" title="Vintage Varsity Jacket with Floral Panel">Vintage Varsity Jacket with Floral Panel</a></h3>
-
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-203">
-                                            <span class="price">$770.00</span>                                    </span>
-                        
-        </div>
-
-
-</div>                    <div class="product-preview category_id_227 ">
-<div class="preview animate scale hover-slide">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/bomber-jacket.html" class="preview-image" >
-<img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/1/2/12_3.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/2/12_3.jpg"    alt="Bomber Jacket">
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/1/2/12_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/2/12_1.jpg"  alt="Bomber Jacket">
-</a>
-
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/207/form_key/IZgMB6Mic63XIbmd/',207);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/207/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',207);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/bomber-jacket.html"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/207/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('207')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/bomber-jacket.html" title="Bomber Jacket">Bomber Jacket</a></h3>
-
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-207">
-                                            <span class="price">$140.00</span>                                    </span>
-                        
-        </div>
-
-
-</div>                    <div class="product-preview category_id_227 ">
-<div class="preview animate scale ">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/barbour-heritage-fit-liddesdale-jacket.html" class="preview-image" >
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/1/1/11_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/1/11_1.jpg"  alt="Barbour Heritage Fit Liddesdale Jacket">
-</a>
-
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/208/form_key/IZgMB6Mic63XIbmd/',208);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/208/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',208);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/208/form_key/IZgMB6Mic63XIbmd/','208')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/208/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('208')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/barbour-heritage-fit-liddesdale-jacket.html" title="Barbour Heritage Fit Liddesdale Jacket">Barbour Heritage Fit Liddesdale Jacket</a></h3>
-
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-208">
-                                            <span class="price">$220.00</span>                                    </span>
-                        
-        </div>
-
-
-</div>                    <div class="product-preview category_id_227 ">
-<div class="preview animate scale hover-slide">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/wool-baseball-jacket.html" class="preview-image" >
-<img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/8/_/8_3.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/8/_/8_3.jpg"    alt="Wool Jacket">
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/8/_/8_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/8/_/8_1.jpg"  alt="Wool Jacket">
-</a>
-
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/210/form_key/IZgMB6Mic63XIbmd/',210);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/210/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',210);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/wool-baseball-jacket.html"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/210/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-<span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('210')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/tab-men/wool-baseball-jacket.html" title="Wool Jacket">Wool Jacket</a></h3>
-
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-210">
-                                            <span class="price">$560.00</span>                                    </span>
-                        
-        </div>
-
-
-</div>    
-                   
-                                        <div class="product-preview category_id_228 ">
-<div class="preview animate scale ">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/unisex/bandage-dress.html" class="preview-image" >
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/5/0/50c1cd75-5e33-11e2-8dbc-dfdfe0d314c0_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/5/0/50c1cd75-5e33-11e2-8dbc-dfdfe0d314c0_1.jpg"  alt="Bandage dress">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-19%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/176/form_key/IZgMB6Mic63XIbmd/',176);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/176/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',176);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/unisex/bandage-dress.html"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/176/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('176')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/unisex/bandage-dress.html" title="Bandage dress">Bandage dress</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-176">
+                        </p>
+                    </div>
+                </div>
+                <div class="product-preview category_id_227 ">
+                    <div class="preview animate scale hover-slide">
+                        <a href="/product/1234" class="preview-image">
+                            <img src="/static/images/machine.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/6/16_3.jpg" alt="Vintage Varsity Jacket with Floral Panel">
+                            <img src="/static/images/machine.jpg    " class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/2/12_1.jpg" alt="Bomber Jacket">
+                        </a>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/203/form_key/IZgMB6Mic63XIbmd/',203);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/203/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',203);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/203/form_key/IZgMB6Mic63XIbmd/','203')"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('203')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/1234" title="Vintage Varsity Jacket with Floral Panel">Sealtight</a></h3>
+                    <div class="price-box">
+                        <span class="regular-price" id="product-price-203">
+                                            <span class="price">$770.00</span> </span>
+                    </div>
+                </div>
+                <div class="product-preview category_id_227 ">
+                    <div class="preview animate scale hover-slide">
+                        <a href="/product/2413" class="preview-image">
+                            <img src="/static/images/machine.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/2/12_3.jpg" alt="Bomber Jacket">
+                            <img src="/static/images/machine.jpg    " class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/2/12_1.jpg" alt="Bomber Jacket">
+                        </a>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/207/form_key/IZgMB6Mic63XIbmd/',207);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/207/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',207);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" href="/product/2413"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('207')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/2413" title="Bomber Jacket">Sach limb</a></h3>
+                    <div class="price-box">
+                        <span class="regular-price" id="product-price-207">
+                                            <span class="price">$140.00</span> </span>
+                    </div>
+                </div>
+                <div class="product-preview category_id_227 ">
+                    <div class="preview animate scale ">
+                        <a href="/product/3386" class="preview-image">
+                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/1/1/11_1.jpg" alt="Barbour Heritage Fit Liddesdale Jacket">
+                        </a>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/208/form_key/IZgMB6Mic63XIbmd/',208);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/208/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',208);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/208/form_key/IZgMB6Mic63XIbmd/','208')"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('208')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/3386" title="Barbour Heritage Fit Liddesdale Jacket">Ankle foot orthosis</a></h3>
+                    <div class="price-box">
+                        <span class="regular-price" id="product-price-208">
+                                            <span class="price">$220.00</span> </span>
+                    </div>
+                </div>
+                <div class="product-preview category_id_227 ">
+                    <div class="preview animate scale hover-slide">
+                        <a href="/product/3392" class="preview-image">
+                            <img src="/static/images/machine.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/8/_/8_3.jpg" alt="Wool Jacket">
+                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/8/_/8_1.jpg" alt="Wool Jacket">
+                        </a>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/210/form_key/IZgMB6Mic63XIbmd/',210);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/210/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',210);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" href="/product/3392"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('210')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/3392" title="Wool Jacket">Slingshot 3</a></h3>
+                    <div class="price-box">
+                        <span class="regular-price" id="product-price-210">
+                                            <span class="price">$560.00</span> </span>
+                    </div>
+                </div>
+                <div class="product-preview category_id_228 ">
+                    <div class="preview animate scale ">
+                        <a href="/product/2034" class="preview-image">
+                            <img src="/static/images/machine2.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/5/0/50c1cd75-5e33-11e2-8dbc-dfdfe0d314c0_1.jpg" alt="Bandage dress">
+                        </a>
+                        <ul class="product-controls-list right">
+                            <li><span class="label label-sale">Sale</span></li>
+                            <li><span class="label">-19%</span></li>
+                        </ul>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/176/form_key/IZgMB6Mic63XIbmd/',176);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/176/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',176);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" href="/product/2034"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('176')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/2034" title="Bandage dress">Expert</a></h3>
+                    <div class="price-box">
+                        <p class="old-price">
+                            <span class="price-label">Regular Price:</span>
+                            <span class="price" id="old-price-176">
                     $850.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-176">
+                        </p>
+                        <p class="special-price">
+                            <span class="price-label">Special Price</span>
+                            <span class="price" id="product-price-176">
                     $690.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>                    <div class="product-preview category_id_228 ">
-<div class="preview animate scale ">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/unisex/laced-paneled-bandage-dress.html" class="preview-image" >
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/d/c/dcc301b8-0fb4-11e3-b218-525400a54919_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/c/dcc301b8-0fb4-11e3-b218-525400a54919_1.jpg"  alt="Laced-paneled bandage dress">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-32%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/177/form_key/IZgMB6Mic63XIbmd/',177);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/177/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',177);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/177/form_key/IZgMB6Mic63XIbmd/','177')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/177/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('177')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/unisex/laced-paneled-bandage-dress.html" title="Laced-paneled bandage dress">Laced-paneled bandage dress</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-177">
+                        </p>
+                    </div>
+                </div>
+                <div class="product-preview category_id_228 ">
+                    <div class="preview animate scale ">
+                        <a href="/product/2129" class="preview-image">
+                            <img src="/static/images/machine2.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/c/dcc301b8-0fb4-11e3-b218-525400a54919_1.jpg" alt="Laced-paneled bandage dress">
+                        </a>
+                        <ul class="product-controls-list right">
+                            <li><span class="label label-sale">Sale</span></li>
+                            <li><span class="label">-32%</span></li>
+                        </ul>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/177/form_key/IZgMB6Mic63XIbmd/',177);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/177/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',177);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/177/form_key/IZgMB6Mic63XIbmd/','177')"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('177')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/2129" title="Laced-paneled bandage dress">Eight-plate</a></h3>
+                    <div class="price-box">
+                        <p class="old-price">
+                            <span class="price-label">Regular Price:</span>
+                            <span class="price" id="old-price-177">
                     $2,200.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-177">
+                        </p>
+                        <p class="special-price">
+                            <span class="price-label">Special Price</span>
+                            <span class="price" id="product-price-177">
                     $1,500.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>                    <div class="product-preview category_id_228 ">
-<div class="preview animate scale hover-slide">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/unisex/cozy-draped-silk-blend-cardigan.html" class="preview-image" >
-<img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/d/6/d65d3d6a-f8c0-11e1-b0a2-8b516ba7b3c1_3.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/6/d65d3d6a-f8c0-11e1-b0a2-8b516ba7b3c1_3.jpg"    alt="Cozy draped silk-blend cardigan">
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/d/6/d65d3d6a-f8c0-11e1-b0a2-8b516ba7b3c1_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/6/d65d3d6a-f8c0-11e1-b0a2-8b516ba7b3c1_1.jpg"  alt="Cozy draped silk-blend cardigan">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-15%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/178/form_key/IZgMB6Mic63XIbmd/',178);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/178/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',178);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/178/form_key/IZgMB6Mic63XIbmd/','178')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/popup/product_id/178/"  class="quick-view hidden-xs fancybox fancybox.ajax">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('178')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/unisex/cozy-draped-silk-blend-cardigan.html" title="Cozy draped silk-blend cardigan">Cozy draped silk-blend cardigan</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-178">
+                        </p>
+                    </div>
+                </div>
+                <div class="product-preview category_id_228 ">
+                    <div class="preview animate scale hover-slide">
+                        <a href="/product/3364" class="preview-image">
+                            <img src="/static/images/machine2.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/6/d65d3d6a-f8c0-11e1-b0a2-8b516ba7b3c1_3.jpg" alt="Cozy draped silk-blend cardigan">
+                            <img src="/static/images/machine2.jpg" class="product-retina img-responsive" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/6/d65d3d6a-f8c0-11e1-b0a2-8b516ba7b3c1_1.jpg" alt="Cozy draped silk-blend cardigan">
+                        </a>
+                        <ul class="product-controls-list right">
+                            <li><span class="label label-sale">Sale</span></li>
+                            <li><span class="label">-15%</span></li>
+                        </ul>
+                        <ul class="product-controls-list right hide-right">
+                            <li class="top-out"></li>
+                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/178/form_key/IZgMB6Mic63XIbmd/',178);return false;"><span class="icon-heart"></span></a></li>
+                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/178/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',178);return false;"><span class="icon-justice"></span></a></li>
+                            <li><a class="cart" onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/178/form_key/IZgMB6Mic63XIbmd/','178')"><span class="icon-basket"></span></a></li>
+                        </ul>
+                        <a href="#" class="quick-view hidden-xs fancybox fancybox.ajax">
+                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('178')"></span> Quick View
+                        </a>
+                    </div>
+                    <h3 class="title"><a href="/product/3364" title="Cozy draped silk-blend cardigan">Bone staple</a></h3>
+                    <div class="price-box">
+                        <p class="old-price">
+                            <span class="price-label">Regular Price:</span>
+                            <span class="price" id="old-price-178">
                     $750.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-178">
+                        </p>
+                        <p class="special-price">
+                            <span class="price-label">Special Price</span>
+                            <span class="price" id="product-price-178">
                     $640.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>    
+                        </p>
                     </div>
-                    </div>
-                </section> 
-                <!--Brands-->
-                 <section class="container content-row">
-                <h3>BRANDS</h3>
-      <div class="brands carouFredSel row">
-        <div class="carouFredSel-controls">
-          <div class="carouFredSel-buttons"><a id="brands-carousel-prev" class="prev" href="#"></a><a id="brands-carousel-next" class="next" href="#"></a></div>
+                </div>
+            </div>
         </div>
-        <div class="brands-carousel">
-          <ul class="slides">
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-themeforest.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-activeden.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-audiojungle.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-videohive.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-graphicriver.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-3docean.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-themeforest.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-activeden.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-audiojungle.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-videohive.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-graphicriver.png" alt=""></a></li>
-              <li><a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-3docean.png" alt=""></a></li>
-          </ul>
+    </section>
+    <!--Brands-->
+<!--     <section class="container content-row">
+        <h3>BRANDS</h3>
+        <div class="brands carouFredSel row">
+            <div class="carouFredSel-controls">
+                <div class="carouFredSel-buttons">
+                    <a id="brands-carousel-prev" class="prev" href="#"></a>
+                    <a id="brands-carousel-next" class="next" href="#"></a>
+                </div>
+            </div>
+            <div class="brands-carousel">
+                <ul class="slides">
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-themeforest.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-activeden.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-audiojungle.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-videohive.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-graphicriver.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-3docean.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-themeforest.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-activeden.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-audiojungle.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-videohive.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-graphicriver.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/brand-3docean.png" alt=""></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-                </section>
-                <!--Blog widjets-->
-                     <section class="blog-widget parallax">
+    </section> -->
+    <!--Blog widjets-->
+<!--     <section class="blog-widget parallax">
         <div class="container content">
             <div class="posts flexslider">
-                                     <h3>Recent Posts</h3>
-                                <ul class="slides">
-                                        <li>
-                                                <div class="image-cell">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=35"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/20.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/20-176x119.jpg" alt="Wordpress Post 10" class="img-responsive animate scale product-retina"  height="119" /></a>
+                <h3>Recent Posts</h3>
+                <ul class="slides">
+                    <li>
+                        <div class="image-cell">
+                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=35"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/20.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/20-176x119.jpg" alt="Wordpress Post 10" class="img-responsive animate scale product-retina" height="119" /></a>
                         </div>
-
-                                                    
                         <div class="offset-image">
                             <h4><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=35">Wordpress Post 10</a></h4>
                             <p>
                                 <a></a>
                             </p>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-<p> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=35" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a>                        </div>
+                            <p> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=35" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a> </div>
                     </li>
-                                        <li>
-                                                <div class="image-cell">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=33"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/19.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/19-176x119.jpg" alt="Wordpress Post 9" class="img-responsive animate scale product-retina"  height="119" /></a>
+                    <li>
+                        <div class="image-cell">
+                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=33"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/19.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/19-176x119.jpg" alt="Wordpress Post 9" class="img-responsive animate scale product-retina" height="119" /></a>
                         </div>
-
-                                                    
                         <div class="offset-image">
                             <h4><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=33">Wordpress Post 9</a></h4>
                             <p>
                                 <a></a>
                             </p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.<br /> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=33" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a>                        </div>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                <br /> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=33" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a> </div>
                     </li>
-                                        <li>
-                                                <div class="image-cell">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=28"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/18.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/18-176x119.jpg" alt="Wordpress Post 8" class="img-responsive animate scale product-retina"  height="119" /></a>
+                    <li>
+                        <div class="image-cell">
+                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=28"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/18.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/18-176x119.jpg" alt="Wordpress Post 8" class="img-responsive animate scale product-retina" height="119" /></a>
                         </div>
-
-                                                    
                         <div class="offset-image">
                             <h4><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=28">Wordpress Post 8</a></h4>
                             <p>
                                 <a></a>
                             </p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.<br /> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=28" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a>                        </div>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                <br /> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=28" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a> </div>
                     </li>
-                                        <li>
-                                                <div class="image-cell">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=24"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/17.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/17-176x119.jpg" alt="Wordpress Post 7" class="img-responsive animate scale product-retina"  height="119" /></a>
+                    <li>
+                        <div class="image-cell">
+                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=24"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/17.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/17-176x119.jpg" alt="Wordpress Post 7" class="img-responsive animate scale product-retina" height="119" /></a>
                         </div>
-
-                                                    
                         <div class="offset-image">
                             <h4><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=24">Wordpress Post 7</a></h4>
                             <p>
                                 <a></a>
                             </p>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-<p> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=24" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a>                        </div>
+                            <p> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=24" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a> </div>
                     </li>
-                                        <li>
-                                                <div class="image-cell">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=21"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/16.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/16-176x119.jpg" alt="Wordpress Post 6" class="img-responsive animate scale product-retina"  height="119" /></a>
+                    <li>
+                        <div class="image-cell">
+                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=21"><img data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/16.jpg" src="http://demo.ethemeuk.com/megatron/magento/demo/wp/wp-content/uploads/2014/06/16-176x119.jpg" alt="Wordpress Post 6" class="img-responsive animate scale product-retina" height="119" /></a>
                         </div>
-
-                                                    
                         <div class="offset-image">
                             <h4><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=21">Wordpress Post 6</a></h4>
                             <p>
                                 <a></a>
                             </p>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-<p> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=21" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a>                        </div>
+                            <p> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blog/?p=21" class="btn btn-mega">Read More <span class="icon icon-arrow-right-5"></span></a> </div>
                     </li>
-                                    </ul>
+                </ul>
             </div>
         </div>
-    </section>
-
-
-
-<div class="line-divider divider-xxs"></div>
-                <!-- Products widgets -->
-<div class="grey-container-light">
-                <section class="container content nopad-bottom hidden-xs">
-                    <div class="row  add_after_quick_view_section">
-                        <div class="col-sm-6 col-md-3 col-lg-3">
-                            <!-- Products list -->
-<h3>Bestsellers</h3>
-    <div class="products-widget jcarousel-skin-previews vertical">
-        <ul class="slides">
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/angela-dress.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/4/e/4e580a72-fe63-11e2-b20d-525400a54919_3.jpg" alt="Angela Dress" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/angela-dress.html" class="preview-image">Angela Dress</a></p>
-                        <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-186">
-                                            <span class="price">$200.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/paisley-print-stretch-silk-camisole.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/4/7/4779385d-a053-11e2-930f-88ba12757e9c_1.jpg" alt="Paisley-print stretch-silk camisole" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/paisley-print-stretch-silk-camisole.html" class="preview-image">Paisley-print stretch-silk camisole</a></p>
-                        <span class="rating"></span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-191">
-                                            <span class="price">$150.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/swarovski-crystal-embellished-jersey-dress.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/b/c/bc862392-71e2-11e2-aa39-9d0b5139df99_1.jpg" alt="Swarovski crystal-embellished jersey dress" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/swarovski-crystal-embellished-jersey-dress.html" class="preview-image">Swarovski crystal-embellished jersey dress</a></p>
-                        <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-192">
-                                            <span class="price">$166.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/biarritz-zigzag-knitted-bikini-briefs.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/8/0/806169b1-8aeb-11e2-85b3-984289b50e96_1.jpg" alt="Biarritz zigzag knitted bikini briefs" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/biarritz-zigzag-knitted-bikini-briefs.html" class="preview-image">Biarritz zigzag knitted bikini briefs</a></p>
-                        <span class="rating"></span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-196">
-                                            <span class="price">$540.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/bomber-jacket.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/2/12_1.jpg" alt="Bomber Jacket" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/bomber-jacket.html" class="preview-image">Bomber Jacket</a></p>
-                        <span class="rating"></span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-207">
-                                            <span class="price">$140.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                    </ul>
-    </div>
-
-                        </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3">
-                            <h3>New Products</h3>
-    <!-- Products list -->
-    <div class="products-widget jcarousel-skin-previews vertical autoscroll">
-        <ul class="slides">
-                                            <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/soft-ruched-one-shoulder.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/e/6/e678acf7-cf6a-11e2-9c8b-aada7f893a9c_1.jpg" alt="Soft Ruched One Shoulder" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/soft-ruched-one-shoulder.html" class="preview-image">Soft Ruched One Shoulder</a></p>
-                        <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> </span>
-                                                    
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-184">
-                                            <span class="price">$300.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                            <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/a-l-c-gerry-dress.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/c/4/c4d86289-a738-4791-ae71-9509d2202beb_1.jpg" alt="A.L.C - Gerry Dress" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/a-l-c-gerry-dress.html" class="preview-image">A.L.C - Gerry Dress</a></p>
-                        <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
-                                                    
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-180">
-                                            <span class="price">$170.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                            <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blue-lagoon-polka-dot-chiffon-and-lace-thong.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/a/c/ac743d3f-0fb4-11e3-b218-525400a54919_1.jpg" alt="Blue Lagoon polka-dot chiffon and lace thong" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blue-lagoon-polka-dot-chiffon-and-lace-thong.html" class="preview-image">Blue Lagoon polka-dot chiffon and lace thong</a></p>
-                        <span class="rating"></span>
-                                                    
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-199">
-                                            <span class="price">$480.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                            <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/asymmetric-embellished-silk-dress.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/d/0/d0a682e5-8abc-11e1-9fb8-9d9a0652c94d_10.jpg" alt="Asymmetric embellished silk dress" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/asymmetric-embellished-silk-dress.html" class="preview-image">Asymmetric embellished silk dress</a></p>
-                        <span class="rating"></span>
-                                                    
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-183">
-                                            <span class="price">$320.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                            <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/2/0/20_1.jpg" alt="Leather Pilot Jacket" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">Leather Pilot Jacket</a></p>
-                        <span class="rating"></span>
-                                                    
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-214">
-                                            <span class="price">$960.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                    </ul>
-    </div>
-
-                        </div>
-                        <section class="col-sm-6 col-md-3 col-lg-3  slider-products module">
-                            
-      <h3>On Sale</h3>
-      <!-- Products list -->
-      <div class="row">
-        <div class="product-carousel">
-                                                            <div class="item">
-<div class="product-preview  ">
-<div class="preview animate scale ">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/bandage-dress.html" class="preview-image" >
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/5/0/50c1cd75-5e33-11e2-8dbc-dfdfe0d314c0_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/5/0/50c1cd75-5e33-11e2-8dbc-dfdfe0d314c0_1.jpg"  alt="Bandage dress">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-19%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/176/form_key/IZgMB6Mic63XIbmd/',176);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/176/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',176);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/bandage-dress.html"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/176/"  class="quick-view hidden-xs">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('176')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/bandage-dress.html" title="Bandage dress">Bandage dress</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-176">
-                    $850.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-176">
-                    $690.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>
-</div>
-                                                            <div class="item">
-<div class="product-preview  ">
-<div class="preview animate scale ">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/laced-paneled-bandage-dress.html" class="preview-image" >
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/d/c/dcc301b8-0fb4-11e3-b218-525400a54919_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/c/dcc301b8-0fb4-11e3-b218-525400a54919_1.jpg"  alt="Laced-paneled bandage dress">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-32%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/177/form_key/IZgMB6Mic63XIbmd/',177);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/177/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',177);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/177/form_key/IZgMB6Mic63XIbmd/','177')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/177/"  class="quick-view hidden-xs">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('177')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/laced-paneled-bandage-dress.html" title="Laced-paneled bandage dress">Laced-paneled bandage dress</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-177">
-                    $2,200.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-177">
-                    $1,500.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>
-</div>
-                                                            <div class="item">
-<div class="product-preview  ">
-<div class="preview animate scale ">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/carven-gabardine-dress.html" class="preview-image" >
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/b/4/b4210453-a052-11e2-930f-88ba12757e9c_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/b/4/b4210453-a052-11e2-930f-88ba12757e9c_1.jpg"  alt="Carven - Gabardine Dress">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-28%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/185/form_key/IZgMB6Mic63XIbmd/',185);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/185/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',185);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/185/form_key/IZgMB6Mic63XIbmd/','185')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/185/"  class="quick-view hidden-xs">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('185')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/carven-gabardine-dress.html" title="Carven - Gabardine Dress">Carven - Gabardine Dress</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-185">
-                    $250.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-185">
-                    $180.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>
-</div>
-                                                            <div class="item">
-<div class="product-preview  ">
-<div class="preview animate scale ">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/biarritz-zigzag-knitted-bikini-briefs.html" class="preview-image" >
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31001-d99d-11e2-b1f8-525400a54919_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31001-d99d-11e2-b1f8-525400a54919_1.jpg"  alt="Aero Draped-front wool cardigan">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-24%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/197/form_key/IZgMB6Mic63XIbmd/',197);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/197/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',197);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/biarritz-zigzag-knitted-bikini-briefs.html"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/197/"  class="quick-view hidden-xs">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('197')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/biarritz-zigzag-knitted-bikini-briefs.html" title="Aero Draped-front wool cardigan">Aero Draped-front wool cardigan</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-197">
-                    $330.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-197">
-                    $250.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>
-</div>
-                                                            <div class="item">
-<div class="product-preview  ">
-<div class="preview animate scale hover-slide">
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/embroidered-lace-thong.html" class="preview-image" >
-<img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/f/6/f63ccd97-ab9a-4079-8d30-163f2b626f1c_4.jpg" class="img-responsive  animate scale product-retina" data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/f/6/f63ccd97-ab9a-4079-8d30-163f2b626f1c_4.jpg"    alt="Embroidered lace thong">
-<img  src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/283x343/9df78eab33525d08d6e5fb8d27136e95/f/6/f63ccd97-ab9a-4079-8d30-163f2b626f1c_1.jpg" class="product-retina img-responsive"   data-image2x="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/566x686/9df78eab33525d08d6e5fb8d27136e95/f/6/f63ccd97-ab9a-4079-8d30-163f2b626f1c_1.jpg"  alt="Embroidered lace thong">
-</a>
-<ul class="product-controls-list right">
-<li><span class="label label-sale">Sale</span></li>
-<li><span class="label">-29%</span></li>
-</ul>
-
-<ul class="product-controls-list right hide-right">
-<li class="top-out"></li>
-<li><a class="circle" href="#"  onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/198/form_key/IZgMB6Mic63XIbmd/',198);return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/198/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',198);return false;"><span class="icon-justice"></span></a></li>
-<li><a class="cart"  onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/198/form_key/IZgMB6Mic63XIbmd/','198')"><span class="icon-basket"></span></a></li>
-</ul>
-<a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/198/"  class="quick-view hidden-xs">
-
-             <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('198')"></span> Quick View
-        
-</a>
-</div>
-<h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/embroidered-lace-thong.html" title="Embroidered lace thong">Embroidered lace thong</a></h3>
-
-
-                        
-    <div class="price-box">
-                                            
-                    <p class="old-price">
-                <span class="price-label">Regular Price:</span>
-                <span class="price" id="old-price-198">
-                    $170.00                </span>
-            </p>
-
-                            <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                <span class="price" id="product-price-198">
-                    $120.00                </span>
-                </p>
-                    
-    
-        </div>
-
-
-</div>
-</div>
+    </section> -->
+    <div class="line-divider divider-xxs"></div>
+    <!-- Products widgets -->
+    <div class="grey-container-light">
+        <section class="container content nopad-bottom hidden-xs">
+            <div class="row  add_after_quick_view_section">
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <h3>Bestsellers</h3>
+                    <div class="products-widget jcarousel-skin-previews vertical">
+                        <ul class="slides">
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/angela-dress.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Angela Dress">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/angela-dress.html" class="preview-image">Angela Dress</a></p>
+                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-186">
+                                            <span class="price">$200.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/paisley-print-stretch-silk-camisole.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Paisley-print stretch-silk camisole">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/paisley-print-stretch-silk-camisole.html" class="preview-image">Paisley-print stretch-silk camisole</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-191">
+                                            <span class="price">$150.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/swarovski-crystal-embellished-jersey-dress.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Swarovski crystal-embellished jersey dress">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/swarovski-crystal-embellished-jersey-dress.html" class="preview-image">Swarovski crystal-embellished jersey dress</a></p>
+                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-192">
+                                            <span class="price">$166.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/biarritz-zigzag-knitted-bikini-briefs.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Biarritz zigzag knitted bikini briefs">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/biarritz-zigzag-knitted-bikini-briefs.html" class="preview-image">Biarritz zigzag knitted bikini briefs</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-196">
+                                            <span class="price">$540.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/bomber-jacket.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Bomber Jacket">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/bomber-jacket.html" class="preview-image">Bomber Jacket</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-207">
+                                            <span class="price">$140.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-
-
-      </div>
-      <!-- //end Products list -->
-
-
-
-
-
-                        </section>
-                        <div class="col-sm-6 col-md-3 col-lg-3">
-                            <!-- Products list -->
-<h3>Top Rated</h3>
-    <div class="products-widget jcarousel-skin-previews vertical">
-        <ul class="slides">
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/advintage-hoodie-with-tye-dye.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/9/19_1.jpg" alt="Advintage Hoodie with Tye-Dye" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/advintage-hoodie-with-tye-dye.html" class="preview-image">Advintage Hoodie with Tye-Dye</a></p>
-                        <span class="rating"></span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-201">
-                                            <span class="price">$330.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/atlantic-track-jacket.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/5/15_1.jpg" alt="Atlantic Track Jacket" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/atlantic-track-jacket.html" class="preview-image">Atlantic Track Jacket</a></p>
-                        <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-204">
-                                            <span class="price">$510.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/barbour-heritage-fit-liddesdale-jacket.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/1/11_1.jpg" alt="Barbour Heritage Fit Liddesdale Jacket" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/barbour-heritage-fit-liddesdale-jacket.html" class="preview-image">Barbour Heritage Fit Liddesdale Jacket</a></p>
-                        <span class="rating"></span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-208">
-                                            <span class="price">$220.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/wool-baseball-jacket.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/8/_/8_1.jpg" alt="Wool Jacket" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/wool-baseball-jacket.html" class="preview-image">Wool Jacket</a></p>
-                        <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-210">
-                                            <span class="price">$560.00</span>                                    </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                                        <li>
-                    <div class="product">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/fit-liddesdale-jacket.html" class="preview-image">
-                            <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/1/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/5/_/5_1.jpg" alt="Fit Liddesdale Jacket" >
-                        </a>
-                        <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/fit-liddesdale-jacket.html" class="preview-image">Fit Liddesdale Jacket</a></p>
-                        <span class="rating"></span>
-                                                
-
-                        
-    <div class="price-box">
-                                                                <span class="regular-price" id="product-price-212">
-                                                                <span class="price">$650.00</span>          </span>
-                        
-        </div>
-
-                                            </div>
-                </li>
-                    </ul>
-    </div>
-
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <h3>New Products</h3>
+                    <div class="products-widget jcarousel-skin-previews vertical autoscroll">
+                        <ul class="slides">
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/soft-ruched-one-shoulder.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Soft Ruched One Shoulder">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/soft-ruched-one-shoulder.html" class="preview-image">Soft Ruched One Shoulder</a></p>
+                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> </span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-184">
+                                            <span class="price">$300.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/a-l-c-gerry-dress.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="A.L.C - Gerry Dress">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/a-l-c-gerry-dress.html" class="preview-image">A.L.C - Gerry Dress</a></p>
+                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-180">
+                                            <span class="price">$170.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blue-lagoon-polka-dot-chiffon-and-lace-thong.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Blue Lagoon polka-dot chiffon and lace thong">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blue-lagoon-polka-dot-chiffon-and-lace-thong.html" class="preview-image">Blue Lagoon polka-dot chiffon and lace thong</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-199">
+                                            <span class="price">$480.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/asymmetric-embellished-silk-dress.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Asymmetric embellished silk dress">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/asymmetric-embellished-silk-dress.html" class="preview-image">Asymmetric embellished silk dress</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-183">
+                                            <span class="price">$320.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Leather Pilot Jacket">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">Leather Pilot Jacket</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-214">
+                                            <span class="price">$960.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <section class="col-sm-6 col-md-3 col-lg-3  slider-products module">
+                    <h3>On Sale</h3>
+                    <div class="row">
+                        <div class="product-carousel">
+                            <div class="item">
+                                <div class="product-preview  ">
+                                    <div class="preview animate scale ">
+                                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/bandage-dress.html" class="preview-image">
+                                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="/static/images/machine2.jpg" alt="Bandage dress">
+                                        </a>
+                                        <ul class="product-controls-list right">
+                                            <li><span class="label label-sale">Sale</span></li>
+                                            <li><span class="label">-19%</span></li>
+                                        </ul>
+                                        <ul class="product-controls-list right hide-right">
+                                            <li class="top-out"></li>
+                                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/176/form_key/IZgMB6Mic63XIbmd/',176);return false;"><span class="icon-heart"></span></a></li>
+                                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/176/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',176);return false;"><span class="icon-justice"></span></a></li>
+                                            <li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/bandage-dress.html"><span class="icon-basket"></span></a></li>
+                                        </ul>
+                                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/176/" class="quick-view hidden-xs">
+                                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('176')"></span> Quick View
+                                        </a>
+                                    </div>
+                                    <h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/bandage-dress.html" title="Bandage dress">Bandage dress</a></h3>
+                                    <div class="price-box">
+                                        <p class="old-price">
+                                            <span class="price-label">Regular Price:</span>
+                                            <span class="price" id="old-price-176">
+                    $850.00                </span>
+                                        </p>
+                                        <p class="special-price">
+                                            <span class="price-label">Special Price</span>
+                                            <span class="price" id="product-price-176">
+                    $690.00                </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="product-preview  ">
+                                    <div class="preview animate scale ">
+                                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/laced-paneled-bandage-dress.html" class="preview-image">
+                                            <img src="/static/images/stetho.jpeg" class="product-retina img-responsive" data-image2x="/static/images/machine.jpeg" alt="Laced-paneled bandage dress">
+                                        </a>
+                                        <ul class="product-controls-list right">
+                                            <li><span class="label label-sale">Sale</span></li>
+                                            <li><span class="label">-32%</span></li>
+                                        </ul>
+                                        <ul class="product-controls-list right hide-right">
+                                            <li class="top-out"></li>
+                                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/177/form_key/IZgMB6Mic63XIbmd/',177);return false;"><span class="icon-heart"></span></a></li>
+                                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/177/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',177);return false;"><span class="icon-justice"></span></a></li>
+                                            <li><a class="cart" onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/177/form_key/IZgMB6Mic63XIbmd/','177')"><span class="icon-basket"></span></a></li>
+                                        </ul>
+                                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/177/" class="quick-view hidden-xs">
+                                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('177')"></span> Quick View
+                                        </a>
+                                    </div>
+                                    <h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/laced-paneled-bandage-dress.html" title="Laced-paneled bandage dress">Laced-paneled bandage dress</a></h3>
+                                    <div class="price-box">
+                                        <p class="old-price">
+                                            <span class="price-label">Regular Price:</span>
+                                            <span class="price" id="old-price-177">
+                    $2,200.00                </span>
+                                        </p>
+                                        <p class="special-price">
+                                            <span class="price-label">Special Price</span>
+                                            <span class="price" id="product-price-177">
+                    $1,500.00                </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="product-preview  ">
+                                    <div class="preview animate scale ">
+                                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/carven-gabardine-dress.html" class="preview-image">
+                                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="/static/images/machine.jpg" alt="Carven - Gabardine Dress">
+                                        </a>
+                                        <ul class="product-controls-list right">
+                                            <li><span class="label label-sale">Sale</span></li>
+                                            <li><span class="label">-28%</span></li>
+                                        </ul>
+                                        <ul class="product-controls-list right hide-right">
+                                            <li class="top-out"></li>
+                                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/185/form_key/IZgMB6Mic63XIbmd/',185);return false;"><span class="icon-heart"></span></a></li>
+                                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/185/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',185);return false;"><span class="icon-justice"></span></a></li>
+                                            <li><a class="cart" onclick="setLocationAjax('http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/add/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/product/185/form_key/IZgMB6Mic63XIbmd/','185')"><span class="icon-basket"></span></a></li>
+                                        </ul>
+                                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/185/" class="quick-view hidden-xs">
+                                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('185')"></span> Quick View
+                                        </a>
+                                    </div>
+                                    <h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/carven-gabardine-dress.html" title="Carven - Gabardine Dress">Carven - Gabardine Dress</a></h3>
+                                    <div class="price-box">
+                                        <p class="old-price">
+                                            <span class="price-label">Regular Price:</span>
+                                            <span class="price" id="old-price-185">
+                    $250.00                </span>
+                                        </p>
+                                        <p class="special-price">
+                                            <span class="price-label">Special Price</span>
+                                            <span class="price" id="product-price-185">
+                    $180.00                </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="product-preview  ">
+                                    <div class="preview animate scale ">
+                                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/biarritz-zigzag-knitted-bikini-briefs.html" class="preview-image">
+                                            <img src="/static/images/machine.jpg" class="product-retina img-responsive" data-image2x="/static/images/machine.jpg" alt="Aero Draped-front wool cardigan">
+                                        </a>
+                                        <ul class="product-controls-list right">
+                                            <li><span class="label label-sale">Sale</span></li>
+                                            <li><span class="label">-24%</span></li>
+                                        </ul>
+                                        <ul class="product-controls-list right hide-right">
+                                            <li class="top-out"></li>
+                                            <li><a class="circle" href="#" onclick="ajaxWishlist('http://demo.ethemeuk.com/megatron/magento/demo/index.php/wishlist/index/add/product/197/form_key/IZgMB6Mic63XIbmd/',197);return false;"><span class="icon-heart"></span></a></li>
+                                            <li><a class="circle" href="#" onclick="ajaxCompare('http://demo.ethemeuk.com/megatron/magento/demo/index.php/catalog/product_compare/add/product/197/uenc/aHR0cDovL2RlbW8uZXRoZW1ldWsuY29tL21lZ2F0cm9uL21hZ2VudG8vZGVtby9pbmRleC5waHAvP19fX3N0b3JlPWRlZmF1bHQ,/form_key/IZgMB6Mic63XIbmd/',197);return false;"><span class="icon-justice"></span></a></li>
+                                            <li><a class="cart" href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/biarritz-zigzag-knitted-bikini-briefs.html"><span class="icon-basket"></span></a></li>
+                                        </ul>
+                                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/197/" class="quick-view hidden-xs">
+                                            <span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('197')"></span> Quick View
+                                        </a>
+                                    </div>
+                                    <h3 class="title"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/new-products/biarritz-zigzag-knitted-bikini-briefs.html" title="Aero Draped-front wool cardigan">Aero Draped-front wool cardigan</a></h3>
+                                    <div class="price-box">
+                                        <p class="old-price">
+                                            <span class="price-label">Regular Price:</span>
+                                            <span class="price" id="old-price-197">
+                    $330.00                </span>
+                                        </p>
+                                        <p class="special-price">
+                                            <span class="price-label">Special Price</span>
+                                            <span class="price" id="product-price-197">
+                    $250.00                </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <h3>Top Rated</h3>
+                    <div class="products-widget jcarousel-skin-previews vertical">
+                        <ul class="slides">
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/advintage-hoodie-with-tye-dye.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Advintage Hoodie with Tye-Dye">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/advintage-hoodie-with-tye-dye.html" class="preview-image">Advintage Hoodie with Tye-Dye</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-201">
+                                            <span class="price">$330.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/atlantic-track-jacket.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Atlantic Track Jacket">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/atlantic-track-jacket.html" class="preview-image">Atlantic Track Jacket</a></p>
+                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-204">
+                                            <span class="price">$510.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/barbour-heritage-fit-liddesdale-jacket.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Barbour Heritage Fit Liddesdale Jacket">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/barbour-heritage-fit-liddesdale-jacket.html" class="preview-image">Barbour Heritage Fit Liddesdale Jacket</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-208">
+                                            <span class="price">$220.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/wool-baseball-jacket.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/machine.jpg" alt="Wool Jacket">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/wool-baseball-jacket.html" class="preview-image">Wool Jacket</a></p>
+                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-210">
+                                            <span class="price">$560.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product">
+                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/fit-liddesdale-jacket.html" class="preview-image">
+                                        <img class="img-responsive product_activ" src="/static/images/machine.jpg" alt="Fit Liddesdale Jacket">
+                                    </a>
+                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/fit-liddesdale-jacket.html" class="preview-image">Fit Liddesdale Jacket</a></p>
+                                    <span class="rating"></span>
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-212">
+                                                                <span class="price">$650.00</span> </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
-</div>        
 {% endblock %}
