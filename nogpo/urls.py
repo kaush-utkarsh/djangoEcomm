@@ -24,5 +24,6 @@ urlpatterns = patterns('',
     url(r'^emptycart/', views.empty_cart),
     url(r'^suppliers/get/',views.get_supplier),
     url(r'^usermeta/',views.meta),
+    url(r'^hospitals/',views.hospital),
 
 )

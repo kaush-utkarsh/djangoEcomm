@@ -10,19 +10,28 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta
+from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment,User_meta,Hospitals,Ecommerce_user_hospital_link
 from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart, create_cart_response,update_cart_price
 from django.template import Context, Template, loader
 from credit import current_credit
 from usermeta import user_meta_data
 
 baseurl = 'http://162.209.8.12:8080/'
-
 def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
     session_data = session.get_decoded()
     uid = session_data.get('_auth_user_id')
     return uid
+def get_hospital(request):
+    hospitals = Hospitals.objects.all()
+    hospital_list = list()
+    response = {}
+    for hospital in hospitals:
+        response['id'] = hospital.id
+        response['name'] = hospital.name
+        hospital_list.append(response)
+        response = {}
+    return hospital_list
 
 #An HttpResponse that renders its content into JSON.
 class JSONResponse(HttpResponse):
@@ -278,6 +287,34 @@ def credits(request):
         credit.save()
         print credit       
         return HttpResponseRedirect("/")
+
+def hospital(request):
+    if request.method == "GET":
+        res = categories(request)
+        hospitals = get_hospital(request)
+        user_id = get_userid(request)
+        cart = Cart.objects.filter(userid=user_id,status=0)
+        if len(cart) > 0:
+            cart_data = get_cart(cart[0])
+            data = {
+                "res": res,
+                "cart":cart_data,
+                "hospitals":hospitals
+            }
+        else:
+            data = {
+                "res": res,
+                "hospitals":hospitals
+            }
+        return render(request,"nogpo/hospital.html",data)
+    if request.method == "POST":
+        userid = get_userid(request)
+        hospital_id = request.POST.get('hospital_id','')
+        print hospital_id
+        print userid
+        relation = Ecommerce_user_hospital_link(user_id=userid,hospital_id=hospital_id)
+        relation.save()
+        return HttpResponseRedirect('/')
 
 @csrf_exempt
 def delete_from_cart(request):
