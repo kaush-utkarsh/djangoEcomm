@@ -93,27 +93,15 @@ jQuery(function($) {
                     }
                     return parms
                 }
+                function imgError(image) {
+                    image.onerror = "";
+                    image.src = "/static/images/default_img.png";
+                    return true;
+                }
 
                 function getProducts(url) {
                     if(url.indexOf('query=') != -1 || url.indexOf('categories=') != -1 || url.indexOf('categories=') != -1) {
                         data = getUrlParms(url)
-
-                        function getCookie(name) {
-                                var cookieValue = null;
-                                if (document.cookie && document.cookie != '') {
-                                    var cookies = document.cookie.split(';');
-                                    for (var i = 0; i < cookies.length; i++) {
-                                        var cookie = jQuery.trim(cookies[i]);
-                                        // Does this cookie string begin with the name we want?
-                                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                            break;
-                                        }
-                                    }
-                                }
-                                return cookieValue;
-                            }
-                            var csrftoken = getCookie('csrftoken');
 
                         jQuery.ajax({
                             url: "/nogpo/search/",
@@ -123,40 +111,15 @@ jQuery(function($) {
                             jQuery('#products_list').empty()
                             var productLists = jQuery("#products_list")
                             var productTemplate = '';
-                            // "http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response['unspsc']+'/'+response[i].pictures[0].url+'"
-                            
+                            "http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response['unspsc']+'/'+response[i].pictures[0].url+'"
                             for (var i = 0; i < response.length; i += 2) {
-                                // code to check if images are found
-                                var img_link;
-                                // var url1=  window.location.protocol+'//'+window.location.hostname+':'+window.location.port+"/static/images/logo1.png"
-                                var url1= 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url
-                                var req;
-                                if (window.XMLHttpRequest)
-                                  {// code for IE7+, Firefox, Chrome, Opera, Safari
-                                  req=new XMLHttpRequest();
-                                  }
-                                else
-                                  {// code for IE6, IE5
-                                  req=new ActiveXObject("Microsoft.XMLHTTP");
-                                  }
-                                req.open('GET', url1 , false); 
-                                req.setRequestHeader("X-CSRFToken",csrftoken );
-                                req.send();
-                                if(req.status == 200) {
-                                    img_link=url1;
-                                }
-                                else{
-                                    img_link="/static/images/default_img.png";
-                                }
-                                // --------------------------code to check ends here------------------------------
-                                
                                 if(response[i]) {
-                                    var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="/product/'+response[i].id+'" class="preview-image"><img src='+img_link+' class="img-responsive  animate scale product-retina" data-image2x='+img_link+' alt="'+response[i].name+'"><img src='+img_link+' class="product-retina img-responsive" data-image2x='+img_link+' alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="/product/'+response[i].id+'"  class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="/product/'+response[i].id+'"  title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+response[i].price+'</span></span></div></div>'
+                                    var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="/product/'+response[i].id+'" class="preview-image"><img src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'" onerror="imgError(this);" class="img-responsive  animate scale product-retina" data-image2x="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'" alt="'+response[i].name+'"><img src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'" onerror="imgError(this);" class="product-retina img-responsive" data-image2x="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'" alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+'$'+response[i].price+'</span></span></div></div>'
                                     productLists.append(templateTwoImages)
                                 }
 
                                 if(response[i+1]) {
-                                    var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="/product/'+response[i+1].id+'" class="preview-image"><img src='+img_link+' class="product-retina img-responsive" data-image2x='+img_link+' alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="/product/'+response[i+1].id+'" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="/product/'+response[i+1].id+'" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+response[i+1].price+'</span></span></div></div>'
+                                    var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="/product/'+response[i+1].id+'" class="preview-image"><img src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i+1].unspsc+'/'+response[i+1].pictures[0].url+'" onerror="imgError(this);" class="product-retina img-responsive" data-image2x="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i+1].unspsc+'/'+response[i+1].pictures[0].url+'" alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+'$'+response[i+1].price+'</span></span></div></div>'
                                     productLists.append(templateOneImage)
                                 }
                             }
@@ -219,12 +182,12 @@ jQuery(function($) {
 
                         for (var i = 0; i < response.length; i += 2) {
                             if(response[i]) {
-                                var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="/product/'+response[i].id+'" class="preview-image"><img src='+img_link+' class="img-responsive  animate scale product-retina" data-image2x='+img_link+' alt="'+response[i].name+'"><img src='+img_link+' class="product-retina img-responsive" data-image2x='+img_link+' alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+response[i].price+'</span></span></div></div>'
+                                var templateTwoImages = '<div class="product-preview new"><div class="preview animate scale hover-slide"><a href="/product/'+response[i].id+'" class="preview-image"><img src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'" onerror="imgError(this);" class="img-responsive  animate scale product-retina" data-image2x="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'" alt="'+response[i].name+'"><img src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'" onerror="imgError(this);" class="product-retina img-responsive" data-image2x="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'" alt="'+response[i].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i].name+'">'+response[i].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i].id+'"><span class="price">'+'$'+response[i].price+'</span></span></div></div>'
                                 productLists.append(templateTwoImages)
                             }
 
                             if(response[i+1]) {
-                                var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="/product/'+response[i+1].id+'" class="preview-image"><img src='+img_link+' class="product-retina img-responsive" data-image2x='+img_link+' alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+response[i+1].price+'</span></span></div></div>'
+                                var templateOneImage = '<div class="product-preview new"><div class="preview animate scale"><a href="/product/'+response[i+1].id+'" class="preview-image"><img src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i+1].unspsc+'/'+response[i+1].pictures[0].url+'"" onerror="imgError(this);" class="product-retina img-responsive" data-image2x="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i+1].unspsc+'/'+response[i+1].pictures[0].url+'" alt="'+response[i+1].name+'"></a><ul class="product-controls-list right hide-right"><li class="top-out-small"></li><li><a class="circle" href="#" onclick="ajaxWishlist([[add_to_wishlist_url]],'+response[i+1].id+');return false;"><span class="icon-heart"></span></a></li><li><a class="circle" href="#" onclick="ajaxCompare(null,'+response[i+1].id+');return false;"><span class="icon-justice"></span></a></li><li><a class="cart" onclick="setLocationAjax(null,'+response[i+1].id+')"><span class="icon-basket"></span></a></li></ul><a href="[[unknown_url]]" class="quick-view hidden-xs"><span class="icon-zoom-in-2 cursor-hand" onclick="showOptions('+response[i+1].id+')"></span> Quick View</a></div><h3 class="title"><a href="[[product_url]]" title="'+response[i+1].name+'">'+response[i+1].name+'</a></h3><div class="price-box"><span class="regular-price" id="product-price-'+response[i+1].id+'"><span class="price">'+'$'+response[i+1].price+'</span></span></div></div>'
                                 productLists.append(templateOneImage)
                             }
                         }

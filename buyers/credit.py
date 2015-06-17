@@ -6,12 +6,21 @@ def current_credit(userid):
     credit_list = []
     credit_balances = Credit_balance.objects.filter(userid=userid)
     print credit_balances
-    for credit_balance in credit_balances:
+    if len(credit_balances) > 0:
+        for credit_balance in credit_balances:
+            credit = {
+                'supplierid':credit_balance.merchantid,
+                'credit_requested':credit_balance.credit_requested,
+                'credit_approved':credit_balance.credit_approved,
+                'credit_expiry_date':credit_balance.credit_expiry_date
+            }
+            credit_list.append(credit)
+    else:
         credit = {
-            'supplierid':credit_balance.merchantid,
-            'credit_approved':credit_balance.credit_approved,
-            'credit_expiry_date':credit_balance.credit_expiry_date
+            'supplierid':'No Supplier',
+            'credit_requested':'No credit requested',
+            'credit_approved': 'No credit approved',
+            'credit_expiry_date':'No credit'
         }
         credit_list.append(credit)
-    print credit_list
     return credit_list
