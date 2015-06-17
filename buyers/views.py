@@ -14,6 +14,7 @@ from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Paymen
 from methods import current_cart,add_to_subcart,add_to_cartproduct,get_cart, create_cart_response,update_cart_price
 from django.template import Context, Template, loader
 from credit import current_credit
+from hospitals import get_hospital,get_hospital_link
 from usermeta import user_meta_data
 
 baseurl = 'http://162.209.8.12:8080/'
@@ -22,16 +23,6 @@ def get_userid(request):
     session_data = session.get_decoded()
     uid = session_data.get('_auth_user_id')
     return uid
-def get_hospital(request):
-    hospitals = Hospitals.objects.all()
-    hospital_list = list()
-    response = {}
-    for hospital in hospitals:
-        response['id'] = hospital.id
-        response['name'] = hospital.name
-        hospital_list.append(response)
-        response = {}
-    return hospital_list
 
 #An HttpResponse that renders its content into JSON.
 class JSONResponse(HttpResponse):
@@ -257,21 +248,21 @@ def credits(request):
         suppliers = get_supplier(request)
         user_id = get_userid(request)
         cart = Cart.objects.filter(userid=user_id,status=0)
+        credits = current_credit(user_id)
+        print credits
         if len(cart)>0:
-            credit = current_credit(user_id)
             cart_data = get_cart(cart[0])
-            print cart_data
             data = {
                 "res": res,
                 "cart":cart_data,
                 "suppliers":suppliers,
-                "credit": credit
+                "credits": credits
             }
         else:
             data = {
              "res":res,
              "suppliers":suppliers,
-             "credit":"No credit from any supplier"
+             "credits":credits
             }
         return render(request,"nogpo/credits.html", data)
     if request.method == "POST":
@@ -290,21 +281,24 @@ def credits(request):
 
 def hospital(request):
     if request.method == "GET":
+        user_id = get_userid(request)
         res = categories(request)
         hospitals = get_hospital(request)
-        user_id = get_userid(request)
+        user_hospital = get_hospital_link(user_id)
         cart = Cart.objects.filter(userid=user_id,status=0)
         if len(cart) > 0:
             cart_data = get_cart(cart[0])
             data = {
                 "res": res,
                 "cart":cart_data,
-                "hospitals":hospitals
+                "hospitals":hospitals,
+                "hospital_links":user_hospital
             }
         else:
             data = {
                 "res": res,
-                "hospitals":hospitals
+                "hospitals":hospitals,
+                "hospital_links":user_hospital
             }
         return render(request,"nogpo/hospital.html",data)
     if request.method == "POST":

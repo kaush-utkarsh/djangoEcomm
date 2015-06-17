@@ -30,6 +30,31 @@
                     </div>
                 </form>
             </section>
+            <div class="hospital">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Hospital Id</th>
+                            <th>Hospital Name</th>
+                            <th>Hospital Address</th>
+                            <th>Hospital City</th>
+                            <th>Hospital Website</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for link in hospital_links %}
+
+                        <tr>
+                            <td>{{link.hospital_id}}</td>
+                            <td>{{link.hospital_name}}</td>
+                            <td>{{link.hospital_address}}</td>
+                            <td>{{link.hospital_city}}</td>
+                            <td>{{link.hospital_website}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </section>
     </div>
 </section>
