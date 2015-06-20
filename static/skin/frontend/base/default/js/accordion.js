@@ -55,7 +55,7 @@ Accordion.prototype = {
             $(this.currentSection).addClassName('active');
             var contents = Element.select(section, '.a-item');
             contents[0].show();
-            //Effect.SlideDown(contents[0], {duration:.2});
+            Effect.SlideDown(contents[0], {duration:.2});
 
             if (this.disallowAccessToNextSections) {
                 var pastCurrentSection = false;
@@ -75,7 +75,7 @@ Accordion.prototype = {
         $(section).removeClassName('active');
         var contents = Element.select(section, '.a-item');
         contents[0].hide();
-        //Effect.SlideUp(contents[0]);
+        Effect.SlideUp(contents[0]);
     },
 
     openNextSection: function(setAllow){

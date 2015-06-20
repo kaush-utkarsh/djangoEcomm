@@ -228,16 +228,19 @@ def checkout(request):
     res = categories(request)
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
+    credits = current_credit(user_id)
     if len(cart) > 0:
 
         cart_data = get_cart(cart[0])
         data = {
             "res": res,
-            "cart":cart_data
+            "cart":cart_data,
+            "credits":credits
         }
     else:
         data = {
-            "res":res
+            "res":res,
+            "credits":credits
         }
     return render(request,"nogpo/checkout.html", data)
 
