@@ -73,7 +73,7 @@ def home(request):
 def products(request):
     res = categories(request)
     filter_data = search_backend(request)
-    # print filter_data['filters']
+    print filter_data
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
     if len(cart)>0:
@@ -371,3 +371,30 @@ def meta(request):
     response = user_meta_data(request)
     # print response
     return HttpResponse(json.dumps(response))
+
+def best_sellers(request):
+    if request.method == "GET":
+        print "in here"
+        url = baseurl +"best-seller"
+        result = urllib2.urlopen(url)
+        response = json.load(result)
+        # print response
+        return HttpResponse(json.dumps(response))
+
+def new_products(request):
+    if request.method == "GET":
+        print "in here 2 "
+        url = baseurl +"new-products"
+        result = urllib2.urlopen(url)
+        response = json.load(result)
+        # print response
+        return HttpResponse(json.dumps(response))
+
+def top_rated(request):
+    if request.method == "GET":
+        print "in here 3"
+        url = baseurl +"top-rated"
+        result = urllib2.urlopen(url)
+        response = json.load(result)
+        # print response
+        return HttpResponse(json.dumps(response))
