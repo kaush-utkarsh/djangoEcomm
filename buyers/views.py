@@ -73,12 +73,12 @@ def home(request):
 def products(request):
     res = categories(request)
     filter_data = search_backend(request)
-    # print filter_data['filters']
+    print filter_data
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
     if len(cart)>0:
         cart_data = get_cart(cart[0])
-        print cart_data
+        # print cart_data
         data = {
             "res": res,
             "cart": cart_data,
@@ -150,7 +150,7 @@ def search_backend(request):
 
 def search(request):
     if request.method == 'GET':
-        print "work"
+        # print "work"
         url = baseurl + 'search?'
         string = request.GET
         for a in string:
@@ -161,12 +161,12 @@ def search(request):
                     val = v
                 else:
                     val = val + "|" + v
-            print val
+            # print val
             url = url + a + '=' + val + '&'
-        print url
+        # print url
         result = urllib2.urlopen(url)
         result_json = json.load(result)
-        print result_json
+        # print result_json
         return JSONResponse(result_json)
         # return HttpResponse('work')
 
@@ -228,16 +228,19 @@ def checkout(request):
     res = categories(request)
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
+    credits = current_credit(user_id)
     if len(cart) > 0:
 
         cart_data = get_cart(cart[0])
         data = {
             "res": res,
-            "cart":cart_data
+            "cart":cart_data,
+            "credits":credits
         }
     else:
         data = {
-            "res":res
+            "res":res,
+            "credits":credits
         }
     return render(request,"nogpo/checkout.html", data)
 
@@ -249,7 +252,7 @@ def credits(request):
         user_id = get_userid(request)
         cart = Cart.objects.filter(userid=user_id,status=0)
         credits = current_credit(user_id)
-        print credits
+        # print credits
         if len(cart)>0:
             cart_data = get_cart(cart[0])
             data = {
@@ -266,7 +269,7 @@ def credits(request):
             }
         return render(request,"nogpo/credits.html", data)
     if request.method == "POST":
-        print "in post"
+        # print "in post"
         userid = get_userid(request)
         merchantid = request.POST.get('merchantid','')
         credit_requested = int(request.POST.get('credit_requested','0'))
@@ -276,7 +279,7 @@ def credits(request):
         status = request.POST.get('status',0)
         credit = Credit_balance(userid=userid,merchantid=merchantid,credit_requested=credit_requested,credit_status=0,applied_date=applied_date,request_msg=request_msg,credit_approved=0)
         credit.save()
-        print credit       
+        # print credit       
         return HttpResponseRedirect("/")
 
 def hospital(request):
@@ -304,8 +307,8 @@ def hospital(request):
     if request.method == "POST":
         userid = get_userid(request)
         hospital_id = request.POST.get('hospital_id','')
-        print hospital_id
-        print userid
+        # print hospital_id
+        # print userid
         relation = Ecommerce_user_hospital_link(user_id=userid,hospital_id=hospital_id)
         relation.save()
         return HttpResponseRedirect('/')
@@ -366,5 +369,32 @@ def meta(request):
     # data = request
     # print data
     response = user_meta_data(request)
-    print response
+    # print response
     return HttpResponse(json.dumps(response))
+
+def best_sellers(request):
+    if request.method == "GET":
+        print "in here"
+        url = baseurl +"best-seller"
+        result = urllib2.urlopen(url)
+        response = json.load(result)
+        # print response
+        return HttpResponse(json.dumps(response))
+
+def new_products(request):
+    if request.method == "GET":
+        print "in here 2 "
+        url = baseurl +"new-products"
+        result = urllib2.urlopen(url)
+        response = json.load(result)
+        # print response
+        return HttpResponse(json.dumps(response))
+
+def top_rated(request):
+    if request.method == "GET":
+        print "in here 3"
+        url = baseurl +"top-rated"
+        result = urllib2.urlopen(url)
+        response = json.load(result)
+        # print response
+        return HttpResponse(json.dumps(response))

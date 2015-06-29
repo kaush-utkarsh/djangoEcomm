@@ -5,7 +5,7 @@ def current_credit(userid):
     supplier_list = []
     credit_list = []
     credit_balances = Credit_balance.objects.filter(userid=userid)
-    print credit_balances
+    # print credit_balances
     if len(credit_balances) > 0:
         for credit_balance in credit_balances:
             credit = {

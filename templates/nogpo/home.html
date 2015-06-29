@@ -483,6 +483,39 @@ jQuery(function($) {
             </div>
         </div>
     </section> -->
+
+    <!-- experimnt starts -->
+<script type="text/javascript">
+    function getBestSeller(url) {
+        if(url) {
+            // data = getUrlParms(url)
+
+            jQuery.ajax({
+                url: window.location.protocol+'//'+window.location.hostname+':'+window.location.port+"/best-sellers",
+                // url: "http://162.209.8.12:8080/best-seller",
+                // data: data
+            }).done(function(response) {
+                response = JSON.parse(response)
+                console.log(response)
+                // response = response.products
+                jQuery('#best_seller').empty()
+                var best_seller_list = jQuery("#best_seller")
+                var productTemplate = '';
+                for (var i = 0; i < 3; i++) {
+                    if(response[i]) {
+                        var bestseller = '<li><div class="product"><a href="/product/'+response[i].id+'" ><img class="img-responsive product_activ" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'"></a><p class="name"><a href="/product/'+response[i].id+'" class="preview-image">'+response[i].name+'</a></p><div class="price-box"><span class="regular-price" id="product-price-186"><span class="price">$'+response[i].price+'</span></span></div></div></li> '
+                        best_seller_list.append(bestseller)
+                    }
+
+                }
+            })
+        }
+    }
+    var url = window.location.href;
+    getBestSeller(url);
+    console.log(url);
+</script>
+    <!-- experimnt ends -->
     <div class="line-divider divider-xxs"></div>
     <!-- Products widgets -->
     <div class="grey-container-light">
@@ -490,81 +523,62 @@ jQuery(function($) {
             <div class="row  add_after_quick_view_section">
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <h3>Bestsellers</h3>
-                    <div class="products-widget jcarousel-skin-previews vertical">
-                        <ul class="slides">
-                            <li>
+                    <div class="products-widget jcarousel-skin-previews vertical autoscroll">
+                        <ul class="slides" id="best_seller">
+
+                            <!-- start yahan se  -->
+                            <!-- <li>
                                 <div class="product">
                                     <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/angela-dress.html" class="preview-image">
                                         <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Angela Dress">
                                     </a>
                                     <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/angela-dress.html" class="preview-image">Angela Dress</a></p>
-                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
                                     <div class="price-box">
                                         <span class="regular-price" id="product-price-186">
                                             <span class="price">$200.00</span> </span>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/paisley-print-stretch-silk-camisole.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Paisley-print stretch-silk camisole">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/paisley-print-stretch-silk-camisole.html" class="preview-image">Paisley-print stretch-silk camisole</a></p>
-                                    <span class="rating"></span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-191">
-                                            <span class="price">$150.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/swarovski-crystal-embellished-jersey-dress.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Swarovski crystal-embellished jersey dress">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/swarovski-crystal-embellished-jersey-dress.html" class="preview-image">Swarovski crystal-embellished jersey dress</a></p>
-                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-192">
-                                            <span class="price">$166.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/biarritz-zigzag-knitted-bikini-briefs.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Biarritz zigzag knitted bikini briefs">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/biarritz-zigzag-knitted-bikini-briefs.html" class="preview-image">Biarritz zigzag knitted bikini briefs</a></p>
-                                    <span class="rating"></span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-196">
-                                            <span class="price">$540.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/bomber-jacket.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Bomber Jacket">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bestsellers/bomber-jacket.html" class="preview-image">Bomber Jacket</a></p>
-                                    <span class="rating"></span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-207">
-                                            <span class="price">$140.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
+                            </li> -->
+                            <!-- end yahan penatibus -->
                         </ul>
                     </div>
                 </div>
+<script type="text/javascript">
+    function getNewProducts(url) {
+        if(url) {
+            // data = getUrlParms(url)
+
+            jQuery.ajax({
+                url: window.location.protocol+'//'+window.location.hostname+':'+window.location.port+"/new-products",
+                // url: "http://162.209.8.12:8080/best-seller",
+                // data: data
+            }).done(function(response) {
+                response = JSON.parse(response)
+                console.log(response)
+                // response = response.products
+                jQuery('#best-seller').empty()
+                var products_list= jQuery("#new-products")
+                var productTemplate = '';
+                for (var i = 0; i < 3; i++) {   
+                    if(response[i]) {
+                        var newproducts = '<li><div class="product"><a href="/product/'+response[i].id+'" ><img class="img-responsive product_activ" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'"></a><p class="name"><a href="/product/'+response[i].id+'" class="preview-image">'+response[i].name+'</a></p><div class="price-box"><span class="regular-price" id="product-price-186"><span class="price">$'+response[i].price+'</span></span></div></div></li> '
+                        products_list.append(newproducts)
+                    }
+
+                }
+            })
+        }
+    }
+    var url = window.location.href;
+    getNewProducts(url);
+    // console.log("2")
+    // console.log(url);
+</script>
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <h3>New Products</h3>
                     <div class="products-widget jcarousel-skin-previews vertical autoscroll">
-                        <ul class="slides">
-                            <li>
+                        <ul class="slides" id="new-products">
+                            <!-- <li>
                                 <div class="product">
                                     <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/soft-ruched-one-shoulder.html" class="preview-image">
                                         <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Soft Ruched One Shoulder">
@@ -576,59 +590,8 @@ jQuery(function($) {
                                             <span class="price">$300.00</span> </span>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/a-l-c-gerry-dress.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="A.L.C - Gerry Dress">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/a-l-c-gerry-dress.html" class="preview-image">A.L.C - Gerry Dress</a></p>
-                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> </span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-180">
-                                            <span class="price">$170.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blue-lagoon-polka-dot-chiffon-and-lace-thong.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Blue Lagoon polka-dot chiffon and lace thong">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blue-lagoon-polka-dot-chiffon-and-lace-thong.html" class="preview-image">Blue Lagoon polka-dot chiffon and lace thong</a></p>
-                                    <span class="rating"></span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-199">
-                                            <span class="price">$480.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/asymmetric-embellished-silk-dress.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Asymmetric embellished silk dress">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/asymmetric-embellished-silk-dress.html" class="preview-image">Asymmetric embellished silk dress</a></p>
-                                    <span class="rating"></span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-183">
-                                            <span class="price">$320.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Leather Pilot Jacket">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">Leather Pilot Jacket</a></p>
-                                    <span class="rating"></span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-214">
-                                            <span class="price">$960.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
+                            </li> -->
+                           
                         </ul>
                     </div>
                 </div>
@@ -779,11 +742,41 @@ jQuery(function($) {
                         </div>
                     </div>
                 </section>
+<script type="text/javascript">
+    function getTopRated(url) {
+        if(url) {
+            // data = getUrlParms(url)
+
+            jQuery.ajax({
+                url: window.location.protocol+'//'+window.location.hostname+':'+window.location.port+"/top-rated",
+                // url: "http://162.209.8.12:8080/best-seller",
+                // data: data
+            }).done(function(response) {
+                response = JSON.parse(response)
+                console.log(response)
+                // response = response.products
+                jQuery('#best-seller').empty()
+                var top_rated_list = jQuery("#top-rated")
+                var productTemplate = '';
+                for (var i = 0; i < 3; i++) {
+                    if(response[i]) {
+                        var bestseller = '<li><div class="product"><a href="/product/'+response[i].id+'" ><img class="img-responsive product_activ" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'"></a><p class="name"><a href="/product/'+response[i].id+'" class="preview-image">'+response[i].name+'</a></p><div class="price-box"><span class="regular-price" id="product-price-186"><span class="price">$'+response[i].price+'</span></span></div></div></li> '
+                        top_rated_list.append(bestseller)
+                    }
+
+                }
+            })
+        }
+    }
+    var url = window.location.href;
+    getTopRated(url)
+    // console.log(url)
+</script>
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <h3>Top Rated</h3>
                     <div class="products-widget jcarousel-skin-previews vertical">
-                        <ul class="slides">
-                            <li>
+                        <ul class="slides" id="top-rated">
+                           <!--  <li>
                                 <div class="product">
                                     <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/advintage-hoodie-with-tye-dye.html" class="preview-image">
                                         <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Advintage Hoodie with Tye-Dye">
@@ -795,59 +788,8 @@ jQuery(function($) {
                                             <span class="price">$330.00</span> </span>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/atlantic-track-jacket.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Atlantic Track Jacket">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/atlantic-track-jacket.html" class="preview-image">Atlantic Track Jacket</a></p>
-                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-204">
-                                            <span class="price">$510.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/barbour-heritage-fit-liddesdale-jacket.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/stetho.jpeg" alt="Barbour Heritage Fit Liddesdale Jacket">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/barbour-heritage-fit-liddesdale-jacket.html" class="preview-image">Barbour Heritage Fit Liddesdale Jacket</a></p>
-                                    <span class="rating"></span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-208">
-                                            <span class="price">$220.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/wool-baseball-jacket.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/machine.jpg" alt="Wool Jacket">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/wool-baseball-jacket.html" class="preview-image">Wool Jacket</a></p>
-                                    <span class="rating"><i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> </span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-210">
-                                            <span class="price">$560.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product">
-                                    <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/fit-liddesdale-jacket.html" class="preview-image">
-                                        <img class="img-responsive product_activ" src="/static/images/machine.jpg" alt="Fit Liddesdale Jacket">
-                                    </a>
-                                    <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/top-rated/fit-liddesdale-jacket.html" class="preview-image">Fit Liddesdale Jacket</a></p>
-                                    <span class="rating"></span>
-                                    <div class="price-box">
-                                        <span class="regular-price" id="product-price-212">
-                                                                <span class="price">$650.00</span> </span>
-                                    </div>
-                                </div>
-                            </li>
+                            </li> -->
+                            
                         </ul>
                     </div>
                 </div>

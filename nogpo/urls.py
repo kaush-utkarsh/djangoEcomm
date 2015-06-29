@@ -25,5 +25,9 @@ urlpatterns = patterns('',
     url(r'^suppliers/get/',views.get_supplier),
     url(r'^usermeta/',views.meta),
     url(r'^hospitals/',views.hospital),
+    url(r'^best-sellers/',views.best_sellers),
+    url(r'^new-products/',views.new_products),
+    url(r'^top-rated/',views.top_rated),
+
 
 )

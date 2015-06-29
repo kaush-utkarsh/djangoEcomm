@@ -3,3 +3,4 @@ django
 pip install djangorestframework
 pip install django-registration-redux
 pip install django-mathfilters
+pip install django-paypal
