@@ -1,11 +1,12 @@
 import urllib2
 import datetime
 import json
+from django.core.mail import send_mail
 from django.shortcuts import render,render_to_response,HttpResponseRedirect
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -398,3 +399,34 @@ def top_rated(request):
         response = json.load(result)
         # print response
         return HttpResponse(json.dumps(response))
+def purchase(request,uid,id):
+    data = request.GET
+    print data
+    return HttpResponse('Success')
+    
+@csrf_exempt
+def contact(request):
+    errors = []
+    if request.method == 'GET':
+        return render_to_response('nogpo/contact.html')
+    if request.method == 'POST':
+        if not request.POST.get('subject',''):
+            errors.append('Enter a subject.')
+        if not request.POST.get('message',''):
+            errors.append('Enter a message')
+        if request.POST.get('email') and '@' not in request.POST['email']:
+            errors.append('enter a valid e-mail address.')
+        if not errors:
+            send_mail(
+                    request.POST['subject'],
+                    request.POST['message'],
+                    request.POST.get('email','nonreply@nogpo.com'),
+                    ['administrator@nogpo.com'],
+                    )
+            return HttpResponseRedirect('/thanks/')
+        return render(request,'nogpo/contact.html',{'errors':errors})
+
+def thanks(request):
+    return render_to_response('nogpo/thanks.html')
+
+

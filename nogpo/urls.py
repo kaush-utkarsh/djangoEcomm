@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     url(r'^best-sellers/',views.best_sellers),
     url(r'^new-products/',views.new_products),
     url(r'^top-rated/',views.top_rated),
-
+    url(r'^purchase/',views.purchase),
+    url(r'^contact/',views.contact),
+    url(r'^thanks/',views.thanks),
 
 )

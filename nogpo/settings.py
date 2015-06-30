@@ -114,3 +114,16 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+
+# paypal
+PAYPAL_PDT_TOKEN = 'MI4mmNCko_VjVmbNQdkQXsTXBsSiq0nMJNaXXvDfxU0gQVlbQ3aXkZ5bKrG'
+PAYPAL_EMAIL = 'asingh@algoscale.com'
+PAYPAL_RETURN_URL = 'http://127.0.0.1:8000'
+
+# sandbox
+PAYPAL_URL = 'https://www.sandbox.paypal.com/au/cgi-bin/webscr'
+PAYPAL_PDT_URL = 'https://www.sandbox.paypal.com/au/cgi-bin/webscr'
+
+# live
+#PAYPAL_URL = 'https://www.paypal.com/au/cgi-bin/webscr'
+#PAYPAL_PDT_URL = 'https://www.paypal.com/au/cgi-bin/webscr'
