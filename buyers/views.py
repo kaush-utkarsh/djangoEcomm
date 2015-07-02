@@ -431,7 +431,8 @@ def contact(request):
 def thanks(request):
     return render_to_response('nogpo/thanks.html')
 
-def check(request):
-    return render_to_response('nogpo/check.html')
-
+def seller_credit_payment(request):
+    print request.GET
+    print request.POST
+    return HttpResponse("success")
 

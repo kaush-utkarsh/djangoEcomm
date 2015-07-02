@@ -4903,14 +4903,20 @@ if ($('onepage-guest-register-button')) {
                                     </ul>
                                 </dd>
                                 <dd>
-                                    <ul class="form-list" id="payment_form_cs" style="display:none;">
+                                <form action="/seller_credit_payment/" id="payment_form_cs" style="display:none;" method="post"> 
+                                {% csrf_token %}
+                                    <ul class="form-list">
+                                        {% for credit in credits %}
                                         <li class="checkbox">
-                                            {% for credit in credits %}
-                                                <input id="{{credit.supplierid}}" type="checkbox">
+                                        <!-- {{credit.supplierid}}_{{credit.credit_requested}} -->
+                                                <input id="{{credit.supplierid}}" value="{{credit.supplierid}}_{{credit.credit_requested}}" name="{{credit.supplierid}}" type="checkbox">
+                                                <label>{{credit.supplierid}}</label>
                                                 <label>{{credit.credit_requested}}</label>
-                                            {% endfor %}
                                         </li>
+                                        {% endfor %}
                                     </ul>
+                                    <input type="submit" value="Pay with seller credit">
+                                </form>
                                 </dd>
                             </dl>
                         </fieldset>
