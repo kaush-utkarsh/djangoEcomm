@@ -117,7 +117,8 @@ TEMPLATE_DIRS = (
 
 # paypal
 PAYPAL_PDT_TOKEN = 'MI4mmNCko_VjVmbNQdkQXsTXBsSiq0nMJNaXXvDfxU0gQVlbQ3aXkZ5bKrG'
-PAYPAL_EMAIL = 'asingh@algoscale.com'
+# PAYPAL_EMAIL = 'asingh@algoscale.com'
+PAYPAL_EMAIL = 'asingh-facilitator@algoscale.com'
 PAYPAL_RETURN_URL = 'http://127.0.0.1:8000'
 
 # sandbox

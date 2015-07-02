@@ -13,7 +13,7 @@
             </div>
             <script type="text/javascript" src="/static/skin/frontend/base/default/js/accordion.js"></script>
             <script type="text/javascript" src="/static/skin/frontend/base/default/js/opcheckout.js"></script>
-            <script type="text/javascript" src="/static/js/customScripts.js"></script>
+            <!-- // <script type="text/javascript" src="/static/js/customScripts.js"></script> -->
             <ol class="opc" id="checkoutSteps">
                 <li id="opc-billing" class="section {% if user.is_authenticated %}allow{% endif %}">
                     <div class="step-title">
@@ -4774,6 +4774,8 @@ if ($('onepage-guest-register-button')) {
                 <div class="step-title">
                     <span class="number">3</span>
                     <h2>Payment Information</h2>
+                    {{ cart.total_price }}
+                    {{  paypal_url }}
                     <a href="#">Edit</a>
                 </div>
                 <div id="checkout-step-payment" class="step a-item" style="display:none;">
@@ -4785,27 +4787,51 @@ if ($('onepage-guest-register-button')) {
                         var lastPrice;
                         //]]>
                     </script>
-                    <form action="" id="co-payment-form">
+                    <!-- <form action="" id="co-payment-form"> -->
                         <fieldset>
                             <dl class="sp-methods" id="checkout-payment-method-load"><dl class="sp-methods" id="checkout-payment-method-load">
-                                <dt>
+<!--                                 <dt>
                                     <label class="radio">
                                         <input id="p_method_checkmo" value="checkmo" type="radio" name="payment[method]" title="Check / Money order" onclick="payment.switchMethod('checkmo')" class="pull-left" autocomplete="off">
                                         Check / Money order
                                     </label>
-                                </dt>
-                                <dt>
+                                </dt> -->
+<!--                                 <dt>
                                     <label class="radio">
                                         <input id="p_method_ccsave" value="ccsave" type="radio" name="payment[method]" title="Credit Card (saved)" onclick="payment.switchMethod('ccsave')" class="pull-left" autocomplete="off">
                                             Credit Card (saved)
                                     </label>
-                                </dt>
+                                </dt> -->
                                 <dt>
+                                    <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                      <input type="hidden" name="amount" value="{{ cart.total_price }}">
+                                      <input type="hidden" name="item_name" value="sadi">
+                                      <input type="hidden" name="business" value="asingh-facilitator@algoscale.com">
+                                      <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/{{ user_id }}/">
+                                      <input type="submit" name="submit">
+                                    </form> -->
+                                  <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                    <input type="hidden" name="cmd" value="_xclick">
+                                    <input type="hidden" name="business" value="asingh-facilitator@algoscale.com">
+                                    <input type="hidden" name="amount" value="{{ cart.total_price }}">
+                                    <input type="hidden" name="no_shipping" value="0">
+                                    <input type="hidden" name="no_note" value="1">
+                                    <input type="hidden" name="currency_code" value="USD">
+                                    <input type="hidden" name="lc" value="AU">
+                                    <input type="hidden" name="bn" value="PP-BuyNowBF">
+                                    <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/{{ user_id }}/">
+                                    <br /><br />
+                                    <input type="submit" value="Pay with PayPal!">
+                                 
+                                </form>
+
+                                </dt>
+<!--                                 <dt>
                                     <label class="radio">
                                         <input id="p_method_cs" value="ccsave" type="radio" name="payment[method]" title="Credit Card (saved)" onclick="payment.switchMethod('cs')" class="pull-left" autocomplete="off">
                                             Credit from seller
                                     </label>
-                                </dt>
+                                </dt> -->
                                 <dd>
                                     <ul class="form-list" id="payment_form_ccsave" style="display:none;">
                                         <li>
@@ -4894,7 +4920,7 @@ if ($('onepage-guest-register-button')) {
                                 </dd>
                             </dl>
                         </fieldset>
-                    </form>
+                    <!-- </form> -->
                     <div class="tool-tip" id="payment-tool-tip" style="display:none;">
                         <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="Close">Close</a></div>
                         <div class="tool-tip-content"><img src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/images/cvv.gif" alt="Card Verification Number Visual Reference" title="Card Verification Number Visual Reference" /></div>

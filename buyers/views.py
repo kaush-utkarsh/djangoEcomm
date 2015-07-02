@@ -236,12 +236,14 @@ def checkout(request):
         data = {
             "res": res,
             "cart":cart_data,
-            "credits":credits
+            "credits":credits,
+            "user_id":user_id
         }
     else:
         data = {
             "res":res,
-            "credits":credits
+            "credits":credits,
+            "user_id":user_id,
         }
     return render(request,"nogpo/checkout.html", data)
 
@@ -399,11 +401,11 @@ def top_rated(request):
         response = json.load(result)
         # print response
         return HttpResponse(json.dumps(response))
-def purchase(request,uid,id):
+def purchase(request):
     data = request.GET
     print data
-    return HttpResponse('Success')
-    
+    return render_to_response('/')
+
 @csrf_exempt
 def contact(request):
     errors = []
@@ -428,5 +430,8 @@ def contact(request):
 
 def thanks(request):
     return render_to_response('nogpo/thanks.html')
+
+def check(request):
+    return render_to_response('nogpo/check.html')
 
 
