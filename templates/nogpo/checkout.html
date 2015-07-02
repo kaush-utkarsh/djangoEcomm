@@ -4774,8 +4774,6 @@ if ($('onepage-guest-register-button')) {
                 <div class="step-title">
                     <span class="number">3</span>
                     <h2>Payment Information</h2>
-                    {{ cart.total_price }}
-                    {{  paypal_url }}
                     <a href="#">Edit</a>
                 </div>
                 <div id="checkout-step-payment" class="step a-item" style="display:none;">
@@ -4803,14 +4801,11 @@ if ($('onepage-guest-register-button')) {
                                     </label>
                                 </dt> -->
                                 <dt>
-                                    <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                                      <input type="hidden" name="amount" value="{{ cart.total_price }}">
-                                      <input type="hidden" name="item_name" value="sadi">
-                                      <input type="hidden" name="business" value="asingh-facilitator@algoscale.com">
-                                      <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/{{ user_id }}/">
-                                      <input type="submit" name="submit">
-                                    </form> -->
-                                  <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                <label class="radio">
+                                        <input id="p_method_cs" value="ccsave" type="radio" name="payment[method]" title="Credit Card (saved)" onclick="payment.switchMethod('pp')" class="pull-left" autocomplete="off">
+                                            Paypal
+                                    </label>
+                                  <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="payment_form_pp" style="display:none">
                                     <input type="hidden" name="cmd" value="_xclick">
                                     <input type="hidden" name="business" value="asingh-facilitator@algoscale.com">
                                     <input type="hidden" name="amount" value="{{ cart.total_price }}">
@@ -4822,16 +4817,15 @@ if ($('onepage-guest-register-button')) {
                                     <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/{{ user_id }}/">
                                     <br /><br />
                                     <input type="submit" value="Pay with PayPal!">
-                                 
                                 </form>
 
                                 </dt>
-<!--                                 <dt>
+                                <dt>
                                     <label class="radio">
                                         <input id="p_method_cs" value="ccsave" type="radio" name="payment[method]" title="Credit Card (saved)" onclick="payment.switchMethod('cs')" class="pull-left" autocomplete="off">
                                             Credit from seller
                                     </label>
-                                </dt> -->
+                                </dt>
                                 <dd>
                                     <ul class="form-list" id="payment_form_ccsave" style="display:none;">
                                         <li>
