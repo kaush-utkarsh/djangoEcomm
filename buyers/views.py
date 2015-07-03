@@ -432,7 +432,6 @@ def thanks(request):
     return render_to_response('nogpo/thanks.html')
 
 def seller_credit_payment(request):
-    print request.GET
     print request.POST
     return HttpResponse("success")
 
