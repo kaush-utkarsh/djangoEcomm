@@ -32,5 +32,6 @@ urlpatterns = patterns('',
     url(r'^contact/',views.contact),
     url(r'^thanks/',views.thanks),
     url(r'^seller_credit_payment/',views.seller_credit_payment),
+    url(r'^subcategory/',views.subcategory),
 
 )

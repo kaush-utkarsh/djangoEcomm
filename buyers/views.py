@@ -122,6 +122,22 @@ def categories(request):
 		    final.append(each)
     return final
 
+def subcategory(request):
+    res = categories(request)
+    user_id = get_userid(request)
+    cart = Cart.objects.filter(userid=user_id)
+    if len(cart)>0:
+        cart_data = get_cart(cart[0])
+        data = {
+            "res":res,
+            "cart":cart_data
+        }
+    else:
+        data = {
+        "res":res
+        }
+    return render(request,"nogpo/subcategory.html",data)
+
 def product(request, product_id):
     res = categories(request)
     if request.method == 'GET':

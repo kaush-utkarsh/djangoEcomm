@@ -1,0 +1,25 @@
+{% extends "nogpo/base.html" %} {% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="margin-left:20%">
+{% for item in res %}
+    {% if item.id >= 6 %}
+    <br>
+        <h4>{{ item.name }}</h4>
+        <div style = "padding-left:5%">
+        {% for item_child in item.child %}
+        <a href="/products/?categories={{item_child.unspsc}}" class="name">
+            {{ item_child.name }}
+        </a>
+        <br>
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock %}
