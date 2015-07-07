@@ -19,6 +19,7 @@ from hospitals import get_hospital,get_hospital_link
 from usermeta import user_meta_data
 
 baseurl = 'http://162.209.8.12:8080/'
+
 def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
     session_data = session.get_decoded()
@@ -417,6 +418,7 @@ def top_rated(request):
         response = json.load(result)
         # print response
         return HttpResponse(json.dumps(response))
+
 def purchase(request):
     data = request.GET
     print data
@@ -450,4 +452,13 @@ def thanks(request):
 def seller_credit_payment(request):
     print request.POST
     return HttpResponse("success")
+
+def related_products(request):
+    if request.method == 'GET':
+        unspsc = request.GET.get('unspsc')
+        url = baseurl + 'related-products/'+unspsc
+        result = urllib2.urlopen(url)
+        response = json.load(result)
+        # print response
+        return HttpResponse(json.dumps(response))
 
