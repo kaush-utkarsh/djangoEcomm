@@ -73,5 +73,6 @@ class Hospitals(models.Model):
 class Ecommerce_user_hospital_link(models.Model):
     user_id = models.IntegerField()
     hospital_id = models.IntegerField()
+    # status = models.IntegerField(default=0)
     class Meta:
         db_table = 'ecommerce_user_hospital_link'
