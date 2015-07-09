@@ -8,7 +8,7 @@
 <br>
 <div style="margin-left:20%">
 {% for item in res %}
-    {% if item.id >= 6 %}
+    {% if item.id == subcategory %}
     <br>
         <h4>{{ item.name }}</h4>
         <div style = "padding-left:5%">
@@ -21,5 +21,7 @@
         </div>
     {% endif %}
 {% endfor %}
+<br>
+<br>
 </div>
 {% endblock %}

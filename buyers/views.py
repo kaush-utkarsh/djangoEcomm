@@ -124,18 +124,26 @@ def categories(request):
     return final
 
 def subcategory(request):
+    subcategory_id = request.GET.get('subcategory','')
     res = categories(request)
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
+    if subcategory_id != '':
+        sub_id = subcategory_id
+    else:
+        sub_id = '0'
     if len(cart)>0:
         cart_data = get_cart(cart[0])
         data = {
             "res":res,
-            "cart":cart_data
+            "cart":cart_data,
+            "subcategory":int(sub_id)
         }
     else:
         data = {
-        "res":res
+        "res":res,
+        "subcategory":int(sub_id)
+
         }
     return render(request,"nogpo/subcategory.html",data)
 
