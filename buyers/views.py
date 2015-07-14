@@ -522,8 +522,6 @@ def update_credit(merchantid,debit,request):
     except Exception as e:
         print e
         return "Fail"
-<<<<<<< HEAD
-=======
 
 def aboutus(request):
     res = categories(request)
@@ -544,4 +542,4 @@ def aboutus(request):
          "suppliers":suppliers,
         }
     return render(request,'nogpo/aboutus.html',data)
->>>>>>> 9ccf927f5e3e23d7e98476f0ef517d23af54c19d
+
