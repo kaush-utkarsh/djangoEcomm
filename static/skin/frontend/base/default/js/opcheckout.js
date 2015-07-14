@@ -287,6 +287,15 @@ Checkout.prototype = {
 }
 
 
+function paypalFunction(item,data)
+{
+    jQuery('#payment_form_pp').find('input[name="amount"]').val(data)
+    jQuery('#payment_form_pp').submit()
+
+    nextFunction(item)
+}
+
+
 function nextFunction(item)
 {
     jQuery('#'+item).parents('li').find('div[class="step a-item"]').attr('style','display:none;')
@@ -592,6 +601,155 @@ Shipping.prototype = {
         //checkout.setShipping();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+var Seller = Class.create();
+Seller.prototype = {
+    initialize: function(form, addressUrl, saveUrl, methodsUrl){
+        this.form = form;
+        if ($(this.form)) {
+            $(this.form).observe('submit', function(event){this.save();Event.stop(event);}.bind(this));
+        }
+        this.addressUrl = addressUrl;
+        this.saveUrl = saveUrl;
+        this.methodsUrl = methodsUrl;
+        this.onAddressLoad = this.fillForm.bindAsEventListener(this);
+        this.onSave = this.nextStep.bindAsEventListener(this);
+        this.onComplete = this.resetLoadWaiting.bindAsEventListener(this);
+    },
+
+    setAddress: function(addressId){
+        if (addressId) {
+            request = new Ajax.Request(
+                this.addressUrl+addressId,
+                {method:'get', onSuccess: this.onAddressLoad, onFailure: checkout.ajaxFailure.bind(checkout)}
+            );
+        }
+        else {
+            this.fillForm(false);
+        }
+    },
+
+
+    fillForm: function(transport){
+        var elementValues = {};
+        if (transport && transport.responseText){
+            try{
+                elementValues = eval('(' + transport.responseText + ')');
+            }
+            catch (e) {
+                elementValues = {};
+            }
+        }
+        else{
+            this.resetSelectedAddress();
+        }
+        arrElements = Form.getElements(this.form);
+        for (var elemIndex in arrElements) {
+            if (arrElements[elemIndex].id) {
+                var fieldName = arrElements[elemIndex].id.replace(/^seller:/, '');
+                arrElements[elemIndex].value = elementValues[fieldName] ? elementValues[fieldName] : '';
+                if (fieldName == 'country_id' && shippingForm){
+                    shippingForm.elementChildLoad(arrElements[elemIndex]);
+                }
+            }
+        }
+    },
+
+    save: function(){
+        if (checkout.loadWaiting!=false) return;
+        var validator = new Validation(this.form);
+        if (validator.validate()) {
+            // var request = new Ajax.Request(
+            //     this.saveUrl,
+            //     {
+            //         method: 'post',
+            //         onComplete: this.onComplete,
+            //         onSuccess: paypalFunction(this.form, data),
+            //         parameters: {seller_det:JSON.stringify(jQuery('#payment_form_cs').serializeArray())}
+            //     }
+            // );
+            
+            var request = jQuery.ajax({
+            type: "POST",
+            url: this.saveUrl,
+            data: {seller_det:JSON.stringify(jQuery('#payment_form_cs').serializeArray())},
+            dataType: "html",
+            success: function(data){
+                    paypalFunction(this.form, data)
+                }
+            });
+
+
+
+        }
+    },
+
+    resetLoadWaiting: function(transport){
+        checkout.setLoadWaiting(false);
+    },
+
+    nextStep: function(transport){
+        if (transport && transport.responseText){
+            try{
+                response = eval('(' + transport.responseText + ')');
+            }
+            catch (e) {
+                response = {};
+            }
+        }
+        if (response.error){
+            if ((typeof response.message) == 'string') {
+                alert(response.message);
+            } else {
+                if (window.shippingRegionUpdater) {
+                    shippingRegionUpdater.update();
+                }
+                alert(response.message.join("\n"));
+            }
+
+            return false;
+        }
+
+        checkout.setStepResponse(response);
+
+        /*
+         var updater = new Ajax.Updater(
+         'checkout-shipping-method-load',
+         this.methodsUrl,
+         {method:'get', onSuccess: checkout.setSeller.bind(checkout)}
+         );
+         */
+        //checkout.setSeller();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // payment
 var Payment = Class.create();

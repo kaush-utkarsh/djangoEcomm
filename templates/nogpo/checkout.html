@@ -1,4 +1,5 @@
 {% extends "nogpo/base.html" %} {% block content %}
+{% load mathfilters %}
 <br>
 <br>
 <br>
@@ -4903,20 +4904,25 @@ if ($('onepage-guest-register-button')) {
                                     </ul>
                                 </dd>
                                 <dd>
-                                <form action="/seller_credit_payment/" id="payment_form_cs" style="display:none;" method="post"> 
-                                {% csrf_token %}
+                                <form action="" id="payment_form_cs" style="display:none;" method="post"> 
                                     <ul class="form-list">
                                         {% for credit in credits %}
+                                        {% if credit.supplierid in cart_supplier %}
                                         <li class="checkbox">
                                         <!-- {{credit.supplierid}}_{{credit.credit_requested}} -->
-                                                <input id="{{credit.supplierid}}" value="{{credit.supplierid}}_{{credit.credit_requested}}" name="{{credit.supplierid}}" type="checkbox">
+                                                <input id="seller:{{credit.supplierid}}" value="{{credit.credit_requested}}" name="{{credit.supplierid}}" type="checkbox">
                                                 <label>{{credit.supplierid}}</label>
                                                 <label>{{credit.credit_requested}}</label>
                                         </li>
+                                        {% endif %}
                                         {% endfor %}
                                     </ul>
-                                    <input type="submit" value="Pay with seller credit">
+                                    <input type="button" class="button" title="Continue" onclick="seller.save()" value="Pay with seller credit"/>
                                 </form>
+                                <script type="text/javascript">
+                                //<![CDATA[
+                                var seller = new Seller('payment_form_cs', '/seller_credit_payment/', '/seller_credit_payment/');
+                                </script>
                                 </dd>
                             </dl>
                         </fieldset>

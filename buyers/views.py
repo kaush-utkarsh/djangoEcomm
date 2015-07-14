@@ -17,6 +17,7 @@ from django.template import Context, Template, loader
 from credit import current_credit
 from hospitals import get_hospital,get_hospital_link
 from usermeta import user_meta_data
+from random import randrange
 
 baseurl = 'http://162.209.8.12:8080/'
 
@@ -256,13 +257,24 @@ def checkout(request):
     cart = Cart.objects.filter(userid=user_id)
     credits = current_credit(user_id)
     if len(cart) > 0:
-
+        cart_suppliers = []
         cart_data = get_cart(cart[0])
+        supplier_price = {}
+        for cart in cart_data['products']:
+            print cart
+            if cart['supplierid'] not in cart_suppliers:
+                cart_suppliers.append(cart['supplierid'])
+                supplier_price[cart['supplierid']] = cart['price']
+            else:
+                supplier_price[cart['supplierid']] = supplier_price[cart['supplierid']] + cart['price']
+
         data = {
             "res": res,
             "cart":cart_data,
             "credits":credits,
-            "user_id":user_id
+            "user_id":user_id,
+            "cart_supplier" : cart_suppliers,
+            "supplier_price" : supplier_price
         }
     else:
         data = {
@@ -457,9 +469,37 @@ def contact(request):
 def thanks(request):
     return render_to_response('nogpo/thanks.html')
 
+@csrf_exempt
 def seller_credit_payment(request):
-    print request.POST
-    return HttpResponse("success")
+    if request.method == 'POST':
+        seller_details = request.POST
+        seller_details = json.loads(seller_details['seller_det'])
+        summ = 0
+        for seller in seller_details:
+            seller_id = seller['name']
+            seller_credit = float(seller['value'])
+            p_id = randrange(199999, 1000000)
+            userid = get_userid(request)
+            cart = Cart.objects.get(userid=userid,status=0)
+            total_credit = 0
+            cart_data = get_cart(cart)
+            supplier_price = {}
+            for crt in cart_data['products']:
+                if crt['supplierid'] == seller_id:
+                    if crt['price']<float(seller_credit):
+                        total_credit = total_credit+crt['price']
+                    else:
+                        total_credit = total_credit+(crt['price']- float(seller_credit))
+            summ = summ + total_credit
+            summ = cart_data['total_price'] - summ
+            subcart = Subcart.objects.get(cart_id=cart,supplierid=seller_id)
+            transact = Transaction(cart_id = cart, status = 0 )
+            transact.save()
+            payment = Payment(payment_id = p_id, method = "seller_credit", ammount = total_credit, transaction_id = transact, method_id = "", subcart_id = subcart)
+            payment.save()
+            result = update_credit(seller_id,total_credit,request)
+            print result
+        return HttpResponse(summ)
 
 def related_products(request):
     if request.method == 'GET':
@@ -470,3 +510,13 @@ def related_products(request):
         # print response
         return HttpResponse(json.dumps(response))
 
+def update_credit(merchantid,debit,request):
+    try:
+        userid = get_userid(request)
+        credit = Credit_balance.objects.get(userid=userid,merchantid=merchantid)
+        credit.credit_requested = float(credit.credit_requested) - float(debit)
+        credit.save()
+        return "Success"
+    except Exception as e:
+        print e
+        return "Fail"
