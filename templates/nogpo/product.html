@@ -685,96 +685,50 @@
         <section class="col-sm-12 col-md-3 col-lg-3  module">
             <h3>Related Products</h3>
             <!-- Related Products '3 visible item' style -->
-            <!--             <div class="products-widget jcarousel-skin-previews vertical">
-                <ul class="slides">
-                    <li>
-                        <div class="product">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">
-                                <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/2/0/20_1.jpg" alt="Leather Pilot Jacket">
-                            </a>
-                            <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">Leather Pilot Jacket</a></p>
-                            <span class="rating"></span>
-                            <div class="price-box">
-                                <span class="regular-price" id="product-price-214">
-                                            <span class="price">$960.00</span> </span>
+            <div class="products-widget jcarousel-skin-previews vertical">
+<script type="text/javascript">
+    function getRelatedProduct(url) {
+        if(url) {
+            jQuery.ajax({
+                url: window.location.protocol+'//'+window.location.hostname+':'+window.location.port+"/related_product/?unspsc={{data.unspsc}}",
+                // data: {{data.unspsc}}
+            }).done(function(response) {
+                response = JSON.parse(response)
+                console.log(response)
+                // response = response.products
+                jQuery('#best-seller').empty()
+                var get_related_products = jQuery("#relatedprod")
+                var productTemplate = '';
+                for (var i = 0; i < 3; i++) {
+                    if(response[i]) {
+                        var bestseller = '<li><div class="product"><a href="/product/'+response[i].id+'" class="preview-image"><img class="img-responsive product_activ" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'"></a><p class="name"><a href="/product/'+response[i].id+'" class="preview-image">'+response[i].name+'</a></p><span class="rating"></span><div class="price-box"><span class="regular-price" id="product-price-214"><span class="price">$'+response[i].price+'</span> </span></div></div></li>'
+                        get_related_products.append(bestseller)
+                    }
+
+                }
+            })
+        }
+    }
+    var url = window.location.href;
+    getRelatedProduct(url)
+</script>
+                <ul class="slides" id="relatedprod">
+                      <!--   <li>
+                            <div class="product">
+                                <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">
+                                    <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/2/0/20_1.jpg" alt="Leather Pilot Jacket">
+                                </a>
+                                <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" class="preview-image">Leather Pilot Jacket</a></p>
+                                <span class="rating"></span>
+                                <div class="price-box">
+                                    <span class="regular-price" id="product-price-214">
+                                                <span class="price">$960.00</span> </span>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="product">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/fit-liddesdale-jacket.html" class="preview-image">
-                                <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/5/_/5_1.jpg" alt="Fit Liddesdale Jacket">
-                            </a>
-                            <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/fit-liddesdale-jacket.html" class="preview-image">Fit Liddesdale Jacket</a></p>
-                            <span class="rating"></span>
-                            <div class="price-box">
-                                <span class="regular-price" id="product-price-212">
-                                            <span class="price">$650.00</span> </span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="product">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/wool-baseball-jacket.html" class="preview-image">
-                                <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/8/_/8_1.jpg" alt="Wool Jacket">
-                            </a>
-                            <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/wool-baseball-jacket.html" class="preview-image">Wool Jacket</a></p>
-                            <span class="rating"></span>
-                            <div class="price-box">
-                                <span class="regular-price" id="product-price-210">
-                                            <span class="price">$560.00</span> </span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="product">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/hoodie-with-tye-dye.html" class="preview-image">
-                                <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/3/_/3_1.jpg" alt="Hoodie with Tye-Dye">
-                            </a>
-                            <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/hoodie-with-tye-dye.html" class="preview-image">Hoodie with Tye-Dye</a></p>
-                            <span class="rating"></span>
-                            <div class="price-box">
-                                <span class="regular-price" id="product-price-213">
-                                            <span class="price">$430.00</span> </span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="product">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/duffle-coat.html" class="preview-image">
-                                <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/6/_/6_1.jpg" alt="Duffle Coat">
-                            </a>
-                            <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/duffle-coat.html" class="preview-image">Duffle Coat</a></p>
-                            <span class="rating"></span>
-                            <div class="price-box">
-                                <p class="old-price">
-                                    <span class="price-label">Regular Price:</span>
-                                    <span class="price" id="old-price-211">
-                    $410.00                </span>
-                                </p>
-                                <p class="special-price">
-                                    <span class="price-label">Special Price</span>
-                                    <span class="price" id="product-price-211">
-                    $320.00                </span>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="product">
-                            <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/jacket-in-quilted-fabric.html" class="preview-image">
-                                <img class="img-responsive product_activ" src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/0/10_1.jpg" alt="Jacket In Quilted Fabric">
-                            </a>
-                            <p class="name"><a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/jacket-in-quilted-fabric.html" class="preview-image">Jacket In Quilted Fabric</a></p>
-                            <span class="rating"></span>
-                            <div class="price-box">
-                                <span class="regular-price" id="product-price-209">
-                                            <span class="price">$720.00</span> </span>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                     -->
                 </ul>
-            </div> -->
+            </div>
             <!-- Services -->
             <h3>PRODUCT CUSTOM BLOCK </h3> You can add your content here, like promotions or some additional info
             <!-- Services -->
@@ -804,6 +758,9 @@
             <!-- //end Services -->
         </section>
     </div>
+
+
+
     <!-- //end Product view -->
     <!-- Services -->
    <!--  <section class="services-block single small row"> -->
@@ -988,7 +945,9 @@
     <!-- <h3>You may also be interested in the following product(s)</h3>
     <div class="products-list-small add_after_quick_view_section">
         <ul class="slides">
-                        <li>
+            
+
+            <li>
                 <div class="product-preview">
                     <div class="preview animate scale">
                         <a href="#" title="Jacket In Quilted Fabric" class="product-image">
@@ -999,177 +958,7 @@
                     </div>
                 </div>
             </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/marguerite-riding-printed-stretch-tulle-thong.html" title="Marguerite Riding printed stretch-tulle thong" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/4/2/42b090eb-8aeb-11e2-85b3-984289b50e96_2.jpg" alt="Marguerite Riding printed stretch-tulle thong" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/200/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/bomber-jacket.html" title="Bomber Jacket" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/2/12_1.jpg" alt="Bomber Jacket" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/207/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/embroidered-lace-thong.html" title="Embroidered lace thong" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/f/6/f63ccd97-ab9a-4079-8d30-163f2b626f1c_1.jpg" alt="Embroidered lace thong" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/198/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket.html" title="Leather Pilot Jacket" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/2/0/20_1.jpg" alt="Leather Pilot Jacket" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/214/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/arctic-parka.html" title="Arctic Parka" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/4/14_1.jpg" alt="Arctic Parka" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/205/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/biarritz-zigzag-knitted-bikini-briefs.html" title="Biarritz zigzag knitted bikini briefs" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/8/0/806169b1-8aeb-11e2-85b3-984289b50e96_1.jpg" alt="Biarritz zigzag knitted bikini briefs" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/196/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/fit-liddesdale-jacket.html" title="Fit Liddesdale Jacket" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/5/_/5_1.jpg" alt="Fit Liddesdale Jacket" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/212/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/vintage-varsity-jacket-with-floral-tapestry-panel.html" title="Vintage Varsity Jacket with Floral Panel" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/6/16_1.jpg" alt="Vintage Varsity Jacket with Floral Panel" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/203/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/wool-baseball-jacket.html" title="Wool Jacket" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/8/_/8_1.jpg" alt="Wool Jacket" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/210/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/advintage-hoodie-with-tye-dye.html" title="Advintage Hoodie with Tye-Dye" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/9/19_1.jpg" alt="Advintage Hoodie with Tye-Dye" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/201/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/barbour-heritage-fit-liddesdale-jacket.html" title="Barbour Heritage Fit Liddesdale Jacket" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/1/11_1.jpg" alt="Barbour Heritage Fit Liddesdale Jacket" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/208/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/blue-lagoon-polka-dot-chiffon-and-lace-thong.html" title="Blue Lagoon polka-dot chiffon and lace thong" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/a/c/ac743d3f-0fb4-11e3-b218-525400a54919_1.jpg" alt="Blue Lagoon polka-dot chiffon and lace thong" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/199/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/slim-fit-suit-jacket-in.html" title="Slim Fit Suit Jacket" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/3/13_1.jpg" alt="Slim Fit Suit Jacket" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/206/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/biarritz-zigzag-knitted-bikini-briefs-251.html" title="Aero Draped-front wool cardigan" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/d/e/dea31001-d99d-11e2-b1f8-525400a54919_1.jpg" alt="Aero Draped-front wool cardigan" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/197/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/hoodie-with-tye-dye.html" title="Hoodie with Tye-Dye" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/3/_/3_1.jpg" alt="Hoodie with Tye-Dye" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/213/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/atlantic-track-jacket.html" title="Atlantic Track Jacket" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/5/15_1.jpg" alt="Atlantic Track Jacket" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/204/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/sheer-abstract-tank.html" title="Sheer abstract tank" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/0/1/01a850ca-1960-11e3-b218-525400a54919_1.jpg" alt="Sheer abstract tank" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/195/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/duffle-coat.html" title="Duffle Coat" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/6/_/6_1.jpg" alt="Duffle Coat" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/211/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="product-preview">
-                    <div class="preview animate scale">
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/leather-pilot-jacket-with-removable-borg-collar.html" title="Leather Pilot Jacket With Removable Borg Collar" class="product-image"><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/catalog/product/cache/9/small_image/126x153/9df78eab33525d08d6e5fb8d27136e95/1/8/18_1.jpg" alt="Leather Pilot Jacket With Removable Borg Collar" /></a>
-                        <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/ajax/index/options/product_id/202/" class="quick-view hidden-xs">
-                            <span class="icon-zoom-in-2"></span> View </a>
-                    </div>
-                </div>
-            </li>
+            
         </ul>
     </div>
     <div class="product-view-ajax-container">
