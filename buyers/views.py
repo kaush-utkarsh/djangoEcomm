@@ -315,9 +315,11 @@ def credits(request):
         credit_requested = int(request.POST.get('credit_requested','0'))
         credit_status = request.POST.get('credit_status',0)
         applied_date = datetime.datetime.now().strftime('%Y-%m-%d')
+	cleared_date = datetime.datetime.now().strftime('%Y-%m-%d')
+	credit_expiry_date = datetime.datetime.now().strftime('%Y-%m-%d')
         request_msg = request.POST.get('request_msg','Please Grant me the requested credit')
         status = request.POST.get('status',0)
-        credit = Credit_balance(userid=userid,merchantid=merchantid,credit_requested=credit_requested,credit_status=0,applied_date=applied_date,request_msg=request_msg,credit_approved=0)
+        credit = Credit_balance(userid=userid,merchantid=merchantid,credit_requested=credit_requested,credit_status=0,applied_date=applied_date,request_msg=request_msg,credit_approved=0,Cleared_date=cleared_date,credit_expiry_date=credit_expiry_date)
         credit.save()
         # print credit       
         return HttpResponseRedirect("/")
