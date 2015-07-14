@@ -76,10 +76,14 @@ jQuery(function($) {
         </aside>
         <!--Content -->
         <section class="col-sm-8 col-md-9 col-lg-9 content-center">
+        <div class="col-sm-8 col-md-9 col-lg-9">
             <form id="submit_query" class="form-inline">
-                <input id="submit_input" type="text" class="input-medium search-query">
+                <div class = "col-sm-7 col-md-8 col-lg-8 content-center">
+                    <input id="submit_input" type="text" class="input-medium search-query">
+                </div>
                 <button type="submit" class="btn btn-lg btn-success">Search</button>
             </form>
+            </div>
             <script type="text/javascript">
                 var slider = new Slider('#ex2', {});
                 function getUrlParms(url) {

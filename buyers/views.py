@@ -520,3 +520,23 @@ def update_credit(merchantid,debit,request):
     except Exception as e:
         print e
         return "Fail"
+
+def aboutus(request):
+    res = categories(request)
+    suppliers = get_supplier(request)
+    user_id = get_userid(request)
+    cart = Cart.objects.filter(userid=user_id,status=0)
+    # print credits
+    if len(cart)>0:
+        cart_data = get_cart(cart[0])
+        data = {
+            "res": res,
+            "cart":cart_data,
+            "suppliers":suppliers,
+        }
+    else:
+        data = {
+         "res":res,
+         "suppliers":suppliers,
+        }
+    return render(request,'nogpo/aboutus.html',data)
