@@ -1,0 +1,5 @@
+djangorestframework
+django-registration-redux
+django-mathfilters
+django-paypal
+django-contact-us

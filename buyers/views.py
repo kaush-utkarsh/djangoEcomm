@@ -1,11 +1,12 @@
 import urllib2
 import datetime
 import json
+from django.core.mail import send_mail
 from django.shortcuts import render,render_to_response,HttpResponseRedirect
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -16,8 +17,10 @@ from django.template import Context, Template, loader
 from credit import current_credit
 from hospitals import get_hospital,get_hospital_link
 from usermeta import user_meta_data
+from random import randrange
 
 baseurl = 'http://162.209.8.12:8080/'
+
 def get_userid(request):
     session = Session.objects.get(session_key=request.session._session_key)
     session_data = session.get_decoded()
@@ -120,6 +123,30 @@ def categories(request):
 				    each["child"].append(second)
 		    final.append(each)
     return final
+
+def subcategory(request):
+    subcategory_id = request.GET.get('subcategory','')
+    res = categories(request)
+    user_id = get_userid(request)
+    cart = Cart.objects.filter(userid=user_id)
+    if subcategory_id != '':
+        sub_id = subcategory_id
+    else:
+        sub_id = '0'
+    if len(cart)>0:
+        cart_data = get_cart(cart[0])
+        data = {
+            "res":res,
+            "cart":cart_data,
+            "subcategory":int(sub_id)
+        }
+    else:
+        data = {
+        "res":res,
+        "subcategory":int(sub_id)
+
+        }
+    return render(request,"nogpo/subcategory.html",data)
 
 def product(request, product_id):
     res = categories(request)
@@ -230,17 +257,30 @@ def checkout(request):
     cart = Cart.objects.filter(userid=user_id)
     credits = current_credit(user_id)
     if len(cart) > 0:
-
+        cart_suppliers = []
         cart_data = get_cart(cart[0])
+        supplier_price = {}
+        for cart in cart_data['products']:
+            print cart
+            if cart['supplierid'] not in cart_suppliers:
+                cart_suppliers.append(cart['supplierid'])
+                supplier_price[cart['supplierid']] = cart['price']
+            else:
+                supplier_price[cart['supplierid']] = supplier_price[cart['supplierid']] + cart['price']
+
         data = {
             "res": res,
             "cart":cart_data,
-            "credits":credits
+            "credits":credits,
+            "user_id":user_id,
+            "cart_supplier" : cart_suppliers,
+            "supplier_price" : supplier_price
         }
     else:
         data = {
             "res":res,
-            "credits":credits
+            "credits":credits,
+            "user_id":user_id,
         }
     return render(request,"nogpo/checkout.html", data)
 
@@ -398,3 +438,85 @@ def top_rated(request):
         response = json.load(result)
         # print response
         return HttpResponse(json.dumps(response))
+
+def purchase(request):
+    data = request.GET
+    print data
+    return render_to_response('/')
+
+@csrf_exempt
+def contact(request):
+    errors = []
+    if request.method == 'GET':
+        return render_to_response('nogpo/contact.html')
+    if request.method == 'POST':
+        if not request.POST.get('subject',''):
+            errors.append('Enter a subject.')
+        if not request.POST.get('message',''):
+            errors.append('Enter a message')
+        if request.POST.get('email') and '@' not in request.POST['email']:
+            errors.append('enter a valid e-mail address.')
+        if not errors:
+            send_mail(
+                    request.POST['subject'],
+                    request.POST['message'],
+                    request.POST.get('email','nonreply@nogpo.com'),
+                    ['administrator@nogpo.com'],
+                    )
+            return HttpResponseRedirect('/thanks/')
+        return render(request,'nogpo/contact.html',{'errors':errors})
+
+def thanks(request):
+    return render_to_response('nogpo/thanks.html')
+
+@csrf_exempt
+def seller_credit_payment(request):
+    if request.method == 'POST':
+        seller_details = request.POST
+        seller_details = json.loads(seller_details['seller_det'])
+        summ = 0
+        for seller in seller_details:
+            seller_id = seller['name']
+            seller_credit = float(seller['value'])
+            p_id = randrange(199999, 1000000)
+            userid = get_userid(request)
+            cart = Cart.objects.get(userid=userid,status=0)
+            total_credit = 0
+            cart_data = get_cart(cart)
+            supplier_price = {}
+            for crt in cart_data['products']:
+                if crt['supplierid'] == seller_id:
+                    if crt['price']<float(seller_credit):
+                        total_credit = total_credit+crt['price']
+                    else:
+                        total_credit = total_credit+(crt['price']- float(seller_credit))
+            summ = summ + total_credit
+            summ = cart_data['total_price'] - summ
+            subcart = Subcart.objects.get(cart_id=cart,supplierid=seller_id)
+            transact = Transaction(cart_id = cart, status = 0 )
+            transact.save()
+            payment = Payment(payment_id = p_id, method = "seller_credit", ammount = total_credit, transaction_id = transact, method_id = "", subcart_id = subcart)
+            payment.save()
+            result = update_credit(seller_id,total_credit,request)
+            print result
+        return HttpResponse(summ)
+
+def related_products(request):
+    if request.method == 'GET':
+        unspsc = request.GET.get('unspsc')
+        url = baseurl + 'related-products/'+unspsc
+        result = urllib2.urlopen(url)
+        response = json.load(result)
+        # print response
+        return HttpResponse(json.dumps(response))
+
+def update_credit(merchantid,debit,request):
+    try:
+        userid = get_userid(request)
+        credit = Credit_balance.objects.get(userid=userid,merchantid=merchantid)
+        credit.credit_requested = float(credit.credit_requested) - float(debit)
+        credit.save()
+        return "Success"
+    except Exception as e:
+        print e
+        return "Fail"
