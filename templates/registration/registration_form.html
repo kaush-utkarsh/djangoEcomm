@@ -13,8 +13,8 @@
             <form action="." method="post" id="form-validate">
                 {% csrf_token %}
         <div class="fieldset">
-            <input type="hidden" name="success_url" value="" />
-            <input type="hidden" name="error_url" value="" />
+            <input type="hidden" name="success_url" value="/" />
+            <input type="hidden" name="error_url" value="/accounts/register/?uui=oiil" />
             <h2 class="legend">Personal Information</h2>
             <ul class="form-list">
                 <li class="fields">
