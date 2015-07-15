@@ -6,19 +6,17 @@
 <br>
 <br>
 <br>
-<div style="margin-left:20%">
+<div style="margin-left:20%;margin-bottom:20px;" class="row">
 {% for item in res %}
     {% if item.id == subcategory %}
-    <br>
         <h4>{{ item.name }}</h4>
-        <div style = "padding-left:5%">
         {% for item_child in item.child %}
+        <div style = "padding-left:5%;margin-top:10px;" class="col-md-4">
         <a href="/products/?categories={{item_child.unspsc}}" class="name">
             {{ item_child.name }}
         </a>
-        <br>
-        {% endfor %}
         </div>
+        {% endfor %}
     {% endif %}
 {% endfor %}
 <br>
