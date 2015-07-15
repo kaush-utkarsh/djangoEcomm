@@ -11,7 +11,7 @@
     {% if item.id == subcategory %}
         <h4>{{ item.name }}</h4>
         {% for item_child in item.child %}
-        <div style = "padding-left:5%;margin-top:10px;" class="col-md-4">
+        <div style = "padding-left:5%;margin-top:75px;" class="col-md-4">
         <a href="/products/?categories={{item_child.unspsc}}" class="name">
             {{ item_child.name }}
         </a>
