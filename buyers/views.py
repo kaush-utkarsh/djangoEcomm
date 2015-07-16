@@ -257,7 +257,7 @@ def checkout(request):
     res = categories(request)
     user_id = get_userid(request)
     cart = Cart.objects.filter(userid=user_id)
-    credits = current_credit(user_id)
+    credits = current_credit(user_id,request)
     if len(cart) > 0:
         cart_suppliers = []
         credit_sellers = []
