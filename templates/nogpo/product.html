@@ -699,7 +699,7 @@
                 jQuery('#best-seller').empty()
                 var get_related_products = jQuery("#relatedprod")
                 var productTemplate = '';
-                for (var i = 0; i < response.length; i++) {
+                for (var i = 0; i < 3; i++) {
                     if(response[i]) {
                         var bestseller = '<li><div class="product"><a href="/product/'+response[i].id+'" class="preview-image"><img class="img-responsive product_activ" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'"></a><p class="name"><a href="/product/'+response[i].id+'" class="preview-image">'+response[i].name+'</a></p><span class="rating"></span><div class="price-box"><span class="regular-price" id="product-price-214"><span class="price">$'+response[i].price+'</span> </span></div></div></li>'
                         get_related_products.append(bestseller)
