@@ -18,6 +18,8 @@ from credit import current_credit
 from hospitals import get_hospital,get_hospital_link
 from usermeta import user_meta_data
 from random import randrange
+from registration.models import RegistrationProfile 
+# import inspect
 
 baseurl = 'http://162.209.8.12:8080/'
 
@@ -258,8 +260,12 @@ def checkout(request):
     credits = current_credit(user_id)
     if len(cart) > 0:
         cart_suppliers = []
+        credit_sellers = []
         cart_data = get_cart(cart[0])
         supplier_price = {}
+        for credit in credits:
+            if credit['supplierid'] not in credit_sellers:
+                credit_sellers.append(credit['supplierid'])
         for cart in cart_data['products']:
             print cart
             if cart['supplierid'] not in cart_suppliers:
@@ -274,7 +280,8 @@ def checkout(request):
             "credits":credits,
             "user_id":user_id,
             "cart_supplier" : cart_suppliers,
-            "supplier_price" : supplier_price
+            "supplier_price" : supplier_price,
+            "credit_sellers": credit_sellers
         }
     else:
         data = {
@@ -543,3 +550,20 @@ def aboutus(request):
         }
     return render(request,'nogpo/aboutus.html',data)
 
+@csrf_exempt
+def checkuser(request):
+    username = request.POST.get('username')
+    print username
+    users = User.objects.all()
+    for user in users:
+        if str(user.username) == username:
+            return HttpResponse("username already present")
+    return HttpResponse("success")
+@csrf_exempt
+def checkemail(request):
+    email = request.POST.get('email')
+    users = User.objects.all()
+    for user in users:
+        if str(user.email) == email:
+            return HttpResponse("email already present")
+    return HttpResponse("success")

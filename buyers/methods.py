@@ -88,12 +88,14 @@ def create_cart_response(cart):
 def get_cart(cart):
     total_quantity = 0
     cart_data = {}
+    length = 0
     product_array = list()
     subcarts = Subcart.objects.filter(cart_id_id=cart.id,status=0)
     for subcart in subcarts:
         products = Cart_products.objects.filter(subcart_id_id=subcart.id,status=0)
         product_return_data = {}
         for product in products:
+            length += 1
             url = baseurl+'product/'+str(product.product_id)
             p = urllib2.urlopen(url)
             productinfo = json.load(p)
@@ -108,13 +110,16 @@ def get_cart(cart):
             product_return_data['product_name'] = productinfo['name']
             product_return_data['quantity'] = str(product.no_of_items)
             product_return_data['price'] = float(product.price)
+            product_return_data['final_price'] = float(product.price) * float(product.no_of_items)
             product_array.append(product_return_data)
 
     cart_data['total_no_items'] = total_quantity
     cart_data['products'] = product_array
+    cart_data['id'] = cart.id
     cart_data['total_price'] = float(cart.total_price)
     cart_data['checkout_url'] = 'yet to do'
     cart_data['cart_url'] = 'yet to do'
+    cart_data['length'] = length
 
     return cart_data
 

@@ -2,6 +2,41 @@
 {% load i18n %}
 
 {% block content %}
+<script>
+    function checkusername(){
+        var user = jQuery('#username').val()
+        jQuery.ajax({
+            type:"POST",
+            async:false,
+            url:"/checkuser/",
+            data:{username:user},
+            success: function(msg){
+            var result = msg
+            if(msg=="username already present")
+                jQuery('#userWarning').html(msg)
+
+            }
+        })
+    }
+
+    function checkemail(){
+        var email = jQuery('#email_address').val()
+        jQuery.ajax({
+            type:"POST",
+            async:false,
+            url:"/checkemail/",
+            data:{email:email},
+            success: function(msg){
+            var result = msg
+            if(msg=="email already present")
+                jQuery('#userWarningEmail').html(msg)
+
+            }
+        })
+    }
+
+    
+</script>
 <div class="container">
 <br>
 <br>
@@ -22,22 +57,27 @@
     <div class="field name-firstname">
         <label for="firstname" class="required"><em>*</em>Username</label>
         <div class="input-box">
-            <input type="text" id="username" name="username" value="" title="Name" maxlength="255" class="input-text required-entry"  />
+            <input type="text" id="username" name="username" value="" title="Name" maxlength="255" class="input-text required-entry" onblur='checkusername()' />
         </div>
+        <br>
+            <label for="firstname" class="required" id="userWarning" style="color:red;"></label>
     </div>
+
 </div>
                 </li>
                 <li>
                     <label for="email_address" class="required"><em>*</em>Email Address</label>
                     <div class="input-box">
-                        <input type="text" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry" />
+                        <input type="text" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry" onblur="checkemail()" />
                     </div>
+                    <br>
+                <label for="firstname" class="required" id="userWarningEmail" style="color:red;"></label>
                 </li>
                                 <li class="control">
-                    <div class="input-box">
+                    <!-- <div class="input-box">
                         <input type="checkbox" name="is_subscribed" title="Sign Up for Newsletter" value="1" id="is_subscribed" class="checkbox" />
                     </div>
-                    <label for="is_subscribed">Sign Up for Newsletter</label>
+                    <label for="is_subscribed">Sign Up for Newsletter</label> -->
                 </li>
                                                                                                     </ul>
         </div>
@@ -96,6 +136,7 @@
             Event.observe(element, 'click', toggleRememberMepopup);
         });
     });
+
 //]]>
 </script>
         </div>
@@ -108,6 +149,7 @@
     <script type="text/javascript">
     //<![CDATA[
         var dataForm = new VarienForm('form-validate', true);
+
             //]]>
     </script>
 </div>

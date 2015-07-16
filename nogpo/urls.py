@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    # url(r'^accounts/register/',views.registration2),
     url(r'^accounts/', include('registration.urls')),
     url(r'^$', views.home, name="home_page"),
     url(r'^product/([\w]+)',views.product),
@@ -35,5 +36,7 @@ urlpatterns = patterns('',
     url(r'^subcategory/',views.subcategory),
     url(r'^related_product/',views.related_products),
     url(r'^aboutus/',views.aboutus),
+    url(r'^checkuser/',views.checkuser),
+    url(r'^checkemail/',views.checkemail),
 
 )

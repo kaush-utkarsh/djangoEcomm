@@ -21,6 +21,7 @@
                         <span class="number">1</span>
                         <h2>Billing Information</h2>
                         <a href="#">Edit</a>
+                        {{ cart }}
                     </div>
                     <div id="checkout-step-billing" class="step a-item" {% if not user.is_authenticated %}style="display:none;"{% endif %}>
                         <form id="co-billing-form" action="">
@@ -4807,15 +4808,19 @@ if ($('onepage-guest-register-button')) {
                                             Paypal
                                     </label>
                                   <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="payment_form_pp" style="display:none">
-                                    <input type="hidden" name="cmd" value="_xclick">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="upload" value="1">
                                     <input type="hidden" name="business" value="asingh-facilitator@algoscale.com">
-                                    <input type="hidden" name="amount" value="{{ cart.total_price }}">
+                                    {% for product in cart.products %}
+                                    <input type="hidden" name="amount_{{forloop.counter}}" value="{{ product.final_price }}">
+                                    <input type='hidden' name='item_name_{{forloop.counter}}' value='{{product.product_name}}'>
+                                    {% endfor %}
                                     <input type="hidden" name="no_shipping" value="0">
                                     <input type="hidden" name="no_note" value="1">
                                     <input type="hidden" name="currency_code" value="USD">
                                     <input type="hidden" name="lc" value="AU">
                                     <input type="hidden" name="bn" value="PP-BuyNowBF">
-                                    <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/{{ user_id }}/">
+                                    <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/{{ cart.id }}/">
                                     <br /><br />
                                     <input type="submit" value="Pay with PayPal!">
                                 </form>
@@ -4904,6 +4909,24 @@ if ($('onepage-guest-register-button')) {
                                     </ul>
                                 </dd>
                                 <dd>
+                                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="seller_payment_form_pp" style="display:none">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="upload" value="1">
+                                    <input type="hidden" name="business" value="asingh-facilitator@algoscale.com">
+                                    {% for product in cart.products %}
+                                            {% if product.supplierid not in credit_sellers %}
+                                                <input type="hidden" name="amount_{{forloop.counter}}" value="{{ product.final_price }}">
+                                                <input type='hidden' name='item_name_{{forloop.counter}}' value='{{product.product_name}}'>
+                                            {% endif %}
+                                    {% endfor %}
+                                    <input type="hidden" name="no_shipping" value="0">
+                                    <input type="hidden" name="no_note" value="1">
+                                    <input type="hidden" name="currency_code" value="USD">
+                                    <input type="hidden" name="lc" value="AU">
+                                    <input type="hidden" name="bn" value="PP-BuyNowBF">
+                                    <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/{{ cart.id }}/">
+                                    <br /><br />
+                                </form>
                                 <form action="" id="payment_form_cs" style="display:none;" method="post"> 
                                     <ul class="form-list">
                                         {% for credit in credits %}
@@ -4917,8 +4940,10 @@ if ($('onepage-guest-register-button')) {
                                         {% endif %}
                                         {% endfor %}
                                     </ul>
+
                                     <input type="button" class="button" title="Continue" onclick="seller.save()" value="Pay with seller credit"/>
                                 </form>
+
                                 <script type="text/javascript">
                                 //<![CDATA[
                                 var seller = new Seller('payment_form_cs', '/seller_credit_payment/', '/seller_credit_payment/');

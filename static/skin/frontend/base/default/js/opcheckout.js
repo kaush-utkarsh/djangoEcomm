@@ -289,8 +289,14 @@ Checkout.prototype = {
 
 function paypalFunction(item,data)
 {
-    jQuery('#payment_form_pp').find('input[name="amount"]').val(data)
-    jQuery('#payment_form_pp').submit()
+    jQuery('#seller_payment_form_pp').find('input[name^="item_name_"]').each(function(i,item){
+    console.log(i)
+    jQuery('input[name="'+jQuery(item).attr('name').replace('item_name_','amount_')+'"]').attr('name','amount_'+(i+1))
+    jQuery(item).attr('name','item_name_'+(i+1))
+    // console.log(item)
+    })
+    // jQuery('#seller_payment_form_pp').find('input[name="amount"]').val(data)
+    jQuery('#seller_payment_form_pp').submit()
 
     nextFunction(item)
 }
