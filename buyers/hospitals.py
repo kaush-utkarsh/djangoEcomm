@@ -1,4 +1,5 @@
 from .models import Hospitals,Ecommerce_user_hospital_link
+from operator import itemgetter
 
 def get_hospital(request):
     hospitals = Hospitals.objects.all()
@@ -9,7 +10,8 @@ def get_hospital(request):
         response['name'] = hospital.name
         hospital_list.append(response)
         response = {}
-    return hospital_list
+    newlist = sorted(hospital_list, key=itemgetter('name')) 
+    return newlist
 
 def get_hospital_link(user_id):
     hospital_link = Ecommerce_user_hospital_link.objects.filter(user_id=user_id)
@@ -34,4 +36,6 @@ def get_hospital_link(user_id):
             'hospital_website':'              '
         }
         link_arr.append(links)
-    return link_arr
+
+    newlist = sorted(link_arr, key=itemgetter('hospital_name')) 
+    return newlist

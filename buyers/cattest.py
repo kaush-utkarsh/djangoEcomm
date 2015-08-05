@@ -3,7 +3,8 @@ import json
 
 def categories():
 	d = {"pcategor":[]}
-	req = urllib2.urlopen("http://162.209.8.12:8080/nogpo/categories")
+	# req = urllib2.urlopen("http://162.209.8.12:8080/nogpo/categories")
+	req = urllib2.urlopen("http://162.209.8.12:8080/categories")
 	res = json.load(req)
 	l = len(res)
 	for i in range(l):

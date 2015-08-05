@@ -4819,7 +4819,7 @@ if ($('onepage-guest-register-button')) {
                                     <input type="hidden" name="currency_code" value="USD">
                                     <input type="hidden" name="lc" value="AU">
                                     <input type="hidden" name="bn" value="PP-BuyNowBF">
-                                    <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/{{ cart.id }}/">
+                                    <input type="hidden" name="return" value="http://127.0.0.1:8000/purchased/?cart={{ cart.id }}/">
                                     <br /><br />
                                     <input type="submit" value="Pay with PayPal!">
                                 </form>
