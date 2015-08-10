@@ -10,19 +10,20 @@
                     <th>Order Id</th>
                     <th>Order Name</th>
                     <th>Order Qty</th>
-                    <th>Order Date</th>
+                    <th>Order Supplier</th>
                 </tr>
             </thead>
             <tbody>
-            {% for link in orders %}
-
+            {% with cart.id as id %}
+            {% for link in cart.products %}
                 <tr>
-                    <td>{{link.hospital_id}}</td>
-                    <td>{{link.hospital_name}}</td>
-                    <td>{{link.hospital_address}}</td>
-                    <td>{{link.hospital_city}}</td>
+                    <td>{{id}}</td>
+                    <td>{{link.product_name}}</td>
+                    <td>{{link.quantity}}</td>
+                    <td>{{link.supplierid}}</td>
                 </tr>
                 {% endfor %}
+            {% endwith %}
             </tbody>
         </table>
     </div>

@@ -369,13 +369,14 @@ def orders(request):
 		# hospitals = get_hospital(request)
 		# user_hospital = get_hospital_link(user_id)
 		cart = Cart.objects.filter(userid=user_id,status=0)
-		print cart
+		# print cart
 		if len(cart) > 0:
 			cart_data = get_cart(cart[0])
+			print "cart"
 			print cart_data
-			subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
-			# subcart_data = get_cart(subcart[0])
-			print subcart
+			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
+			# # subcart_data = get_cart(subcart[0])
+			# print subcart
 			data = {
 				"res": res,
 				"cart":cart_data
