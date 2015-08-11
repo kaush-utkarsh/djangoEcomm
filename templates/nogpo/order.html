@@ -1,0 +1,33 @@
+{% extends "nogpo/base.html" %} {% block content %} {% load mathfilters %}
+<section class="container" style="margin-top:130px;">
+    <div class="page-title">
+        <h1>My Orders</h1>
+    </div>
+    <div class="orders">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Product Quantity</th>
+                    <th>Supplier Id</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for link in cart%}
+            {% for linkp in link.products%}
+                <tr>
+                    <td>{{linkp.product_id}}</td>
+                    <td>{{linkp.product_name}}</td>
+                    <td>{{linkp.final_price}}</td>
+                    <td>{{linkp.quantity}}</td>
+                    <td>{{linkp.supplierid}}</td>
+                </tr>
+            {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

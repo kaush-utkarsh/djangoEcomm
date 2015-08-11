@@ -238,7 +238,7 @@ def empty_cart(request):
 def cart(request):
 	res = categories(request)
 	user_id = get_userid(request)
-	cart = Cart.objects.filter(userid=user_id)
+	cart = Cart.objects.filter(userid=user_id,status=0)
 	if len(cart) > 0 :
 
 		cart_data = get_cart(cart[0])
@@ -368,33 +368,46 @@ def orders(request):
 		res = categories(request)
 		# hospitals = get_hospital(request)
 		# user_hospital = get_hospital_link(user_id)
-		cart = Cart.objects.filter(userid=user_id,status=0)
-		# print cart
-		if len(cart) > 0:
-			cart_data = get_cart(cart[0])
+		cart = Cart.objects.filter(userid=user_id,status=2)
+		print cart
+		data = {
+			"res": res
+		}
+		data['cart'] =[]
+		for crt in cart:
+			cart_data = get_cart(crt)
 			print "cart"
 			print cart_data
 			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
 			# # subcart_data = get_cart(subcart[0])
 			# print subcart
-			data = {
-				"res": res,
-				"cart":cart_data
-			}
-		else:
-			data = {
-				"res": res
-			}
-		return render(request,"nogpo/orders.html",data)
-	if request.method == "POST":
-		userid = get_userid(request)
-		hospital_id = request.POST.get('hospital_id','')
-		# print hospital_id
-		# print userid
-		relation = Ecommerce_user_hospital_link(user_id=userid,hospital_id=hospital_id)
-		relation.save()
-		return HttpResponseRedirect('/')
+			data['cart'].append(cart_data)
 
+		return render(request,"nogpo/orders.html",data)
+
+def order(request):
+	if request.method == "GET":
+		user_id = get_userid(request)
+		res = categories(request)
+		cartId=request.GET.get('id')
+		# hospitals = get_hospital(request)
+		# user_hospital = get_hospital_link(user_id)
+		cart = Cart.objects.filter(userid=user_id,status=2,id=cartId)
+		print cart
+		data = {
+			"res": res
+		}
+		data['cart'] =[]
+		for crt in cart:
+			cart_data = get_cart(crt)
+			print "cart"
+			print cart_data
+			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
+			# # subcart_data = get_cart(subcart[0])
+			# print subcart
+			data['cart'].append(cart_data)
+
+		return render(request,"nogpo/order.html",data)
 
 @csrf_exempt
 def delete_from_cart(request):
