@@ -115,7 +115,9 @@ def get_cart(cart):
 
     cart_data['total_no_items'] = total_quantity
     cart_data['products'] = product_array
+    cart_data['unique_products'] = len(product_array)
     cart_data['id'] = cart.id
+    cart_data['date'] = cart.checkout_date
     cart_data['total_price'] = float(cart.total_price)
     cart_data['checkout_url'] = 'yet to do'
     cart_data['cart_url'] = 'yet to do'

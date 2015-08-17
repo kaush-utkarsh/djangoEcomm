@@ -8,14 +8,18 @@
             <thead>
                 <tr>
                     <th>Order Id</th>
-                    <th>Order Products</th>
-                    <th>Order Price</th>
+                    <th>Order Date</th>
+                    <th>Total Products</th>
+                    <th>Total Items</th>
+                    <th>Total Price</th>
                 </tr>
             </thead>
             <tbody>
             {% for link in cart%}
                 <tr>
                     <td><a href="/order/?id={{link.id}}">{{link.id}}</a></td>
+                    <td>{{link.date}}</td>
+                    <td>{{link.unique_products}}</td>
                     <td>{{link.total_no_items}}</td>
                     <td>{{link.total_price}}</td>
                 </tr>
