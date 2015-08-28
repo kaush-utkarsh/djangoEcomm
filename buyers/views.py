@@ -19,6 +19,7 @@ from hospitals import get_hospital,get_hospital_link
 from usermeta import user_meta_data
 from random import randrange
 from registration.models import RegistrationProfile 
+from operator import itemgetter
 # import inspect
 
 baseurl = 'http://162.209.8.12:8080/'
@@ -83,10 +84,11 @@ def home(request):
 @login_required
 def products(request):
 	res = categories(request)
+	print res
 	filter_data = search_backend(request)
 	print filter_data
 	user_id = get_userid(request)
-	cart = Cart.objects.filter(userid=user_id)
+	cart = Cart.objects.filter(userid=user_id,status=0)
 	if len(cart)>0:
 		cart_data = get_cart(cart[0])
 		# print cart_data
@@ -106,7 +108,7 @@ def products(request):
 def products_details(request):
 	res = categories(request)
 	user_id = get_userid(request)
-	cart = Cart.objects.filter(userid=user_id)
+	cart = Cart.objects.filter(userid=user_id,status=0)
 	if len(cart)>0:
 		cart_data = get_cart(cart[0])
 		data = {
@@ -136,7 +138,7 @@ def subcategory(request):
 	subcategory_id = request.GET.get('subcategory','')
 	res = categories(request)
 	user_id = get_userid(request)
-	cart = Cart.objects.filter(userid=user_id)
+	cart = Cart.objects.filter(userid=user_id,status=0)
 	if subcategory_id != '':
 		sub_id = subcategory_id
 	else:
@@ -161,7 +163,7 @@ def product(request, product_id):
 	if request.method == 'GET':
 		product = urllib2.urlopen(baseurl+'product/'+product_id)
 		user_id = get_userid(request)
-		cart = Cart.objects.filter(userid=user_id)
+		cart = Cart.objects.filter(userid=user_id,status=0)
 		if len(cart) > 0:
 			cart_data = get_cart(cart[0])
 			data = {
@@ -178,7 +180,9 @@ def product(request, product_id):
 
 def search_backend(request):
 	string = request.GET
+	print string
 	hiturl = get_search_url(string)
+	print hiturl
 	result = urllib2.urlopen(hiturl)
 	result_json = json.load(result)
 	return result_json
@@ -198,7 +202,7 @@ def search(request):
 					val = val + "|" + v
 			# print val
 			url = url + a + '=' + val + '&'
-		# print url
+		print url
 		result = urllib2.urlopen(url)
 		result_json = json.load(result)
 		# print result_json
@@ -231,10 +235,11 @@ def add_to_cart(request):
 		response = current_cart(userid,supplierid,float(price)*int(no_of_items),cartproduct_data)
 		return HttpResponse(json.dumps(response))
 
+@csrf_exempt
 def empty_cart(request):
 	if request.method == 'POST':
 		userid = get_userid(request)
-		cart = Cart.objects.get(userid=userid)
+		cart = Cart.objects.get(userid=userid,status=0)
 		cart.status = 1
 		cart.save()
 		return HttpResponse('Success')
@@ -262,7 +267,7 @@ def cart(request):
 def checkout(request):
 	res = categories(request)
 	user_id = get_userid(request)
-	cart = Cart.objects.filter(userid=user_id)
+	cart = Cart.objects.filter(userid=user_id,status=0)
 	credits = current_credit(user_id,request)
 	if len(cart) > 0:
 		cart_suppliers = []
@@ -304,8 +309,9 @@ def credits(request):
 		suppliers = get_supplier(request)
 		user_id = get_userid(request)
 		cart = Cart.objects.filter(userid=user_id,status=0)
-		credits = current_credit(user_id)
+		credits = current_credit(user_id,request)
 		# print credits
+		suppliers = sorted(suppliers, key=itemgetter('name'), reverse=True)
 		if len(cart)>0:
 			cart_data = get_cart(cart[0])
 			data = {
@@ -374,7 +380,7 @@ def orders(request):
 		res = categories(request)
 		# hospitals = get_hospital(request)
 		# user_hospital = get_hospital_link(user_id)
-		cart = Cart.objects.filter(userid=user_id,status=2)
+		cart = Cart.objects.filter(userid=user_id,status=0)
 		print cart
 		data = {
 			"res": res
@@ -389,6 +395,19 @@ def orders(request):
 			# print subcart
 			data['cart'].append(cart_data)
 
+		cart = Cart.objects.filter(userid=user_id,status=2)
+		data['ordercart'] =[]
+		for crt in cart:
+			cart_data = get_cart(crt)
+			print "cart"
+			print cart_data
+			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
+			# # subcart_data = get_cart(subcart[0])
+			# print subcart
+			data['ordercart'].append(cart_data)
+
+		newlist = sorted(data['ordercart'], key=itemgetter('date'), reverse=True)
+		data['ordercart'] = newlist
 		return render(request,"nogpo/orders.html",data)
 
 def order(request):
@@ -398,7 +417,7 @@ def order(request):
 		cartId=request.GET.get('id')
 		# hospitals = get_hospital(request)
 		# user_hospital = get_hospital_link(user_id)
-		cart = Cart.objects.filter(userid=user_id,status=2,id=cartId)
+		cart = Cart.objects.filter(userid=user_id,status=0,id=cartId)
 		print cart
 		data = {
 			"res": res
@@ -412,6 +431,21 @@ def order(request):
 			# # subcart_data = get_cart(subcart[0])
 			# print subcart
 			data['cart'].append(cart_data)
+
+		cart = Cart.objects.filter(userid=user_id,status=2,id=cartId)
+		print cart
+		# data = {
+		# 	"res": res
+		# }
+		data['ocart'] =[]
+		for crt in cart:
+			cart_data = get_cart(crt)
+			print "cart"
+			print cart_data
+			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
+			# # subcart_data = get_cart(subcart[0])
+			# print subcart
+			data['ocart'].append(cart_data)
 
 		return render(request,"nogpo/order.html",data)
 

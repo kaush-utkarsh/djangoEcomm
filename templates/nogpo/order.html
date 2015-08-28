@@ -3,6 +3,29 @@
     <div class="page-title">
         <h1>My Orders</h1>
     </div>
+    
+    <div id="content">
+    {% for link in ocart%}
+        <div class="row">
+            <div class="col-md-6">
+                Order ID: {{link.id}}        
+            </div>
+            <div class="col-md-6">
+                Order Date: {{link.date}}
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                Order Price: {{link.total_price}}
+            </div>
+            <div class="col-md-6">
+                Dispatched
+            </div>
+            
+        </div>
+    {% endfor %}
+    </div>
     <div class="orders">
         <table class="table">
             <thead>
@@ -15,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for link in cart%}
+            {% for link in ocart%}
             {% for linkp in link.products%}
                 <tr>
                     <td>{{linkp.product_id}}</td>
@@ -31,3 +54,4 @@
     </div>
 </section>
 {% endblock %}
+    

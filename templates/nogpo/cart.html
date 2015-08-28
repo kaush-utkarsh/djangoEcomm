@@ -15,7 +15,7 @@
                             <img src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/images/shopping-cart-back-right.png" alt="" class="pull-right">
                         </div>
                         <div class="box">
-                            <form action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/updatePost/" method="post">
+                            <form id="cart">
                                 <input name="form_key" type="hidden" value="dpiWLWbTaRzrtxhh">
                                 <h3>Shopping Cart</h3>
                                 <table>
@@ -73,24 +73,25 @@
                                 </table>
                                 <div class="row hidden-xs">
                                     <div class="col-md-4 col-lg-4 col-xs-4">
-                                        <button type="button " title="Continue Shopping" class="btn btn-sm btn-primary" onclick="setLocation('http://demo.ethemeuk.com/megatron/magento/demo/index.php/');return false;"><span><span>Continue Shopping</span></span>
+                                        <button type="button" class="btn btn-sm btn-primary" onclick="window.location.href='/';"><span>Continue with Shopping</span>
                                         </button>
                                     </div>
                                     <div class="col-md-4 col-lg-4 col-xs-4 text-center">
-                                        <button type="submit" name="update_cart_action" value="update_qty" title="Update Shopping Cart" class="btn btn-sm btn-primary "><span><span>Update Shopping Cart</span></span>
+                                        <button class="btn btn-sm btn-primary "><span>Update the Shopping Cart</span>
                                         </button>
                                     </div>
                                     <div class="col-md-4 col-lg-4 col-xs-4 text-right">
-                                        <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary" id="empty_cart_button"><span><span>Clear Shopping Cart</span></span>
+                                        <button name="delete_cart" value="delete_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary " onclick="emptyCart();"><span>Clear this Cart</span>
                                         </button>
                                     </div>
                                 </div>
+
                                 <div class="row visible-xs">
-                                    <button type="button " title="Continue Shopping" class="btn btn-sm btn-primary" onclick="setLocation('http://demo.ethemeuk.com/megatron/magento/demo/index.php/');return false;"><span><span>Continue Shopping</span></span>
+                                    <button type="button" class="btn btn-sm btn-primary" onclick="window.location.href='/';"><span>Continue with Shopping</span>
                                     </button>
-                                    <button type="submit" name="update_cart_action" value="update_qty" title="Update Shopping Cart" class="btn btn-sm btn-primary "><span><span>Update Shopping Cart</span></span>
+                                    <button class="btn btn-sm btn-primary "><span>Update the Shopping Cart</span>
                                     </button>
-                                    <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary" id="empty_cart_button"><span><span>Clear Shopping Cart</span></span>
+                                    <button name="delete_cart_action" value="empty_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary"><span>Clear this Cart</span>
                                     </button>
                                 </div>
                             </form>
@@ -124,12 +125,12 @@
                                     </table>
                                     <ul class="checkout-types">
                                         <li>
-                                            <button type="button" title="Proceed to Checkout" class="btn btn-mega btn-inverse btn-xl btn-proceed-checkout btn-checkout" onclick="window.location='http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/onepage/';"><i class="typcn typcn-tick"></i><span><span>Proceed to Checkout</span></span>
+                                            <button type="button" title="Proceed to Checkout" class="btn btn-mega btn-inverse btn-xl btn-proceed-checkout btn-checkout" onclick="window.location.href='/checkout/';"><i class="typcn typcn-tick"></i><span><span>Proceed to Checkout</span></span>
                                             </button>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/multishipping/" title="Checkout with Multiple Addresses">Checkout with Multiple Addresses</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -138,7 +139,7 @@
                     </div>
                 </section>
             </section>
-            <aside class="col-md-4 col-lg-4 shopping-cart-aside">
+            <!-- <aside class="col-md-4 col-lg-4 shopping-cart-aside">
                 <section class="container-widget">
                     <form id="discount-coupon-form" action="http://demo.ethemeuk.com/megatron/magento/demo/index.php/checkout/cart/couponPost/" method="post">
                         <div class="discount">
@@ -156,9 +157,23 @@
                         </div>
                     </form>
                 </section>
-            </aside>
+            </aside> -->
         </div>
     </section>
+    <script>
+        function emptyCart()
+        {
+            jQuery.ajax(
+            {
+                url: "/emptycart/",
+                type: "POST",
+                data: jQuery('form[id=cart]').serialize(),
+                success: function (data) {
+                    console.log(data)
+            }
+    });
+        }
+    </script>
 {% else %}
     <section class="container">
         <div class="row">
@@ -178,4 +193,5 @@
         </div>
     </section>
 {% endif %}
+
 {% endblock %}

@@ -25,6 +25,8 @@ def current_credit(userid,request):
                 'credit_approved':credit_balance.credit_approved,
                 'credit_expiry_date':credit_balance.credit_expiry_date
             }
+            if str(credit_balance.credit_approved) == '0.00':
+                credit['credit_approved']="Not Approved Yet"
             credit_list.append(credit)
             print "---------------------------------------------"
             print supplier_name

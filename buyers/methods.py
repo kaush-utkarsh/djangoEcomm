@@ -91,14 +91,22 @@ def get_cart(cart):
     length = 0
     product_array = list()
     subcarts = Subcart.objects.filter(cart_id_id=cart.id,status=0)
+    print "subcart"
     for subcart in subcarts:
-        products = Cart_products.objects.filter(subcart_id_id=subcart.id,status=0)
+        products = Cart_products.objects.filter(subcart_id_id=subcart.id)
+        print len(products)
+        print 'pr'
         product_return_data = {}
+
         for product in products:
+            print "hr"
             length += 1
             url = baseurl+'product/'+str(product.product_id)
+            print url
             p = urllib2.urlopen(url)
+            print p
             productinfo = json.load(p)
+            print productinfo
             quant = str(product.no_of_items)
             total_quantity = long(total_quantity) + long(quant)
             product_return_data['product_url'] = str(product.product_id)
@@ -111,8 +119,9 @@ def get_cart(cart):
             product_return_data['quantity'] = str(product.no_of_items)
             product_return_data['price'] = float(product.price)
             product_return_data['final_price'] = float(product.price) * float(product.no_of_items)
+            # print product_return_data
             product_array.append(product_return_data)
-
+    print "crt"
     cart_data['total_no_items'] = total_quantity
     cart_data['products'] = product_array
     cart_data['unique_products'] = len(product_array)

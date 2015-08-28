@@ -157,7 +157,7 @@
     //]]>
     </script>
     <link href='//fonts.googleapis.com/css?family=Jura' rel='stylesheet'>
-    <link type="text/css" href="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/css/colors/colors_default.css" rel="stylesheet" />
+    <!-- <link type="text/css" href="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/css/colors/colors_default.css" rel="stylesheet" /> -->
 </head>
 
 <body class="responsive cms-index-index cms-mtron-home-fast">
@@ -212,7 +212,7 @@
                                             <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li class="first"><a href="/" title="My Account">My Account</a></li>
+                                            <!-- <li class="first"><a href="/" title="My Account">My Account</a></li> -->
                                             <li><a href="/orders/" title="My Orders">My Orders</a></li>
                                             <li><a href="/cart/" title="My Cart" class="top-link-cart">My Cart</a></li>
                                             <li><a href="/credits/" title="My Credits">My Credits</a></li>
@@ -223,17 +223,17 @@
                                             <li class=" last"><a href="{% url 'auth_password_change' %}" title="password change">Password Change</a></li>
                                         </ul>
                                     </div>
-                                    <div class="btn-group compact-hidden block-compare btn-hidden">
+                                    <!-- <div class="btn-group compact-hidden block-compare btn-hidden">
                                         <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"> <span class="icon icon-justice"></span> Compare (0)&#x200E;
                                             <span class="caret"></span>
                                         </a>
                                         <div class="dropdown-menu pull-right shoppingcart-box empty" role="menu">
                                             <p class="empty">You have no items to compare.</p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="btn-group " id="shopping_cart">
                                         {% if cart.products %}
-                                            <a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <a href="/cart/" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
                                                 <span class="icon-xcart-animate">
                                                     <span class="box">{{ cart.total_no_items }}</span>
                                                     <span class="handle"></span>
@@ -246,7 +246,7 @@
                                                     {% for product in cart.products %}
                                                     <li class="item">
                                                         <div class="icon-product-edit">
-                                                            <a class="icon icon-edit" href="{{ product.product_url }}"></a>
+                                                            <a class="icon icon-edit" href="/product/{{ product.product_url }}"></a>
                                                         </div>
                                                         <div class="icon-product-delete">
                                                             <a href="#" class="icon icon-trash-2" userproduct-delete="{{ product.product_id }}_{{ product.supplierid }}"></a>
@@ -268,7 +268,7 @@
                                                 </div>
                                                 <a href="/checkout/" class="btn btn-mega">Proceed to Checkout</a>
                                                 <div class="view-link">
-                                                    <a href="/cart_url/">View shopping cart </a>
+                                                    <a href="/cart/">View shopping cart </a>
                                                 </div>
                                             </div>
                                         {% else %}
@@ -297,7 +297,7 @@
                                         {% for item in res %}
                                             {% if item.id < 6 %} 
                                                 <dt class="item with-sub level0 nav-{{ item.id }} first parent">
-                                                    <a href="/products/" class="btn-main line">
+                                                    <a href="#" class="btn-main line">
                                                         {{ item.name }}
                                                     </a>
                                                     <dd class="item-content">
@@ -334,7 +334,7 @@
                                             {% endif %}
                                         {% endfor %}
                                         <dt class="item with-sub level0 nav-3 last parent">
-                                            <a href="/subcategory/" class="btn-main line">Others</a>
+                                            <a href="#" class="btn-main line">Others</a>
                                             <dd class="item-content">
                                                 <div class="navbar-main-submenu">
                                                     <div class="wrapper-border">
@@ -479,7 +479,7 @@
             </header>
             <div id="content">
                 {% block content %}{% endblock %}
-            </div>
+            </div>1
             <footer>
                 <section class="footer-navbar dark">
                     <div class="container content nopad-xs">
@@ -511,10 +511,10 @@
                                 <h3>My account<a class="expander visible-xs" href="#TabBlock-5">+</a></h3>
                                 <div class="tabBlock" id="TabBlock-5">
                                     <ul class="menu">
-                                        <li><a href="/">My Account </a> </li>
+                                        <!-- <li><a href="/">My Account </a> </li> -->
                                         <li><a href="/orders/">Order History</a> </li>
-                                        <li><a href="#">Wish List</a> </li>
-                                        <li><a href="#">Site Map </a></li>
+                                        <!-- <li><a href="#">Wish List</a> </li> -->
+                                        <!-- <li><a href="#">Site Map </a></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -532,9 +532,9 @@
                         </div>
                     </div>
                 </section>
-                <section class="footer-bottom-block container">
+           <!--      <section class="footer-bottom-block container">
                     <div class="row">
-                        <div class="col-sm-3 col-md-8">
+                        <div class="col-sm-3 col-md-8"> -->
                             <!-- Select Store: -->
                             <!-- <div class="btn-group btn-select dropup">
                                 <a href="#" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -569,7 +569,7 @@
                                     <li> <a href="http://demo.ethemeuk.com/megatron/magento/demo/index.php/?___store=yellow">Yellow</a> </li>
                                 </ul>
                             </div> -->
-                        </div>
+                        <!-- </div> --><!-- 
                         <div class="col-sm-4 col-md-4">
                             <ul class="payment-list pull-right">
                                 <li><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/icon-payment-01.png" width="36" height="22" alt=""></li>
@@ -578,10 +578,10 @@
                                 <li><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/icon-payment-04.png" width="36" height="22" alt=""></li>
                                 <li><img src="http://demo.ethemeuk.com/megatron/magento/demo/media/wysiwyg/icon-payment-05.png" width="36" height="22" alt=""></li>
                             </ul>
-                        </div>
-                    </div>
-                </section>
-            </footer>
+                        </div> -->
+                    <!-- </div>
+                </section> -->
+            <!-- </footer> -->
         </div>
     </div>
     <script type="text/javascript">

@@ -12,17 +12,21 @@
                     <th>Total Products</th>
                     <th>Total Items</th>
                     <th>Total Price</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-            {% for link in cart%}
-                <tr>
-                    <td><a href="/order/?id={{link.id}}">{{link.id}}</a></td>
+            {% for link in ordercart%}
+                <!-- <a href="/order/?id={{link.id}}"> -->
+                <tr onclick="location.href='/order/?id={{link.id}}';">
+                    <td>{{link.id}}</td>
                     <td>{{link.date}}</td>
                     <td>{{link.unique_products}}</td>
                     <td>{{link.total_no_items}}</td>
                     <td>{{link.total_price}}</td>
+                    <td>Dispatched by Vendor</td>
                 </tr>
+                <!-- </a> -->
                 {% endfor %}
             </tbody>
         </table>
