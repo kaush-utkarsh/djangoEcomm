@@ -83,6 +83,7 @@ def home(request):
 
 @login_required
 def products(request):
+	print request
 	res = categories(request)
 	print res
 	filter_data = search_backend(request)
@@ -123,6 +124,7 @@ def products_details(request):
 
 def categories(request):
 	re = urllib2.urlopen("http://162.209.8.12:8080/categories")
+	print re
 	jsn = json.load(re)
 	final = list()
 	for each in jsn:
@@ -164,6 +166,7 @@ def product(request, product_id):
 		product = urllib2.urlopen(baseurl+'product/'+product_id)
 		user_id = get_userid(request)
 		cart = Cart.objects.filter(userid=user_id,status=0)
+		
 		if len(cart) > 0:
 			cart_data = get_cart(cart[0])
 			data = {
@@ -244,15 +247,61 @@ def empty_cart(request):
 		cart.save()
 		return HttpResponse('Success')
 
+@csrf_exempt
+def update_cart(request):
+	if request.method == 'POST':
+		userid = get_userid(request)
+		products = request.POST.get('products')
+		productsDict = json.loads(products)
+		
+		cart = Cart.objects.get(userid=userid,status=0)
+
+		subcarts = Subcart.objects.filter(cart_id_id=cart.id)
+		total_price = 0
+		for subcart in subcarts:
+			products = Cart_products.objects.filter(subcart_id_id=subcart.id,status=0)
+			
+			subcart_price = 0
+			for product in products:
+				product_price = 0
+				print product.product_id
+				# return "Success"
+				if str(product.product_id) in productsDict.keys():
+					product_price = product_price + (float(productsDict[str(product.product_id)] ) * float(product.price))
+					print product_price
+					subcart_price = subcart_price + product_price
+					product.no_of_items = productsDict[str(product.product_id)]
+					product.save()
+				else:
+					product.status = 1
+					product.save()	
+			total_price =total_price + subcart_price
+			subcart.total_price = subcart_price
+			subcart.save()
+			# print subcart_price
+		# total_price = subcart_price
+		# print total_price
+		
+		# subcart.total_price = total_price
+		
+		cart.total_price = total_price
+		# print cart.total_price
+		cart.save()
+		# cart.status = 1
+		# cart.save()
+		return HttpResponse('Success')
+
 
 @csrf_exempt
 def cart(request):
 	res = categories(request)
 	user_id = get_userid(request)
 	cart = Cart.objects.filter(userid=user_id,status=0)
+	print cart
 	if len(cart) > 0 :
 
 		cart_data = get_cart(cart[0])
+		print cart_data
 		data = {
 			"res": res,
 			"cart": cart_data
@@ -378,33 +427,30 @@ def orders(request):
 	if request.method == "GET":
 		user_id = get_userid(request)
 		res = categories(request)
-		# hospitals = get_hospital(request)
-		# user_hospital = get_hospital_link(user_id)
+		cart = Cart.objects.filter(userid=user_id,status=2)
+		ordercart =[]
+		for crt in cart:
+			cart_data = get_cart(crt)
+			print "cart"
+			print cart_data
+			ordercart.append(cart_data)
+
+
 		cart = Cart.objects.filter(userid=user_id,status=0)
 		print cart
-		data = {
-			"res": res
-		}
-		data['cart'] =[]
-		for crt in cart:
-			cart_data = get_cart(crt)
-			print "cart"
-			print cart_data
-			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
-			# # subcart_data = get_cart(subcart[0])
-			# print subcart
-			data['cart'].append(cart_data)
-
-		cart = Cart.objects.filter(userid=user_id,status=2)
-		data['ordercart'] =[]
-		for crt in cart:
-			cart_data = get_cart(crt)
-			print "cart"
-			print cart_data
-			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
-			# # subcart_data = get_cart(subcart[0])
-			# print subcart
-			data['ordercart'].append(cart_data)
+		if len(cart) > 0:
+			cart_data = get_cart(cart[0])
+			data = {
+				"res": res,
+				"cart":cart_data,
+				"ordercart":ordercart
+			}
+		else:
+			data = {
+				"res": res,
+				"ordercart":ordercart
+			}
+		
 
 		newlist = sorted(data['ordercart'], key=itemgetter('date'), reverse=True)
 		data['ordercart'] = newlist
@@ -415,37 +461,31 @@ def order(request):
 		user_id = get_userid(request)
 		res = categories(request)
 		cartId=request.GET.get('id')
-		# hospitals = get_hospital(request)
-		# user_hospital = get_hospital_link(user_id)
-		cart = Cart.objects.filter(userid=user_id,status=0,id=cartId)
-		print cart
-		data = {
-			"res": res
-		}
-		data['cart'] =[]
-		for crt in cart:
-			cart_data = get_cart(crt)
-			print "cart"
-			print cart_data
-			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
-			# # subcart_data = get_cart(subcart[0])
-			# print subcart
-			data['cart'].append(cart_data)
 
 		cart = Cart.objects.filter(userid=user_id,status=2,id=cartId)
 		print cart
-		# data = {
-		# 	"res": res
-		# }
-		data['ocart'] =[]
+		ocart =[]
 		for crt in cart:
 			cart_data = get_cart(crt)
 			print "cart"
 			print cart_data
-			# subcart = Subcart.objects.get(cart_id_id=cart_data['id'],status=0)
-			# # subcart_data = get_cart(subcart[0])
-			# print subcart
-			data['ocart'].append(cart_data)
+			ocart.append(cart_data)
+
+		cart = Cart.objects.filter(userid=user_id,status=0)
+		print cart
+		if len(cart) > 0:
+			cart_data = get_cart(cart[0])
+			data = {
+				"res": res,
+				"cart":cart_data,
+				"ocart":ocart
+			}
+		else:
+			data = {
+				"res": res,
+				"ocart":ocart
+			}
+
 
 		return render(request,"nogpo/order.html",data)
 
@@ -460,8 +500,8 @@ def delete_from_cart(request):
 		product = Cart_products.objects.get(subcart_id_id = subcart.id,product_id=productid,status=0)
 		product.status = 1
 		product.save()
-		subcart.status = 1
-		subcart.save()
+		# subcart.status = 1
+		# subcart.save()
 		update_cart_price(cart)
 		response = create_cart_response(cart)
 		return HttpResponse(json.dumps(response))
@@ -565,6 +605,102 @@ def contact(request):
 
 def thanks(request):
 	return render_to_response('nogpo/thanks.html')
+
+
+def shipping(request):
+	if request.method == 'GET':
+		user_id = get_userid(request)
+		res = categories(request)
+		cart = Cart.objects.filter(userid=user_id,status=0)
+		if len(cart) > 0:
+			cart_data = get_cart(cart[0])
+			data = {
+				"res": res,
+				"cart":cart_data
+				# "ocart":ocart
+			}
+		else:
+			data = {
+				"res": res
+			}
+
+		return render(request,'nogpo/shipping.html',data)
+def privacy(request):
+	if request.method == 'GET':
+		user_id = get_userid(request)
+		res = categories(request)
+		cart = Cart.objects.filter(userid=user_id,status=0)
+		if len(cart) > 0:
+			cart_data = get_cart(cart[0])
+			data = {
+				"res": res,
+				"cart":cart_data
+				# "ocart":ocart
+			}
+		else:
+			data = {
+				"res": res
+			}
+
+		return render(request,'nogpo/privacy.html',data)
+def conditions(request):
+	if request.method == 'GET':
+		user_id = get_userid(request)
+		res = categories(request)
+		cart = Cart.objects.filter(userid=user_id,status=0)
+		if len(cart) > 0:
+			cart_data = get_cart(cart[0])
+			data = {
+				"res": res,
+				"cart":cart_data
+				# "ocart":ocart
+			}
+		else:
+			data = {
+				"res": res
+			}
+
+		return render(request,'nogpo/condition.html',data)
+
+def support(request):
+	if request.method == 'GET':
+		user_id = get_userid(request)
+		res = categories(request)
+		cart = Cart.objects.filter(userid=user_id,status=0)
+		if len(cart) > 0:
+			cart_data = get_cart(cart[0])
+			data = {
+				"res": res,
+				"cart":cart_data
+				# "ocart":ocart
+			}
+		else:
+			data = {
+				"res": res
+			}
+
+		return render(request,'nogpo/support.html',data)
+
+def help(request):
+	if request.method == 'GET':
+		user_id = get_userid(request)
+		res = categories(request)
+		cart = Cart.objects.filter(userid=user_id,status=0)
+		if len(cart) > 0:
+			cart_data = get_cart(cart[0])
+			data = {
+				"res": res,
+				"cart":cart_data
+				# "ocart":ocart
+			}
+		else:
+			data = {
+				"res": res
+			}
+
+		return render(request,'nogpo/help.html',data)
+
+
 
 @csrf_exempt
 def seller_credit_payment(request):

@@ -1,15 +1,26 @@
 {% extends "nogpo/base.html" %} {% block content %}
  <script type="text/javascript">
-                            function makeRadioButtons()
-                            {    
-                                var x = jQuery("input:radio[name=merchantId]:checked").val().split(',')[1];
-                                var y = document.getElementsByClassName("price");
-                                for (i = 0; i < y.length; i++) { 
-                                y[i].innerHTML = '$ '+x;
-                                }
-                            } 
+    function makeRadioButtons()
+    {    
+        var x = jQuery("input:radio[name=merchantId]:checked").val().split(',')[1];
+        var y = document.getElementsByClassName("price");
+        for (i = 0; i < y.length; i++) { 
+        y[i].innerHTML = '$ '+x;
+        }
+    } 
 
-                        </script>
+    
+    // jQuery(document).ready(function(){
+
+        
+    //     // }, 2000);        
+
+    // })
+
+
+
+</script>
+
 <!-- <div class="hide-rich-snippets">
     <div itemscope itemtype="http://schema.org/Product">
         <meta itemprop="name" content="Swarovski crystal-embellished jersey dress" />
@@ -45,7 +56,29 @@
 </section> -->
 <!-- //end Small Previews -->
 <section class="container" style = "margin-top: 130px;">
+    <div class="row">
+    <p id="categoryTree"></p>
+    <input type="hidden" id="itemData" value="{{data}}">
+    </div>
     <script type="text/javascript">
+        var categoryTree;
+
+        categoryTree = "{{ data }}"
+        console.log(categoryTree);
+
+        // var categoryTree = jQuery('#itemData').val()
+
+        // console.log("HELLO");
+        // setTimeout(function(){
+            categoryTree = categoryTree.replace(new RegExp('u&#39;', 'g'),'"').replace(new RegExp('&#39;', 'g'),'"').replace(new RegExp('None', 'g'),'""').replace(new RegExp('none', 'g'),'""').replace(new RegExp('True', 'g'),'""').replace(new RegExp('False', 'g'),'""').replace(new RegExp('true', 'g'),'""').replace(new RegExp('false', 'g'),'""')
+            categoryTree = "["+categoryTree+"]"
+            categoryTree = JSON.parse(categoryTree)
+            var dept = categoryTree[0].attributes['Hospital Department']
+            var subCat = categoryTree[0].attributes['Unspsc Code Description']
+            var pName = categoryTree[0].attributes['Short Name']
+            jQuery('p[id="categoryTree"]').html(dept+" / "+subCat+" / "+'{{ data.name }}')
+
+
     window.optionsPrice = new Product.OptionsPrice({
         "productId": {{ data.id }},
         "priceFormat": {
@@ -89,9 +122,9 @@
                 <ul class="previews-list slides thumbs">
                     <!-- small image in down -->
                     <li><img class='cloudzoom-gallery' alt="" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}" data-cloudzoom="useZoom: '#zoom192', image: 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}', zoomImage: 'http://162.209.8.12/nogpo-portal/portal/system/Catalog/{{data.unspsc}}/{{pictures.url}}', autoInside : 991"></li>
-                    <li>
+                    <!-- <li>
                         <a class="various fancybox.iframe" href="http://www.youtube.com/embed/L9szn1QQfas"><img alt="#" class='fancybox-video' src="http://demo.ethemeuk.com/megatron/magento/demo/skin/frontend/megatron/default/images/video.png"></a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="flexslider flexslider-large visible-xs">
@@ -686,8 +719,11 @@
                 var productTemplate = '';
                 for (var i = 0; i < 3; i++) {
                     if(response[i]) {
+                        if((response[i].id+'')!='{{data.id}}')
+                        {
                         var bestseller = '<li><div class="product"><a href="/product/'+response[i].id+'" class="preview-image"><img class="img-responsive product_activ" src="http://162.209.8.12/nogpo-portal/portal/system/Catalog/'+response[i].unspsc+'/'+response[i].pictures[0].url+'"></a><p class="name"><a href="/product/'+response[i].id+'" class="preview-image">'+response[i].name+'</a></p><span class="rating"></span><div class="price-box"><span class="regular-price" id="product-price-214"><span class="price">$'+response[i].price+'</span> </span></div></div></li>'
                         get_related_products.append(bestseller)
+                        }
                     }
 
                 }
@@ -1041,8 +1077,12 @@
         }
     }.bind(productAddToCartForm);
 
+
+
     //]]>
     </script>
+
+
 </section>
 
 

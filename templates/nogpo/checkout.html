@@ -360,7 +360,7 @@
                                                 <div class="field">
                                                     <label for="billing:telephone" class="required"><em>*</em>Telephone</label>
                                                     <div class="input-box">
-                                                        <input type="text" name="telephone" value="" title="Telephone" class="input-text  required-entry" id="billing:telephone" />
+                                                        <input type="text" name="telephone" pattern = "[0-9]" value="" title="Telephone" class="input-text validate-phoneLax required-entry" id="billing:telephone" />
                                                     </div>
                                                 </div>
                                                 <div class="field">
@@ -2762,7 +2762,7 @@ if ($('onepage-guest-register-button')) {
                                             <div class="field">
                                                 <label for="shipping:telephone" class="required"><em>*</em>Telephone</label>
                                                 <div class="input-box">
-                                                    <input type="text" name="telephone" value="" title="Telephone" class="input-text  required-entry" id="shipping:telephone" onchange="shipping.setSameAsBilling(false);" />
+                                                    <input type="text" name="telephone" value="" pattern = "[0-9]" title="Telephone" class="input-text validate-phoneLax required-entry" id="shipping:telephone" onchange="shipping.setSameAsBilling(false);" />
                                                 </div>
                                             </div>
                                             <div class="field">
@@ -2785,7 +2785,7 @@ if ($('onepage-guest-register-button')) {
                         </ul>
                         <div class="buttons-set" id="shipping-buttons-container">
                             <p class="required">* Required Fields</p>
-                            <p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small>Back</a></p>
+                            <p class="back-link"><a href="#" onclick="previousFunction(this);"><small>&laquo; </small>Back</a></p>
                             <button type="button" class="button" title="Continue" onclick="shipping.save()"><span><span>Continue</span></span>
                             </button>
                             <span id="shipping-please-wait" class="please-wait" style="display:none;">
@@ -4957,7 +4957,7 @@ if ($('onepage-guest-register-button')) {
                     </div>
                     <div class="buttons-set" id="payment-buttons-container">
                         <p class="required">* Required Fields</p>
-                        <p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small>Back</a></p>
+                        <p class="back-link"><a href="#" onclick="previousFunction(this);"><small>&laquo; </small>Back</a></p>
                         <button type="button" class="button" onclick="payment.save()"><span><span>Continue</span></span>
                         </button>
                         <span class="please-wait" id="payment-please-wait" style="display:none;">

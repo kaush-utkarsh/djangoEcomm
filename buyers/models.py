@@ -17,7 +17,7 @@ class Subcart(models.Model):
 class Cart_products(models.Model):
     subcart_id = models.ForeignKey(Subcart)
     product_id = models.CharField(max_length=70)
-    no_of_items = models.IntegerField(max_length=360)
+    no_of_items = models.IntegerField(max_length=360,default=0)
     price = models.DecimalField(max_digits=10,decimal_places=2)
     status = models.IntegerField(default=1)
     date = models.DateTimeField(max_length=132)

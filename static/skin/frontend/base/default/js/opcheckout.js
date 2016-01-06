@@ -310,6 +310,17 @@ function nextFunction(item)
 
 }
 
+function previousFunction(item)
+{
+    // console.log('here')
+    // console.log(item)
+    // console.log('#'+item)
+
+    jQuery(item).parents('li').find('div[class="step a-item"]').attr('style','display:none;')
+    jQuery(item).parents('li').prev().addClass('allow')
+    jQuery(item).parents('li').prev().find('div[class="step a-item"]').attr('style','display:block;')
+
+}
 
 
 

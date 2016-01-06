@@ -1,5 +1,5 @@
 import urllib2
-import datetime
+import datetime,time
 import json
 from .models import Cart,Cart_products,Subcart,Credit_balance,Transaction,Payment
 from django.template import Context, Template, loader
@@ -65,9 +65,13 @@ def add_to_subcart(data,cart):
     return subcart
 
 def add_to_cartproduct(data,subcart):
-    product = Cart_products(subcart_id=subcart,product_id=data['product_id'],no_of_items=data['no_of_items'],status=0,date=datetime.datetime.now().strftime('%Y-%m-%d'),price=data['price'])
+    product = Cart_products(subcart_id=subcart,product_id=data['product_id'],status=0,price=data['price'])
+    new_num = int(product.no_of_items) + int(data['no_of_items'])
+    product.no_of_items=new_num
+    product.date=datetime.datetime.now().strftime('%Y-%m-%d')
     product.save()
-    new_price = int(data['no_of_items']) * float(data['price'])
+
+    new_price = int(new_num) * float(data['price'])
     return new_price,product
 
 def create_cart_response(cart):
@@ -93,20 +97,19 @@ def get_cart(cart):
     subcarts = Subcart.objects.filter(cart_id_id=cart.id,status=0)
     print "subcart"
     for subcart in subcarts:
-        products = Cart_products.objects.filter(subcart_id_id=subcart.id)
+        products = Cart_products.objects.filter(subcart_id_id=subcart.id,status=0)
         print len(products)
         print 'pr'
-        product_return_data = {}
 
         for product in products:
-            print "hr"
+            product_return_data = {}
             length += 1
             url = baseurl+'product/'+str(product.product_id)
-            print url
+            # print url
             p = urllib2.urlopen(url)
-            print p
+            # print p
             productinfo = json.load(p)
-            print productinfo
+            # print productinfo
             quant = str(product.no_of_items)
             total_quantity = long(total_quantity) + long(quant)
             product_return_data['product_url'] = str(product.product_id)
@@ -121,7 +124,6 @@ def get_cart(cart):
             product_return_data['final_price'] = float(product.price) * float(product.no_of_items)
             # print product_return_data
             product_array.append(product_return_data)
-    print "crt"
     cart_data['total_no_items'] = total_quantity
     cart_data['products'] = product_array
     cart_data['unique_products'] = len(product_array)

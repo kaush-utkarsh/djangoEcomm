@@ -3728,7 +3728,7 @@ _:valid\0, .contacts-form input.form-control, .contacts-form textarea.form-contr
 	text-decoration:none
 }
 .footer-navbar {
-	background:url(../images/logo-back-white.png) no-repeat 50% 50%;
+	background:no-repeat 50% 50%;
 	border-top:1px solid #eee;
 	border-bottom:1px solid #eee
 }
@@ -3750,7 +3750,7 @@ _:valid\0, .contacts-form input.form-control, .contacts-form textarea.form-contr
 	padding-bottom: 20px;
 }
 .footer-navbar.dark {
-	background:url(../images/logo-back.png) no-repeat 50% 50% #272727;
+	background:no-repeat 50% 50% #272727;
 	color:#d9d9d9
 }
 .footer-navbar.dark h3 {

@@ -29,35 +29,39 @@
                                             <th>Subtotal</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="cartData">
                                         {% for product in cart.products %}
                                             <tr>
+                                            <!-- {{product}} -->
                                                 <td>
-                                                    <a href="#" title="Remove item" class="remove-button hidden-xs">
-                                                        <span class="icon-cancel-2 "></span>
-                                                    </a>
+                                                    <!-- <a href="#" title="Remove item" class="remove-button hidden-xs"> -->
+                                                        <span onClick="deleteItem(this);" class="icon-cancel-2 "></span>
+                                                    <!-- </a> -->
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="remove-button visible-xs">
-                                                        <span class="icon-cancel-2 "></span>
-                                                    </a>
+                                                    <!-- <a href="#" class="remove-button visible-xs"> -->
+                                                        <!-- <span onClick="deleteItem(this);" class="icon-cancel-2 "></span> -->
+                                                    <!-- </a> -->
                                                     <a href="{{ product.product_url }}" title="Azrouel Dress"><img class="preview" src="{{ product.product_image }}" alt="{{ product.product_name }}"></a>
                                                 </td>
                                                 <td>
                                                     <span class="td-name visible-xs">Product</span>
                                                     <a href="{{ product.product_url }}">{{ product.product_name }}</a>
+                                                    <input type="hidden" id="prod_id" value="{{product.product_id}}">
+
                                                 </td>
                                                 <td>
                                                     <span class="td-name visible-xs">Price</span>
                                                     <span>
                                                         <span class="price">${{ product.price }}</span>
+                                                        <input type="hidden" id="prod_price" value="{{product.price}}">
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="td-name visible-xs">Quantity</span>
                                                     <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
                                                         <span class="input-group-addon">−</span>
-                                                        <input name="cart[{{ product.product_id }}][qty]" value="{{ product.quantity }}" size="4" title="Qty" class="form-control" maxlength="2">
+                                                        <input name="prod_qty" id="prod_qty" value="{{ product.quantity }}" size="4" title="Qty" onchange="changeValues(this);" class="form-control" maxlength="2">
                                                         <span class="input-group-addon">+</span>
                                                     </div>
                                                 </td>
@@ -77,8 +81,8 @@
                                         </button>
                                     </div>
                                     <div class="col-md-4 col-lg-4 col-xs-4 text-center">
-                                        <button class="btn btn-sm btn-primary "><span>Update the Shopping Cart</span>
-                                        </button>
+                                       <button class="btn btn-sm btn-primary" onclick="updateCart();"><span>Update the Shopping Cart</span>
+                                    </button>
                                     </div>
                                     <div class="col-md-4 col-lg-4 col-xs-4 text-right">
                                         <button name="delete_cart" value="delete_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary " onclick="emptyCart();"><span>Clear this Cart</span>
@@ -89,9 +93,9 @@
                                 <div class="row visible-xs">
                                     <button type="button" class="btn btn-sm btn-primary" onclick="window.location.href='/';"><span>Continue with Shopping</span>
                                     </button>
-                                    <button class="btn btn-sm btn-primary "><span>Update the Shopping Cart</span>
+                                    <button class="btn btn-sm btn-primary" onclick="updateCart();"><span>Update the Shopping Cart</span>
                                     </button>
-                                    <button name="delete_cart_action" value="empty_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary"><span>Clear this Cart</span>
+                                    <button name="delete_cart" value="delete_cart" title="Clear Shopping Cart" class="btn btn-sm  btn-primary " onclick="emptyCart();"><span>Clear this Cart</span>
                                     </button>
                                 </div>
                             </form>
@@ -172,6 +176,40 @@
                     console.log(data)
             }
     });
+        }
+        // function changeValuses(item){
+        //     console.log(item).val())
+        // }
+        function deleteItem(item)
+        {
+            jQuery(item).parents('tr').remove()
+    
+        }
+        function updateCart()
+        {
+            if(jQuery('tbody[id="cartData"]').find('tr').length == 0)
+            {
+                emptyCart()
+                return true;
+            }
+            else
+            {
+                var cartDict={}
+                jQuery('tbody[id="cartData"]').find('tr').each(function(i,item){
+                cartDict[jQuery(item).find('#prod_id').val()]=jQuery(item).find('#prod_qty').val()
+                })
+
+                jQuery.ajax(
+                {
+                    url: "/updateCart/",
+                    type: "POST",
+                    async: false,
+                    data: {products:JSON.stringify(cartDict)},
+                    success: function (data) {
+                        console.log(data)
+                }
+                })
+            }
         }
     </script>
 {% else %}
